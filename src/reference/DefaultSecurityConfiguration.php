@@ -216,7 +216,7 @@ class DefaultSecurityConfiguration implements SecurityConfiguration
      */
     private function _logSpecial($msg)
     {
-        echo $msg;
+        ESAPI::getAuditor('DefaultSecurityConfiguration')->warning(Auditor::SECURITY, false, $msg);
     }
 
     /**
