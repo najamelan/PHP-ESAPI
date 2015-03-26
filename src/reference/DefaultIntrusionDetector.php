@@ -66,7 +66,7 @@ class DefaultIntrusionDetector implements IntrusionDetector
      *
      * @return null
      */
-    function __construct()
+    public function __construct()
     {
         $this->_auditor = ESAPI::getAuditor('IntrusionDetector');
         $this->_userEvents = array();

@@ -39,7 +39,7 @@ class RandomAccessReferenceMap implements AccessReferenceMap
     private $itod = null;
     private $random = 0;
 
-    function __construct($directReferences = null)
+    public function __construct($directReferences = null)
     {
         $this->random = mt_rand();
 
@@ -58,7 +58,7 @@ class RandomAccessReferenceMap implements AccessReferenceMap
      *
      * @return the iterator
      */
-    function iterator()
+    public function iterator()
     {
         return $this->dtoi->getIterator();
     }
@@ -75,7 +75,7 @@ class RandomAccessReferenceMap implements AccessReferenceMap
      * @return
      * 		the indirect reference
      */
-    function getIndirectReference($direct)
+    public function getIndirectReference($direct)
     {
         if (empty($direct))
         {
@@ -108,7 +108,7 @@ class RandomAccessReferenceMap implements AccessReferenceMap
      * @throws AccessControlException
      * 		if no direct reference exists for the specified indirect reference
      */
-    function getDirectReference($indirectReference)
+    public function getDirectReference($indirectReference)
     {
         if (!empty($indirectReference) && $this->itod->offsetExists($indirectReference))
         {
@@ -129,7 +129,7 @@ class RandomAccessReferenceMap implements AccessReferenceMap
      * @return
      * 		the corresponding indirect reference
      */
-    function addDirectReference($direct)
+    public function addDirectReference($direct)
     {
         if (empty($direct))
         {
@@ -157,7 +157,7 @@ class RandomAccessReferenceMap implements AccessReferenceMap
      *  @return
      *  	a random reference that is guaranteed to be unique
      */
-    function getUniqueRandomReference() {
+    public function getUniqueRandomReference() {
         $candidate = null;
 
         do {
@@ -167,7 +167,7 @@ class RandomAccessReferenceMap implements AccessReferenceMap
         return $candidate;
     }
 
-    function getHash($direct)
+    public function getHash($direct)
     {
         if (empty($direct))
         {
@@ -189,7 +189,7 @@ class RandomAccessReferenceMap implements AccessReferenceMap
      *
      * @throws AccessControlException
      */
-    function removeDirectReference($direct)
+    public function removeDirectReference($direct)
     {
         if (empty($direct)) {
             return null;
@@ -217,7 +217,7 @@ class RandomAccessReferenceMap implements AccessReferenceMap
      * @param directReferences
      * 		a Set of direct references to add
      */
-    function update($directReferences)
+    public function update($directReferences)
     {
         $dtoi_old = clone $this->dtoi;
 

@@ -37,7 +37,7 @@ class IntegerAccessReferenceMap implements AccessReferenceMap
     private $itod = null;
     private $count = 1;
 
-    function __construct($directReferences = null)
+    public function __construct($directReferences = null)
     {
         $this->dtoi = new ArrayObject();
         $this->itod = new ArrayObject();
@@ -54,7 +54,7 @@ class IntegerAccessReferenceMap implements AccessReferenceMap
      *
      * @return the iterator
      */
-    function iterator()
+    public function iterator()
     {
         return $this->dtoi->getIterator();
     }
@@ -71,7 +71,7 @@ class IntegerAccessReferenceMap implements AccessReferenceMap
      * @return
      * 		the indirect reference
      */
-    function getIndirectReference($direct)
+    public function getIndirectReference($direct)
     {
         if (empty($direct))
         {
@@ -104,7 +104,7 @@ class IntegerAccessReferenceMap implements AccessReferenceMap
      * @throws AccessControlException
      * 		if no direct reference exists for the specified indirect reference
      */
-    function getDirectReference($indirectReference)
+    public function getDirectReference($indirectReference)
     {
         if (!empty($indirectReference) && $this->itod->offsetExists($indirectReference))
         {
@@ -125,7 +125,7 @@ class IntegerAccessReferenceMap implements AccessReferenceMap
      * @return
      * 		the corresponding indirect reference
      */
-    function addDirectReference($direct)
+    public function addDirectReference($direct)
     {
         if (empty($direct))
         {
@@ -153,11 +153,11 @@ class IntegerAccessReferenceMap implements AccessReferenceMap
      *  @return
      *  	a random reference that is guaranteed to be unique
      */
-    function getUniqueReference() {
+    public function getUniqueReference() {
         return "".$this->count++;
     }
 
-    function getHash($direct)
+    public function getHash($direct)
     {
         if (empty($direct))
         {
@@ -180,7 +180,7 @@ class IntegerAccessReferenceMap implements AccessReferenceMap
      *
      * @throws AccessControlException
      */
-    function removeDirectReference($direct)
+    public function removeDirectReference($direct)
     {
         if (empty($direct)) {
             return null;
@@ -208,7 +208,7 @@ class IntegerAccessReferenceMap implements AccessReferenceMap
      * @param directReferences
      * 		a Set of direct references to add
      */
-    function update($directReferences)
+    public function update($directReferences)
     {
         $dtoi_old = clone $this->dtoi;
 

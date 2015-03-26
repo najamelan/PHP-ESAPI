@@ -55,7 +55,7 @@ class DefaultAuditorFactory implements AuditorFactory
      * 
      * @return does not return a value.
      */
-    function __construct()
+    public function __construct()
     {
         // NoOp
     }

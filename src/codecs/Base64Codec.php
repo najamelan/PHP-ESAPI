@@ -44,7 +44,7 @@ class Base64Codec extends Codec
     /**
      * Public Constructor
      */
-    function __construct()
+    public function __construct()
     {
         $logger = ESAPI::getAuditor("Base64");
     }

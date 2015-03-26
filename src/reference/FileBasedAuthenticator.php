@@ -54,7 +54,7 @@ class FileBasedAuthenticator implements Authenticator
     // $passwordMap[user] = passwordHash, where the values are password hashes, with the current hash in entry 0
     private $passwordMap = array();
 
-    function __construct() {
+    public function __construct() {
         $this->users = array();
         $this->logger = ESAPI::getLogger("Authenticator");
     }
@@ -66,7 +66,7 @@ class FileBasedAuthenticator implements Authenticator
      * all possible ESAPI operations have concluded. If you clear too early, many calls will
      * fail, including logging, which requires the user identity.
      */
-    function clearCurrent() {
+    public function clearCurrent() {
         throw new EnterpriseSecurityException("Method Not implemented");
     }
 
@@ -102,7 +102,7 @@ class FileBasedAuthenticator implements Authenticator
      * @throws AuthenticationException
      *             if the credentials are not verified, or if the account is disabled, locked, expired, or timed out
      */
-    function login($request, $response) {
+    public function login($request, $response) {
         throw new EnterpriseSecurityException("Method Not implemented");
     }
 
@@ -121,7 +121,7 @@ class FileBasedAuthenticator implements Authenticator
      * @return
      * 		true, if the password is correct for the specified user
      */
-    function verifyPassword($user, $password) {
+    public function verifyPassword($user, $password) {
         throw new EnterpriseSecurityException("Method Not implemented");
     }
 
@@ -130,7 +130,7 @@ class FileBasedAuthenticator implements Authenticator
      *
      * This is usually done by calling User.logout on the current User.
      */
-    function logout() {
+    public function logout() {
         throw new EnterpriseSecurityException("Method Not implemented");
     }
 
@@ -156,7 +156,7 @@ class FileBasedAuthenticator implements Authenticator
      * @throws AuthenticationException
      * 		if user creation fails due to any of the qualifications listed in this method's description
      */
-    function createUser($accountName, $password1, $password2) {
+    public function createUser($accountName, $password1, $password2) {
 
         $this->loadUsersIfNecessary();
         if (!$this->isValidString($accountName)) {
@@ -244,7 +244,7 @@ class FileBasedAuthenticator implements Authenticator
      * @return
      * 		a password with strong password strength
      */
-    function generateStrongPassword($user = null, $oldPassword = null) {
+    public function generateStrongPassword($user = null, $oldPassword = null) {
         $randomizer = ESAPI::getRandomizer();
         $letters = $randomizer->getRandomInteger(4, 6);
         $digits = 7 - $letters;
@@ -277,7 +277,7 @@ class FileBasedAuthenticator implements Authenticator
      * @throws AuthenticationException
      * 		if any errors occur
      */
-    function changePassword($user, $currentPassword, $newPassword, $newPassword2) {
+    public function changePassword($user, $currentPassword, $newPassword, $newPassword2) {
         $accountName = $user->getAccountName();
 
         try {
@@ -375,7 +375,7 @@ class FileBasedAuthenticator implements Authenticator
      * @return
      * 		the matching User object, or the Anonymous User if no match exists
      */
-    function getUserById($accountId) {
+    public function getUserById($accountId) {
 
         if($accountId == 0) {
             //FIXME: ANONYMOUS User to be returned
@@ -401,7 +401,7 @@ class FileBasedAuthenticator implements Authenticator
      * @return
      * 		the matching User object, or the Anonymous User if no match exists
      */
-    function getUserByName($accountName) {
+    public function getUserByName($accountName) {
         if (empty($this->users)) {
             return null;
         }
@@ -419,7 +419,7 @@ class FileBasedAuthenticator implements Authenticator
      * @return
      * 		a set of all user names
      */
-    function getUserNames() {
+    public function getUserNames() {
         // TODO: Re-work in Milestone 3
 
         if (!empty($this->users)) {
@@ -451,7 +451,7 @@ class FileBasedAuthenticator implements Authenticator
      * 		the matching User object, or the Anonymous User if no match
      *         exists
      */
-    function getCurrentUser() {
+    public function getCurrentUser() {
         throw new EnterpriseSecurityException("Method Not implemented");
     }
 
@@ -461,7 +461,7 @@ class FileBasedAuthenticator implements Authenticator
      * @param user
      *          the user to set as the current user
      */
-    function setCurrentUser($user) {
+    public function setCurrentUser($user) {
         throw new EnterpriseSecurityException("Method Not implemented");
     }
 
@@ -500,7 +500,7 @@ class FileBasedAuthenticator implements Authenticator
      * @return
      * 		the hashed password
      */
-    function hashPassword($password, $accountName) {
+    public function hashPassword($password, $accountName) {
         $salt = strtolower($accountName);
         return ESAPI::getEncryptor()->hash($password, $salt);
     }
@@ -514,7 +514,7 @@ class FileBasedAuthenticator implements Authenticator
      * @throws AuthenticationException
      *             the authentication exception if user does not exist
      */
-    function removeUser($accountName) {
+    public function removeUser($accountName) {
         // TODO: Change in Milestone 3. In milestone 1, this is used to clean up a test
 
         $idx = array_search($accountName, $this->users);
@@ -535,7 +535,7 @@ class FileBasedAuthenticator implements Authenticator
      * @throws AuthenticationException
      *             if account name does not meet complexity requirements
      */
-    function verifyAccountNameStrength($accountName) {
+    public function verifyAccountNameStrength($accountName) {
         if (!$this->isValidString($accountName)) {
             throw new AuthenticationCredentialsException("Invalid account name", "Attempt to create account with a null/empty account name");
         }
@@ -560,7 +560,7 @@ class FileBasedAuthenticator implements Authenticator
      * @throws AuthenticationException
      *				if newPassword is too similar to oldPassword or if newPassword does not meet complexity requirements
      */
-    function verifyPasswordStrength($oldPassword, $newPassword) {
+    public function verifyPasswordStrength($oldPassword, $newPassword) {
         if(!$this->isValidString($newPassword)) {
             throw new AuthenticationCredentialsException("Invalid password", "New password cannot be null");
         }
@@ -620,7 +620,7 @@ class FileBasedAuthenticator implements Authenticator
      *
      * @return true, if the account exists
      */
-    function exists($accountName) {
+    public function exists($accountName) {
         throw new EnterpriseSecurityException("Method Not implemented");
     }
 

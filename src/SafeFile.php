@@ -65,7 +65,7 @@ class SafeFile extends SplFileObject
      *
      * @return does not return a value.
      */
-    function __construct($path)
+    public function __construct($path)
     {
         try {
             @parent::__construct($path);
