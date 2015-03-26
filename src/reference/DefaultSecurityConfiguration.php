@@ -22,6 +22,8 @@
  */
 
 require_once __DIR__ . '/../SecurityConfiguration.php';
+require_once __DIR__ . '/../Threshold.php';
+
 
 /**
  * Reference Implementation of the SecurityConfiguration interface.
@@ -292,8 +294,14 @@ class DefaultSecurityConfiguration implements SecurityConfiguration
             $this->_logSpecial(
                 'getESAPIValidationExpression: No regular '.
                 'expressions in the config file.'
+<<<<<<< HEAD
                 );
                 return false;
+=======
+            );
+
+            return false;
+>>>>>>> d866fd8... fixup separate classes
         }
 
         if (isset($var[0])) {
@@ -320,6 +328,10 @@ class DefaultSecurityConfiguration implements SecurityConfiguration
                 'getESAPIValidationExpression: Cannot find '.
                 'regular expression: ' . $type 
             );
+<<<<<<< HEAD
+=======
+
+>>>>>>> d866fd8... fixup separate classes
             return false;
         }
     }
@@ -851,10 +863,10 @@ class DefaultSecurityConfiguration implements SecurityConfiguration
             $path = 'HttpUtilities/ApprovedResources/resource';
             $this->_AllowedResources = $this->_getESAPIArrayProperty($path, null);
         }
-        
+
         return $this->_AllowedResources;
     }
-    
+
     /**
      * getSpecialDebugging returns boolean true if special debugging should be
      * enabled. Default is false.
@@ -869,7 +881,7 @@ class DefaultSecurityConfiguration implements SecurityConfiguration
             $path = 'SpecialDebugging/Enabled';
             $this->_SpecialDebugging = $this->_getESAPIBooleanProperty($path, false);
         }
-        
+
         return $this->_SpecialDebugging;
     }
 
