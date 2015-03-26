@@ -37,6 +37,7 @@ require_once 'Codec.php';
  */
 class OracleCodec extends Codec
 {
+
     /**
      * Public Constructor 
      */
@@ -116,4 +117,5 @@ class OracleCodec extends Codec
             'encodedString' => $this->normalizeEncoding("''")
         );
     }
+
 }

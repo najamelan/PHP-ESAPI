@@ -35,6 +35,7 @@ require_once 'Codec.php';
  */
 class JavaScriptCodec extends Codec
 {
+
     /**
      * Public Constructor 
      */
@@ -328,4 +329,5 @@ class JavaScriptCodec extends Codec
             return null;
         }
     }
+
 }

@@ -38,6 +38,7 @@ require_once 'Codec.php';
  */
 class CSSCodec extends Codec
 {
+
     /**
      * Public Constructor 
      */
@@ -156,7 +157,7 @@ class CSSCodec extends Codec
                 return array(
                     'decodedCharacter' => $this->normalizeEncoding($candidateChar),
                     'encodedString' => mb_substr(
-                        $input, 0, 1 + $hexDigitCount, 
+                        $input, 0, 1 + $hexDigitCount,
                         "UTF-32"
                     )
                 );
@@ -249,4 +250,5 @@ class CSSCodec extends Codec
             return null;
         }
     }
+
 }

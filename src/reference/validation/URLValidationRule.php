@@ -39,6 +39,7 @@ require_once __DIR__ . '/StringValidationRule.php';
  */
 class URLValidationRule extends StringValidationRule
 {
+
     private $_auditor   = null;
  
     /**
@@ -54,7 +55,7 @@ class URLValidationRule extends StringValidationRule
      * 
      * @return does not return a value.
      */
-    public function __construct($typeName, $encoder = null, 
+    public function __construct($typeName, $encoder = null,
         $whitelistPattern = null
     ) {
         global $ESAPI;
@@ -104,7 +105,6 @@ class URLValidationRule extends StringValidationRule
 
         return $clean_url;
     }
-
 
     /**
      * Simply attempt to purify the URL and return an empty string if that

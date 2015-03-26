@@ -45,9 +45,9 @@ require_once __DIR__ . '/StringValidationRule.php';
  */
 class CreditCardValidationRule extends BaseValidationRule
 {
+
     private $_ccrule = null ;
     const CREDIT_CARD_VALIDATOR_KEY = 'CreditCard';
-
 
     /**
      * Constructor sets-up the validation rule with a descriptive name for this
@@ -74,7 +74,6 @@ class CreditCardValidationRule extends BaseValidationRule
         }
     }
 
-
     /**
      * Returns an instance of StringValidationRule constructed with a regex
      * pattern for validating Credit Card Numbers obtained from the ESAPI
@@ -88,15 +87,14 @@ class CreditCardValidationRule extends BaseValidationRule
         $config = ESAPI::getSecurityConfiguration();
         $pattern = $config->getValidationPattern(self::CREDIT_CARD_VALIDATOR_KEY);
         $ccr = new StringValidationRule(
-            'CreditCardValidator', 
-            $this->encoder, 
+            'CreditCardValidator',
+            $this->encoder,
             $pattern
         );
         $ccr->setMaximumLength(19);
         $ccr->setAllowNull(false);
         return $ccr;
     }
-
 
     /**
      * Returns the canonicalized, valid input.
@@ -167,7 +165,6 @@ class CreditCardValidationRule extends BaseValidationRule
         return $canonical;
     }
 
-
     /**
      * Returns the supplied input string after removing any non-numeric
      * characters.
@@ -184,6 +181,5 @@ class CreditCardValidationRule extends BaseValidationRule
     {
         return $this->whitelist($input, Encoder::CHAR_DIGITS);
     }
-
 
 }

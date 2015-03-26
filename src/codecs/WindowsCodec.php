@@ -37,6 +37,7 @@ require_once 'Codec.php';
  */
 class WindowsCodec extends Codec
 {
+    
     /**
      * Public Constructor 
      */
@@ -44,7 +45,6 @@ class WindowsCodec extends Codec
     {
         parent::__construct();
     }
-    
     
     /**
      * {@inheritdoc}
@@ -95,8 +95,6 @@ class WindowsCodec extends Codec
         return $encodedOutput . "^" . $c;
     }
     
-    
-    
     /**
      * {@inheritdoc}
      */
@@ -135,4 +133,5 @@ class WindowsCodec extends Codec
             'encodedString' => mb_substr($input, 0, 2, "UTF-32")
         );
     }
+
 }

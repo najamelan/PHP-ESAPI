@@ -47,6 +47,7 @@ require_once __DIR__ . '/../codecs/PercentCodec.php';
  */
 class SafeRequest
 {
+
     /*
      * Ascii character sets defining printable, non-alphanumeric characters
      * permitted in various HTTP request contexts.
@@ -100,7 +101,6 @@ class SafeRequest
     private $_encoder   = null;
     private $_auditor   = null;
 
-
     /**
      * SafeRequest can be forced to use the supplied cookies, headers and server
      * globals by passing an array containing the following keys: 'cookies',
@@ -137,7 +137,6 @@ class SafeRequest
         }
     }
 
-
     /**
      * Sets the encoder instance to be used for encoding/decoding, canonicalization
      * and validation.
@@ -155,7 +154,6 @@ class SafeRequest
         }
         $this->_encoder = $encoder;
     }
-
 
     /**
      * Returns the value of $_SERVER['AUTH_TYPE'] if it is present or an
@@ -193,7 +191,6 @@ class SafeRequest
         return $this->_authType;
     }
 
-
     /**
      * Returns the value of $_SERVER['CONTENT_LENGTH'] if it is present or zero
      * otherwise.
@@ -222,7 +219,6 @@ class SafeRequest
 
         return $this->_contentLength;
     }
-
 
     /**
      * Returns the value of $_SERVER['CONTENT_TYPE'] if it is present or an
@@ -263,7 +259,6 @@ class SafeRequest
         return $this->_contentType;
     }
 
-
     /**
      * Returns the value of $_SERVER['PATH_INFO'] if it is present or an
      * empty string if it is not.
@@ -302,7 +297,6 @@ class SafeRequest
         
         return $this->_pathInfo;
     }
-
 
     /**
      * Returns the value of $_SERVER['PATH_TRANSLATED'] if it is present or an
@@ -343,7 +337,6 @@ class SafeRequest
         return $this->_pathTranslated;
     }
 
-
     /**
      * Returns the value of $_SERVER['QUERY_STRING'] if it is present or an
      * empty string if it is not.
@@ -383,7 +376,6 @@ class SafeRequest
         return $this->_queryString;
     }
 
-
     /**
      * Returns the value of $_SERVER['REMOTE_ADDR'] if it is present or an
      * empty string if it is not.
@@ -421,7 +413,6 @@ class SafeRequest
         return $this->_remoteAddr;
     }
 
-
     /**
      * Returns the value of $_SERVER['REMOTE_HOST'] if it is present or an
      * empty string if it is not.
@@ -458,7 +449,6 @@ class SafeRequest
 
         return $this->_remoteHost;
     }
-
 
     /**
      * Returns the value of $_SERVER['REMOTE_USER'] if it is present or an
@@ -499,7 +489,6 @@ class SafeRequest
         return $this->_remoteUser;
     }
 
-
     /**
      * Returns the value of $_SERVER['REQUEST_METHOD'] if it is present or an
      * empty string if it is not.
@@ -535,7 +524,6 @@ class SafeRequest
 
         return $this->_method;
     }
-
 
     /**
      * Returns the URI from the HTTP Request line exlcuding any path info and the
@@ -574,7 +562,6 @@ class SafeRequest
 
         return $this->_requestURI;
     }
-
 
     /**
      * Returns the value of $_SERVER['SERVER_NAME'] if it is present or an
@@ -617,7 +604,6 @@ class SafeRequest
         return $this->_serverName;
     }
 
-
     /**
      * Returns the value of $_SERVER['SERVER_PORT'] if it is present or zero if it
      * is not.
@@ -647,7 +633,6 @@ class SafeRequest
         return $this->_serverPort;
     }
 
-
     /**
      * Returns an associative array of valid, canonical HTTP Headers.
      *
@@ -666,7 +651,6 @@ class SafeRequest
         $this->_headers = $this->_validateHeaders($this->_serverGlobals);
         return $this->_headers;
     }
-
 
     /**
      * Retreives a named HTTP header value.
@@ -692,7 +676,6 @@ class SafeRequest
         return $this->_headers[$key];
     }
 
-
     /**
      * Returns an associative array of HTTP Cookies.
      *
@@ -709,7 +692,6 @@ class SafeRequest
         return $this->_cookies;
 
     }
-
 
     /**
      * Retreives a named http cookie value.
@@ -734,7 +716,6 @@ class SafeRequest
 
         return $this->_cookies[$name];
     }
-
 
     /**
      * Returns the value of the PHP Server Global with the supplied name. If the
@@ -763,7 +744,6 @@ class SafeRequest
 
         return null;
     }
-
 
     /**
      * Returns the value of a request parameter as a String, or null if the
@@ -798,7 +778,6 @@ class SafeRequest
         return $this->_parameterMap[$name][0];
     }
 
-
     /**
      * Returns an array containing the names of all parameters for this request.
      * If the request has no parameters the returned array will be empty.
@@ -821,7 +800,6 @@ class SafeRequest
         return $this->_parameterNames;
 
     }
-
 
     /**
      * Retrieves all values for the supplied parameter of this request as an array.
@@ -848,7 +826,6 @@ class SafeRequest
         }
         return $this->_parameterMap[$name];
     }
-
 
     /**
      * Returns an associative array of the parameters of this request. Request
@@ -888,7 +865,6 @@ class SafeRequest
         return $this->_parameterMap;
     }
 
-
     /**
      * A convenience method to retrieve an array of PHP Server Globals.  Both the
      * keys and values are canonicalized and those that generate exceptions are
@@ -906,7 +882,6 @@ class SafeRequest
 
         return $this->_serverGlobals;
     }
-
 
     /**
      * Performs strict canonicalization of the indices and values of the supplied
@@ -934,7 +909,6 @@ class SafeRequest
         }
         return $tmp;
     }
-
 
     /**
      * This helper method accepts either the server globals array $_SERVER or a
@@ -982,7 +956,6 @@ class SafeRequest
         return $tmp;
     }
 
-
     /**
      * This helper method accepts either the $_COOKIES array or a similar array
      * containing custom cookie name value pairs.  The names and values are
@@ -1029,7 +1002,6 @@ class SafeRequest
 
     }
 
-
     /**
      * Helper method to validate input and return the canonicalized, validated value
      * if valid.
@@ -1060,7 +1032,6 @@ class SafeRequest
 
         return $validationRule->getValid($context, $input);
     }
-
 
     /**
      * Helper method which hex encodes characters in the supplied array of strings

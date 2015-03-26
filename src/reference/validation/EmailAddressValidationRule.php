@@ -39,6 +39,7 @@ require_once __DIR__ . '/StringValidationRule.php';
  */
 class EmailAddressValidationRule extends StringValidationRule
 {
+
     private $_auditor   = null;
  
     /**
@@ -102,7 +103,6 @@ class EmailAddressValidationRule extends StringValidationRule
 
         return $clean_email;
     }
-
 
     /**
      * Simply attempt to purify the email address and return an empty string if that

@@ -50,7 +50,6 @@ class DefaultAuditorFactory implements AuditorFactory
 
     private $_loggerMap = array();
 
-
     /**
      * DefaultAuditorFactory constructor.
      * 
@@ -61,7 +60,6 @@ class DefaultAuditorFactory implements AuditorFactory
         // NoOp
     }
 
-
     /**
      * {@inheritdoc}
      */
@@ -70,7 +68,7 @@ class DefaultAuditorFactory implements AuditorFactory
 
         // If a logger for this module already exists, we return the same one,
         // otherwise we create a new one.
-        if (   array_key_exists($moduleName, $this->_loggerMap)
+        if (array_key_exists($moduleName, $this->_loggerMap)
             && $this->_loggerMap[$moduleName] instanceof DefaultAuditor
         ) {
             return $this->_loggerMap[$moduleName];
@@ -80,4 +78,5 @@ class DefaultAuditorFactory implements AuditorFactory
             return $moduleLogger;
         }
     }
+
 }

@@ -38,6 +38,7 @@ require_once  __DIR__.'/EnterpriseSecurityException.php';
  */
 class EncryptionException extends EnterpriseSecurityException
 {
+
     /**
      * Instantiates a new EncryptionException.
      * 
@@ -50,4 +51,5 @@ class EncryptionException extends EnterpriseSecurityException
     {
         parent::__construct($userMessage, $logMessage);
     }
+
 }

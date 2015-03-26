@@ -103,7 +103,6 @@ class DefaultAuditor implements Auditor
         }
     }
 
-
     /**
      * @inheritdoc
      */
@@ -111,7 +110,6 @@ class DefaultAuditor implements Auditor
     {
         $this->_log(Auditor::FATAL, $type, $success, $message, $throwable);
     }
-
 
     /**
      * @inheritdoc
@@ -121,7 +119,6 @@ class DefaultAuditor implements Auditor
         return $this->_log4php->isEnabledFor(LoggerLevel::getLevelFatal());
     }
 
-
     /**
      * @inheritdoc
      */
@@ -129,7 +126,6 @@ class DefaultAuditor implements Auditor
     {
         $this->_log(Auditor::ERROR, $type, $success, $message, $throwable);
     }
-
 
     /**
      * @inheritdoc
@@ -139,7 +135,6 @@ class DefaultAuditor implements Auditor
         return $this->_log4php->isEnabledFor(LoggerLevel::getLevelError());
     }
 
-
     /**
      * @inheritdoc
      */
@@ -147,7 +142,6 @@ class DefaultAuditor implements Auditor
     {
         $this->_log(Auditor::WARNING, $type, $success, $message, $throwable);
     }
-
 
     /**
      * @inheritdoc
@@ -157,7 +151,6 @@ class DefaultAuditor implements Auditor
         return $this->_log4php->isEnabledFor(LoggerLevel::getLevelWarn());
     }
 
-
     /**
      * @inheritdoc
      */
@@ -165,7 +158,6 @@ class DefaultAuditor implements Auditor
     {
         $this->_log(Auditor::INFO, $type, $success, $message, $throwable);
     }
-
 
     /**
      * @inheritdoc
@@ -175,7 +167,6 @@ class DefaultAuditor implements Auditor
         return $this->_log4php->isEnabledFor(LoggerLevel::getLevelInfo());
     }
 
-
     /**
      * @inheritdoc
      */
@@ -183,7 +174,6 @@ class DefaultAuditor implements Auditor
     {
         $this->_log(Auditor::DEBUG, $type, $success, $message, $throwable);
     }
-
 
     /**
      * @inheritdoc
@@ -193,7 +183,6 @@ class DefaultAuditor implements Auditor
         return $this->_log4php->isEnabledFor(LoggerLevel::getLevelDebug());
     }
 
-
     /**
      * @inheritdoc
      */
@@ -202,7 +191,6 @@ class DefaultAuditor implements Auditor
         $this->_log(Auditor::TRACE, $type, $success, $message, $throwable);
     }
 
-
     /**
      * @inheritdoc
      */
@@ -210,7 +198,6 @@ class DefaultAuditor implements Auditor
     {
         return $this->_log4php->isEnabledFor(LoggerLevel::getLevelAll());
     }
-
 
     /**
      * Helper function.
@@ -327,13 +314,12 @@ class DefaultAuditor implements Auditor
                     );
                     $_SESSION['DefaultAuditor']['SessionIDForLogging']
                     = $userSessionIDforLogging;
-                } catch( Exception $e ) {
+                } catch(Exception $e) {
                     // continue
                 }
             }
         }
         $context .= "[ID:{$userSessionIDforLogging}]";
-
 
         // Now comes the message.
         if (! is_string($message)) {
@@ -350,7 +336,7 @@ class DefaultAuditor implements Auditor
 
         // Encode for HTML if ESAPI.xml says so
         $encodedMessage = null;
-        if ($secConfig->getLogEncodingRequired() ) {
+        if ($secConfig->getLogEncodingRequired()) {
             try
             {
                 $encodedMessage = $encoder->encodeForHTML($crlfEncoded);
@@ -378,7 +364,6 @@ class DefaultAuditor implements Auditor
 
         $this->_log4php->log($logLevel, $messageForLog, $this);
     }
-
 
     /**
      * Helper function.
@@ -496,7 +481,6 @@ class DefaultAuditor implements Auditor
         }
     }
 
-
     /**
      *  Helper function.
      *
@@ -546,4 +530,5 @@ class DefaultAuditor implements Auditor
             self::_convertESAPILeveltoLoggerLevel($logLevel)
         );
     }
+
 }

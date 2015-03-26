@@ -60,7 +60,7 @@ class ValidationErrorList
     public function addError($context, $ve) 
     {
         //		if (getError(context) != null) throw new RuntimeException("Context (" + context + ") already exists, programmer error");
-        //		
+        //        
         //		if ((context != null) && (ve != null)) {
         //			errorList.put(context, ve);
         //		}
@@ -85,7 +85,7 @@ class ValidationErrorList
      */
     public function getError($context) 
     {
-        //		if (context == null) return null;		
+        //		if (context == null) return null;        
         //		return (ValidationException)errorList.get(context);
     }
 
@@ -108,4 +108,5 @@ class ValidationErrorList
     {
         //		return errorList.size();
     }
+
 }

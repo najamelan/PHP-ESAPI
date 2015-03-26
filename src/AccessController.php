@@ -44,6 +44,7 @@ require_once __DIR__ . '/errors/AccessControlException.php';
  */
 interface AccessController
 {
+
     /**
      * Checks if an account is authorized to access the referenced URL. Generally, this method should be invoked in the
      * application's controller or a filter as follows:
@@ -290,9 +291,7 @@ interface AccessController
      * 
      * @throws AccessControlException
      * 		if access is not permitted
-     */				
+     */                
     function assertAuthorizedForService($serviceName);
-    
-    
+
 }
-?>

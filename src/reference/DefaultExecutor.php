@@ -75,7 +75,7 @@ class DefaultExecutor implements Executor
      /**
      * @inheritdoc
      */
-    function executeSystemCommandLonghand($executable, $params, $workdir, 
+    function executeSystemCommandLonghand($executable, $params, $workdir,
         $logParams
     ) {
         try {
@@ -123,7 +123,7 @@ class DefaultExecutor implements Executor
             // working directory must exist
             $resolved_workdir = $workdir;
             if (substr(PHP_OS, 0, 3) == 'WIN') {
-                if (substr_count($workdir, '%')>=2) {
+                if (substr_count($workdir, '%') >= 2) {
                     //only explode on % if at least 2x % chars exist in string
                     $exploded = explode("%", $workdir);
                     $systemroot = getenv($exploded[1]);
@@ -148,7 +148,7 @@ class DefaultExecutor implements Executor
             $output = shell_exec($executable . $paramstr);    
             return $output;
         }
-        catch ( ExecutorException $e ) {
+        catch (ExecutorException $e) {
             $this->_auditor->warning(Auditor::SECURITY, true, $e->getMessage());
             throw new ExecutorException($e->getMessage());
         }
@@ -156,4 +156,3 @@ class DefaultExecutor implements Executor
     }    
     
 }
-?>

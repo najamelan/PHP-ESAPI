@@ -44,10 +44,10 @@ require_once __DIR__ . '/../DefaultEncoder.php';
  */
 abstract class BaseValidationRule implements ValidationRule
 {
+
     protected $typeName  = null;
     protected $encoder   = null;
     protected $allowNull = false;
-
 
     /**
      * Stores an instance of an Encoder implementation (e.g. DefaultEncoder) to
@@ -70,7 +70,6 @@ abstract class BaseValidationRule implements ValidationRule
         $this->typeName = $typeName;
     }
 
-
     /**
      * Sets the boolean allowNull property which, if set true, will allow empty
      * inputs to validate as true.
@@ -88,7 +87,6 @@ abstract class BaseValidationRule implements ValidationRule
         }
     }
 
-
     /**
      * Gets the boolean allowNull property which, if set true, will allow empty
      * inputs to validate as true.
@@ -100,7 +98,6 @@ abstract class BaseValidationRule implements ValidationRule
     {
         return $this->allowNull;
     }
-
 
     /**
      * Sets a descriptive name for the validator e.g. CreditCardNumber.
@@ -118,7 +115,6 @@ abstract class BaseValidationRule implements ValidationRule
         $this->typeName = $typeName;
     }
 
-
     /**
      * Gets the descriptive name for the validator.
      *
@@ -128,7 +124,6 @@ abstract class BaseValidationRule implements ValidationRule
     {
         return $this->typeName;
     }
-
 
     /**
      * Sets an instance of an encoder class which should provide a
@@ -143,7 +138,7 @@ abstract class BaseValidationRule implements ValidationRule
      */
     final public function setEncoder($encoder)
     {
-        if (   ! is_object($encoder)
+        if (! is_object($encoder)
             || ! method_exists($encoder, 'canonicalize')
         ) {
             throw new InvalidArgumentException(
@@ -152,7 +147,6 @@ abstract class BaseValidationRule implements ValidationRule
         }
         $this->encoder = $encoder;
     }
-
 
     /**
      * Asserts that the supplied $input is valid after canonicalization. Invalid
@@ -171,7 +165,6 @@ abstract class BaseValidationRule implements ValidationRule
     {
         $this->getValid($context, $input);
     }
-
 
     /**
      * Attempts to return valid canonicalized input.  If a ValidationException
@@ -194,13 +187,12 @@ abstract class BaseValidationRule implements ValidationRule
         {
             $safe = $this->getValid($context, $input);
         }
-        catch (ValidationException$e )
+        catch (ValidationException$e)
         {
             $safe = $this->sanitize($context, $input);
         }
         return $safe;
     }
-
 
     /**
      * Returns boolean true if the input is valid, false otherwise.
@@ -225,7 +217,6 @@ abstract class BaseValidationRule implements ValidationRule
             return false;
         }
     }
-
 
     /**
      * Returns the supplied input string after removing any characters not

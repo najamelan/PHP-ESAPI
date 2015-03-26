@@ -59,7 +59,6 @@ class DefaultIntrusionDetector implements IntrusionDetector
     private $_auditor     = null;
     private $_userEvents = null;
 
-
     /**
      * Constructor stores an instance of Auditor for logging and initialises the
      * storage for events generated for a user.
@@ -71,7 +70,6 @@ class DefaultIntrusionDetector implements IntrusionDetector
         $this->_auditor = ESAPI::getAuditor('IntrusionDetector');
         $this->_userEvents = array();
     }
-
 
     /**
      * Adds an exception to the IntrusionDetector.
@@ -129,9 +127,7 @@ class DefaultIntrusionDetector implements IntrusionDetector
             }
         }
 
-
     }
-
 
     /**
      * Adds an event to the IntrusionDetector.
@@ -184,7 +180,6 @@ class DefaultIntrusionDetector implements IntrusionDetector
         }
     }
 
-
     /**
      * Take a specified security action.
      *
@@ -198,7 +193,7 @@ class DefaultIntrusionDetector implements IntrusionDetector
      */
     private function _takeSecurityAction($action, $message)
     {
-        if ($action == 'log' ) {
+        if ($action == 'log') {
             $this->_auditor->fatal(
                 Auditor::SECURITY,
                 false,
@@ -206,7 +201,6 @@ class DefaultIntrusionDetector implements IntrusionDetector
             );
         }
     }
-
 
      /**
      * Adds a security event.  These events are used to check that the user has
@@ -241,14 +235,14 @@ class DefaultIntrusionDetector implements IntrusionDetector
             }
             // If a session was started after events existed then ensure those
             // events are added to the session store
-            if (   is_array($this->_userEvents)
+            if (is_array($this->_userEvents)
                 && $this->_userEvents !== $_SESSION['ESAPI']['IntrusionDetector']['UserEvents']
             ) {
                 $_SESSION['ESAPI']['IntrusionDetector']['UserEvents']
                     = $this->_userEvents;
             }
             // Assign a reference to the session store
-            $this->_userEvents =&
+            $this->_userEvents = &
                 $_SESSION['ESAPI']['IntrusionDetector']['UserEvents'];
         } else if (! isset($this->_userEvents)) {
             $this->_userEvents = array();
@@ -267,8 +261,6 @@ class DefaultIntrusionDetector implements IntrusionDetector
         }
     }
 }
-
-
 
 /**
  * Reference implementation of an Intrusion Event.
@@ -292,12 +284,10 @@ class Event
     private $_key;
     private $_times = array();
 
-
     /**
      * @var int $count The number of times this event occurred for a given user.
      */
     public $count = 0;
-
 
     /**
      * Constructor stores the supplied key as the event name.
@@ -311,7 +301,6 @@ class Event
     {
         $this->_key = $key;
     }
-
 
     /**
      * The increment method increments the number of times this event occurred

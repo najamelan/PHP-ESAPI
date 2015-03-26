@@ -39,6 +39,7 @@ require_once __DIR__.'/AuthenticationException.php';
  */
 class AuthenticationAccountsException extends AuthenticationException
 {
+
     /**
      * Instantiates a new authentication exception.
      * 
@@ -51,5 +52,5 @@ class AuthenticationAccountsException extends AuthenticationException
     {
         parent::__construct($userMessage, $logMessage);
     }
+
 }
-?>

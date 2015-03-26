@@ -44,11 +44,11 @@ require_once __DIR__ . '/BaseValidationRule.php';
  */
 class StringValidationRule extends BaseValidationRule
 {
+
     protected $whitelistPatterns;
     protected $blacklistPatterns;
     protected $minLength = 0;
     protected $maxLength = PHP_INT_MAX;
-
 
     /**
      * Constructor sets-up the validation rule with a descriptive name for this
@@ -61,7 +61,7 @@ class StringValidationRule extends BaseValidationRule
      * 
      * @return does not return a value
      */
-    public function __construct($typeName, $encoder = null, 
+    public function __construct($typeName, $encoder = null,
         $whiteListPattern = null
     ) {
         parent::__construct($typeName, $encoder);
@@ -78,7 +78,6 @@ class StringValidationRule extends BaseValidationRule
             );
         }
     }
-
 
     /**
      * Adds a whitelist regex pattern to the array of whitelist patterns.
@@ -104,7 +103,6 @@ class StringValidationRule extends BaseValidationRule
         }
         array_push($this->whitelistPatterns, $pattern);
     }
-
 
     /**
      * Adds a blacklist regex pattern to the array of blacklist patterns.
@@ -134,7 +132,6 @@ class StringValidationRule extends BaseValidationRule
         
     }
 
-
     /**
      * Sets the minimum length of the input after canonicalization, below which
      * the input is deemed invalid.
@@ -155,7 +152,6 @@ class StringValidationRule extends BaseValidationRule
         $this->minLength = (int) $length;
     }
 
-
     /**
      * Sets the maximum length of the input after canonicalization, above which
      * the input is deemed invalid.
@@ -175,7 +171,6 @@ class StringValidationRule extends BaseValidationRule
         }
         $this->maxLength = (int) $length;
     }
-
 
     /**
      * Returns the canonicalized, valid input.
@@ -287,7 +282,6 @@ class StringValidationRule extends BaseValidationRule
         return $canonical;
     }
 
-
     /**
      * Returns the supplied input string after removing any non-alphanumeric
      * characters.
@@ -304,4 +298,5 @@ class StringValidationRule extends BaseValidationRule
     {
         return $this->whitelist($input, Encoder::CHAR_ALPHANUMERICS);
     }
+
 }

@@ -22,6 +22,7 @@ require_once dirname(__FILE__) . '/../Randomizer.php';
 
 class DefaultRandomizer implements Randomizer
 {
+    
     private $maxRand;
 
     function __construct()
@@ -46,7 +47,7 @@ class DefaultRandomizer implements Randomizer
     function getRandomString($numChars, $charset)
     {
 
-        if ( $numChars < 1 || strlen($charset) < 2 ) {
+        if ($numChars < 1 || strlen($charset) < 2) {
             throw new InvalidArgumentException();
         }
 
@@ -73,7 +74,7 @@ class DefaultRandomizer implements Randomizer
      */
     function getRandomBoolean()
     {
-        return (( mt_rand(0, 100) % 2) ? true : false);
+        return ((mt_rand(0, 100) % 2) ? true : false);
     }
 
     /**
@@ -150,7 +151,7 @@ class DefaultRandomizer implements Randomizer
      */
     function getRandomReal($min, $max)
     {
-        $rf = (float) (mt_rand() / $this->maxRand);		// Maximizes the random bit counts from the PHP PRNG
+        $rf = (float) (mt_rand() / $this->maxRand);        // Maximizes the random bit counts from the PHP PRNG
 
         $factor = $max - $min;
         return (float) ($rf * $factor + $min);
@@ -174,14 +175,13 @@ class DefaultRandomizer implements Randomizer
         return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
         mt_rand(0, 65535), mt_rand(0, 65535), // 32 bits for "time_low"
         mt_rand(0, 65535), // 16 bits for "time_mid"
-        					 mt_rand(0, 4095),  // 12 bits before the 0100 of (version) 4 for "time_hi_and_version"
-        					 bindec(substr_replace(sprintf('%016b', mt_rand(0, 65535)), '01', 6, 2)),
-				            // 8 bits, the last two of which (positions 6 and 7) are 01, for "clk_seq_hi_res"
-				            // (hence, the 2nd hex digit after the 3rd hyphen can only be 1, 5, 9 or d)
-				            // 8 bits for "clk_seq_low"
-					        mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535) // 48 bits for "node"
-					   );  
-	}
+                             mt_rand(0, 4095),  // 12 bits before the 0100 of (version) 4 for "time_hi_and_version"
+                             bindec(substr_replace(sprintf('%016b', mt_rand(0, 65535)), '01', 6, 2)),
+                            // 8 bits, the last two of which (positions 6 and 7) are 01, for "clk_seq_hi_res"
+                            // (hence, the 2nd hex digit after the 3rd hyphen can only be 1, 5, 9 or d)
+                            // 8 bits for "clk_seq_low"
+                            mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535) // 48 bits for "node"
+                       );  
+    }
 
 }
-?>

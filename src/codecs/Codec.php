@@ -50,12 +50,12 @@ require_once __DIR__ . '/../Encoder.php';
  */
 abstract class Codec
 {
+
     /**
      * An map where the keys are ordinal values of non-alphanumeric single-byte
      * characters and the values are hexadecimal equivalents as strings.
      */
     private static $_hex = Array();
-    
     
     /**
      * Populates the $hex map of non-alphanumeric single-byte characters.
@@ -102,7 +102,6 @@ abstract class Codec
         
         return $encodedString;
     }
-    
     
     /**
      * Encode a Character with a Codec.
@@ -176,8 +175,8 @@ abstract class Codec
                 // encoding of that character from the start of the input string.
                 if ($decodedCharacter != '') {
                     $resultOfAppend = $this->_appendCharacterToOuput(
-                        $decodedCharacter, 
-                        $decodedString, 
+                        $decodedCharacter,
+                        $decodedString,
                         $targetCharacterEncoding
                     );
                     
@@ -187,8 +186,8 @@ abstract class Codec
                         // $_4ByteString and append it to the decoded string.
                         $charToAppend   = mb_substr($_4ByteString, 0, 1, 'UTF-32');
                         $resultOfAppend = $this->_appendCharacterToOuput(
-                            $charToAppend, 
-                            $decodedString, 
+                            $charToAppend,
+                            $decodedString,
                             $targetCharacterEncoding
                         );
                         if ($resultOfAppend != true) {
@@ -196,7 +195,7 @@ abstract class Codec
                             // or ignore the dodgy character.  This situation is
                             // an exceptional one and shouldn't happen often...
                             throw new EncodingException(
-                                'Error encountered whilst decoding Input.', 
+                                'Error encountered whilst decoding Input.',
                                 'A sequence of characters was recognised as using '.
                                 'a valid encoding scheme, but the character it '.
                                 'encodes is not a valid Unicode CodePoint. '.
@@ -226,8 +225,8 @@ abstract class Codec
                 // from the start of the input string.
                 $charToAppend   = mb_substr($_4ByteString, 0, 1, 'UTF-32');
                 $resultOfAppend = $this->_appendCharacterToOuput(
-                    $charToAppend, 
-                    $decodedString, 
+                    $charToAppend,
+                    $decodedString,
                     $targetCharacterEncoding
                 );
                 if ($resultOfAppend !== true) {
@@ -236,7 +235,7 @@ abstract class Codec
                     // throw EncodingException here, but instead we'll forget
                     // about it and log a warning.
                     ESAPI::getLogger('Codec')->warn(
-                        DefaultLogger::SECURITY, false, 
+                        DefaultLogger::SECURITY, false,
                         'Input contained a character with an invalid Unicode '.
                         'CodePoint. We destroyed it!'
                     );
@@ -255,7 +254,6 @@ abstract class Codec
         return $decodedString;
     }
     
-    
     /**
      * Helper method which handles appending a UTF-32 character to the output
      * string of decode methods such that the output string does not contain
@@ -271,7 +269,7 @@ abstract class Codec
      * @return bool returns true if the character was successfully appended to the 
      *              target false otherwise.
      */
-    private function _appendCharacterToOuput(&$character_UTF32, &$targetString, 
+    private function _appendCharacterToOuput(&$character_UTF32, &$targetString,
         &$targetCharEnc
     ) {
         list(, $ordinalValue) = unpack('N', $character_UTF32);
@@ -284,23 +282,23 @@ abstract class Codec
             // An ASCII character can be appended to a string of any character
             // encoding
             $targetString .= mb_convert_encoding(
-                $character_UTF32, 
-                'ASCII', 
+                $character_UTF32,
+                'ASCII',
                 "UTF-32"
             );
         } else if ($ordinalValue <= 0x10FFFF) {
             // convert the decoded character to UTF-8
             $character_UTF8 = mb_convert_encoding(
-                $character_UTF32, 
-                'UTF-8', 
+                $character_UTF32,
+                'UTF-8',
                 'UTF-32'
             );
             
             // convert decodedString to UTF-8 if necessary
             if ($targetString !== '' && $targetCharEnc != 'UTF-8') {
                 $targetString = mb_convert_encoding(
-                    $targetString, 
-                    'UTF-8', 
+                    $targetString,
+                    'UTF-8',
                     $targetCharEnc
                 );
             }
@@ -318,8 +316,8 @@ abstract class Codec
             ) {
                 // we can convert back to target encoding
                 $targetString = mb_convert_encoding(
-                    $targetString, 
-                    $targetCharEnc, 
+                    $targetString,
+                    $targetCharEnc,
                     'UTF-8'
                 );
             } else {
@@ -361,7 +359,6 @@ abstract class Codec
         return self::toHex($ordinalValue);
     }
     
-    
     /**
      * Return the hex value of a character as a string without leading zeroes.
      *
@@ -375,7 +372,6 @@ abstract class Codec
         // (i.e. an integer)
         return dechex($c);
     }
-    
     
     /**
      * Utility to search a char[] for a specific char.
@@ -413,7 +409,6 @@ abstract class Codec
         return false;
     }
     
-    
     /**
      * Utility to detect a (potentially multibyte) string's encoding with 
      * extra logic to deal with single characters that mb_detect_encoding() fails 
@@ -437,9 +432,9 @@ abstract class Codec
         catch (Exception $e) {
             // unreach?
             ESAPI::getLogger('Codec')->warning(
-                DefaultLogger::SECURITY, false, 
+                DefaultLogger::SECURITY, false,
                 'Codec::detectEncoding threw an exception whilst attempting'.
-                ' to unpack an input string', 
+                ' to unpack an input string',
                 $e
             );
         }
@@ -470,7 +465,7 @@ abstract class Codec
             $limit = mb_strlen($string, 'ISO-8859-1');
             for ($i = 0; $i < $limit; $i++) {
                 $char = mb_substr($string, $i, 1, 'ISO-8859-1');
-                if ( (ord($char) == 172) 
+                if ((ord($char) == 172) 
                     || (ord($char) >= 128 && ord($char) <= 159)
                 ) {
                     return 'UTF-8';
@@ -483,7 +478,6 @@ abstract class Codec
             return mb_detect_encoding($string);
         }
     }
-    
     
     /**
      * Utility to normalize a string's encoding to UTF-32.
@@ -503,7 +497,6 @@ abstract class Codec
         return $encoded;
     }
     
-    
     /**
      * Utility to get first (potentially multibyte) character from a (potentially 
      * multicharacter) multibyte string.
@@ -517,7 +510,6 @@ abstract class Codec
         // Grab first character from UTF-32 encoded string
         return mb_substr($string, 0, 1, "UTF-32");
     }
-    
     
     /**
      * Utility method to determine if a single character string is a hex digit
@@ -542,4 +534,5 @@ abstract class Codec
         
         return false;
     }
+
 }

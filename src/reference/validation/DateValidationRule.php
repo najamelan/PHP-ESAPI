@@ -46,8 +46,8 @@ require_once __DIR__ . '/BaseValidationRule.php';
  */
 class DateValidationRule extends BaseValidationRule
 {
-    private $_format;
 
+    private $_format;
 
     /**
      * Constructor sets-up the validation rule with a descriptive name for this
@@ -71,7 +71,6 @@ class DateValidationRule extends BaseValidationRule
         $this->setDateFormat($newFormat);
     }
 
-
     /**
      * Sets the date format string which valid inputs must adhere to. The format
      * should be of the type accepted by PHP's date() function e.g. 'Y-m-d'.
@@ -90,7 +89,6 @@ class DateValidationRule extends BaseValidationRule
         }
         $this->_format = $newFormat;
     }
-
 
     /**
      * Returns the canonicalized, valid input.
@@ -176,7 +174,6 @@ class DateValidationRule extends BaseValidationRule
         return $date;
     }
 
-
     /**
      * Returns a default DateTime object created by calling date_create without
      * supplying any parameters.
@@ -194,6 +191,5 @@ class DateValidationRule extends BaseValidationRule
     {
         return date_create();
     }
-
 
 }

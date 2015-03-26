@@ -38,6 +38,7 @@ require_once  __DIR__.'/EnterpriseSecurityException.php';
  */
 class EncodingException extends EnterpriseSecurityException
 {
+
     /**
      * Instantiates a new EncodingException.
      * 
@@ -50,5 +51,5 @@ class EncodingException extends EnterpriseSecurityException
     {
         parent::__construct($userMessage, $logMessage);
     }
+
 }
-?>

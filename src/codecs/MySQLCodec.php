@@ -37,6 +37,7 @@ require_once 'Codec.php';
  */
 class MySQLCodec extends Codec
 {
+
     const MYSQL_ANSI = 0;
     const MYSQL_STD = 1;
     
@@ -336,4 +337,5 @@ class MySQLCodec extends Codec
             'encodedString' => mb_substr($input, 0, 2, "UTF-32")
         );
     }
+
 }

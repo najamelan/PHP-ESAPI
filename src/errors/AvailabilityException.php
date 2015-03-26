@@ -39,6 +39,7 @@ require_once  __DIR__.'/EnterpriseSecurityException.php';
  */
 class AvailabilityException extends EnterpriseSecurityException
 {
+
     /**
      * Instantiates a new AvailabilityException.
      * 
@@ -51,5 +52,5 @@ class AvailabilityException extends EnterpriseSecurityException
     {
         parent::__construct($userMessage, $logMessage);
     }
+
 }
-?>

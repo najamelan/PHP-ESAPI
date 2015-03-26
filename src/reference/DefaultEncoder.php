@@ -127,7 +127,6 @@ class DefaultEncoder implements Encoder
 
     }
 
-
     /**
      * @inheritdoc
      */
@@ -159,8 +158,8 @@ class DefaultEncoder implements Encoder
                 }
             }
         }
-        if ( $foundCount >= 2 && $mixedCount > 1 ) {
-            if ( $strict == true ) {
+        if ($foundCount >= 2 && $mixedCount > 1) {
+            if ($strict == true) {
                 throw new IntrusionException('Input validation failure',
                     'Multiple (' . $foundCount . 'x) and mixed ('
                     . $mixedCount . 'x) encoding detected in ' . $input
@@ -172,8 +171,8 @@ class DefaultEncoder implements Encoder
                     . $mixedCount . 'x) encoding detected in '.$input
                 );
             }
-        } else if ( $foundCount >= 2 ) {
-            if ( $strict == true ) {
+        } else if ($foundCount >= 2) {
+            if ($strict == true) {
                 throw new IntrusionException(
                     'Input validation failure',
                     "Multiple encoding ({$foundCount}x) detected in {$input}"
@@ -184,8 +183,8 @@ class DefaultEncoder implements Encoder
                     "Multiple encoding ({$foundCount}x) detected in {$input}"
                 );
             }
-        } else if ( $mixedCount > 1 ) {
-            if ( $strict == true ) {
+        } else if ($mixedCount > 1) {
+            if ($strict == true) {
                 throw new IntrusionException(
                     'Input validation failure',
                     "Mixed encoding ({$mixedCount}x) detected in {$input}"
@@ -200,7 +199,6 @@ class DefaultEncoder implements Encoder
         return $working;
     }
 
-
     /**
      * @inheritdoc
      */
@@ -211,7 +209,6 @@ class DefaultEncoder implements Encoder
         }
         return $this->_cssCodec->encode($this->_immune_css, $input);
     }
-
 
     /**
      * @inheritdoc
@@ -224,7 +221,6 @@ class DefaultEncoder implements Encoder
         return $this->_htmlCodec->encode($this->_immune_html, $input);
     }
 
-
     /**
      * @inheritdoc
      */
@@ -235,7 +231,6 @@ class DefaultEncoder implements Encoder
         }
         return $this->_htmlCodec->encode($this->_immune_htmlattr, $input);
     }
-
 
     /**
      * @inheritdoc
@@ -248,7 +243,6 @@ class DefaultEncoder implements Encoder
         return $this->_javascriptCodec->encode($this->_immune_javascript, $input);
     }
 
-
     /**
      * @inheritdoc
      */
@@ -260,7 +254,6 @@ class DefaultEncoder implements Encoder
         return $this->_vbscriptCodec->encode($this->_immune_vbscript, $input);
     }
 
-
     /**
      * @inheritdoc
      */
@@ -271,7 +264,6 @@ class DefaultEncoder implements Encoder
         }
         return $codec->encode($this->_immune_sql, $input);
     }
-
 
     /**
      * @inheritdoc
@@ -304,7 +296,6 @@ class DefaultEncoder implements Encoder
         return $this->_htmlCodec->encode($this->_immune_xpath, $input);
     }
 
-
     /**
      * @inheritdoc
      */
@@ -316,7 +307,6 @@ class DefaultEncoder implements Encoder
         return $this->_xmlCodec->encode($this->_immune_xml, $input);
     }
 
-
     /**
      * @inheritdoc
      */
@@ -327,7 +317,6 @@ class DefaultEncoder implements Encoder
         }
         return $this->_xmlCodec->encode($this->_immune_xmlattr, $input);
     }
-
 
     /**
      * @inheritdoc
@@ -356,7 +345,7 @@ class DefaultEncoder implements Encoder
             $c = mb_substr($encoded, $i, 1, $initialEncoding);
             $d = mb_substr($encoded, $i+1, 1, $initialEncoding);
             $e = mb_substr($encoded, $i+2, 1, $initialEncoding);
-            if (   $this->_percentCodec->normalizeEncoding($c) == $pcnt
+            if ($this->_percentCodec->normalizeEncoding($c) == $pcnt
                 && $this->_percentCodec->normalizeEncoding($d) == $two
                 && $this->_percentCodec->normalizeEncoding($e) == $zero
             ) {
@@ -370,7 +359,6 @@ class DefaultEncoder implements Encoder
 
         return $decodedString;
     }
-
 
     /**
      * @inheritdoc
@@ -402,7 +390,6 @@ class DefaultEncoder implements Encoder
         return $this->_percentCodec->decode($decodedString);
     }
 
-
     /**
      * @inheritdoc
      */
@@ -414,7 +401,6 @@ class DefaultEncoder implements Encoder
         return $this->_base64Codec->encode($input, $wrap);
     }
 
-
     /**
      * @inheritdoc
      */
@@ -425,4 +411,5 @@ class DefaultEncoder implements Encoder
         }
         return $this->_base64Codec->decode($input);
     }
+
 }

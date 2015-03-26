@@ -38,6 +38,7 @@ require_once  __DIR__.'/EnterpriseSecurityException.php';
  */
 class CertificateException extends EnterpriseSecurityException
 {
+
     /**
      * Instantiates a new CertificateException.
      * 
@@ -50,5 +51,5 @@ class CertificateException extends EnterpriseSecurityException
     {
         parent::__construct($userMessage, $logMessage);
     }
+
 }
-?>

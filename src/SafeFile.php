@@ -93,14 +93,14 @@ class SafeFile extends SplFileObject
     {
         $dir = $this->getPath();
         
-        if ( preg_match($this->_DIR_BLACKLIST_PAT, $dir) ) {
+        if (preg_match($this->_DIR_BLACKLIST_PAT, $dir)) {
             throw new ValidationException(
                 'Invalid directory',
                 "Directory path ({$dir}) contains illegal character. "
             );
         }
 
-        if ( preg_match($this->_PERCENTS_PAT, $dir) ) {
+        if (preg_match($this->_PERCENTS_PAT, $dir)) {
             throw new ValidationException(
                 'Invalid directory',
                 "Directory path ({$dir}) contains encoded characters. "
@@ -161,13 +161,13 @@ class SafeFile extends SplFileObject
 
         }
 
-        if ( preg_match($this->_FILE_BLACKLIST_PAT, $filename) ) {
+        if (preg_match($this->_FILE_BLACKLIST_PAT, $filename)) {
             throw new ValidationException(
                 'Invalid file',
                 "File path ({$filename}) contains illegal character.");
         }
 
-        if ( preg_match($this->_PERCENTS_PAT, $filename) ) {
+        if (preg_match($this->_PERCENTS_PAT, $filename)) {
             throw new ValidationException(
                 'Invalid file',
                 "File path ({$filename}) contains encoded characters."
@@ -220,4 +220,5 @@ class SafeFile extends SplFileObject
             );
         }
     }
+
 }

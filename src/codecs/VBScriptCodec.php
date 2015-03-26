@@ -37,6 +37,7 @@ require_once 'Codec.php';
  */
 class VBScriptCodec extends Codec
 {
+
     /**
      * Public Constructor 
      */
@@ -136,4 +137,5 @@ class VBScriptCodec extends Codec
             'encodedString' => mb_substr($input, 0, 2, "UTF-32")
         );
     }
+
 }

@@ -34,6 +34,7 @@ require_once __DIR__.'/../StringUtilities.php';
  */
 class RandomAccessReferenceMap implements AccessReferenceMap
 {
+    
     private $dtoi = null;
     private $itod = null;
     private $random = 0;
@@ -45,7 +46,7 @@ class RandomAccessReferenceMap implements AccessReferenceMap
         $this->dtoi = new ArrayObject();
         $this->itod = new ArrayObject();
 
-        if ( !empty($directReferences) )
+        if (!empty($directReferences))
         {
             $this->update($directReferences);
         }
@@ -76,14 +77,14 @@ class RandomAccessReferenceMap implements AccessReferenceMap
      */
     function getIndirectReference($direct)
     {
-        if ( empty($direct) )
+        if (empty($direct))
         {
             return null;
         }
 
         $hash = $this->getHash($direct);
 
-        if ( !($this->dtoi->offsetExists($hash)) )
+        if (!($this->dtoi->offsetExists($hash)))
         {
             return null;
         }
@@ -109,7 +110,7 @@ class RandomAccessReferenceMap implements AccessReferenceMap
      */
     function getDirectReference($indirectReference)
     {
-        if (!empty($indirectReference) && $this->itod->offsetExists($indirectReference) )
+        if (!empty($indirectReference) && $this->itod->offsetExists($indirectReference))
         {
             return $this->itod->offsetGet($indirectReference);
         }
@@ -130,14 +131,14 @@ class RandomAccessReferenceMap implements AccessReferenceMap
      */
     function addDirectReference($direct)
     {
-        if ( empty($direct) )
+        if (empty($direct))
         {
             return null;
         }
 
         $hash = $this->getHash($direct);
 
-        if ( $this->dtoi->offsetExists($hash) )
+        if ($this->dtoi->offsetExists($hash))
         {
             return $this->dtoi->offsetGet($hash);
         }
@@ -160,7 +161,7 @@ class RandomAccessReferenceMap implements AccessReferenceMap
         $candidate = null;
 
         do {
-            $candidate = ESAPI::getRandomizer()->getRandomString(6	, "123456789");
+            $candidate = ESAPI::getRandomizer()->getRandomString(6, "123456789");
         } while ($this->itod->offsetExists($candidate));
 
         return $candidate;
@@ -168,7 +169,7 @@ class RandomAccessReferenceMap implements AccessReferenceMap
 
     function getHash($direct)
     {
-        if ( empty($direct) )
+        if (empty($direct))
         {
             return null;
         }
@@ -190,13 +191,13 @@ class RandomAccessReferenceMap implements AccessReferenceMap
      */
     function removeDirectReference($direct)
     {
-        if ( empty($direct) ) {
+        if (empty($direct)) {
             return null;
         }
 
         $hash = $this->getHash($direct);
 
-        if ( $this->dtoi->offsetExists($hash) ) {
+        if ($this->dtoi->offsetExists($hash)) {
             $indirect = $this->dtoi->offsetGet($hash);
             $this->itod->offsetUnset($indirect);
             $this->dtoi->offsetUnset($hash);
@@ -205,8 +206,6 @@ class RandomAccessReferenceMap implements AccessReferenceMap
 
         return null;
     }
-
-
 
     /**
      * Updates the access reference map with a new set of direct references, maintaining
@@ -236,15 +235,15 @@ class RandomAccessReferenceMap implements AccessReferenceMap
             $indirect = null;
             $direct = $directIterator->current();
             $hash = $this->getHash($direct);
-            	
+                
             // Try to get the old direct object reference (if it exists)
             // otherwise, create a new entry
-            if (!empty($direct) && $dtoi_old->offsetExists($hash) )
+            if (!empty($direct) && $dtoi_old->offsetExists($hash))
             {
                 $indirect = $dtoi_old->offsetGet($hash);
             }
-            	
-            if ( empty($indirect) )
+                
+            if (empty($indirect))
             {
                 $indirect = $this->getUniqueRandomReference();
             }
@@ -253,5 +252,5 @@ class RandomAccessReferenceMap implements AccessReferenceMap
             $directIterator->next();
         }
     }
+
 }
-?>

@@ -39,6 +39,7 @@ require_once __DIR__.'/AuthenticationException.php';
  */
 class AuthenticationHostException extends AuthenticationException
 {
+
     /**
      * Instantiates a new authentication exception.
      * 
@@ -53,4 +54,3 @@ class AuthenticationHostException extends AuthenticationException
     }
 
 }
-?>

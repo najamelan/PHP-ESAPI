@@ -37,6 +37,7 @@ require_once 'Codec.php';
  */
 class HTMLEntityCodec extends Codec
 {
+
     private static $_characterToEntityMap = Array();
     private static $_entityToCharacterMap = Array();
     private static $_longestEntity = 0;
@@ -1559,4 +1560,5 @@ class HTMLEntityCodec extends Codec
         self::$_longestEntity += 2;
         self::$_mapIsInitialized = true;
     }
+
 }

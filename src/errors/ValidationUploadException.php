@@ -38,6 +38,7 @@ require_once  __DIR__.'/ValidationException.php';
  */
 class ValidationUploadException extends ValidationException
 {
+
     /**
      * Create a new ValidationException
      * 
@@ -50,5 +51,5 @@ class ValidationUploadException extends ValidationException
     {
         parent::__construct($userMessage, $logMessage);
     }
+
 }
-?>

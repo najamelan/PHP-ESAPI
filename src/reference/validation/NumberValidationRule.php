@@ -44,10 +44,10 @@ require_once __DIR__ . '/BaseValidationRule.php';
  */
 class NumberValidationRule extends BaseValidationRule
 {
+
     private $_minValue;
     private $_maxValue;
 
-    
     /**
      * Constructor sets-up the validation rule with a descriptive name for this
      * validator, an optional Encoder instance (for canonicalization) and
@@ -60,7 +60,7 @@ class NumberValidationRule extends BaseValidationRule
      * 
      * @return does not return a value.
      */
-    public function __construct($typeName, $encoder, $minValue = null, 
+    public function __construct($typeName, $encoder, $minValue = null,
         $maxValue = null
     ) {
         parent::__construct($typeName, $encoder);
@@ -77,7 +77,6 @@ class NumberValidationRule extends BaseValidationRule
             $this->_maxValue = (double) $maxValue;
         }
     }
-    
     
     /**
      * Returns the canonicalized, valid input.
@@ -108,7 +107,7 @@ class NumberValidationRule extends BaseValidationRule
             );
         }
         
-        if (   $this->_minValue !== null
+        if ($this->_minValue !== null
             && $this->_maxValue !== null
             && $this->_minValue > $this->_maxValue
         ) {
@@ -204,7 +203,6 @@ class NumberValidationRule extends BaseValidationRule
         }
     }
 
-
     /**
      * Returns a default safe number - in this case (double) zero.
      * TODO filter non-numeric chars 0123456789+-e., ?
@@ -221,6 +219,5 @@ class NumberValidationRule extends BaseValidationRule
     {
         return (double) 0;
     }
-
 
 }

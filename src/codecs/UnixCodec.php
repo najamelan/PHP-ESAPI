@@ -37,6 +37,7 @@ require_once 'Codec.php';
  */
 class UnixCodec extends Codec
 {
+
     /**
      * Public Constructor 
      */
@@ -44,8 +45,7 @@ class UnixCodec extends Codec
     {
         parent::__construct();
     }
-    
-    
+
     /**
      * {@inheritdoc}
      */
@@ -81,8 +81,7 @@ class UnixCodec extends Codec
         
         return $encodedOutput . "\\" . $c;
     }
-    
-    
+
     /**
      * {@inheritdoc}
      */
@@ -122,4 +121,5 @@ class UnixCodec extends Codec
             'encodedString' => mb_substr($input, 0, 2, "UTF-32")
         );
     }
+
 }

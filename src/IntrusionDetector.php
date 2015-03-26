@@ -66,7 +66,6 @@ interface IntrusionDetector
      */
     function addException($exception);
 
-
     /**
      * Adds an event to the IntrusionDetector.
      * 
@@ -83,6 +82,5 @@ interface IntrusionDetector
      * @return does not return a value.
      */
     function addEvent($eventName, $logMessage);
-
 
 }

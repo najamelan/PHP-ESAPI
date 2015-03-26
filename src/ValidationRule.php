@@ -58,7 +58,6 @@ interface ValidationRule
      */
     public function setAllowNull($flag);
 
-
     /**
      * Sets a descriptive name for the validator e.g. CreditCardNumber.
      *
@@ -68,14 +67,12 @@ interface ValidationRule
      */
     public function setTypeName($typeName);
 
-
     /**
      * Gets the descriptive name for the validator.
      *
      * @return string name describing the validator.
      */
     public function getTypeName();
-
 
     /**
      * Sets an instance of an encoder class which should provide a
@@ -86,7 +83,6 @@ interface ValidationRule
      * @return does not return a value.
      */
     public function setEncoder($encoder);
-
 
     /**
      * Asserts that the supplied $input is valid after canonicalization. Invalid
@@ -103,7 +99,6 @@ interface ValidationRule
      */
     public function assertValid($context, $input);
 
-
     /**
      * Returns the canonicalized, valid input.
      * Throws ValidationException if the input is not valid or
@@ -118,7 +113,6 @@ interface ValidationRule
      * @return string canonicalized, valid input.
      */
     public function getValid($context, $input);
-
 
     /**
      * Attempts to return valid canonicalized input.  If a ValidationException
@@ -137,7 +131,6 @@ interface ValidationRule
      */
     public function getSafe($context, $input);
 
-
     /**
      * Returns boolean true if the input is valid, false otherwise.
      *
@@ -150,7 +143,6 @@ interface ValidationRule
      * @return bool true if the input is valid, false otherwise.
      */
     public function isValid($context, $input);
-
 
     /**
      * The method is similar to getSafe except that it returns a harmless value
@@ -169,7 +161,6 @@ interface ValidationRule
      */
     public function sanitize($context, $input);
 
-
     /**
      * Returns the supplied input string after removing any characters not
      * present in the supplied whitelist.
@@ -180,6 +171,5 @@ interface ValidationRule
      * @return string a string of characters from $input that are present in $list.
      */
     public function whitelist($input, $list);
-
 
 }

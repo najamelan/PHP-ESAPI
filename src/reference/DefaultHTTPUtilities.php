@@ -47,7 +47,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
     private $_currentRequest = null;
     private $_validator      = null;
 
-
     /**
      * The constructor stores an instance of Auditor for the purpose of logging.
      * 
@@ -57,10 +56,9 @@ class DefaultHTTPUtilities implements HTTPUtilities
     {
         Global $ESAPI;
         $this->_auditor = ESAPI::getAuditor('DefaultHTTPUtilities');
-	$this->_validator = ESAPI::getValidator();
+    $this->_validator = ESAPI::getValidator();
 
     }
-
 
     /**
      * Adds the CSRF token from the current session to the supplied URL for the
@@ -96,7 +94,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
         return $href;
     }
 
-
     /**
      * Returns the CSRF token from the current session. If there is no current
      * session then null is returned. If the CSRF Token is not present in the
@@ -111,7 +108,7 @@ class DefaultHTTPUtilities implements HTTPUtilities
             return null;
         }
         
-        if (   ! array_key_exists('ESAPI', $_SESSION)
+        if (! array_key_exists('ESAPI', $_SESSION)
             || ! array_key_exists('HTTPUtilities', $_SESSION['ESAPI'])
             || ! array_key_exists('CSRFToken', $_SESSION['ESAPI']['HTTPUtilities'])
         ) {
@@ -120,7 +117,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
         
         return $_SESSION['ESAPI']['HTTPUtilities']['CSRFToken'];
     }
-
 
     /**
      * Searches the GET and POST parameters in a request for the CSRF token stored
@@ -148,7 +144,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
         }
         
     }
-
 
     /**
      * Sets the CSRF Token for the current session.  If the session has not been
@@ -180,7 +175,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
             = ESAPI::getRandomizer()->getRandomGUID();
     }
 
-
     /**
      * Get the first cookie with the matching name.
      *
@@ -199,7 +193,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
         }
         return $request->getCookie($name);
     }
-
 
     /**
      * Ensures that the supplied request was received with Transport Layer
@@ -238,7 +231,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
         }
     }
 
-
     /**
      * Invalidate the old session after copying all of its contents to a newly
      * created session with a new session id. Note that this is different from
@@ -254,7 +246,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
         $result = session_regenerate_id(true);
         return $result;
     }
-
 
     /**
      * Returns true if the supplied request object was received over a secured
@@ -302,14 +293,14 @@ class DefaultHTTPUtilities implements HTTPUtilities
     public function getParameter($request, $name, $default = null)
     {
       $value = $request->getParameter($name);
-      if($this->_validator->isValidInput("HTTP parameter value: " . $value, $value, "HTTPParameterValue", 2000, true) )
-	{
-	  return $value;
-	}
+      if($this->_validator->isValidInput("HTTP parameter value: " . $value, $value, "HTTPParameterValue", 2000, true))
+    {
+      return $value;
+    }
       else 
-	{
-	  return $default;
-	}
+    {
+      return $default;
+    }
     }
 
     /**
@@ -333,7 +324,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
             $this->killCookie($request, $name);
         }
     }
-
 
     /**
      * Kills the specified cookie by setting a new cookie that expires
@@ -361,7 +351,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
         setcookie($name, $value, $expire, $path, $domain);
     }
 
-
     /**
      * Takes an HTTP query string and parses it into name-value pairs which are
      * returned as an associative array.  This implementation will ignore
@@ -384,14 +373,13 @@ class DefaultHTTPUtilities implements HTTPUtilities
                 if (! array_key_exists($name, $map)) {
                     $map[$name] = $value;
                 }
-            } catch( EncodingException $e ) {
+            } catch(EncodingException $e) {
                 // NoOp - skip this pair - exception was logged already.
             }
         }
 
         return $map;
     }
-
 
     /**
      * Stores the supplied SafeRequest object so that it may be readily accessed
@@ -411,7 +399,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
         $this->_currentRequest = $request;
     }
 
-
     /**
      * Retrieves the current SafeRequest.
      *
@@ -421,7 +408,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
     {
         return $this->_currentRequest;
     }
-
 
     /**
      * Format the Source IP address, URL, URL parameters, and all form parameters
@@ -437,7 +423,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
     {
         $this->logHTTPRequestObfuscate($request, $auditor, null);
     }
-
 
     /**
      * Format the Source IP address, URL, URL parameters, and all form parameters
@@ -523,7 +508,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
         
     }
 
-
     /*
      * Retrieves the current HttpServletResponse.
      *
@@ -536,7 +520,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
             'getCurrentResponse method Not implemented'
         );
     }*/
-
 
     /*
      * This method performs a forward to any resource located inside the WEB-INF
@@ -566,7 +549,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
         );
     }*/
 
-
     /*
      * Set the content type character encoding header on every HttpServletResponse
      * in order to limit the ways in which the input data can be represented. This
@@ -593,7 +575,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
             'setSafeContentType method Not implemented'
         );
     }*/
-
 
     /*
      * Set headers to protect sensitive information against being cached in the
@@ -644,7 +625,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
         );
     }*/
 
-
     /*
      * Set a cookie containing the current User's remember me token for
      * automatic authentication. The use of remember me tokens is generally not
@@ -680,7 +660,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
         );
     }*/
 
-
     /*
      * Decrypts an encrypted hidden field value and returns the plain text. If
      * the field does not decrypt properly, an IntrusionException is thrown to
@@ -712,7 +691,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
         }
     }*/
 
-
     /*
      * Takes an encrypted query string and returns an asscoiative array
      * containing the original, unencrypted parameters.
@@ -732,7 +710,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
         $plaintext = ESAPI::getEncryptor()->decrypt($encrypted);
         return $this->_queryToMap($plaintext);
     }*/
-
 
     /*
      * Retrieves a map of data from a cookie encrypted with encryptStateInCookie().
@@ -761,7 +738,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
 
     }*/
 
-
     /*
      * Encrypts a hidden field value for use in HTML.
      *
@@ -779,7 +755,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
         );
         return ESAPI::getEncryptor()->encrypt($value);
     }*/
-
 
     /*
      * Takes an HTTP query string (everything after the question mark in the
@@ -799,7 +774,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
         );
         return ESAPI::getEncryptor()->encrypt($query);
     }*/
-
 
     /*
      * Stores a Map of data in an encrypted cookie. Generally the session is a
@@ -836,7 +810,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
 
         $response->addCookie('state', $encrypted);
     }*/
-
 
     /*
      * Extract uploaded files from a multipart HTTP requests. Implementations

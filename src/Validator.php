@@ -51,6 +51,7 @@ require_once __DIR__.'/errors/ValidationException.php';
  */
 interface Validator
 {
+
     /**
      * Returns true if input is valid according to the specified type after
      * canonicalization. The type parameter must be the name of a defined type
@@ -116,8 +117,7 @@ interface Validator
      * @return bool TRUE if the input is valid, FALSE otherwise.
      */
     public function isValidHTML($context, $input, $maxLength, $allowNull);
-    
-     
+
     /**
      * Returns true if the canonicalized input is a valid Credit Card Number.
      * 
@@ -170,11 +170,10 @@ interface Validator
      * 
      * @return bool TRUE if the input is valid, FALSE otherwise.
      */
-    public function isValidNumber($context, $input, $minValue, $maxValue, 
+    public function isValidNumber($context, $input, $minValue, $maxValue,
         $allowNull
     );
-   
-    
+
     /**
      * Returns true if the canonicalized input is a valid integer within the
      * specified range minValue to maxValue.
@@ -193,11 +192,10 @@ interface Validator
      * 
      * @return bool TRUE if the input is valid, FALSE otherwise.
      */
-    public function isValidInteger($context, $input, $minValue, $maxValue, 
+    public function isValidInteger($context, $input, $minValue, $maxValue,
         $allowNull
     );
-    
-   
+
     /**
      * Returns true if the canonicalized input is a valid double within the
      * specified range minValue to maxValue.
@@ -216,7 +214,7 @@ interface Validator
      * 
      * @return bool TRUE if the input is valid, FALSE otherwise.
      */
-    public function isValidDouble($context, $input, $minValue, $maxValue, 
+    public function isValidDouble($context, $input, $minValue, $maxValue,
         $allowNull
     );
  
