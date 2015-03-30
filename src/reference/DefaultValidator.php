@@ -77,14 +77,9 @@ class DefaultValidator implements Validator
      */
     public function isValidInput($context, $input, $type, $maxLength, $allowNull)
     {
-        try
-        {
-            $this->_assertValidInput(
-            $context, $input, $type, $maxLength, $allowNull
-            );
-        }
-        catch (Exception $e)
-        {
+        try {
+            $this->_assertValidInput($context, $input, $type, $maxLength, $allowNull);
+        } catch (Exception $e) {
             return false;
         }
 
@@ -104,9 +99,8 @@ class DefaultValidator implements Validator
      * @throws ValidationException thrown if input is invalid.
      * @throws IntrusionException thrown if intrusion is detected.
      */
-    private function _assertValidInput($context, $input, $type, $maxLength,
-    $allowNull
-    ) {
+    private function _assertValidInput($context, $input, $type, $maxLength, $allowNull)
+    {
         $validationRule = new StringValidationRule($type, $this->_encoder);
 
         $config = ESAPI::getSecurityConfiguration();
@@ -132,8 +126,7 @@ class DefaultValidator implements Validator
     {
         try {
             $this->_assertValidDate($context, $input, $format, $allowNull);
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
 
@@ -169,8 +162,7 @@ class DefaultValidator implements Validator
     {
         try {
             $this->_assertValidHTML($context, $input, $maxLength, $allowNull);
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
 
@@ -207,8 +199,7 @@ class DefaultValidator implements Validator
     {
         try {
             $this->_assertValidCreditCard($context, $input, $allowNull);
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
 
@@ -243,8 +234,7 @@ class DefaultValidator implements Validator
     {
         try {
             $this->_assertValidDirectoryPath($context, $input, $allowNull);
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
 
@@ -267,7 +257,7 @@ class DefaultValidator implements Validator
         throw new EnterpriseSecurityException(
             'Method Not implemented',
             'assertValidDirectoryPath method not implemented'
-            );
+        );
     }
 
     /**
@@ -276,11 +266,8 @@ class DefaultValidator implements Validator
     public function isValidNumber($context, $input, $minValue, $maxValue, $allowNull)
     {
         try {
-            $this->_assertValidNumber(
-            $context, $input, $minValue, $maxValue, $allowNull
-            );
-        }
-        catch (Exception $e) {
+            $this->_assertValidNumber($context, $input, $minValue, $maxValue, $allowNull);
+        } catch (Exception $e) {
             return false;
         }
 
@@ -300,12 +287,9 @@ class DefaultValidator implements Validator
      * @throws ValidationException thrown if input is invalid.
      * @throws IntrusionException thrown if intrusion is detected.
      */
-    private function _assertValidNumber($context, $input, $minValue, $maxValue,
-    $allowNull
-    ) {
-        $nvr = new NumberValidationRule(
-            'NumberValidator', $this->_encoder, $minValue, $maxValue
-        );
+    private function _assertValidNumber($context, $input, $minValue, $maxValue, $allowNull)
+    {
+        $nvr = new NumberValidationRule('NumberValidator', $this->_encoder, $minValue, $maxValue);
         $nvr->setAllowNull($allowNull);
 
         $nvr->assertValid($context, $input);
@@ -316,15 +300,11 @@ class DefaultValidator implements Validator
     /**
      * @inheritdoc
      */
-    public function isValidInteger($context, $input, $minValue, $maxValue,
-    $allowNull
-    ) {
+    public function isValidInteger($context, $input, $minValue, $maxValue, $allowNull)
+    {
         try {
-            $this->_assertValidInteger(
-            $context, $input, $minValue, $maxValue, $allowNull
-            );
-        }
-        catch (Exception $e) {
+            $this->_assertValidInteger($context, $input, $minValue, $maxValue, $allowNull);
+        } catch (Exception $e) {
             return false;
         }
 
@@ -344,12 +324,9 @@ class DefaultValidator implements Validator
      * @throws ValidationException thrown if input is invalid.
      * @throws IntrusionException thrown if intrusion is detected.
      */
-    private function _assertValidInteger($context, $input, $minValue, $maxValue,
-    $allowNull
-    ) {
-        $nvr = new IntegerValidationRule(
-            'IntegerValidator', $this->_encoder, $minValue, $maxValue
-        );
+    private function _assertValidInteger($context, $input, $minValue, $maxValue, $allowNull)
+    {
+        $nvr = new IntegerValidationRule('IntegerValidator', $this->_encoder, $minValue, $maxValue);
         $nvr->setAllowNull($allowNull);
 
         $nvr->assertValid($context, $input);
@@ -360,15 +337,11 @@ class DefaultValidator implements Validator
     /**
      * @inheritdoc
      */
-    public function isValidDouble($context, $input, $minValue, $maxValue,
-    $allowNull
-    ) {
+    public function isValidDouble($context, $input, $minValue, $maxValue, $allowNull)
+    {
         try {
-            $this->_assertValidDouble(
-            $context, $input, $minValue, $maxValue, $allowNull
-            );
-        }
-        catch (Exception $e) {
+            $this->_assertValidDouble($context, $input, $minValue, $maxValue, $allowNull);
+        } catch (Exception $e) {
             return false;
         }
 
@@ -388,12 +361,9 @@ class DefaultValidator implements Validator
      * @throws ValidationException thrown if input is invalid.
      * @throws IntrusionException thrown if intrusion is detected.
      */
-    private function _assertValidDouble($context, $input, $minValue, $maxValue,
-    $allowNull
-    ) {
-        $this->_assertValidNumber(
-        $context, $input, $minValue, $maxValue, $allowNull
-        );
+    private function _assertValidDouble($context, $input, $minValue, $maxValue, $allowNull)
+    {
+        $this->_assertValidNumber($context, $input, $minValue, $maxValue, $allowNull);
 
         return null;
     }
@@ -405,8 +375,7 @@ class DefaultValidator implements Validator
     {
         try {
             $this->_assertValidFileContent($context, $input, $maxBytes, $allowNull);
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
 
@@ -434,17 +403,18 @@ class DefaultValidator implements Validator
             throw new ValidationException(
                 "{$context}: Input required",
                 "Input was not a string or NULL: context={$context}",
-            $context
+                $context
             );
         }
 
         if (! is_numeric($maxBytes) || $maxBytes < 0) {
             $this->_auditor->warning(
-            ESAPILogger::SECURITY, false,
+            ESAPILogger::SECURITY,
+                false,
                 'assertValidFileContent expected $maxBytes as positive integer.'.
                 ' Falling back to AllowedFileUploadSize.'
-                );
-                $maxBytes = null;
+            );
+            $maxBytes = null;
         }
 
         if ($input === null || $input == '') {
@@ -454,7 +424,7 @@ class DefaultValidator implements Validator
             throw new ValidationException(
                 "{$context}: Input required",
                 "Input required: context={$context}",
-            $context
+                $context
             );
         }
 
@@ -470,17 +440,17 @@ class DefaultValidator implements Validator
                 "{$esapiMaxBytes} bytes.",
                 "Invalid file content. Input ({$inputLen} bytes) exceeds ".
                 "AllowedFileUploadSize ({$esapiMaxBytes} bytes.)",
-            $context
+                $context
             );
         }
          
         if ($maxBytes !== null && $inputLen > $maxBytes) {
             throw new ValidationException(
-                 "{$context}: Invalid file content. Size must not exceed ".
-                 "{$maxBytes} bytes.",
-                 "Invalid file content. Input ({$inputLen} bytes) exceeds ".
-                 "maximum of ({$esapiMaxBytes} bytes.)",
-            $context
+                "{$context}: Invalid file content. Size must not exceed ".
+                "{$maxBytes} bytes.",
+                "Invalid file content. Input ({$inputLen} bytes) exceeds ".
+                "maximum of ({$esapiMaxBytes} bytes.)",
+                $context
             );
         }
 
@@ -494,8 +464,7 @@ class DefaultValidator implements Validator
     {
         try {
             $this->_assertValidListItem($context, $input, $list);
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
 
@@ -523,27 +492,26 @@ class DefaultValidator implements Validator
             throw new ValidationException(
                 "{$context}: Input required",
                 "Input was not a string or NULL: context={$context}",
-            $context
+                $context
             );
         }
         if (! is_array($list)) {
             throw new RuntimeException(
                 'Validation misconfiguration - assertValidListItem expected'.
                 ' an array $list!'
-                );
+            );
         }
 
         // strict canonicalization
         $canonical = null;
         try {
             $canonical = $this->_encoder->canonicalize($input, true);
-        }
-        catch (EncodingException $e) {
+        } catch (EncodingException $e) {
             throw new ValidationException(
             $context . ': Invalid input. Encoding problem detected.',
                 'An EncodingException was thrown during canonicalization of '.
                 'the input.',
-            $context
+                $context
             );
         }
 
@@ -552,7 +520,7 @@ class DefaultValidator implements Validator
             $context . ': Invalid input. Input was not a valid member of '.
                 'the list.',
                 'canonicalized input was not a member of the supplied list.',
-            $context
+                $context
             );
         }
 
@@ -566,8 +534,7 @@ class DefaultValidator implements Validator
     {
         try {
             $this->_assertValidPrintable($context, $input, $maxLength, $allowNull);
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
 
@@ -581,7 +548,7 @@ class DefaultValidator implements Validator
      * @param string $input     Please see corresponding isValidXX description.
      * @param int    $maxLength Please see corresponding isValidXX description.
      * @param bool   $allowNull Please see corresponding isValidXX description.
-     * 
+     *
      * @return does not return a value.
      * @throws ValidationException thrown if input is invalid.
      * @throws IntrusionException thrown if intrusion is detected.
@@ -600,5 +567,4 @@ class DefaultValidator implements Validator
     {
         return $this->isValidInput($context, $input, "Redirect", 512, $allowNull);
     }
-    
 }

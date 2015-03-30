@@ -4,7 +4,7 @@
  *
  * This file is part of the Open Web Application Security Project (OWASP)
  * Enterprise Security API (ESAPI) project.
- * 
+ *
  * PHP version 5.2
  *
  * LICENSE: This source file is subject to the New BSD license.  You should read
@@ -55,7 +55,7 @@ class XMLEntityCodec extends Codec
     /**
      * Public Constructor calls the parent construcor and initialises the character
      * to entity and entity to character maps.
-     * 
+     *
      * @return null
      */
     public function __construct()
@@ -112,12 +112,10 @@ class XMLEntityCodec extends Codec
 
         // Check if there's a defined entity
         if (array_key_exists($_4ByteCharacter, self::$_characterToEntityMap)) {
-        
             $entityName = self::$_characterToEntityMap[$_4ByteCharacter];
             if ($entityName != null) {
                 return $encodedOutput . '&' . $entityName . ';';
             }
-        
         }
 
         $encodedOutput .= '&#x' . $hex . ';';
@@ -140,7 +138,6 @@ class XMLEntityCodec extends Codec
     
         // if this is not an encoded character, return null
         if (mb_substr($input, 0, 1, 'UTF-32') != $this->normalizeEncoding('&')) {
-        
             // 1st character is not part of encoding pattern, so return null
             return array('decodedCharacter' => null,'encodedString' => null);
         }
@@ -149,7 +146,6 @@ class XMLEntityCodec extends Codec
 
         // test for numeric encodings
         if (mb_substr($input, 1, 1, 'UTF-32') == null) {
-        
             // 2nd character is null, so return decodedCharacter=null and
             // encodedString=(1st character, malformed encoding)
             return array(
@@ -159,33 +155,26 @@ class XMLEntityCodec extends Codec
         }
     
         if (mb_substr($input, 1, 1, 'UTF-32') == $this->normalizeEncoding('#')) {
-        
             // 2nd character is hash, so handle numbers...
             $decodeResult = $this->_getNumericEntity($input);
             $decodedCharacter = $decodeResult['decodedCharacter'];
             if ($decodedCharacter != null) {
                 return $decodeResult;
             }
-        
         } else {
-        
             // Get the ordinal value of the 2nd character.
             list(, $ordinalValue) = unpack("N", mb_substr($input, 1, 1, 'UTF-32'));
         
             if (preg_match("/^[a-zA-Z]/", chr($ordinalValue))) {
-            
                 // 2nd character is an alphabetical char, so handle entities...
                 $decodeResult = $this->_getNamedEntity($input);
                 $decodedCharacter = $decodeResult['decodedCharacter'];
                 if ($decodedCharacter != null) {
                     return $decodeResult;
                 }
-            
             } else {
-            
                 // 2nd character does not form a known entity, so return null
                 return array('decodedCharacter' => null, 'encodedString' => null);
-            
             }
         }
     
@@ -198,9 +187,9 @@ class XMLEntityCodec extends Codec
     /**
      * getNumericEntry checks the input to see if it is either a decimal or
      * hexadecimal numeric entity.
-     * 
+     *
      * @param string $input The input to test for being a numeric entity.
-     * 
+     *
      * @return array Returns an array containing two objects:
      *               'decodedCharacter' => the decoded character.
      *               'encodedString' => the string that was decoded or found to be
@@ -231,9 +220,9 @@ class XMLEntityCodec extends Codec
 
     /**
      * Parse a decimal numeric string.
-     * 
+     *
      * @param string $input The input to test for being a decimal numeric entity.
-     * 
+     *
      * @return array Returns an array containing two objects:
      *               'decodedCharacter' => the decoded character.
      *               'encodedString'    => the string that was decoded or found to
@@ -247,7 +236,6 @@ class XMLEntityCodec extends Codec
         if (mb_substr($input, 0, 1, 'UTF-32') != $this->normalizeEncoding('&')
             || mb_substr($input, 1, 1, 'UTF-32') != $this->normalizeEncoding('#')
         ) {
-        
             // input did not satisfy initial pattern requirements for _parseNumber,
             // so return null
             return array('decodedCharacter' => null, 'encodedString' => null);
@@ -260,22 +248,17 @@ class XMLEntityCodec extends Codec
         $inputLength = mb_strlen($input, 'UTF-32');
     
         for ($i = 2; $i < $inputLength; $i++) {
-        
             // Get the ordinal value of the character.
             list(, $ordinalValue) = unpack("N", mb_substr($input, $i, 1, 'UTF-32'));
         
             // if character is a digit, add it and keep on going
             if (preg_match('/^[0-9]/', chr($ordinalValue))) {
-            
                 $integerString .= mb_substr($input, $i, 1, 'UTF-32');
                 $integerStringAscii .= chr($ordinalValue);
-            
-            } else if (mb_substr($input, $i, 1, 'UTF-32') == $this->normalizeEncoding(';')) {
-
+            } elseif (mb_substr($input, $i, 1, 'UTF-32') == $this->normalizeEncoding(';')) {
                 // if character is a semicolon, then eat it and quit
                 $integerString .= mb_substr($input, $i, 1, 'UTF-32');
                 break;
-            
             } else {
                 // otherwise just quit
                 break;
@@ -283,31 +266,28 @@ class XMLEntityCodec extends Codec
         }
     
         try {
-        
             $parsedInteger = (int) $integerStringAscii;
             $parsedCharacter = $this->normalizeEncoding(chr($parsedInteger));
+
             return array(
                 'decodedCharacter' => $parsedCharacter,
                 'encodedString'    => $integerString
             );
-        
-        } catch(Exception $e) {
-        
+        } catch (Exception $e) {
             //TODO: throw an exception for malformed entity?
             return array(
                 'decodedCharacter' => null,
                 'encodedString'    => mb_substr($input, 0, $i+1, 'UTF-32')
             );
-        
         }
     }
 
     /**
      * Parse a hexadecimal numeric entity.
-     * 
+     *
      * @param string $input Hexadecimal numeric string - possibly with a trailing
      *                      semi-colon e.g. '437ae;'.
-     * 
+     *
      * @return array Returns an array containing two objects:
      *               'decodedCharacter' => null if input is null, the character of
      *               input after decoding
@@ -334,32 +314,24 @@ class XMLEntityCodec extends Codec
         $inputLength = mb_strlen($input, 'UTF-32');
     
         for ($i = 3; $i < $inputLength; $i++) {
-        
             // Get the ordinal value of the character.
             list(, $ordinalValue) = unpack("N", mb_substr($input, $i, 1, 'UTF-32'));
         
             if (preg_match('/^[0-9a-fA-F]/', chr($ordinalValue))) {
-            
                 // hex digit found, add it and continue...
                 $hexString .= mb_substr($input, $i, 1, 'UTF-32');
-            
-            } else if (mb_substr($input, $i, 1, 'UTF-32') == $this->normalizeEncoding(';')) {
-            
+            } elseif (mb_substr($input, $i, 1, 'UTF-32') == $this->normalizeEncoding(';')) {
                 // if character is a semicolon, then eat it and quit
                 $trailingSemicolon = $this->normalizeEncoding(';');
                 break;
-            
             } else {
-            
                 // otherwise just quit
                 break;
             }
-        
         }
     
         // try to convert hexString to integer...
         try {
-        
             $parsedInteger = (int) hexdec($hexString);
             if ($parsedInteger <= 0xFF) {
                 $parsedCharacter = chr($parsedInteger);
@@ -369,13 +341,13 @@ class XMLEntityCodec extends Codec
                 );
             }
             $parsedCharacter = $this->normalizeEncoding($parsedCharacter);
+
             return array(
                 'decodedCharacter' => $parsedCharacter,
                 'encodedString' => mb_substr($input, 0, 3, 'UTF-32')
                     . $hexString . $trailingSemicolon
             );
-        
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             //TODO: throw an exception for malformed entity?
             return array(
                 'decodedCharacter' => null,
@@ -536,7 +508,7 @@ class XMLEntityCodec extends Codec
      * for decoding of named entities.
      * During the initialization, the length of the longest named entity (including
      * the leading ampersand and trailing semi-colon) is noted in _longestEntity.
-     * 
+     *
      * @return null
      */
     private function _initializeMaps()
@@ -829,5 +801,4 @@ class XMLEntityCodec extends Codec
         }
         self::$_longestEntity = $longestEntity + 2;
     }
-
 }

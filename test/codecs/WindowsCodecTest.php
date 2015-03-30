@@ -27,8 +27,7 @@ class WindowsCodecTest extends PHPUnit_Framework_TestCase
     {
         global $ESAPI;
 
-        if (!isset($ESAPI))
-        {
+        if (!isset($ESAPI)) {
             $ESAPI = new ESAPI();
         }
 
@@ -37,7 +36,6 @@ class WindowsCodecTest extends PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-
     }
     
     public function testEncode()
@@ -52,7 +50,7 @@ class WindowsCodecTest extends PHPUnit_Framework_TestCase
         $immune = array("");
         
         $this->assertEquals("^<", $this->windowsCodec->encode($immune, "<"));
-    }    
+    }
     
     public function testDecode()
     {
@@ -63,5 +61,4 @@ class WindowsCodecTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals("<", $this->windowsCodec->decode("^<"));
     }
-    
 }

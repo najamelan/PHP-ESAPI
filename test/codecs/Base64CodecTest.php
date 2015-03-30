@@ -26,8 +26,7 @@ class Base64CodecTest extends PHPUnit_Framework_TestCase
     {
         global $ESAPI;
 
-        if (!isset($ESAPI))
-        {
+        if (!isset($ESAPI)) {
             $ESAPI = new ESAPI();
         }
         
@@ -42,7 +41,7 @@ class Base64CodecTest extends PHPUnit_Framework_TestCase
     public function testEncodeCharacter()
     {
         $this->assertEquals("PA==", $this->base64Codec->encode("<"));
-    }    
+    }
     
     public function testDecode()
     {

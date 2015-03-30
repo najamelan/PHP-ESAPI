@@ -28,8 +28,7 @@ class CSSCodecTest extends PHPUnit_Framework_TestCase
     {
         global $ESAPI;
 
-        if (!isset($ESAPI))
-        {
+        if (!isset($ESAPI)) {
             $ESAPI = new ESAPI();
         }
         
@@ -48,7 +47,7 @@ class CSSCodecTest extends PHPUnit_Framework_TestCase
         $immune = array("");
         
         $this->assertEquals("\\3c ", $this->cssCodec->encode($immune, "<"));
-    }    
+    }
     
     public function testDecode()
     {
@@ -120,5 +119,4 @@ class CSSCodecTest extends PHPUnit_Framework_TestCase
         $immune = array("");
         $this->cssCodec->encodeCharacter($immune, chr(0x00));
     }
-    
 }

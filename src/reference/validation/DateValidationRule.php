@@ -132,12 +132,9 @@ class DateValidationRule extends BaseValidationRule
 
         // strict canonicalization
         $canonical = null;
-        try
-        {
+        try {
             $canonical = $this->encoder->canonicalize($input, true);
-        }
-        catch (EncodingException $e)
-        {
+        } catch (EncodingException $e) {
             throw new ValidationException(
                 "{$context} -  Invalid input. Encoding problem detected.",
                 'An EncodingException was thrown during canonicalization of '.
@@ -191,5 +188,4 @@ class DateValidationRule extends BaseValidationRule
     {
         return date_create();
     }
-
 }

@@ -32,17 +32,13 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         global $ESAPI;
-        if (!isset($ESAPI))
-        {
+        if (!isset($ESAPI)) {
             $ESAPI = new ESAPI();
         }
         
-        if (substr(PHP_OS, 0, 3) == 'WIN')
-        {
-            $this->_os = self::PLATFORM_WINDOWS; 
-        }
-        else 
-        {
+        if (substr(PHP_OS, 0, 3) == 'WIN') {
+            $this->_os = self::PLATFORM_WINDOWS;
+        } else {
             $this->_os = self::PLATFORM_UNIX;
         }
     }
@@ -318,7 +314,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      */
     public function testAssertValidInput_Email_valid_01()
     {
-        $this->markTestIncomplete(); 
+        $this->markTestIncomplete();
         
         $instance = ESAPI::getValidator();
         try {
@@ -333,7 +329,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      */
     public function testAssertValidInput_Email_valid_02()
     {
-        $this->markTestIncomplete(); 
+        $this->markTestIncomplete();
         
         $instance = ESAPI::getValidator();
         try {
@@ -348,7 +344,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      */
     public function testAssertValidInput_Email_invalid_01()
     {
-        $this->markTestIncomplete(); 
+        $this->markTestIncomplete();
         
         $instance = ESAPI::getValidator();
         $this->setExpectedException('ValidationException');
@@ -361,7 +357,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      */
     public function testAssertValidInput_Email_invalid_02()
     {
-        $this->markTestIncomplete(); 
+        $this->markTestIncomplete();
         
         $instance = ESAPI::getValidator();
         $this->setExpectedException('ValidationException');
@@ -374,7 +370,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      */
     public function testAssertValidInput_Email_invalid_03()
     {
-        $this->markTestIncomplete(); 
+        $this->markTestIncomplete();
         
         $instance = ESAPI::getValidator();
         $this->setExpectedException('ValidationException');
@@ -388,7 +384,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      */
     public function testAssertValidInput_IPv4Address_valid_01()
     {
-        $this->markTestIncomplete(); 
+        $this->markTestIncomplete();
         $instance = ESAPI::getValidator();
         try {
             $instance->assertValidInput('test', '123.168.100.234', 'IPAddress', 100, false);
@@ -402,9 +398,9 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      * Test assertValidInput method of class Validator with a valid type:
      * IPv4 Address.
      */
-   public function testAssertValidInput_IPv4Address_valid_02()
+    public function testAssertValidInput_IPv4Address_valid_02()
     {
-        $this->markTestIncomplete(); 
+        $this->markTestIncomplete();
         $instance = ESAPI::getValidator();
         try {
             $instance->assertValidInput('test', '192.168.1.234', 'IPAddress', 100, false);
@@ -420,7 +416,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      */
     public function testAssertValidInput_IPv4Address_invalid_01()
     {
-        $this->markTestIncomplete(); 
+        $this->markTestIncomplete();
         $instance = ESAPI::getValidator();
         $this->setExpectedException('ValidationException');
         $instance->assertValidInput('test', '..168.1.234', 'IPAddress', 100, false);
@@ -433,7 +429,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      */
     public function testAssertValidInput_IPv4Address_invalid_02()
     {
-        $this->markTestIncomplete(); 
+        $this->markTestIncomplete();
         $instance = ESAPI::getValidator();
         $this->setExpectedException('ValidationException');
         $instance->assertValidInput('test', '10.x.1.234', 'IPAddress', 100, false);
@@ -445,7 +441,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      */
     public function testAssertValidInput_URL_valid_01()
     {
-        $this->markTestIncomplete(); 
+        $this->markTestIncomplete();
         $instance = ESAPI::getValidator();
         try {
             $instance->assertValidInput('test', 'http://www.aspectsecurity.com', 'URL', 100, false);
@@ -459,7 +455,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      */
     public function testAssertValidInput_URL_invalid_01()
     {
-        $this->markTestIncomplete(); 
+        $this->markTestIncomplete();
         $instance = ESAPI::getValidator();
         $this->setExpectedException('ValidationException');
         $instance->assertValidInput('test', 'http:///www.aspectsecurity.com', 'URL', 100, false);
@@ -471,7 +467,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      */
     public function testAssertValidInput_URL_invalid_02()
     {
-        $this->markTestIncomplete(); 
+        $this->markTestIncomplete();
         $instance = ESAPI::getValidator();
         $this->setExpectedException('ValidationException');
         $instance->assertValidInput('test', 'http://www.aspect security.com', 'URL', 100, false);
@@ -484,7 +480,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      */
     public function testAssertValidInput_SSN_valid_01()
     {
-        $this->markTestIncomplete(); 
+        $this->markTestIncomplete();
         $instance = ESAPI::getValidator();
         try {
             $instance->assertValidInput('test', '078-05-1120', 'SSN', 100, false);
@@ -500,7 +496,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      */
     public function testAssertValidInput_SSN_valid_02()
     {
-        $this->markTestIncomplete(); 
+        $this->markTestIncomplete();
         $instance = ESAPI::getValidator();
         try {
             $instance->assertValidInput('test', '078 05 1120', 'SSN', 100, false);
@@ -515,7 +511,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      */
     public function testAssertValidInput_SSN_valid_03()
     {
-        $this->markTestIncomplete(); 
+        $this->markTestIncomplete();
         $instance = ESAPI::getValidator();
         try {
             $instance->assertValidInput('test', '078051120', 'SSN', 100, false);
@@ -598,7 +594,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      */
     public function testAssertValidDate_valid_01()
     {
-        $this->markTestIncomplete(); 
+        $this->markTestIncomplete();
         $instance = ESAPI::getValidator();
         try {
             $instance->assertValidDate('testAssertValidDate_valid_01', 'June 23, 1967', 'F j, Y', false);
@@ -612,7 +608,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
      */
     public function testAssertValidDate_invalid_01()
     {
-        $this->markTestIncomplete(); 
+        $this->markTestIncomplete();
         $instance = ESAPI::getValidator();
         $this->setExpectedException('ValidationException');
         $instance->assertValidDate('testAssertValidDate_invalid_01', 'freakshow', 'F j, Y', false);
@@ -625,9 +621,9 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     /**
      * Test of isValidSafeHTML method, of class org.owasp.esapi.Validator.
      */
-    public function testIsValidSafeHTML() 
+    public function testIsValidSafeHTML()
     {
-        $this->markTestIncomplete(); 
+        $this->markTestIncomplete();
         $instance = ESAPI::getValidator();
 
         $this->assertTrue($instance->isValidSafeHTML('test', '<b>Jeff</b>', 100, false));
@@ -736,7 +732,8 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     /**
      * Test of isValidListItem method, of class org.owasp.esapi.Validator.
      */
-    public function testIsValidListItem() {
+    public function testIsValidListItem()
+    {
         $val = ESAPI::getValidator();
         $list = array('one','two');
         $this->assertTrue($val->isValidListItem('test', 'one', $list));
@@ -747,7 +744,8 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     /**
      * Test of isValidNumber method, of class org.owasp.esapi.Validator.
      */
-    public function testIsValidNumber() {
+    public function testIsValidNumber()
+    {
         $instance = ESAPI::getValidator();
 //        testing negative range
         $this->assertFalse($instance->isValidNumber('test', '-4', 1, 10, false));
@@ -784,7 +782,8 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     /**
      *
      */
-    public function testIsValidInteger() {
+    public function testIsValidInteger()
+    {
         $instance = ESAPI::getValidator();
         //testing negative range
         $this->assertFalse($instance->isValidInteger('test', '-4', 1, 10, false));
@@ -815,7 +814,6 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($instance->isValidInteger('test', '+NaN', 10, 10000, false));
         $this->assertFalse($instance->isValidInteger('test', '1e-6', -999999999, 999999999, false));
         $this->assertFalse($instance->isValidInteger('test', '-1e-6', -999999999, 999999999, false));
-
     }
 
 
@@ -905,57 +903,58 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     /**
      * Test of isValidDirectoryPath method, of class org.owasp.esapi.Validator.
      */
-    public function testIsValidDirectoryPath() {
+    public function testIsValidDirectoryPath()
+    {
         $list = array();
         array_push($list, new HTMLEntityCodec());
         $encoder = new DefaultEncoder($list);
         $instance = ESAPI::getValidator();
         
-        switch ($this->_os)
-        {
+        switch ($this->_os) {
             case self::PLATFORM_WINDOWS:
-            // Windows paths that don't exist and thus should fail
-            $this->assertFalse($instance->isValidDirectoryPath('test', 'c:\\ridiculous', false));
-            $this->assertFalse($instance->isValidDirectoryPath('test', 'c:\\jeff', false));
-            $this->assertFalse($instance->isValidDirectoryPath('test', 'c:\\temp\\..\\etc', false));
-
-            // Windows paths that should pass
-            $this->assertTrue($instance->isValidDirectoryPath('test', 'C:\\', false));                                // Windows root directory
-            $this->assertTrue($instance->isValidDirectoryPath('test', 'C:\\Windows', false));                        // Windows always exist directory
-            $this->assertTrue($instance->isValidDirectoryPath('test', 'C:\\Windows\\System32\\cmd.exe', false));        // Windows command shell
-            
-            // Unix specific paths should not pass
-            $this->assertFalse($instance->isValidDirectoryPath('test', '/tmp', false));        // Unix Temporary directory
-            $this->assertFalse($instance->isValidDirectoryPath('test', '/bin/sh', false));    // Unix Standard shell
-            $this->assertFalse($instance->isValidDirectoryPath('test', '/etc/config', false));
-
-            // Unix specific paths that should not exist or work
-            $this->assertFalse($instance->isValidDirectoryPath('test', '/etc/ridiculous', false));
-            $this->assertFalse($instance->isValidDirectoryPath('test', '/tmp/../etc', false));
+                // Windows paths that don't exist and thus should fail
+                $this->assertFalse($instance->isValidDirectoryPath('test', 'c:\\ridiculous', false));
+                $this->assertFalse($instance->isValidDirectoryPath('test', 'c:\\jeff', false));
+                $this->assertFalse($instance->isValidDirectoryPath('test', 'c:\\temp\\..\\etc', false));
+    
+                // Windows paths that should pass
+                $this->assertTrue($instance->isValidDirectoryPath('test', 'C:\\', false));                                // Windows root directory
+                $this->assertTrue($instance->isValidDirectoryPath('test', 'C:\\Windows', false));                        // Windows always exist directory
+                $this->assertTrue($instance->isValidDirectoryPath('test', 'C:\\Windows\\System32\\cmd.exe', false));        // Windows command shell
+                
+                // Unix specific paths should not pass
+                $this->assertFalse($instance->isValidDirectoryPath('test', '/tmp', false));        // Unix Temporary directory
+                $this->assertFalse($instance->isValidDirectoryPath('test', '/bin/sh', false));    // Unix Standard shell
+                $this->assertFalse($instance->isValidDirectoryPath('test', '/etc/config', false));
+    
+                // Unix specific paths that should not exist or work
+                $this->assertFalse($instance->isValidDirectoryPath('test', '/etc/ridiculous', false));
+                $this->assertFalse($instance->isValidDirectoryPath('test', '/tmp/../etc', false));
+                
                 break;
                 
             case self::PLATFORM_UNIX:
-            // Windows paths should fail
-            $this->assertFalse($instance->isValidDirectoryPath('test', 'c:\\ridiculous', false));
-            $this->assertFalse($instance->isValidDirectoryPath('test', 'c:\\temp\\..\\etc', false));
-
-            // Standard Windows locations should fail
-            $this->assertFalse($instance->isValidDirectoryPath('test', 'c:\\', false));                                // Windows root directory
-            $this->assertFalse($instance->isValidDirectoryPath('test', 'c:\\Windows\\temp', false));                    // Windows temporary directory
-            $this->assertFalse($instance->isValidDirectoryPath('test', 'c:\\Windows\\System32\\cmd.exe', false));    // Windows command shell
-
-            // Unix specific paths should pass
-            $this->assertTrue($instance->isValidDirectoryPath('test', '/', false));            // Root directory
-            $this->assertTrue($instance->isValidDirectoryPath('test', '/bin', false));        // Always exist directory
-            $this->assertTrue($instance->isValidDirectoryPath('test', '/bin/sh', false));    // Standard shell
-
-            // Unix specific paths that should not exist or work
-            $this->assertFalse($instance->isValidDirectoryPath('test', '/etc/ridiculous', false));
-            $this->assertFalse($instance->isValidDirectoryPath('test', '/tmp/../etc', false));
+                // Windows paths should fail
+                $this->assertFalse($instance->isValidDirectoryPath('test', 'c:\\ridiculous', false));
+                $this->assertFalse($instance->isValidDirectoryPath('test', 'c:\\temp\\..\\etc', false));
+    
+                // Standard Windows locations should fail
+                $this->assertFalse($instance->isValidDirectoryPath('test', 'c:\\', false));                                // Windows root directory
+                $this->assertFalse($instance->isValidDirectoryPath('test', 'c:\\Windows\\temp', false));                    // Windows temporary directory
+                $this->assertFalse($instance->isValidDirectoryPath('test', 'c:\\Windows\\System32\\cmd.exe', false));    // Windows command shell
+    
+                // Unix specific paths should pass
+                $this->assertTrue($instance->isValidDirectoryPath('test', '/', false));            // Root directory
+                $this->assertTrue($instance->isValidDirectoryPath('test', '/bin', false));        // Always exist directory
+                $this->assertTrue($instance->isValidDirectoryPath('test', '/bin/sh', false));    // Standard shell
+    
+                // Unix specific paths that should not exist or work
+                $this->assertFalse($instance->isValidDirectoryPath('test', '/etc/ridiculous', false));
+                $this->assertFalse($instance->isValidDirectoryPath('test', '/tmp/../etc', false));
                 
                 break;
 
-            default: 
+            default:
                 $this->fail("No platform support for your platform.");
                 break;
         }
@@ -967,8 +966,8 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $val = ESAPI::getValidator();
         $this->assertTrue(
             $val->isValidRedirectLocation(
-                'testIsRedirectLocation_01', 
-                '\/test.php',  
+                'testIsRedirectLocation_01',
+                '\/test.php',
                 false
             )
         );
@@ -979,8 +978,8 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $val = ESAPI::getValidator();
         $this->assertFalse(
             $val->isValidRedirectLocation(
-                'testIsRedirectLocation_01', 
-                '\/badlocation.php', 
+                'testIsRedirectLocation_01',
+                '\/badlocation.php',
                 false
             )
         );

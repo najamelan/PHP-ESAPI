@@ -8,7 +8,7 @@
  * LICENSE: This source file is subject to the New BSD license.  You should read
  * and accept the LICENSE before you use, modify, and/or redistribute this
  * software.
- * 
+ *
  * PHP version 5.2
  *
  * @category  OWASP
@@ -52,13 +52,12 @@ class WordValidationRule extends StringValidationRule
      * @param string $typeName         descriptive name for this validator.
      * @param object $encoder          providing canonicalize method.
      * @param string $whitelistPattern whitelist regex.
-     * 
+     *
      * @return does not return a value.
      */
-    public function __construct($typeName, $encoder = null,
-        $whitelistPattern = null
-    ) {
-            global $ESAPI;
+    public function __construct($typeName, $encoder = null, $whitelistPattern = null)
+    {
+        global $ESAPI;
 
         parent::__construct($typeName, $encoder);
 
@@ -71,8 +70,8 @@ class WordValidationRule extends StringValidationRule
      * IntrusionException if the input is an obvious attack.
      *
      * @param string $context A descriptive name of the parameter that you are
-     *                        validating (e.g., ProfilePage_Signature). This value 
-     *                        is used by any logging or error handling that is done 
+     *                        validating (e.g., ProfilePage_Signature). This value
+     *                        is used by any logging or error handling that is done
      *                        with respect to the value passed in.
      * @param string $input   The actual string user input data to validate.
      *
@@ -95,8 +94,8 @@ class WordValidationRule extends StringValidationRule
      * fails.
      *
      * @param string $context A descriptive name of the parameter that you are
-     *                        validating (e.g., ProfilePage_Signature). This value 
-     *                        is used by any logging or error handling that is done 
+     *                        validating (e.g., ProfilePage_Signature). This value
+     *                        is used by any logging or error handling that is done
      *                        with respect to the value passed in.
      * @param string $input   The actual user input data to validate.
      *
@@ -117,5 +116,4 @@ class WordValidationRule extends StringValidationRule
             return "";
         }
     }
-
 }

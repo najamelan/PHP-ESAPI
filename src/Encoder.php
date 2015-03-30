@@ -4,7 +4,7 @@
  *
  * This file is part of the Open Web Application Security Project (OWASP)
  * Enterprise Security API (ESAPI) project.
- * 
+ *
  * PHP version 5.2
  *
  * LICENSE: This source file is subject to the New BSD license.  You should read
@@ -30,8 +30,8 @@ require_once __DIR__ . '/codecs/Codec.php';
 
 /**
  * Use this ESAPI security control to wrap your codecs.
- * 
- * The idea behind this interface is to make output safe so that it 
+ *
+ * The idea behind this interface is to make output safe so that it
  * will be safe for the intended interpreter.
  *
  * @category  OWASP
@@ -55,9 +55,9 @@ interface Encoder
     const CHAR_UPPERS        = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const CHAR_DIGITS        = '0123456789';
     const CHAR_SPECIALS      = '.-_!@$^*=~|+?';
-    const CHAR_LETTERS       
+    const CHAR_LETTERS
         = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const CHAR_ALPHANUMERICS 
+    const CHAR_ALPHANUMERICS
         = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
     /*
@@ -142,7 +142,7 @@ interface Encoder
      * @return the canonicalized input string.
      * @throws IntrusionException if, in strict mode, canonicalization detects
      *         multiple or mixed encoding.
-     *         
+     *
      * @see <a href="http://www.w3.org/TR/html4/interact/forms.html#h-17.13.4">W3C specifications</a>
      */
     public function canonicalize($input, $strict = true);
@@ -153,7 +153,7 @@ interface Encoder
      * @param string $input string to encode for CSS.
      *
      * @return the input string encoded for CSS.
-     * 
+     *
      * @see <a href="http://www.w3.org/TR/CSS21/syndata.html#escaped-characters">CSS Syntax [w3.org]</a>
      */
     public function encodeForCSS($input);
@@ -167,7 +167,7 @@ interface Encoder
      * @param string $input string to encode for HTML.
      *
      * @return the input string encoded for HTML.
-     * 
+     *
      * @see <a href="http://en.wikipedia.org/wiki/Character_encodings_in_HTML">HTML Encodings [wikipedia.org]</a>
      * @see <a href="http://www.w3.org/TR/html4/sgml/sgmldecl.html">SGML Specification [w3.org]</a>
      * @see <a href="http://www.w3.org/TR/REC-xml/#charsets">XML Specification [w3.org]</a>
@@ -218,7 +218,7 @@ interface Encoder
      * interface is the preferred approach. However, if for some reason this is
      * impossible, then this method is provided as a weaker alternative.
      *
-     * @param Codec  $codec an instance of a Codec which will encode the input 
+     * @param Codec  $codec an instance of a Codec which will encode the input
      *                      string for the desired SQL database (e.g. MySQL, Oracle,
      *                      etc.).
      * @param string $input string to encode for use in a SQL query.
@@ -231,7 +231,7 @@ interface Encoder
      * Encode for an operating system command shell according to the selected
      * codec (appropriate codecs include the WindowsCodec and UnixCodec).
      *
-     * @param Codec  $codec an instance of a Codec which will encode the input 
+     * @param Codec  $codec an instance of a Codec which will encode the input
      *                      string for the desired operating system (e.g. Windows,
      *                      Unix, etc.).
      * @param string $input string to encode for use in a command shell.
@@ -318,7 +318,7 @@ interface Encoder
      * Encode data with Base64 encoding.
      *
      * @param string $input string to encode for Base64.
-     * @param bool   $wrap  boolean the encoder will wrap lines every 64 characters 
+     * @param bool   $wrap  boolean the encoder will wrap lines every 64 characters
      *                      of output if true.
      *
      * @return the input string encoded for Base64.
@@ -333,5 +333,4 @@ interface Encoder
      * @return the input string decoded from Base64.
      */
     public function decodeFromBase64($input);
-
 }

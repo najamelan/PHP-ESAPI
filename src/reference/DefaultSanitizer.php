@@ -120,7 +120,7 @@ class DefaultSanitizer implements Sanitizer
     
     /**
      * Returns valid, "safe" English language word based on the provided guess.
-     * 
+     *
      * @param  $context A descriptive name of the parameter that you are
      *         validating (e.g. ProfilePage_Sig). This value is used by any
      *         logging or error handling that is done with respect to the value
@@ -135,5 +135,4 @@ class DefaultSanitizer implements Sanitizer
         
         return $wvr->sanitize($context, $input);
     }
-
 }

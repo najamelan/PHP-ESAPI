@@ -86,14 +86,11 @@ class DefaultAuditor implements Auditor
      */
     public function setLevel($level)
     {
-        try
-        {
+        try {
             $this->_log4php->setLevel(
             $this->_convertESAPILeveltoLoggerLevel($level)
             );
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             $this->error(
             Logger::SECURITY,
             false,
@@ -246,7 +243,7 @@ class DefaultAuditor implements Auditor
         $levelStr = $logLevel->toString();
         if ($levelStr == 'ALL') {
             $levelStr = 'TRACE';
-        } else if ($levelStr == 'WARN') {
+        } elseif ($levelStr == 'WARN') {
             $levelStr = 'WARNING';
         }
         $context .= $levelStr;
@@ -306,15 +303,10 @@ class DefaultAuditor implements Auditor
                 $userSessionIDforLogging
                 = $_SESSION['DefaultAuditor']['SessionIDForLogging'];
             } else {
-                try
-                {
-                    $userSessionIDforLogging
-                    = (string) ESAPI::getRandomizer()->getRandomInteger(
-                    0, 1000000
-                    );
-                    $_SESSION['DefaultAuditor']['SessionIDForLogging']
-                    = $userSessionIDforLogging;
-                } catch(Exception $e) {
+                try {
+                    $userSessionIDforLogging = (string) ESAPI::getRandomizer()->getRandomInteger(0, 1000000);
+                    $_SESSION['DefaultAuditor']['SessionIDForLogging'] = $userSessionIDforLogging;
+                } catch (Exception $e) {
                     // continue
                 }
             }
@@ -337,15 +329,12 @@ class DefaultAuditor implements Auditor
         // Encode for HTML if ESAPI.xml says so
         $encodedMessage = null;
         if ($secConfig->getLogEncodingRequired()) {
-            try
-            {
+            try {
                 $encodedMessage = $encoder->encodeForHTML($crlfEncoded);
                 if ($encodedMessage !== $crlfEncoded) {
                     $encodedMessage .= ' (This log message was encoded for HTML)';
                 }
-            }
-            catch (Exception $e)
-            {
+            } catch (Exception $e) {
                 $exType = get_type($e);
                 $encodedMessage = "The supplied log message generated an ".
                     "Exception of type {$exType} and was not included";
@@ -405,12 +394,13 @@ class DefaultAuditor implements Auditor
                 $index = $i+2;
                 $nextChar = null;
                 $crlfEncoded .= $substitute;
-            } else if ($thisChar == "\r" || $thisChar == "\n") {
+            } elseif ($thisChar == "\r" || $thisChar == "\n") {
                 $crlfEncoded .= $substitute;
             } else {
                 $crlfEncoded .= $thisChar;
             }
         }
+
         return $crlfEncoded;
     }
 
@@ -530,5 +520,4 @@ class DefaultAuditor implements Auditor
             self::_convertESAPILeveltoLoggerLevel($logLevel)
         );
     }
-
 }

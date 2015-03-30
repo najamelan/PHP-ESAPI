@@ -39,8 +39,7 @@ class HTMLEntityCodecTest extends PHPUnit_Framework_TestCase
     {
         global $ESAPI;
 
-        if (!isset($ESAPI))
-        {
+        if (!isset($ESAPI)) {
             $ESAPI = new ESAPI();
         }
 
@@ -230,10 +229,11 @@ class HTMLEntityCodecTest extends PHPUnit_Framework_TestCase
     public function testDecodeFromHTML()
     {
         $this->assertEquals(
-           '"><script>alert(/XSS/)</script><foo attr="',
+            '"><script>alert(/XSS/)</script><foo attr="',
             $this->htmlEntityCodec->decode(
                 '&quot;&gt;&lt;script&gt;alert&#x28;&#x2f;XSS&#x2f;&#x29;&lt;&#x2f;script&gt;&lt;foo attr&#x3d;&quot;'
-            ));
+            )
+        );
     }
 
     public function testDecodeNullFromHTML()
@@ -351,5 +351,4 @@ class HTMLEntityCodecTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals('<', $this->htmlEntityCodec->decode('&lt;'));
     }
-
 }

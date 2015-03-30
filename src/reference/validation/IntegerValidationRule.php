@@ -8,7 +8,7 @@
  * LICENSE: This source file is subject to the New BSD license.  You should read
  * and accept the LICENSE before you use, modify, and/or redistribute this
  * software.
- * 
+ *
  * PHP version 5.2
  *
  * @category  OWASP
@@ -57,13 +57,11 @@ class IntegerValidationRule extends BaseValidationRule
      * @param object $encoder  providing canonicalize method.
      * @param int    $minValue minimum valid number.
      * @param int    $maxValue maximum valid number.
-     * 
+     *
      * @return does not return a value.
      */
-    public function __construct($typeName, $encoder, $minValue = null,
-        $maxValue = null
-    ) {
-
+    public function __construct($typeName, $encoder, $minValue = null, $maxValue = null)
+    {
         parent::__construct($typeName, $encoder);
 
         if ($minValue === null || ! is_numeric($minValue)) {
@@ -85,8 +83,8 @@ class IntegerValidationRule extends BaseValidationRule
      * IntrusionException if the input is an obvious attack.
      *
      * @param string $context A descriptive name of the parameter that you are
-     *                        validating (e.g., LoginPage_UsernameField). This 
-     *                        value is used by any logging or error handling that 
+     *                        validating (e.g., LoginPage_UsernameField). This
+     *                        value is used by any logging or error handling that
      *                        is done with respect to the value passed in.
      * @param string $input   The actual string user input data to validate.
      *
@@ -125,12 +123,9 @@ class IntegerValidationRule extends BaseValidationRule
 
         // strict canonicalization
         $canonical = null;
-        try
-        {
+        try {
             $canonical = $this->encoder->canonicalize($input, true);
-        }
-        catch (EncodingException $e)
-        {
+        } catch (EncodingException $e) {
             throw new ValidationException(
                 $context . ': Invalid input. Encoding problem detected.',
                 'An EncodingException was thrown during canonicalization of'.
@@ -140,8 +135,7 @@ class IntegerValidationRule extends BaseValidationRule
         }
 
         // validate min and max
-        try
-        {
+        try {
             if (! preg_match('/^[-+0-9]+$/', $canonical)) {
                 throw new ValidationException(
                     'Invalid integer input: context=' . $context,
@@ -176,9 +170,7 @@ class IntegerValidationRule extends BaseValidationRule
                 );
             }
             return $i;
-        }
-        catch (NumberFormatException $e)
-        {
+        } catch (NumberFormatException $e) {
             throw new ValidationException(
                 $context . ': Invalid integer input',
                 'Invalid integer input format: Caught NumberFormatException: '.
@@ -193,8 +185,8 @@ class IntegerValidationRule extends BaseValidationRule
      * TODO filter non-numeric chars 0123456789+- ?
      *
      * @param string $context A descriptive name of the parameter that you are
-     *                        validating (e.g., LoginPage_UsernameField). This 
-     *                        value is used by any logging or error handling that 
+     *                        validating (e.g., LoginPage_UsernameField). This
+     *                        value is used by any logging or error handling that
      *                        is done with respect to the value passed in.
      * @param string $input   The actual user input data to validate.
      *
@@ -204,5 +196,4 @@ class IntegerValidationRule extends BaseValidationRule
     {
         return 0;
     }
-
 }

@@ -73,7 +73,7 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
         }
         if ($sf && !$sf->isReadable()) {
             $this->fail("{$file} is not readable");
-        } 
+        }
         
         $this->assertTrue($sf && $sf->isReadable());
     }
@@ -110,7 +110,7 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
         
         if (!$sf->isReadable()) {
             $this->fail("{$file} is not readable - %s");
-        } 
+        }
         
         $this->assertTrue($sf->isReadable());
     }
@@ -237,10 +237,10 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
         foreach ($fileIllegals as $char) {
             $file = $config->getResourceDirectory() . "/ESAPI$char.xml";
 
-            try{
+            try {
                 $sf = new SafeFile($file);
                 $this->fail();
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 //Expected
             }
         }
@@ -248,10 +248,10 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
         foreach ($dirIllegals as $char) {
             $file = $config->getResourceDirectory() . "$char/ESAPI.xml";
 
-            try{
+            try {
                 $sf = new SafeFile($file);
                 $this->fail();
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 //Expected
             }
         }
@@ -329,9 +329,9 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
             $file = 'file:///etc/hosts';
         }
 
-        try{
+        try {
             $sf = new SafeFile($file);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $this->fail(
                 'This test could not run so did not really fail. Please choose a suitable test input.'
             );
@@ -352,9 +352,9 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
     {
         $file = 'http://www.google.com/index.html';
 
-        try{
+        try {
             $sf = new SafeFile($file);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $this->fail(
                 'This test could not run so did not really fail. Please choose a suitable test input.'
             );

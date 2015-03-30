@@ -48,14 +48,14 @@ require_once __DIR__ . '/../../src/filters/SafeRequest.php';
  * @version   Release: @package_version@
  * @link      http://www.owasp.org/index.php/ESAPI
  */
-class HttpUtilitiesTest extends PHPUnit_Framework_TestCase
+class HTTPUtilitiesTest extends PHPUnit_Framework_TestCase
 {
     private $_httpUtils = null;
 
     /**
      * Constructor ensures global ESAPI is set and stores an instance of
      * DefaultHTTPUtilities.
-     * 
+     *
      * @return null
      */
     public function __construct()
@@ -201,5 +201,4 @@ class HttpUtilitiesTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException('EnterpriseSecurityException');
         $this->_httpUtils->assertSecureRequest($req);
     }
-
 }

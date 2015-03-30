@@ -8,7 +8,7 @@
  * LICENSE: This source file is subject to the New BSD license.  You should read
  * and accept the LICENSE before you use, modify, and/or redistribute this
  * software.
- * 
+ *
  * PHP version 5.2
  *
  * @category  OWASP
@@ -58,12 +58,11 @@ class StringValidationRule extends BaseValidationRule
      * @param string $typeName         descriptive name for this validator.
      * @param object $encoder          providing canonicalize method.
      * @param string $whiteListPattern whitelist regex.
-     * 
+     *
      * @return does not return a value
      */
-    public function __construct($typeName, $encoder = null,
-        $whiteListPattern = null
-    ) {
+    public function __construct($typeName, $encoder = null, $whiteListPattern = null)
+    {
         parent::__construct($typeName, $encoder);
 
         $this->whitelistPatterns = array();
@@ -71,7 +70,7 @@ class StringValidationRule extends BaseValidationRule
 
         if (is_string($whiteListPattern)) {
             $this->addWhitelistPattern($whiteListPattern);
-        } else if ($whiteListPattern !== null) {
+        } elseif ($whiteListPattern !== null) {
             throw new InvalidArgumentException(
                 'Validation misconfiguration - constructor expected a string'.
                 ' $whiteListPattern'
@@ -84,7 +83,7 @@ class StringValidationRule extends BaseValidationRule
      * Inputs will be validated against each pattern.
      *
      * @param string $pattern non-empty string whitelist regex pattern.
-     * 
+     *
      * @return does not return a value
      */
     public function addWhitelistPattern($pattern)
@@ -109,7 +108,7 @@ class StringValidationRule extends BaseValidationRule
      * Inputs will be validated against each pattern.
      *
      * @param string $pattern non-empty string blacklist regex pattern.
-     * 
+     *
      * @return does not return a value
      */
     public function addBlacklistPattern($pattern)
@@ -129,7 +128,6 @@ class StringValidationRule extends BaseValidationRule
         }
         
         array_push($this->blacklistPatterns, $pattern);
-        
     }
 
     /**
@@ -138,7 +136,7 @@ class StringValidationRule extends BaseValidationRule
      *
      * @param int $length minimum length of the canonicalized Input below which
      *                    it is deemed invalid.
-     *                    
+     *
      * @return does not return a value
      */
     public function setMinimumLength($length)
@@ -158,7 +156,7 @@ class StringValidationRule extends BaseValidationRule
      *
      * @param int $length maximum length of the canonicalized Input above which
      *                    it is deemed invalid.
-     *                    
+     *
      * @return does not return a value
      */
     public function setMaximumLength($length)
@@ -178,8 +176,8 @@ class StringValidationRule extends BaseValidationRule
      * IntrusionException if the input is an obvious attack.
      *
      * @param string $context A descriptive name of the parameter that you are
-     *                        validating (e.g., LoginPage_UsernameField). This 
-     *                        value is used by any logging or error handling that 
+     *                        validating (e.g., LoginPage_UsernameField). This
+     *                        value is used by any logging or error handling that
      *                        is done with respect to the value passed in.
      * @param string $input   The actual string user input data to validate.
      *
@@ -221,8 +219,7 @@ class StringValidationRule extends BaseValidationRule
         $canonical = null;
         try {
             $canonical = $this->encoder->canonicalize($input, true);
-        } catch (EncodingException $e)
-        {
+        } catch (EncodingException $e) {
             throw new ValidationException(
                 $context . ': Invalid input. Encoding problem detected.',
                 'An EncodingException was thrown during canonicalization '.
@@ -238,7 +235,7 @@ class StringValidationRule extends BaseValidationRule
             throw new ValidationException(
                 $context . ': Invalid input. Input was shorter than the '.
                 'Minimum length of ' . $this->minLength . ' characters.',
-                'Length of Input was less than the minimum length of ' . 
+                'Length of Input was less than the minimum length of ' .
                 $this->minLength,
                 $context
             );
@@ -247,7 +244,7 @@ class StringValidationRule extends BaseValidationRule
             throw new ValidationException(
                 $context . ': Invalid input. Input was longer than the '.
                 'Maximum length of ' . $this->maxLength . ' characters.',
-                'Length of Input was more than the maximum length of ' . 
+                'Length of Input was more than the maximum length of ' .
                 $this->maxLength,
                 $context
             );
@@ -257,7 +254,7 @@ class StringValidationRule extends BaseValidationRule
         foreach ($this->whitelistPatterns as $pattern) {
             if (! preg_match("/{$pattern}/", $canonical)) {
                 throw new ValidationException(
-                    $context . ': Invalid input. Please conform to the regex ' . 
+                    $context . ': Invalid input. Please conform to the regex ' .
                     $pattern,
                     $context . ': Invalid input. Input does not conform to the'.
                     ' whitelist regex ' . $pattern,
@@ -270,7 +267,7 @@ class StringValidationRule extends BaseValidationRule
         foreach ($this->blacklistPatterns as $pattern) {
             if (preg_match("/{$pattern}/", $canonical)) {
                 throw new ValidationException(
-                    $context . ': Invalid input. Dangerous input matching ' . 
+                    $context . ': Invalid input. Dangerous input matching ' .
                     $pattern,
                     $context . ': Invalid input. Input matches the blacklist '.
                     'regex ' . $pattern,
@@ -287,8 +284,8 @@ class StringValidationRule extends BaseValidationRule
      * characters.
      *
      * @param string $context A descriptive name of the parameter that you are
-     *                        validating (e.g., LoginPage_UsernameField). This 
-     *                        value is used by any logging or error handling that 
+     *                        validating (e.g., LoginPage_UsernameField). This
+     *                        value is used by any logging or error handling that
      *                        is done with respect to the value passed in.
      * @param string $input   The actual user input data to validate.
      *
@@ -298,5 +295,4 @@ class StringValidationRule extends BaseValidationRule
     {
         return $this->whitelist($input, Encoder::CHAR_ALPHANUMERICS);
     }
-
 }

@@ -26,8 +26,7 @@ class PercentCodecTest extends PHPUnit_Framework_TestCase
     {
         global $ESAPI;
 
-        if (!isset($ESAPI))
-        {
+        if (!isset($ESAPI)) {
             $ESAPI = new ESAPI();
         }
         
@@ -36,7 +35,6 @@ class PercentCodecTest extends PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-
     }
     
     public function testEncode()
@@ -51,7 +49,7 @@ class PercentCodecTest extends PHPUnit_Framework_TestCase
         $immune = array("");
         
         $this->assertEquals("%3C", $this->percentCodec->encode($immune, "<"));
-    }    
+    }
     
     public function testDecode()
     {
@@ -62,5 +60,4 @@ class PercentCodecTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals("<", $this->percentCodec->decode("%3C"));
     }
-    
 }

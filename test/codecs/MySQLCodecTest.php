@@ -28,8 +28,7 @@ class MySQLCodecTest extends PHPUnit_Framework_TestCase
     {
         global $ESAPI;
 
-        if (!isset($ESAPI))
-        {
+        if (!isset($ESAPI)) {
             $ESAPI = new ESAPI();
         }
         
@@ -49,7 +48,7 @@ class MySQLCodecTest extends PHPUnit_Framework_TestCase
         $immune = array("");
         
         $this->assertEquals("''", $this->mysqlAnsiCodec->encode($immune, "'"));
-    }    
+    }
     
     public function testANSIDecode()
     {

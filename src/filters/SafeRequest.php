@@ -690,7 +690,6 @@ class SafeRequest
         $this->_cookies = $this->_validateCookies($_COOKIE);
 
         return $this->_cookies;
-
     }
 
     /**
@@ -798,7 +797,6 @@ class SafeRequest
         }
         $this->_parameterNames = $tmp;
         return $this->_parameterNames;
-
     }
 
     /**
@@ -934,8 +932,7 @@ class SafeRequest
 
         $tmp = array();
         foreach ($ary as $unvalidatedKey => $unvalidatedVal) {
-            try
-            {
+            try {
                 $safeKey = $this->_getIfValid(
                     '$_SERVER Index', $unvalidatedKey, $ptnKey,
                     'HTTP Header Validator', PHP_INT_MAX, false
@@ -947,9 +944,7 @@ class SafeRequest
                     );
                     $tmp[$safeKey] = $safeVal;
                 }
-            }
-            catch (Exception $e)
-            {
+            } catch (Exception $e) {
                 // NoOp
             }
         }
@@ -999,7 +994,6 @@ class SafeRequest
             }
         }
         return $tmp;
-
     }
 
     /**
@@ -1062,5 +1056,4 @@ class SafeRequest
         }
         return $hex;
     }
-
 }
