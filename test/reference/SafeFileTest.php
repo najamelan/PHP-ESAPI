@@ -21,13 +21,11 @@
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 
-
 /**
  * Require ESAPI and SafeFile.
  */
 require_once __DIR__.'/../../src/ESAPI.php';
 require_once __DIR__.'/../../src/SafeFile.php';
-
 
 /**
  * Unit Tests for the SafeFile extension to SplFileObject.
@@ -57,7 +55,6 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
         }
     }
 
-
     /**
      * Test constructor of class SafeFile.
      *
@@ -81,7 +78,6 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($sf && $sf->isReadable());
     }
 
-
     /**
      * Test constructor of class SafeFile with Invalid path.
      *
@@ -95,7 +91,6 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException('EnterpriseSecurityException');
         $sf = new SafeFile($file);
     }
-
 
     /**
      * Test constructor of class SafeFile with Valid path.
@@ -117,9 +112,8 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
             $this->fail("{$file} is not readable - %s");
         } 
         
-		$this->assertTrue($sf->isReadable());
+        $this->assertTrue($sf->isReadable());
     }
-
 
     /**
      * Test class SafeFile with Invalid path.
@@ -144,7 +138,6 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
         $sf = new SafeFile($file);
     }
 
-
     /**
      * Test constructor of class SafeFile with Invalid path.
      *
@@ -158,7 +151,6 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException('EnterpriseSecurityException');
         $sf = new SafeFile($file);
     }
-
 
     /**
      * Test constructor of class SafeFile with Invalid path.
@@ -174,7 +166,6 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
         $sf = new SafeFile($file);
     }
 
-
     /**
      * Test constructor of class SafeFile with Invalid path.
      *
@@ -188,7 +179,6 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException('EnterpriseSecurityException');
         $sf = new SafeFile($file);
     }
-
 
     /**
      * Test constructor of class SafeFile with Invalid path.
@@ -204,7 +194,6 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
         $sf = new SafeFile($file);
     }
 
-
     /**
      * Test constructor of class SafeFile with Invalid path.
      *
@@ -219,7 +208,6 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
         $sf = new SafeFile($file);
     }
 
-
     /**
      * Test constructor of class SafeFile with Invalid path.
      *
@@ -233,7 +221,6 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException('EnterpriseSecurityException');
         $sf = new SafeFile($file);
     }
-
 
     /**
      * Test constructor of class SafeFile with Invalid path.
@@ -272,7 +259,6 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(true);
     }
 
-
     /**
      * Test constructor of class SafeFile with Invalid path.
      *
@@ -286,7 +272,6 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException('EnterpriseSecurityException');
         $sf = new SafeFile($file);
     }
-
 
     /**
      * Test constructor of class SafeFile with Invalid path.
@@ -302,7 +287,6 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
         $sf = new SafeFile($file);
     }
 
-
     /**
      * Test constructor of class SafeFile with Invalid path.
      *
@@ -317,7 +301,6 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
         $sf = new SafeFile($file);
     }
 
-
     /**
      * Test constructor of class SafeFile with Invalid path.
      *
@@ -331,7 +314,6 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException('EnterpriseSecurityException');
         $sf = new SafeFile($file);
     }
-
 
       /**
      * Test null byte injection.
@@ -360,7 +342,6 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException('ValidationException'); // but we will!
         $sf = new SafeFile($file);
     }
-
 
       /**
      * Test null byte injection.

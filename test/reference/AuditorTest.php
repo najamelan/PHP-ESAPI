@@ -40,7 +40,7 @@ class AuditorTest extends PHPUnit_Framework_TestCase
     /**
      * @var Auditor
      */
-    private $testLogger= null;
+    private $testLogger = null;
     private $alphanum = null;
     private $rnd = null;
     private $logFileLoc = null;
@@ -62,7 +62,7 @@ class AuditorTest extends PHPUnit_Framework_TestCase
     protected function setUp() {
         global $ESAPI;
 
-        if ( !isset($ESAPI)) {
+        if (!isset($ESAPI)) {
             $ESAPI = new
             ESAPI(__DIR__.'/../testresources/ESAPI.xml');
         }
@@ -74,7 +74,6 @@ class AuditorTest extends PHPUnit_Framework_TestCase
     function tearDown() {
         $this->testLogger = null; // TODO - working?
     }
-
 
     function testSetLevelOffCheckTrace() {
         $this->testLogger->setLevel(Auditor::OFF);
@@ -106,7 +105,6 @@ class AuditorTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->testLogger->isFatalEnabled());
     }
 
-
     function testSetLevelTraceCheckTrace() {
         $this->testLogger->setLevel(Auditor::TRACE);
         $this->assertTrue($this->testLogger->isTraceEnabled());
@@ -136,7 +134,6 @@ class AuditorTest extends PHPUnit_Framework_TestCase
         $this->testLogger->setLevel(Auditor::TRACE);
         $this->assertTrue($this->testLogger->isFatalEnabled());
     }
-
 
     function testSetLevelDebugCheckTrace() {
         $this->testLogger->setLevel(Auditor::DEBUG);
@@ -168,7 +165,6 @@ class AuditorTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->testLogger->isFatalEnabled());
     }
 
-
     function testSetLevelInfoCheckTrace() {
         $this->testLogger->setLevel(Auditor::INFO);
         $this->assertFalse($this->testLogger->isTraceEnabled());
@@ -198,7 +194,6 @@ class AuditorTest extends PHPUnit_Framework_TestCase
         $this->testLogger->setLevel(Auditor::INFO);
         $this->assertTrue($this->testLogger->isFatalEnabled());
     }
-
 
     function testSetLevelWarningCheckTrace() {
         $this->testLogger->setLevel(Auditor::WARNING);
@@ -230,7 +225,6 @@ class AuditorTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->testLogger->isFatalEnabled());
     }
 
-
     function testSetLevelErrorCheckTrace() {
         $this->testLogger->setLevel(Auditor::ERROR);
         $this->assertFalse($this->testLogger->isTraceEnabled());
@@ -260,7 +254,6 @@ class AuditorTest extends PHPUnit_Framework_TestCase
         $this->testLogger->setLevel(Auditor::ERROR);
         $this->assertTrue($this->testLogger->isFatalEnabled());
     }
-
 
     function testSetLevelFatalCheckTrace() {
         $this->testLogger->setLevel(Auditor::FATAL);
@@ -292,12 +285,11 @@ class AuditorTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->testLogger->isFatalEnabled());
     }
 
-
     function testSetLevelMultipleLogsExpectedTrue() {
         //Now test to see if a change to the logging level in one log affects other logs
-        $newLogger = ESAPI::getAuditor( 'test_num2' );
-        $this->testLogger->setLevel( Auditor::OFF );
-        $newLogger->setLevel( Auditor::INFO );
+        $newLogger = ESAPI::getAuditor('test_num2');
+        $this->testLogger->setLevel(Auditor::OFF);
+        $newLogger->setLevel(Auditor::INFO);
         $log_1_result = $this->testLogger->isInfoEnabled();
         $log_2_result = $newLogger->isInfoEnabled();
 
@@ -319,7 +311,6 @@ class AuditorTest extends PHPUnit_Framework_TestCase
 #        $this->assertTrue($log_1_result &&!$log_2_result);        
 #    }
 
-
     function testLoggingToFile() {
         $testMsg = null;
         $r = getRandomAlphaNumString(32);
@@ -329,7 +320,6 @@ class AuditorTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($logFileIsReadable, $testMsg);
         return $logFileIsReadable;
     }
-
 
     function testFatalSecuritySuccess() {
         $testMsg = null;
@@ -892,7 +882,6 @@ class AuditorTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->verifyLogEntry($expected, $testMsg), $testMsg);
     }
 
-
     /**
      * @depends testLoggingToFile
      */
@@ -910,7 +899,6 @@ class AuditorTest extends PHPUnit_Framework_TestCase
         
         $this->assertTrue($result, $failMessage);
     }
-
 
     /**
      * @depends testLoggingToFile
@@ -935,7 +923,6 @@ class AuditorTest extends PHPUnit_Framework_TestCase
         
         $this->assertTrue($result, $failMessage);
     }
-
 
     /**
      * Helper function to read the logfile and match the supplied pattern.

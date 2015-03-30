@@ -21,12 +21,10 @@
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 
-
 /**
  * HttpUtilitiesTest requires SafeRequest.
  */
 require_once __DIR__ . '/../../src/filters/SafeRequest.php';
-
 
 /**
  * Tests for the reference implementation of the HTTPUtilities interface.
@@ -65,7 +63,6 @@ class HttpUtilitiesTest extends PHPUnit_Framework_TestCase
         $this->_httpUtils = ESAPI::getHTTPUtilities();
     }
 
-
     /**
      * Test of addCSRFToken method of class HTTPUtilities.
      *
@@ -90,7 +87,6 @@ class HttpUtilitiesTest extends PHPUnit_Framework_TestCase
         );
     }
 
-
     /**
      * Test of getCookie method of class HTTPUtilities.
      *
@@ -107,7 +103,6 @@ class HttpUtilitiesTest extends PHPUnit_Framework_TestCase
         );
         $this->assertEquals('bar', $this->_httpUtils->getCookie($req, 'foo'));
     }
-
 
     /**
      * Test of assertSecureRequest method of class HTTPUtilities.
@@ -127,7 +122,6 @@ class HttpUtilitiesTest extends PHPUnit_Framework_TestCase
         );
         $this->assertNull($this->_httpUtils->assertSecureRequest($req));
     }
-
 
     /**
      * Test of assertSecureRequest method of class HTTPUtilities.
@@ -149,7 +143,6 @@ class HttpUtilitiesTest extends PHPUnit_Framework_TestCase
         $this->_httpUtils->assertSecureRequest($req);
     }
 
-
     /**
      * Test of assertSecureRequest method of class HTTPUtilities.
      * No TLS.
@@ -170,7 +163,6 @@ class HttpUtilitiesTest extends PHPUnit_Framework_TestCase
         $this->_httpUtils->assertSecureRequest($req);
     }
 
-
     /**
      * Test of assertSecureRequest method of class HTTPUtilities.
      * Not POST.
@@ -190,7 +182,6 @@ class HttpUtilitiesTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException('AccessControlException');
         $this->_httpUtils->assertSecureRequest($req);
     }
-
 
     /**
      * Test of assertSecureRequest method of class HTTPUtilities.

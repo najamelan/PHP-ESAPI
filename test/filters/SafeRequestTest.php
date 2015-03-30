@@ -20,13 +20,11 @@
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 
-
 /**
  * Require ESAPI and SafeRequest.
  */
 require_once __DIR__ . '/../../src/ESAPI.php';
 require_once __DIR__ . '/../../src/filters/SafeRequest.php';
-
 
 /**
  * UnitTestCase for SafeRequest implementation.
@@ -59,7 +57,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         }
     }
 
-
     /**
      * Test of SafeRequest::getAuthType() with null input.
      * 
@@ -77,7 +74,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertInternalType('string', $result);
         $this->assertEquals('', $result);
     }
-
 
     /**
      * Test of SafeRequest::getAuthType() with invalid input.
@@ -98,7 +94,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('', $result);
     }
 
-
     /**
      * Test of SafeRequest::getAuthType() with valid input.
      * 
@@ -118,7 +113,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('bAsic', $result);
     }
 
-
     /**
      * Test of SafeRequest::getContentLength() with null input.
      * 
@@ -136,7 +130,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertInternalType('int', $result);
         $this->assertEquals(0, $result);
     }
-
 
     /**
      * Test of SafeRequest::getContentLength() with invalid input.
@@ -157,7 +150,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(0, $result);
     }
 
-
     /**
      * Test of SafeRequest::getContentLength() with valid input.
      * 
@@ -177,7 +169,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1024, $result);
     }
 
-
     /**
      * Test of SafeRequest::getContentType() with null input.
      * 
@@ -195,7 +186,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertInternalType('string', $result);
         $this->assertEquals('', $result);
     }
-
 
     /**
      * Test of SafeRequest::getContentType() with invalid input.
@@ -216,7 +206,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('', $result);
     }
 
-
     /**
      * Test of SafeRequest::getContentType() with valid input.
      * 
@@ -236,7 +225,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('application/url-form-encoded', $result);
     }
 
-
     /**
      * Test of SafeRequest::getPathInfo() with null input.
      * 
@@ -254,7 +242,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertInternalType('string', $result);
         $this->assertEquals('', $result);
     }
-
 
     /**
      * Test of SafeRequest::getPathInfo() with invalid input.
@@ -275,7 +262,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('', $result);
     }
 
-
     /**
      * Test of SafeRequest::getPathInfo() with valid input.
      * 
@@ -295,7 +281,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('/foo', $result);
     }
 
-
     /**
      * Test of SafeRequest::getPathTranslated() with null input.
      * 
@@ -313,7 +298,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertInternalType('string', $result);
         $this->assertEquals('', $result);
     }
-
 
     /**
      * Test of SafeRequest::getPathTranslated() with invalid input.
@@ -334,7 +318,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('', $result);
     }
 
-
     /**
      * Test of SafeRequest::getPathTranslated() with valid input.
      * 
@@ -354,7 +337,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('/foo', $result);
     }
 
-
     /**
      * Test of SafeRequest::getQueryString() with null input.
      * 
@@ -372,7 +354,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertInternalType('string', $result);
         $this->assertEquals('', $result);
     }
-
 
     /**
      * Test of SafeRequest::getQueryString() with invalid input.
@@ -393,7 +374,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('', $result);
     }
 
-
     /**
      * Test of SafeRequest::getQueryString() with valid input.
      * 
@@ -413,7 +393,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('foo=bar', $result);
     }
 
-
     /**
      * Test of SafeRequest::getRemoteAddr() with null input.
      * 
@@ -431,7 +410,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertInternalType('string', $result);
         $this->assertEquals('', $result);
     }
-
 
     /**
      * Test of SafeRequest::getRemoteAddr() with invalid input.
@@ -452,7 +430,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('', $result);
     }
 
-
     /**
      * Test of SafeRequest::getRemoteAddr() with valid input.
      * 
@@ -472,7 +449,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('123.45.67.89', $result);
     }
 
-
     /**
      * Test of SafeRequest::getRemoteHost() with null input.
      * 
@@ -490,7 +466,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertInternalType('string', $result);
         $this->assertEquals('', $result);
     }
-
 
     /**
      * Test of SafeRequest::getRemoteHost() with invalid input.
@@ -533,7 +508,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('', $result);
     }
 
-
     /**
      * Test of SafeRequest::getRemoteHost() with valid input.
      * 
@@ -575,7 +549,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('foo-bar.0example0.com', $result);
     }
 
-
     /**
      * Test of SafeRequest::getRemoteHost() with null input.
      * 
@@ -593,7 +566,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertInternalType('string', $result);
         $this->assertEquals('', $result);
     }
-
 
     /**
      * Test of SafeRequest::getRemoteUser() with invalid input.
@@ -614,7 +586,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('', $result);
     }
 
-
     /**
      * Test of SafeRequest::getRemoteUser() with valid input.
      * 
@@ -634,7 +605,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('user_1', $result);
     }
 
-
     /**
      * Test of SafeRequest::getMethod() with null input.
      * 
@@ -652,7 +622,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertInternalType('string', $result);
         $this->assertEquals('', $result);
     }
-
 
     /**
      * Test of SafeRequest::getMethod() with invalid input.
@@ -673,7 +642,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('', $result);
     }
 
-
     /**
      * Test of SafeRequest::getMethod() with valid input.
      * 
@@ -693,7 +661,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('GET', $result);
     }
 
-
     /**
      * Test of SafeRequest::getRequestURI() with null input.
      * 
@@ -711,7 +678,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertInternalType('string', $result);
         $this->assertEquals('', $result);
     }
-
 
     /**
      * Test of SafeRequest::getRequestURI() with invalid input.
@@ -732,7 +698,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('', $result);
     }
 
-
     /**
      * Test of SafeRequest::getRequestURI() with valid input.
      * 
@@ -752,7 +717,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('/foo/bar.php', $result);
     }
 
-
     /**
      * Test of SafeRequest::getServerName() with null input.
      * 
@@ -770,7 +734,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertInternalType('string', $result);
         $this->assertEquals('', $result);
     }
-
 
     /**
      * Test of SafeRequest::getServerName() with invalid input.
@@ -813,7 +776,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('', $result);
     }
 
-
     /**
      * Test of SafeRequest::getServerName() with valid input.
      * 
@@ -844,7 +806,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('example.com', $result);
     }
 
-
     /**
      * Test of SafeRequest::getServerPort() with null input.
      * 
@@ -862,7 +823,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertInternalType('int', $result);
         $this->assertEquals(0, $result);
     }
-
 
     /**
      * Test of SafeRequest::getServerPort() with invalid input.
@@ -883,7 +843,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(0, $result);
     }
 
-
     /**
      * Test of SafeRequest::getServerPort() with valid input.
      * 
@@ -903,7 +862,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(80, $result);
     }
 
-
     /**
      * Test of SafeRequest::getHeader() with null input.
      * 
@@ -920,7 +878,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $result = $req->getHeader('HTTP_ACCEPT');
         $this->assertInternalType('null', $result);
     }
-
 
     /**
      * Test of SafeRequest::getHeader() with invalid input.
@@ -939,7 +896,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $result = $req->getHeader('HTTP_ACCEPT');
         $this->assertInternalType('null', $result);
     }
-
 
     /**
      * Test of SafeRequest::getHeader() with valid input.
@@ -963,7 +919,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         );
     }
 
-
     /**
      * Test of SafeRequest::getCookie() with null input.
      * 
@@ -980,7 +935,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $result = $req->getCookie('foo');
         $this->assertInternalType('null', $result);
     }
-
 
     /**
      * Test of SafeRequest::getCookie() with invalid input.
@@ -999,7 +953,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $result = $req->getCookie('foo');
         $this->assertInternalType('null', $result);
     }
-
 
     /**
      * Test of SafeRequest::getCookie() with valid input.
@@ -1020,7 +973,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('bar', $result);
     }
 
-
     /**
      * Test of SafeRequest::getServerGlobal() with null input.
      * 
@@ -1037,7 +989,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $result = $req->getServerGlobal('foo');
         $this->assertInternalType('null', $result);
     }
-
 
     /**
      * Test of SafeRequest::getServerGlobal() with double encoding.
@@ -1056,7 +1007,6 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
         $result = $req->getServerGlobal('PHP_SELF');
         $this->assertInternalType('null', $result);
     }
-
 
     /**
      * Test of SafeRequest::getServerGlobal() with valid input.

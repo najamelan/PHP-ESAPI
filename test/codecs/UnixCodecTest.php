@@ -20,48 +20,47 @@ require_once __DIR__.'/../../src/codecs/UnixCodec.php';
 
 class UnixCodecTest extends PHPUnit_Framework_TestCase
 {
-	private $unixCodec = null;
-	
-	function setUp()
-	{
-		global $ESAPI;
+    private $unixCodec = null;
+    
+    function setUp()
+    {
+        global $ESAPI;
 
-		if ( !isset($ESAPI))
-		{
-			$ESAPI = new ESAPI();
-		}
+        if (!isset($ESAPI))
+        {
+            $ESAPI = new ESAPI();
+        }
 
-		$this->unixCodec = new UnixCodec();
-	}
+        $this->unixCodec = new UnixCodec();
+    }
 
-	function tearDown()
-	{
+    function tearDown()
+    {
 
-	}
-	
-	function testEncode()
-	{
-		$immune = array("");
-		
-		$this->assertEquals( '\\"\\;\\ ls\\ \\/\\ \\>\\ \\/tmp\\/foo\\;\\ \\#\\ ', $this->unixCodec->encode($immune, '"; ls / > /tmp/foo; # ') );
-	}
-	
-	function testEncodeCharacter()
-	{
-		$immune = array("");
-		
-		$this->assertEquals( "\\<", $this->unixCodec->encode($immune, "<") );
-	}	
-	
-	function testDecode()
-	{
-		$this->assertEquals( '"; ls / > /tmp/foo; # ', $this->unixCodec->decode('\\"\\;\\ ls\\ \\/\\ \\>\\ \\/tmp\\/foo\\;\\ \\#\\ ') );
-	}
-		
-	function testDecodeCharacter()
-	{
-		$this->assertEquals( "<", $this->unixCodec->decode("\\<") );
-	}
-	
+    }
+    
+    function testEncode()
+    {
+        $immune = array("");
+        
+        $this->assertEquals('\\"\\;\\ ls\\ \\/\\ \\>\\ \\/tmp\\/foo\\;\\ \\#\\ ', $this->unixCodec->encode($immune, '"; ls / > /tmp/foo; # '));
+    }
+    
+    function testEncodeCharacter()
+    {
+        $immune = array("");
+        
+        $this->assertEquals("\\<", $this->unixCodec->encode($immune, "<"));
+    }    
+    
+    function testDecode()
+    {
+        $this->assertEquals('"; ls / > /tmp/foo; # ', $this->unixCodec->decode('\\"\\;\\ ls\\ \\/\\ \\>\\ \\/tmp\\/foo\\;\\ \\#\\ '));
+    }
+        
+    function testDecodeCharacter()
+    {
+        $this->assertEquals("<", $this->unixCodec->decode("\\<"));
+    }
+    
 }
-?>

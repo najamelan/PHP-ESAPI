@@ -27,7 +27,7 @@ class SanitizerTest extends PHPUnit_Framework_TestCase
     function setUp()
     {
         global $ESAPI;
-        if ( !isset($ESAPI))
+        if (!isset($ESAPI))
         {
             $ESAPI = new ESAPI();
         }
