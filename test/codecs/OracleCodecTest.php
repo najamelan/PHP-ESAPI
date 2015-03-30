@@ -23,7 +23,7 @@ class OracleCodecTest extends PHPUnit_Framework_TestCase
 {
     private $oracleCodec = null;
     
-    function setUp()
+    public function setUp()
     {
         global $ESAPI;
 
@@ -35,7 +35,7 @@ class OracleCodecTest extends PHPUnit_Framework_TestCase
         $this->oracleCodec = new OracleCodec();
     }
         
-    function testEncode()
+    public function testEncode()
     {
         $immune = array("");
         
@@ -43,20 +43,20 @@ class OracleCodecTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('\'\'', $this->oracleCodec->encode($immune, '\''));
     }
     
-    function testEncodeCharacter()
+    public function testEncodeCharacter()
     {
         $immune = array("");
         
         $this->assertEquals("''", $this->oracleCodec->encode($immune, "'"));
     }    
     
-    function testDecode()
+    public function testDecode()
     {
         $this->assertEquals(' || \'x\' FROM DUAL;--', $this->oracleCodec->decode(' || \'\'x\'\' FROM DUAL;--'));
         $this->assertEquals('\'', $this->oracleCodec->decode('\'\''));
     }
         
-    function testDecodeCharacter()
+    public function testDecodeCharacter()
     {
         $this->assertEquals("'", $this->oracleCodec->decode("''"));
     }

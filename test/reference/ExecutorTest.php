@@ -31,7 +31,7 @@ class ExecutorTest extends PHPUnit_Framework_TestCase
     const PLATFORM_WINDOWS    = 1;
     const PLATFORM_UNIX    = 2;
      
-    function setUp() 
+    public function setUp() 
     {
         global $ESAPI;
         
@@ -58,7 +58,7 @@ class ExecutorTest extends PHPUnit_Framework_TestCase
         $this->_instance = new DefaultExecutor();
     }
         
-    function tearDown()
+    public function tearDown()
     {
         
     }
@@ -66,7 +66,7 @@ class ExecutorTest extends PHPUnit_Framework_TestCase
     /**
      * Test of executeSystemCommand method, of Executor
      */
-    function testExecuteWindowsLegalSystemCommand() 
+    public function testExecuteWindowsLegalSystemCommand() 
     {    
         if ($this->_os != self::PLATFORM_WINDOWS)
         {
@@ -87,7 +87,7 @@ class ExecutorTest extends PHPUnit_Framework_TestCase
     /**
      * Test to ensure that bad commands fail
      */
-    function testExecuteWindowsInjectIllegalSystemCommand() 
+    public function testExecuteWindowsInjectIllegalSystemCommand() 
     {    
         if ($this->_os != self::PLATFORM_WINDOWS)
         {
@@ -104,7 +104,7 @@ class ExecutorTest extends PHPUnit_Framework_TestCase
     /**
      * Test of file system canonicalization
      */
-    function testExecuteWindowsCanonicalization() 
+    public function testExecuteWindowsCanonicalization() 
     {    
         if ($this->_os != self::PLATFORM_WINDOWS)
         {
@@ -121,7 +121,7 @@ class ExecutorTest extends PHPUnit_Framework_TestCase
     /**
      *	Test to see if a good work directory is properly handled. 
      */
-    function testExecuteWindowsGoodWorkDirectory() 
+    public function testExecuteWindowsGoodWorkDirectory() 
     {    
         if ($this->_os != self::PLATFORM_WINDOWS)
         {
@@ -143,7 +143,7 @@ class ExecutorTest extends PHPUnit_Framework_TestCase
     /**
      *	Test to see if a non-existent work directory is properly handled. 
      */
-    function testExecuteWindowsBadWorkDirectory() 
+    public function testExecuteWindowsBadWorkDirectory() 
     {    
         if ($this->_os != self::PLATFORM_WINDOWS)
         {
@@ -160,7 +160,7 @@ class ExecutorTest extends PHPUnit_Framework_TestCase
     /**
      * Test to prevent chained command execution
      */
-    function testExecuteWindowsChainedCommand() 
+    public function testExecuteWindowsChainedCommand() 
     {    
         if ($this->_os != self::PLATFORM_WINDOWS)
         {
@@ -177,7 +177,7 @@ class ExecutorTest extends PHPUnit_Framework_TestCase
     /**
      * Test to prevent chained command execution
      */
-    function testExecuteWindowsChainedParameter() 
+    public function testExecuteWindowsChainedParameter() 
     {    
         if ($this->_os != self::PLATFORM_WINDOWS)
         {
@@ -199,7 +199,7 @@ class ExecutorTest extends PHPUnit_Framework_TestCase
     /*
      *	Test to see if the escaping mechanism renders supplemental results safely 
      */
-    function testExecuteWindowsDoubleArgs() 
+    public function testExecuteWindowsDoubleArgs() 
     {    
         if ($this->_os != self::PLATFORM_WINDOWS)
         {
@@ -222,7 +222,7 @@ class ExecutorTest extends PHPUnit_Framework_TestCase
     /**
      * Test of executeSystemCommand method, of Executor
      */
-    function testExecuteUnixLegalSystemCommand() 
+    public function testExecuteUnixLegalSystemCommand() 
     {    
         if ($this->_os != self::PLATFORM_UNIX)
         {
@@ -243,7 +243,7 @@ class ExecutorTest extends PHPUnit_Framework_TestCase
     /**
      * Test to ensure that bad commands fail
      */
-    function testExecuteUnixInjectIllegalSystemCommand() 
+    public function testExecuteUnixInjectIllegalSystemCommand() 
     {    
         if ($this->_os != self::PLATFORM_UNIX)
         {
@@ -260,7 +260,7 @@ class ExecutorTest extends PHPUnit_Framework_TestCase
     /**
      * Test of file system canonicalization
      */
-    function testExecuteUnixCanonicalization() 
+    public function testExecuteUnixCanonicalization() 
     {    
         if ($this->_os != self::PLATFORM_UNIX)
         {
@@ -277,7 +277,7 @@ class ExecutorTest extends PHPUnit_Framework_TestCase
     /**
      *	Test to see if a good work directory is properly handled. 
      */
-    function testExecuteUnixGoodWorkDirectory() 
+    public function testExecuteUnixGoodWorkDirectory() 
     {    
         if ($this->_os != self::PLATFORM_UNIX)
         {
@@ -299,7 +299,7 @@ class ExecutorTest extends PHPUnit_Framework_TestCase
     /**
      *	Test to see if a non-existent work directory is properly handled. 
      */
-    function testExecuteUnixBadWorkDirectory() 
+    public function testExecuteUnixBadWorkDirectory() 
     {    
         if ($this->_os != self::PLATFORM_UNIX)
         {
@@ -316,7 +316,7 @@ class ExecutorTest extends PHPUnit_Framework_TestCase
     /**
      * Test to prevent chained command execution
      */
-    function testExecuteUnixChainedCommand() 
+    public function testExecuteUnixChainedCommand() 
     {    
         if ($this->_os != self::PLATFORM_UNIX)
         {
@@ -333,7 +333,7 @@ class ExecutorTest extends PHPUnit_Framework_TestCase
     /**
      * Test to prevent chained command execution by adding a new command to end of the parameters
      */
-    function testExecuteUnixChainedParameter() 
+    public function testExecuteUnixChainedParameter() 
     {    
         if ($this->_os != self::PLATFORM_UNIX)
         {

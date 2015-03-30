@@ -52,7 +52,7 @@ class IntrusionDetectorTest extends PHPUnit_Framework_TestCase
      *
      * @return null
      */
-    function __construct()
+    public function __construct()
     {
         global $ESAPI;
         if (! isset($ESAPI)) {
@@ -76,7 +76,7 @@ class IntrusionDetectorTest extends PHPUnit_Framework_TestCase
      *
      * @return null
      */
-    function __destruct()
+    public function __destruct()
     {
         ESAPI::setSecurityConfiguration($this->_restoreSecCon);
     }
@@ -88,7 +88,7 @@ class IntrusionDetectorTest extends PHPUnit_Framework_TestCase
      *
      * @return bool True on Pass.
      */
-    function testExceptionAutoAdd()
+    public function testExceptionAutoAdd()
     {
         if ($this->_logFileLoc === false) {
             $this->fail(
@@ -114,7 +114,7 @@ class IntrusionDetectorTest extends PHPUnit_Framework_TestCase
      *
      * @return bool True on Pass.
      */
-    function testAddException()
+    public function testAddException()
     {
         if ($this->_logFileLoc === false) {
             $this->fail(
@@ -141,7 +141,7 @@ class IntrusionDetectorTest extends PHPUnit_Framework_TestCase
      *
      * @return bool True on Pass.
      */
-    function testAddEvent()
+    public function testAddEvent()
     {
         if ($this->_logFileLoc === false) {
             $this->fail(
@@ -183,7 +183,7 @@ class IntrusionDetectorTest extends PHPUnit_Framework_TestCase
      *
      * @return bool True on Pass.
      */
-    function testAddIntrusionExceptionIsTracked()
+    public function testAddIntrusionExceptionIsTracked()
     {
         if ($this->_logFileLoc === false) {
             $this->fail(
@@ -225,7 +225,7 @@ class IntrusionDetectorTest extends PHPUnit_Framework_TestCase
      *
      * @return bool True on Pass.
      */
-    function testRapidIDSEvents()
+    public function testRapidIDSEvents()
     {
         if ($this->_logFileLoc === false) {
             $this->fail(
@@ -270,7 +270,7 @@ class IntrusionDetectorTest extends PHPUnit_Framework_TestCase
      *
      * @return bool True on Pass.
      */
-    function testTripTwice()
+    public function testTripTwice()
     {
         if ($this->_logFileLoc === false) {
             $this->fail(
@@ -323,7 +323,7 @@ class IntrusionDetectorTest extends PHPUnit_Framework_TestCase
      *
      * @return bool True on Pass.
      */
-    function testSlidingInterval()
+    public function testSlidingInterval()
     {
         if ($this->_logFileLoc === false) {
             $this->fail(
