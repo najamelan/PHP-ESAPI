@@ -47,8 +47,8 @@ require_once __DIR__ . '/Codec.php';
 class XMLEntityCodec extends Codec
 {
     
-    private static $_characterToEntityMap = Array();
-    private static $_entityToCharacterMap = Array();
+    private static $_characterToEntityMap = array();
+    private static $_entityToCharacterMap = array();
     private static $_longestEntity = 0;
     private static $_mapIsInitialized = false;
     

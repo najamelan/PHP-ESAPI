@@ -186,7 +186,7 @@ class FileBasedAuthenticator implements Authenticator
 
         $this->userMap[$user->getAccountId()] = $user;
 
-        $this->logger->info(ESAPILogger::SECURITY, TRUE, "New user created: ".$accountName);
+        $this->logger->info(ESAPILogger::SECURITY, true, "New user created: ".$accountName);
         $this->saveUsers();
         return $user;
     }
@@ -254,7 +254,7 @@ class FileBasedAuthenticator implements Authenticator
         $newPassword = $passLetters.$passSpecial.$passDigits;
 
         if ($this->isValidString($newPassword) && $this->isValidString($user)) {
-            $this->logger->info(ESAPILogger::SECURITY, TRUE, "Generated strong password for ".$user->getAccountName());
+            $this->logger->info(ESAPILogger::SECURITY, true, "Generated strong password for ".$user->getAccountName());
         }
 
         return $newPassword;
@@ -301,7 +301,7 @@ class FileBasedAuthenticator implements Authenticator
             }
 
             $this->setHashedPassword($user, $newHash);
-            $this->logger->info(ESAPILogger::SECURITY, TRUE, "Password changed for user: ".$accountName);
+            $this->logger->info(ESAPILogger::SECURITY, true, "Password changed for user: ".$accountName);
         } catch (EncryptionException $e) {
             throw new AuthenticationException("Password change failed", "Encryption exception changing password for ".$accountName);
         }
@@ -360,7 +360,7 @@ class FileBasedAuthenticator implements Authenticator
     public function getOldPasswordHashes($user) {
         $hashes = $this->getAllHashedPasswords($user, false);
         if (count($hashes) > 1) {
-            return array_slice($hashes, 1, (count($hashes) - 1), TRUE);
+            return array_slice($hashes, 1, (count($hashes) - 1), true);
         }
         return array();
     }
@@ -481,7 +481,7 @@ class FileBasedAuthenticator implements Authenticator
             //TODO: Verify
             array_pop($hashes);
         }
-        $this->logger->info(ESAPILogger::SECURITY, TRUE, "New hashed password stored for ".$user->getAccountName());
+        $this->logger->info(ESAPILogger::SECURITY, true, "New hashed password stored for ".$user->getAccountName());
     }
 
     /**
