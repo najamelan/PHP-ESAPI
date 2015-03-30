@@ -1,7 +1,7 @@
 <?php
 
 /**
- * OWASP Enterprise Security API (ESAPI)
+ * OWASP Enterprise Security API (ESAPI).
  *
  * This file is part of the Open Web Application Security Project (OWASP)
  * Enterprise Security API (ESAPI) project. For details, please see
@@ -14,7 +14,9 @@
  *
  * @author Andrew van der Stock
  * @created 2009
+ *
  * @since 1.6
+ *
  * @package ESAPI_Reference
  */
 

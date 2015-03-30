@@ -1,6 +1,6 @@
 <?php
 /**
- * OWASP Enterprise Security API (ESAPI)
+ * OWASP Enterprise Security API (ESAPI).
  *
  * This file is part of the Open Web Application Security Project (OWASP)
  * Enterprise Security API (ESAPI) project.
@@ -12,13 +12,17 @@
  * software.
  *
  * @category  OWASP
+ *
  * @package   ESAPI
+ *
  * @author    Andrew van der Stock <vanderaj@owasp.org>
  * @author    jah <jah@jahboite.co.uk>
  * @author    Mike Boberski <boberski_michael@bah.com>
  * @copyright 2009-2010 The OWASP Foundation
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD license
+ *
  * @version   SVN: $Id$
+ *
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 
@@ -36,13 +40,17 @@ require_once __DIR__ . '/errors/IntrusionException.php';
  * security relevant events and identify attack behavior.
  *
  * @category  OWASP
+ *
  * @package   ESAPI
+ *
  * @author    Andrew van der Stock <vanderaj@owasp.org>
  * @author    jah <jah@jahboite.co.uk>
  * @author    Mike Boberski <boberski_michael@bah.com>
  * @copyright 2009-2010 The OWASP Foundation
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD license
+ *
  * @version   Release: @package_version@
+ *
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 interface IntrusionDetector
@@ -60,7 +68,7 @@ interface IntrusionDetector
      * has reached any security thresholds, the appropriate security action can
      * be taken and logged.
      *
-     * @param string $exception string exception thrown.
+     * @param string $exception String exception thrown.
      *
      * @return does not return a value
      */
@@ -77,7 +85,7 @@ interface IntrusionDetector
      * the appropriate security action can be taken and logged.
      *
      * @param string $eventName  string event to add.
-     * @param string $logMessage string message to log with the event.
+     * @param string $logMessage String message to log with the event.
      *
      * @return does not return a value.
      */

@@ -1,6 +1,6 @@
 <?php
 /**
- * OWASP Enterprise Security API (ESAPI)
+ * OWASP Enterprise Security API (ESAPI).
  *
  * This file is part of the Open Web Application Security Project (OWASP)
  * Enterprise Security API (ESAPI) project.
@@ -12,12 +12,16 @@
  * PHP version 5.2
  *
  * @category  OWASP
+ *
  * @package   ESAPI_Codecs
- * @author    Linden Darling <Linden.Darling@jds.net.au>
+ *
+ * @author    Linden Darling <linden.darling@jds.net.au>
  * @author    Mike Boberski <boberski_michael@bah.com>
  * @copyright 2009-2010 The OWASP Foundation
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD license
+ *
  * @version   SVN: $Id$
+ *
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 
@@ -27,12 +31,16 @@ require_once 'Codec.php';
  * Reference implementation of the HTML entity codec.
  *
  * @category  OWASP
+ *
  * @package   ESAPI_Codecs
- * @author    Linden Darling <Linden.Darling@jds.net.au>
+ *
+ * @author    Linden Darling <linden.darling@jds.net.au>
  * @author    Mike Boberski <boberski_michael@bah.com>
  * @copyright 2009-2010 The OWASP Foundation
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD license
+ *
  * @version   Release: @package_version@
+ *
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 class HTMLEntityCodec extends Codec
@@ -44,7 +52,7 @@ class HTMLEntityCodec extends Codec
     private static $_mapIsInitialized = false;
     
     /**
-     * Public Constructor
+     * Public Constructor.
      */
     public function __construct()
     {
@@ -197,13 +205,13 @@ class HTMLEntityCodec extends Codec
     }
     
     /**
-     * getNumericEntry checks input to see if it is a numeric entity
+     * getNumericEntry checks input to see if it is a numeric entity.
      *
      * @param string $input The input to test for being a numeric entity, may
      *                      contain trailing characters like &
      *
      * @return array Returns an array containing two objects: 'decodedCharacter'
-     *               => null if input is null, the character of input after
+     *               => NULL if input is NULL, the character of input after
      *               decoding 'encodedString' => the string that was decoded or
      *               found to be malformed
      */
@@ -234,12 +242,12 @@ class HTMLEntityCodec extends Codec
     
     /**
      * Parse a decimal number, such as those from JavaScript's
-     * String.fromCharCode(value)
+     * String.fromCharCode(value).
      *
      * @param string $input The input to test for being a numeric entity
      *
      * @return array Returns an array containing two objects: 'decodedCharacter'
-     *               => null if input is null, the character of input after
+     *               => NULL if input is NULL, the character of input after
      *               decoding 'encodedString' => the string that was decoded or
      *               found to be malformed
      */
@@ -302,12 +310,12 @@ class HTMLEntityCodec extends Codec
     }
     
     /**
-     * Parse a hex encoded entity
+     * Parse a hex encoded entity.
      *
      * @param string $input Hex encoded input (such as 437ae;)
      *
      * @return array Returns an array containing two objects: 'decodedCharacter' =>
-     *               null if input is null, the character of input after decoding
+     *               NULL if input is NULL, the character of input after decoding
      *               'encodedString' => the string that was decoded or found to be
      *               malformed
      */
@@ -378,7 +386,7 @@ class HTMLEntityCodec extends Codec
     
     /**
      * Returns the decoded version of the character starting at index, or
-     * null if no decoding is possible.
+     * NULL if no decoding is possible.
      *
      * Formats all are legal both with and without semi-colon, upper/lower case:
      * &aa;
@@ -397,7 +405,7 @@ class HTMLEntityCodec extends Codec
      *                     or &quotquotlala .
      *
      * @return array Returns an array containing two objects: 'decodedCharacter' =>
-     *               the decoded version of the character starting at index, or null
+     *               the decoded version of the character starting at index, or NULL
      *               if no decoding is possible. 'encodedString' => the string that
      *               was decoded or found to be malformed
      */
@@ -527,7 +535,7 @@ class HTMLEntityCodec extends Codec
     }
     
     /**
-     * Initialize the entityNames array with all possible named entities
+     * Initialize the entityNames array with all possible named entities.
      *
      * @return does not return a value.
      */

@@ -1,6 +1,6 @@
 <?php
 /**
- * OWASP Enterprise Security API (ESAPI)
+ * OWASP Enterprise Security API (ESAPI).
  *
  * This file is part of the Open Web Application Security Project (OWASP)
  * Enterprise Security API (ESAPI) project.
@@ -12,11 +12,15 @@
  * software.
  *
  * @category  OWASP
+ *
  * @package   ESAPI_Filters
+ *
  * @author    jah <jah@jahboite.co.uk>
  * @copyright 2009-2010 The OWASP Foundation
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD license
+ *
  * @version   SVN: $Id$
+ *
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 
@@ -38,11 +42,15 @@ require_once __DIR__ . '/../codecs/PercentCodec.php';
  * PHP version 5.2
  *
  * @category  OWASP
+ *
  * @package   ESAPI_Filters
+ *
  * @author    jah <jah@jahboite.co.uk>
  * @copyright 2009-2010 The OWASP Foundation
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD license
+ *
  * @version   Release: @package_version@
+ *
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 class SafeRequest
@@ -111,7 +119,7 @@ class SafeRequest
      * TODO accept a string like: 'GET / HTTP/1.1\r\nHost:example.com\r\n\r\n'
      * TODO accept GET and REQUEST parameters.
      *
-     * @param null|array $options array (optional) of HTTP Request elements.
+     * @param NULL|array $options Array (optional) of HTTP Request elements.
      */
     public function __construct($options = null)
     {
@@ -143,7 +151,6 @@ class SafeRequest
      *
      * @param Encoder $encoder An instance of the Encoder interface.
      *
-     * @return null
      */
     public function setEncoder($encoder)
     {
@@ -657,7 +664,7 @@ class SafeRequest
      *
      * @param string $key Name of the http header value to retreive.
      *
-     * @return null|string valid, canonicalised header value or null if it is not
+     * @return NULL|string valid, canonicalised header value or NULL if it is not
      *                     present in the header or was present, but invalid.
      */
     public function getHeader($key)
@@ -697,7 +704,7 @@ class SafeRequest
      *
      * @param string $name Name of the cookie value to retreive.
      *
-     * @return null|string valid, canonicalised cookie value or null if it is not
+     * @return NULL|string valid, canonicalised cookie value or NULL if it is not
      *                     present in the header or was present, but invalid.
      */
     public function getCookie($name)
@@ -718,11 +725,11 @@ class SafeRequest
 
     /**
      * Returns the value of the PHP Server Global with the supplied name. If the
-     * variable does not exist then null is returned.
+     * variable does not exist then NULL is returned.
      *
      * @param string $key Index name for a value in the $_SERVER array.
      *
-     * @return string|null Value of a $_SERVER variable or null.
+     * @return string|NULL Value of a $_SERVER variable or NULL.
      */
     public function getServerGlobal($key)
     {
@@ -745,7 +752,7 @@ class SafeRequest
     }
 
     /**
-     * Returns the value of a request parameter as a String, or null if the
+     * Returns the value of a request parameter as a String, or NULL if the
      * parameter does not exist. Request parameters are contained in the query
      * string or posted form data and are retreived from the $_GET and $_POST PHP
      * globals {@see getParameterMap}.
@@ -757,7 +764,7 @@ class SafeRequest
      *
      * @param string $name The name of a parameter to retreive.
      *
-     * @return string|null The first or only value of a parameter or null if the
+     * @return string|NULL The first or only value of a parameter or NULL if the
      *                     parameter is not present in the request.
      */
     public function getParameter($name)
@@ -807,8 +814,8 @@ class SafeRequest
      *
      * @param string $name The name of the parameter to retreive.
      *
-     * @return array|null Array of request parameter values asscoiated with the
-     *                    supplied name or null if the parameter name was not found
+     * @return array|NULL Array of request parameter values asscoiated with the
+     *                    supplied name or NULL if the parameter name was not found
      *                    in this request.
      */
     public function getParameterValues($name)
@@ -1007,11 +1014,12 @@ class SafeRequest
      * @param string $type      A descriptive name for the StringValidationRule.
      * @param int    $maxLength The maximum post-canonicalized length of valid
      *                          inputs.
-     * @param bool   $allowNull Whether an empty string is considered valid input.
+     * @param bool   $allowNULL Whether an empty string is considered valid input.
+     *
+     * @throws ValidationException
      *
      * @return string canonicalized, valid inputs only.
      *
-     * @throws ValidationException
      */
     private function _getIfValid($context, $input, $pattern, $type, $maxLength, $allowNull)
     {

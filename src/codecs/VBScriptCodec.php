@@ -1,6 +1,6 @@
 <?php
 /**
- * OWASP Enterprise Security API (ESAPI)
+ * OWASP Enterprise Security API (ESAPI).
  *
  * This file is part of the Open Web Application Security Project (OWASP)
  * Enterprise Security API (ESAPI) project.
@@ -12,12 +12,16 @@
  * PHP version 5.2
  *
  * @category  OWASP
+ *
  * @package   ESAPI_Codecs
+ *
  * @author    Arnaud Labenne <arnaud.labenne@dotsafe.fr>
  * @author    Mike Boberski <boberski_michael@bah.com>
  * @copyright 2009-2010 The OWASP Foundation
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD license
+ *
  * @version   SVN: $Id$
+ *
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 
@@ -27,19 +31,23 @@ require_once 'Codec.php';
  * Reference implementation of the CSS codec.
  *
  * @category  OWASP
+ *
  * @package   ESAPI_Codecs
+ *
  * @author    Arnaud Labenne <arnaud.labenne@dotsafe.fr>
  * @author    Mike Boberski <boberski_michael@bah.com>
  * @copyright 2009-2010 The OWASP Foundation
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD license
+ *
  * @version   Release: @package_version@
+ *
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 class VBScriptCodec extends Codec
 {
 
     /**
-     * Public Constructor
+     * Public Constructor.
      */
     public function __construct()
     {
@@ -99,7 +107,7 @@ class VBScriptCodec extends Codec
     /**
      * {@inheritdoc}
      *
-     * 	 Formats all are legal both upper/lower case:
+     * Formats all are legal both upper/lower case:
      *   "x - all special characters
      *   " + chr(x) + "  - not supported yet
      */

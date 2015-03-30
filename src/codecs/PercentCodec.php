@@ -1,6 +1,6 @@
 <?php
 /**
- * OWASP Enterprise Security API (ESAPI)
+ * OWASP Enterprise Security API (ESAPI).
  *
  * This file is part of the Open Web Application Security Project (OWASP)
  * Enterprise Security API (ESAPI) project.
@@ -12,11 +12,15 @@
  * PHP version 5.2
  *
  * @category  OWASP
+ *
  * @package   ESAPI_Codecs
+ *
  * @author    Mike Boberski <boberski_michael@bah.com>
  * @copyright 2009-2010 The OWASP Foundation
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD license
+ *
  * @version   SVN: $Id$
+ *
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 
@@ -26,18 +30,22 @@ require_once 'Codec.php';
  * Reference implementation of the CSS codec.
  *
  * @category  OWASP
+ *
  * @package   ESAPI_Codecs
+ *
  * @author    Mike Boberski <boberski_michael@bah.com>
  * @copyright 2009-2010 The OWASP Foundation
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD license
+ *
  * @version   Release: @package_version@
+ *
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 class PercentCodec extends Codec
 {
 
     /**
-     * Public Constructor
+     * Public Constructor.
      */
     public function __construct()
     {
@@ -142,12 +150,12 @@ class PercentCodec extends Codec
     }
     
     /**
-     * Parse a hex encoded entity
+     * Parse a hex encoded entity.
      *
      * @param string $input Hex encoded input (such as 437ae;)
      *
      * @return string Returns an array containing two objects:
-     *                'decodedCharacter' => null if input is null, the character
+     *                'decodedCharacter' => NULL if input is NULL, the character
      *                of input after decoding 'encodedString' => the string that
      *                was decoded or found to be malformed
      */

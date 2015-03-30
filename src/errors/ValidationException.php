@@ -1,6 +1,6 @@
 <?php
 /**
- * OWASP Enterprise Security API (ESAPI)
+ * OWASP Enterprise Security API (ESAPI).
  *
  * This file is part of the Open Web Application Security Project (OWASP)
  * Enterprise Security API (ESAPI) project.
@@ -12,12 +12,16 @@
  * PHP version 5.2
  *
  * @category  OWASP
+ *
  * @package   ESAPI_Errors
+ *
  * @author    Andrew van der Stock <vanderaj@owasp.org>
  * @author    Mike Boberski <boberski_michael@bah.com>
  * @copyright 2009-2010 The OWASP Foundation
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD license
+ *
  * @version   SVN: $Id$
+ *
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 
@@ -29,12 +33,16 @@ require_once  __DIR__.'/EnterpriseSecurityException.php';
  * rules that have been specified for that data.
  *
  * @category  OWASP
+ *
  * @package   ESAPI_Errors
+ *
  * @author    Andrew van der Stock <vanderaj@owasp.org>
  * @author    Mike Boberski <boberski_michael@bah.com>
  * @copyright 2009-2010 The OWASP Foundation
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD license
+ *
  * @version   Release: @package_version@
+ *
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 class ValidationException extends EnterpriseSecurityException
@@ -45,9 +53,9 @@ class ValidationException extends EnterpriseSecurityException
 
     /**
      * Instantiates a new ValidationException.
-     * Create a new ValidationAvailabilityException
+     * Create a new ValidationAvailabilityException.
      *
-     * @param string $userMessage the message displayed to the user
+     * @param string $userMessage The message displayed to the user
      * @param string $logMessage  the message logged
      * @param string $context     the source that caused this exception
      *
@@ -60,7 +68,7 @@ class ValidationException extends EnterpriseSecurityException
     }
 
     /**
-     * Returns the UI reference that caused this ValidationException
+     * Returns the UI reference that caused this ValidationException.
      *
      * @return string context, the source that caused the exception, stored as a
      *                string
@@ -71,9 +79,9 @@ class ValidationException extends EnterpriseSecurityException
     }
 
     /**
-     * Set's the UI reference that caused this ValidationException
+     * Set's the UI reference that caused this ValidationException.
      *
-     * @param string $context the context to set, passed as a String
+     * @param string $context The context to set, passed as a String
      *
      * @return does not return a value.
      */

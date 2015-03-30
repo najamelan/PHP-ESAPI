@@ -1,6 +1,6 @@
 <?php
 /**
- * OWASP Enterprise Security API (ESAPI)
+ * OWASP Enterprise Security API (ESAPI).
  *
  * This file is part of the Open Web Application Security Project (OWASP)
  * Enterprise Security API (ESAPI) project.
@@ -12,13 +12,17 @@
  * PHP version 5.2
  *
  * @category  OWASP
+ *
  * @package   ESAPI_Reference_Validation
+ *
  * @author    Johannes B. Ullrich <jullrich@sans.edu>
  * @author    Mike Boberski <boberski_michael@bah.com>
  * @author    jah <jah@jahboite.co.uk>
  * @copyright 2009-2010 The OWASP Foundation
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD license
+ *
  * @version   SVN: $Id$
+ *
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 
@@ -33,13 +37,17 @@ require_once __DIR__ . '/BaseValidationRule.php';
  * Reference extension of the BaseValidationRule class.
  *
  * @category  OWASP
+ *
  * @package   ESAPI_Reference_Validation
+ *
  * @author    Johannes B. Ullrich <jullrich@sans.edu>
  * @author    jah <jah@jahboite.co.uk>
  * @author    Mike Boberski <boberski_michael@bah.com>
  * @copyright 2009-2010 The OWASP Foundation
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD license
+ *
  * @version   Release: @package_version@
+ *
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 class StringValidationRule extends BaseValidationRule
@@ -57,7 +65,7 @@ class StringValidationRule extends BaseValidationRule
      *
      * @param string $typeName         descriptive name for this validator.
      * @param object $encoder          providing canonicalize method.
-     * @param string $whiteListPattern whitelist regex.
+     * @param string $whiteListPattern Whitelist regex.
      *
      * @return does not return a value
      */
@@ -82,7 +90,7 @@ class StringValidationRule extends BaseValidationRule
      * Adds a whitelist regex pattern to the array of whitelist patterns.
      * Inputs will be validated against each pattern.
      *
-     * @param string $pattern non-empty string whitelist regex pattern.
+     * @param string $pattern Non-empty string whitelist regex pattern.
      *
      * @return does not return a value
      */
@@ -107,7 +115,7 @@ class StringValidationRule extends BaseValidationRule
      * Adds a blacklist regex pattern to the array of blacklist patterns.
      * Inputs will be validated against each pattern.
      *
-     * @param string $pattern non-empty string blacklist regex pattern.
+     * @param string $pattern Non-empty string blacklist regex pattern.
      *
      * @return does not return a value
      */
@@ -134,7 +142,7 @@ class StringValidationRule extends BaseValidationRule
      * Sets the minimum length of the input after canonicalization, below which
      * the input is deemed invalid.
      *
-     * @param int $length minimum length of the canonicalized Input below which
+     * @param int $length Minimum length of the canonicalized Input below which
      *                    it is deemed invalid.
      *
      * @return does not return a value
@@ -154,7 +162,7 @@ class StringValidationRule extends BaseValidationRule
      * Sets the maximum length of the input after canonicalization, above which
      * the input is deemed invalid.
      *
-     * @param int $length maximum length of the canonicalized Input above which
+     * @param int $length Maximum length of the canonicalized Input above which
      *                    it is deemed invalid.
      *
      * @return does not return a value
@@ -181,8 +189,9 @@ class StringValidationRule extends BaseValidationRule
      *                        is done with respect to the value passed in.
      * @param string $input   The actual string user input data to validate.
      *
-     * @return string canonicalized, valid input.
      * @throws ValidationException, IntrusionException
+     *
+     * @return string canonicalized, valid input.
      */
     public function getValid($context, $input)
     {
