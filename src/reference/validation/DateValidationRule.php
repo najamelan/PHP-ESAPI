@@ -66,7 +66,6 @@ class DateValidationRule extends BaseValidationRule
      * @param string  $typeName  A descriptive name for this validator.
      * @param Encoder $encoder   Encoder object providing canonicalize method.
      * @param string  $newFormat Date format string {@see date()}.
-     *
      */
     public function __construct($typeName, $encoder = null, $newFormat = null)
     {
@@ -83,7 +82,6 @@ class DateValidationRule extends BaseValidationRule
      * should be of the type accepted by PHP's date() function e.g. 'Y-m-d'.
      *
      * @param string $newFormat Date format string {@see date()}.
-     *
      */
     public function setDateFormat($newFormat)
     {
@@ -110,7 +108,6 @@ class DateValidationRule extends BaseValidationRule
      * @throws ValidationException, IntrusionException
      *
      * @return DateTime DateTime object parsed from canonicalized, valid input.
-     *
      */
     public function getValid($context, $input)
     {

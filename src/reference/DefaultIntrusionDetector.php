@@ -71,7 +71,6 @@ class DefaultIntrusionDetector implements IntrusionDetector
     /**
      * Constructor stores an instance of Auditor for logging and initialises the
      * storage for events generated for a user.
-     *
      */
     public function __construct()
     {
@@ -89,7 +88,6 @@ class DefaultIntrusionDetector implements IntrusionDetector
      * security action taken and logged.
      *
      * @param Exception $exception The exception to add.
-     *
      */
     public function addException($exception)
     {
@@ -137,7 +135,6 @@ class DefaultIntrusionDetector implements IntrusionDetector
      *
      * @param string $eventName  The event to add.
      * @param string $logMessage Message to log with the event.
-     *
      */
     public function addEvent($eventName, $logMessage)
     {
@@ -181,7 +178,6 @@ class DefaultIntrusionDetector implements IntrusionDetector
      *
      * @param string $action  The action to take.
      * @param string $message Message to log where the action is 'log'.
-     *
      */
     private function _takeSecurityAction($action, $message)
     {
@@ -203,7 +199,6 @@ class DefaultIntrusionDetector implements IntrusionDetector
      * tracked across requests.
      *
      * @param string $eventName The name of the event that occurred.
-     *
      */
     private function _addSecurityEvent($eventName)
     {

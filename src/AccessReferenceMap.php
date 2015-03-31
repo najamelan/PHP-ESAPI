@@ -86,7 +86,6 @@ interface AccessReferenceMap
      *                                specified indirect reference
      *
      * @return string the direct reference
-     *
      */
     public function getDirectReference($indirectReference);
 
@@ -109,7 +108,6 @@ interface AccessReferenceMap
      * @throws AccessControlException
      *
      * @return does not return a avalue
-     *
      */
     public function removeDirectReference($direct);
 

@@ -94,7 +94,6 @@ interface HTTPUtilities
      * Sets the CSRF Token for the current session.  If the session has not been
      * started at the time this method is called then the token will not be
      * generated.
-     *
      */
     public function setCSRFToken();
 
@@ -144,7 +143,6 @@ interface HTTPUtilities
      * @param string $default An optional default value to return if parameter does not pass validation
      *
      * @return the requested parameter value or $default if the named parameter does not pass validation
-     *
      */
     public function getParameter($request, $name, $default = null);
 
@@ -154,7 +152,6 @@ interface HTTPUtilities
      * this method.
      *
      * @param SafeRequest $request Request object.
-     *
      */
     public function killAllCookies($request);
 
@@ -165,8 +162,6 @@ interface HTTPUtilities
      *
      * @param SafeRequest $request Request object.
      * @param string      $name    Name of the cookie to be killed.
-     *
-     *
      */
     public function killCookie($request, $name);
 
@@ -175,7 +170,6 @@ interface HTTPUtilities
      * throughout ESAPI (and elsewhere).
      *
      * @param SafeRequest $request Current Request object.
-     *
      */
     public function setCurrentHTTP($request);
 
@@ -193,7 +187,6 @@ interface HTTPUtilities
      *
      * @param SafeRequest $request Current Request object.
      * @param Auditor     $auditor the auditor to write the request to.
-     *
      */
     public function logHTTPRequest($request, $auditor);
 
@@ -210,7 +203,6 @@ interface HTTPUtilities
      * @param SafeRequest $request           Current Request object.
      * @param Auditor     $auditor           The auditor to write the request to.
      * @param array|NULL  $paramsToObfuscate The sensitive parameters.
-     *
      */
     public function logHTTPRequestObfuscate($request, $auditor, $paramsToObfuscate);
 
@@ -301,7 +293,6 @@ interface HTTPUtilities
      * @throws EncryptionException
      *
      * @return string encrypted query string.
-     *
      */
     // public function encryptQueryString($query);
 

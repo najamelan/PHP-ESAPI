@@ -86,7 +86,6 @@ class WordValidationRule extends StringValidationRule
      * @throws ValidationException, IntrusionException
      *
      * @return string canonicalized, valid input.
-     *
      */
     public function getValid($context, $input)
     {

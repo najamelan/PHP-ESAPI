@@ -150,7 +150,6 @@ class SafeRequest
      * and validation.
      *
      * @param Encoder $encoder An instance of the Encoder interface.
-     *
      */
     public function setEncoder($encoder)
     {
@@ -1019,7 +1018,6 @@ class SafeRequest
      * @throws ValidationException
      *
      * @return string canonicalized, valid inputs only.
-     *
      */
     private function _getIfValid($context, $input, $pattern, $type, $maxLength, $allowNull)
     {
