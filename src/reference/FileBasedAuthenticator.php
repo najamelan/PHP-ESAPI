@@ -71,7 +71,10 @@ class FileBasedAuthenticator implements Authenticator
      */
     public function clearCurrent()
     {
-        throw new EnterpriseSecurityException('Method "' . __METHOD__ . '" not implemented');
+        throw new EnterpriseSecurityException(
+            'Method not implemented',
+            'Method "' . __METHOD__ . '" not implemented'
+        );
     }
 
     /**
@@ -79,7 +82,10 @@ class FileBasedAuthenticator implements Authenticator
      */
     public function login($request, $response)
     {
-        throw new EnterpriseSecurityException('Method "' . __METHOD__ . '" not implemented');
+        throw new EnterpriseSecurityException(
+            'Method not implemented',
+            'Method "' . __METHOD__ . '" not implemented'
+        );
     }
 
     /**
@@ -87,7 +93,10 @@ class FileBasedAuthenticator implements Authenticator
      */
     public function verifyPassword($user, $password)
     {
-        throw new EnterpriseSecurityException('Method "' . __METHOD__ . '" not implemented');
+        throw new EnterpriseSecurityException(
+            'Method not implemented',
+            'Method "' . __METHOD__ . '" not implemented'
+        );
     }
 
     /**
@@ -95,7 +104,10 @@ class FileBasedAuthenticator implements Authenticator
      */
     public function logout()
     {
-        throw new EnterpriseSecurityException('Method "' . __METHOD__ . '" not implemented');
+        throw new EnterpriseSecurityException(
+            'Method not implemented',
+            'Method "' . __METHOD__ . '" not implemented'
+        );
     }
 
     /**
@@ -358,7 +370,10 @@ class FileBasedAuthenticator implements Authenticator
      */
     public function getCurrentUser()
     {
-        throw new EnterpriseSecurityException('Method "' . __METHOD__ . '" not implemented');
+        throw new EnterpriseSecurityException(
+            'Method not implemented',
+            'Method "' . __METHOD__ . '" not implemented'
+        );
     }
 
     /**
@@ -366,7 +381,10 @@ class FileBasedAuthenticator implements Authenticator
      */
     public function setCurrentUser($user)
     {
-        throw new EnterpriseSecurityException('Method "' . __METHOD__ . '" not implemented');
+        throw new EnterpriseSecurityException(
+            'Method not implemented',
+            'Method "' . __METHOD__ . '" not implemented'
+        );
     }
 
     /**
@@ -500,7 +518,10 @@ class FileBasedAuthenticator implements Authenticator
      */
     public function exists($accountName)
     {
-        throw new EnterpriseSecurityException('Method "' . __METHOD__ . '" not implemented');
+        throw new EnterpriseSecurityException(
+            'Method not implemented',
+            'Method "' . __METHOD__ . '" not implemented'
+        );
     }
 
     /**
