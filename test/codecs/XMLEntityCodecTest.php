@@ -55,12 +55,6 @@ class XMLEntityCodecTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        global $ESAPI;
-
-        if (! isset($ESAPI)) {
-            $ESAPI = new ESAPI();
-        }
-
         $this->_xmlEntityCodec = new XMLEntityCodec();
     }
 

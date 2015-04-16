@@ -37,12 +37,6 @@ class HTMLEntityCodecTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        global $ESAPI;
-
-        if (!isset($ESAPI)) {
-            $ESAPI = new ESAPI();
-        }
-
         $this->htmlEntityCodec = new HTMLEntityCodec();
     }
 

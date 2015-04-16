@@ -37,16 +37,6 @@ class EncoderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        global $ESAPI;
-
-        if (!isset($ESAPI)) {
-            $ESAPI = new ESAPI(__DIR__.'/../testresources/ESAPI.xml');
-        }
-        
-        $codecArray = array();
-        array_push($codecArray, new HTMLEntityCodec());
-        array_push($codecArray, new PercentCodec());
-        $this->encoderInstance = new DefaultEncoder($codecArray);
     }
 
     public function tearDown()
