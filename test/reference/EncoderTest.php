@@ -33,16 +33,6 @@ require_once __DIR__.'/../../src/codecs/WindowsCodec.php';
  */
 class EncoderTest extends PHPUnit_Framework_TestCase
 {
-
-    public function setUp()
-    {
-    }
-
-    public function tearDown()
-    {
-        // NoOp
-    }
-
     /**
      * Test for exception thrown when DefaultEncoder is constructed with an array
      * containing an object other than a Codec instance.

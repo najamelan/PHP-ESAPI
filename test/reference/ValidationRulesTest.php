@@ -45,10 +45,6 @@ require_once __DIR__ . '/../../src/reference/validation/StringValidationRule.php
  */
 class ValidationRulesTest extends PHPUnit_Framework_TestCase
 {
-    public function __construct()
-    {
-    }
-
     /**************************************************************************
      *
      *                       BaseValidationRule tests

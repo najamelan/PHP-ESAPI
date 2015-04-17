@@ -45,15 +45,6 @@ require_once __DIR__ . '/../../src/filters/SafeRequest.php';
 class SafeRequestTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Ensures ESAPI is initialised.
-     *
-     * @return null
-     */
-    public function __construct()
-    {
-    }
-
-    /**
      * Test of SafeRequest::getAuthType() with null input.
      *
      * @return bool true True on Pass.

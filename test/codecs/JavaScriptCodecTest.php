@@ -23,7 +23,7 @@ class JavaScriptCodecTest extends PHPUnit_Framework_TestCase
 {
     private $javascriptCodec;
     
-    public function setUp()
+    protected function setUp()
     {
         $this->javascriptCodec = new JavaScriptCodec();
     }

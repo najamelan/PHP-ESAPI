@@ -53,7 +53,7 @@ class XMLEntityCodecTest extends PHPUnit_Framework_TestCase
      *
      * @return null
      */
-    public function setUp()
+    protected function setUp()
     {
         $this->_xmlEntityCodec = new XMLEntityCodec();
     }

@@ -34,14 +34,6 @@ require_once __DIR__.'/../../src/errors/ValidationUploadException.php';
 
 class EnterpriseSecurityExceptionTest extends PHPUnit_Framework_TestCase
 {
-    public function setUp()
-    {
-    }
-
-    public function tearDown()
-    {
-    }
-
     public function testEnterpriseSecurityDefaultException()
     {
         $e = new EnterpriseSecurityException();

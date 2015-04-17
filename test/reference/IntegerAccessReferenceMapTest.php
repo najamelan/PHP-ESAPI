@@ -21,14 +21,6 @@ require_once __DIR__.'/../../src/reference/IntegerAccessReferenceMap.php';
 
 class IntegerReferenceMapTest extends PHPUnit_Framework_TestCase
 {
-    public function setUp()
-    {
-    }
-    
-    public function tearDown()
-    {
-    }
-    
     /**
      * Test of iterator method, of class org.owasp.esapi.AccessReferenceMap.
      */
