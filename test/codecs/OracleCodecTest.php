@@ -21,7 +21,7 @@ require_once __DIR__.'/../../src/codecs/OracleCodec.php';
 
 class OracleCodecTest extends PHPUnit_Framework_TestCase
 {
-    private $oracleCodec = null;
+    private $oracleCodec;
     
     public function setUp()
     {
@@ -30,7 +30,7 @@ class OracleCodecTest extends PHPUnit_Framework_TestCase
         
     public function testEncode()
     {
-        $immune = array("");
+        $immune = array();
         
         $this->assertEquals(' || \'\'x\'\' FROM DUAL;--', $this->oracleCodec->encode($immune, ' || \'x\' FROM DUAL;--'));
         $this->assertEquals('\'\'', $this->oracleCodec->encode($immune, '\''));
@@ -38,7 +38,7 @@ class OracleCodecTest extends PHPUnit_Framework_TestCase
     
     public function testEncodeCharacter()
     {
-        $immune = array("");
+        $immune = array();
         
         $this->assertEquals("''", $this->oracleCodec->encode($immune, "'"));
     }

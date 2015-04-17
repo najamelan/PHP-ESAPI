@@ -20,7 +20,7 @@ require_once __DIR__.'/../../src/codecs/UnixCodec.php';
 
 class UnixCodecTest extends PHPUnit_Framework_TestCase
 {
-    private $unixCodec = null;
+    private $unixCodec;
     
     public function setUp()
     {
@@ -33,14 +33,14 @@ class UnixCodecTest extends PHPUnit_Framework_TestCase
     
     public function testEncode()
     {
-        $immune = array("");
+        $immune = array();
         
         $this->assertEquals('\\"\\;\\ ls\\ \\/\\ \\>\\ \\/tmp\\/foo\\;\\ \\#\\ ', $this->unixCodec->encode($immune, '"; ls / > /tmp/foo; # '));
     }
     
     public function testEncodeCharacter()
     {
-        $immune = array("");
+        $immune = array();
         
         $this->assertEquals("\\<", $this->unixCodec->encode($immune, "<"));
     }

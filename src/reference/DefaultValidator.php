@@ -61,9 +61,10 @@ require_once __DIR__.'/validation/DateValidationRule.php';
 class DefaultValidator implements Validator
 {
 
-    private $_rules = null;
-    private $_auditor = null;
-    private $_encoder = null;
+    private $_rules;
+    private $_auditor;
+    private $_encoder;
+    private $_fileValidator;
      
     const MAX_PARAMETER_NAME_LENGTH = 100;
     const MAX_PARAMETER_VALUE_LENGTH = 65535;

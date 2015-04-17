@@ -43,7 +43,7 @@ class FileBasedAuthenticator implements Authenticator
     private $users;
 
     /** The file that contains the user db */
-    private $userDB = null;
+    private $userDB;
 
     /** How frequently to check the user db for external modifications */
     private $checkInterval = 60000;//60 * 1000;

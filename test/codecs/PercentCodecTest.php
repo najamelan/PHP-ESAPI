@@ -20,7 +20,7 @@ require_once __DIR__.'/../../src/codecs/PercentCodec.php';
 
 class PercentCodecTest extends PHPUnit_Framework_TestCase
 {
-    private $percentCodec = null;
+    private $percentCodec;
     
     public function setUp()
     {
@@ -40,7 +40,7 @@ class PercentCodecTest extends PHPUnit_Framework_TestCase
     
     public function testEncodeCharacter()
     {
-        $immune = array("");
+        $immune = array();
         
         $this->assertEquals("%3C", $this->percentCodec->encode($immune, "<"));
     }

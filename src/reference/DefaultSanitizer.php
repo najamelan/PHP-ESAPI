@@ -57,7 +57,7 @@ require_once dirname ( __FILE__ ) . '/validation/WordValidationRule.php';
 class DefaultSanitizer implements Sanitizer
 {
 
-    private $encoder = null;
+    private $encoder;
 
     public function __construct()
     {

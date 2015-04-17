@@ -65,8 +65,8 @@ require_once __DIR__ . '/Event.php';
 class DefaultIntrusionDetector implements IntrusionDetector
 {
 
-    private $_auditor     = null;
-    private $_userEvents = null;
+    private $_auditor;
+    private $_userEvents;
 
     /**
      * Constructor stores an instance of Auditor for logging and initialises the

@@ -49,9 +49,9 @@ class DefaultUser implements User
     public $sessionTimeout = 3600; #one hour
     public $sessionAbsoluteTimeout = 7200; #2 hours
     //TODO: load these from config
-    private $_username = null;
-    private $_password = null;
-    private $_uid = null;
+    private $_username;
+    private $_password;
+    private $_uid;
     private $_userInfo = array();
     private $_PathToUsersFiles = "../../test/testresources/users.txt";
 
@@ -83,7 +83,7 @@ class DefaultUser implements User
     private $_enabled = false;
 
     /** The last host address used by this user. */
-    private $_lastHostAddress = null;
+    private $_lastHostAddress;
 
     /** The last password change time for this user. */
     //	private $lastPasswordChangeTime = new Date(0);
@@ -764,5 +764,5 @@ class DefaultUser implements User
      * this.
      */
     //FIXME:
-    public $ANONYMOUS = null;
+    public $ANONYMOUS;
 }

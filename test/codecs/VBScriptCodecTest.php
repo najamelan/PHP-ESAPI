@@ -21,7 +21,7 @@ require_once __DIR__.'/../../src/codecs/VBScriptCodec.php';
 
 class VBScriptCodecTest extends PHPUnit_Framework_TestCase
 {
-    private $vbScriptCodec = null;
+    private $vbScriptCodec;
     
     public function setUp()
     {

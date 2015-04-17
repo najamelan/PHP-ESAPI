@@ -53,8 +53,8 @@ require_once __DIR__ . '/../DefaultEncoder.php';
 abstract class BaseValidationRule implements ValidationRule
 {
 
-    protected $typeName  = null;
-    protected $encoder   = null;
+    protected $typeName;
+    protected $encoder;
     protected $allowNull = false;
 
     /**

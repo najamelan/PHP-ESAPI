@@ -21,7 +21,7 @@ require_once __DIR__.'/../../src/codecs/WindowsCodec.php';
 
 class WindowsCodecTest extends PHPUnit_Framework_TestCase
 {
-    private $windowsCodec = null;
+    private $windowsCodec;
     
     public function setUp()
     {
@@ -34,14 +34,14 @@ class WindowsCodecTest extends PHPUnit_Framework_TestCase
     
     public function testEncode()
     {
-        $immune = array("");
+        $immune = array();
         
         $this->assertEquals('^"^ ^&^ dir^/s^ c^:', $this->windowsCodec->encode($immune, '" & dir/s c:'));
     }
     
     public function testEncodeCharacter()
     {
-        $immune = array("");
+        $immune = array();
         
         $this->assertEquals("^<", $this->windowsCodec->encode($immune, "<"));
     }

@@ -20,7 +20,7 @@ require_once __DIR__.'/../../src/codecs/Base64Codec.php';
 
 class Base64CodecTest extends PHPUnit_Framework_TestCase
 {
-    private $base64Codec = null;
+    private $base64Codec;
     
     public function setUp()
     {
