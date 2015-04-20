@@ -283,7 +283,7 @@ class XMLEntityCodec extends Codec
             //TODO: throw an exception for malformed entity?
             return array(
                 'decodedCharacter' => null,
-                'encodedString'    => mb_substr($input, 0, $i+1, 'UTF-32')
+                'encodedString'    => mb_substr($input, 0, $i + 1, 'UTF-32')
             );
         }
     }
@@ -357,7 +357,7 @@ class XMLEntityCodec extends Codec
             //TODO: throw an exception for malformed entity?
             return array(
                 'decodedCharacter' => null,
-                'encodedString' => mb_substr($input, 0, $i+1, 'UTF-32')
+                'encodedString' => mb_substr($input, 0, $i + 1, 'UTF-32')
             );
         }
     }

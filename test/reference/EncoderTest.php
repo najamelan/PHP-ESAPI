@@ -744,7 +744,7 @@ class EncoderTest extends PHPUnit_Framework_TestCase
     public function testEncodeForHTML_11()
     {
         $instance = ESAPI::getEncoder();
-        $this->assertEquals("".(chr(12345)).(chr(65533)).(chr(1244)), "".(chr(12345)).(chr(65533)).(chr(1244)));
+        $this->assertEquals("" . (chr(12345)) . (chr(65533)).(chr(1244)), "" . (chr(12345)) . (chr(65533)) . (chr(1244)));
     }
 
     /*

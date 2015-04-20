@@ -32,8 +32,8 @@ class HTMLEntityCodecTest extends PHPUnit_Framework_TestCase
     private $htmlEntityCodec;
 
     // these immune characters are the ones defined in DefaultEncoder.
-    private $immune_html     = array( ',', '.', '-', '_', ' ' );
-    private $immune_htmlattr = array( ',', '.', '-', '_' );
+    private $immune_html     = array(',', '.', '-', '_', ' ');
+    private $immune_htmlattr = array(',', '.', '-', '_');
 
     public function setUp()
     {
@@ -174,8 +174,8 @@ class HTMLEntityCodecTest extends PHPUnit_Framework_TestCase
     public function testSomeChars()
     {
         $this->assertEquals(
-            ''.(chr(12345)).(chr(65533)).(chr(1244)),
-            ''.(chr(12345)).(chr(65533)).(chr(1244))
+            '' . chr(12345) . chr(65533) . chr(1244),
+            '' . chr(12345) . chr(65533) . chr(1244)
         );
     }
 

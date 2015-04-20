@@ -428,7 +428,7 @@ class DefaultValidator implements Validator
             $this->_auditor->warning(
             ESAPILogger::SECURITY,
                 false,
-                'assertValidFileContent expected $maxBytes as positive integer.'.
+                'assertValidFileContent expected $maxBytes as positive integer.' .
                 ' Falling back to AllowedFileUploadSize.'
             );
             $maxBytes = null;
@@ -453,9 +453,9 @@ class DefaultValidator implements Validator
 
         if ($inputLen > $esapiMaxBytes) {
             throw new ValidationException(
-                "{$context}: Invalid file content. Size must not exceed ".
+                "{$context}: Invalid file content. Size must not exceed " .
                 "{$esapiMaxBytes} bytes.",
-                "Invalid file content. Input ({$inputLen} bytes) exceeds ".
+                "Invalid file content. Input ({$inputLen} bytes) exceeds " .
                 "AllowedFileUploadSize ({$esapiMaxBytes} bytes.)",
                 $context
             );
@@ -463,9 +463,9 @@ class DefaultValidator implements Validator
          
         if ($maxBytes !== null && $inputLen > $maxBytes) {
             throw new ValidationException(
-                "{$context}: Invalid file content. Size must not exceed ".
+                "{$context}: Invalid file content. Size must not exceed " .
                 "{$maxBytes} bytes.",
-                "Invalid file content. Input ({$inputLen} bytes) exceeds ".
+                "Invalid file content. Input ({$inputLen} bytes) exceeds " .
                 "maximum of ({$esapiMaxBytes} bytes.)",
                 $context
             );
@@ -515,7 +515,7 @@ class DefaultValidator implements Validator
         }
         if (! is_array($list)) {
             throw new RuntimeException(
-                'Validation misconfiguration - assertValidListItem expected'.
+                'Validation misconfiguration - assertValidListItem expected' .
                 ' an array $list!'
             );
         }
@@ -527,7 +527,7 @@ class DefaultValidator implements Validator
         } catch (EncodingException $e) {
             throw new ValidationException(
             $context . ': Invalid input. Encoding problem detected.',
-                'An EncodingException was thrown during canonicalization of '.
+                'An EncodingException was thrown during canonicalization of ' .
                 'the input.',
                 $context
             );
@@ -535,7 +535,7 @@ class DefaultValidator implements Validator
 
         if (in_array($canonical, $list, true) != true) {
             throw new ValidationException(
-            $context . ': Invalid input. Input was not a valid member of '.
+            $context . ': Invalid input. Input was not a valid member of ' .
                 'the list.',
                 'canonicalized input was not a member of the supplied list.',
                 $context

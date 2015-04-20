@@ -340,9 +340,9 @@ class AuditorTest extends PHPUnit_Framework_TestCase
      */
 #    function testSetLevelMultipleLogsExpectedFalse() {
 #        //Now test to see if a change to the logging level in one log affects other logs
-#        $newLogger = ESAPI::getAuditor( 'test_num2' );
-#        $this->testLogger->setLevel( Auditor::OFF );
-#        $newLogger->setLevel( Auditor::INFO );
+#        $newLogger = ESAPI::getAuditor('test_num2');
+#        $this->testLogger->setLevel(Auditor::OFF);
+#        $newLogger->setLevel(Auditor::INFO);
 #        $log_1_result = $this->testLogger->isInfoEnabled();
 #        $log_2_result = $newLogger->isInfoEnabled();
 
@@ -1041,10 +1041,12 @@ class AuditorTest extends PHPUnit_Framework_TestCase
             $this->logFileLoc = false;
             $msg = "Failed to read the log file from {$this->logFileLoc}. All" .
                 ' further LoggerTest tests will fail!';
+
             return false;
         } elseif ($result === true) {
             $msg = 'Log file contains the expected entry. Logging to file' .
                     ' with the supplied parameters is verified.';
+
             return true;
         } else {
             $msg = 'Log file does not contain the expected entry. Cannot verify' .

@@ -92,16 +92,16 @@ class JavaScriptCodec extends Codec
         }
         
         // Do not use these shortcuts as they can be used to break out of a context
-        // if ( ch == 0x00 ) return "\\0";
-        // if ( ch == 0x08 ) return "\\b";
-        // if ( ch == 0x09 ) return "\\t";
-        // if ( ch == 0x0a ) return "\\n";
-        // if ( ch == 0x0b ) return "\\v";
-        // if ( ch == 0x0c ) return "\\f";
-        // if ( ch == 0x0d ) return "\\r";
-        // if ( ch == 0x22 ) return "\\\"";
-        // if ( ch == 0x27 ) return "\\'";
-        // if ( ch == 0x5c ) return "\\\\";
+        // if (ch == 0x00) return "\\0";
+        // if (ch == 0x08) return "\\b";
+        // if (ch == 0x09) return "\\t";
+        // if (ch == 0x0a) return "\\n";
+        // if (ch == 0x0b) return "\\v";
+        // if (ch == 0x0c) return "\\f";
+        // if (ch == 0x0d) return "\\r";
+        // if (ch == 0x22) return "\\\"";
+        // if (ch == 0x27) return "\\'";
+        // if (ch == 0x5c) return "\\\\";
         
         // encode up to 256 with \\xHH
         $pad = mb_substr("00", mb_strlen($hex));
@@ -111,6 +111,7 @@ class JavaScriptCodec extends Codec
         
         // otherwise encode with \\uHHHH
         $pad = mb_substr("0000", mb_strlen($hex));
+
         return "\\u" . $pad . strtoupper($hex);
     }
     
@@ -161,8 +162,8 @@ class JavaScriptCodec extends Codec
         }
         
         // \0 collides with the octal decoder and is non-standard
-        // if ( second.charValue() == '0' ) {
-        //    return Character.valueOf( (char)0x00 );
+        // if (second.charValue() == '0') {
+        //    return Character.valueOf((char)0x00);
         if ($second == $this->normalizeEncoding('b')) {
             return array(
                 'decodedCharacter' => $this->normalizeEncoding(chr(hexdec('8'))),
@@ -222,11 +223,13 @@ class JavaScriptCodec extends Codec
                 $charFromHex = $this->normalizeEncoding(
                     $this->_parseHex($potentialHexString)
                 );
+
                 return array(
                     'decodedCharacter' => $charFromHex,
                     'encodedString' => mb_substr($input, 0, 4, "UTF-32")
                 );
             }
+
             return array(
                 'decodedCharacter' => null,
                 'encodedString' => null
@@ -245,11 +248,13 @@ class JavaScriptCodec extends Codec
                 $charFromHex = $this->normalizeEncoding(
                     $this->_parseHex($potentialHexString)
                 );
+
                 return array(
                     'decodedCharacter' => $charFromHex,
                     'encodedString' => mb_substr($input, 0, 6, "UTF-32")
                 );
             }
+
             return array(
                 'decodedCharacter' => null,
                 'encodedString' => null
@@ -273,6 +278,7 @@ class JavaScriptCodec extends Codec
                     $digits = $digit1 . $digit2 . $digit3;
                 }
             }
+
             return array(
                 'decodedCharacter' =>
                     $this->normalizeEncoding(chr(octdec($digits))),
@@ -328,6 +334,7 @@ class JavaScriptCodec extends Codec
             } else {
                 $parsedCharacter = mb_convert_encoding('&#' . $parsedInteger . ';', 'UTF-8', 'HTML-ENTITIES');
             }
+
             return $parsedCharacter;
         } catch (Exception $e) {
             //TODO: throw an exception for malformed entity?

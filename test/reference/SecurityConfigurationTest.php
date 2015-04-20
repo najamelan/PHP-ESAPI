@@ -34,7 +34,7 @@ class SecurityConfigurationTest extends PHPUnit_Framework_TestCase
 
     public function testConfigExists()
     {
-        $this->assertTrue(file_exists(__DIR__.'/../testresources/ESAPI.xml'));
+        $this->assertTrue(file_exists(__DIR__ . '/../testresources/ESAPI.xml'));
     }
 //
 //    /**
@@ -517,7 +517,7 @@ class SecurityConfigurationTest extends PHPUnit_Framework_TestCase
 //
 //        $directory = $config->getWorkingDirectory();
 //
-//        if ( substr(PHP_OS, 0, 3) == 'WIN' ) {
+//        if (substr(PHP_OS, 0, 3) == 'WIN') {
 //            $this->assertEquals($directory, '%SYSTEMROOT%\\Temp');
 //        } else {
 //            $this->assertEquals($directory, '/tmp');
@@ -531,7 +531,7 @@ class SecurityConfigurationTest extends PHPUnit_Framework_TestCase
 //        $exes = $config->getAllowedExecutables();
 //        $this->assertEquals(count($exes), 2);
 //
-//        if ( substr(PHP_OS, 0, 3) == 'WIN' ) {
+//        if (substr(PHP_OS, 0, 3) == 'WIN') {
 //            $this->assertTrue(in_array('%SYSTEMROOT%\\System32\\cmd.exe', $exes));              // 1
 //            $this->assertTrue(in_array('%SYSTEMROOT%\\System32\\runas.exe', $exes));              // 1
 //        } else {

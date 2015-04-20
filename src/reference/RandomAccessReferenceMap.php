@@ -113,6 +113,7 @@ class RandomAccessReferenceMap implements AccessReferenceMap
         }
 
         throw new AccessControlException("Access denied", "Request for invalid indirect reference: " + $indirectReference);
+
         return null;
     }
 
@@ -167,6 +168,7 @@ class RandomAccessReferenceMap implements AccessReferenceMap
         }
 
         $hash = hexdec(substr(md5(serialize($direct)), -7));
+
         return $hash;
     }
 
@@ -191,6 +193,7 @@ class RandomAccessReferenceMap implements AccessReferenceMap
             $indirect = $this->dtoi->offsetGet($hash);
             $this->itod->offsetUnset($indirect);
             $this->dtoi->offsetUnset($hash);
+
             return $indirect;
         }
 

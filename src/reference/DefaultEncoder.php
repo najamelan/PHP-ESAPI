@@ -71,17 +71,17 @@ class DefaultEncoder implements Encoder
      * Character sets that define characters (in addition to alphanumerics) that are
      * immune from encoding in various formats
      */
-    private $_immune_css        = array( ' ' );
-    private $_immune_html       = array( ',', '.', '-', '_', ' ' );
-    private $_immune_htmlattr   = array( ',', '.', '-', '_' );
-    private $_immune_javascript = array( ',', '.', '_' );
-    private $_immune_os         = array( '-' );
-    private $_immune_sql        = array( ' ' );
-    private $_immune_vbscript   = array( ' ' );
-    private $_immune_xml        = array( ',', '.', '-', '_', ' ' );
-    private $_immune_xmlattr    = array( ',', '.', '-', '_' );
-    private $_immune_xpath      = array( ',', '.', '-', '_', ' ' );
-    private $_immune_url        = array( '.', '-', '*', '_');
+    private $_immune_css        = array(' ');
+    private $_immune_html       = array(',', '.', '-', '_', ' ');
+    private $_immune_htmlattr   = array(',', '.', '-', '_');
+    private $_immune_javascript = array(',', '.', '_');
+    private $_immune_os         = array('-');
+    private $_immune_sql        = array(' ');
+    private $_immune_vbscript   = array(' ');
+    private $_immune_xml        = array(',', '.', '-', '_', ' ');
+    private $_immune_xmlattr    = array(',', '.', '-', '_');
+    private $_immune_xpath      = array(',', '.', '-', '_', ' ');
+    private $_immune_url        = array('.', '-', '*', '_');
 
     private $_codecs = array();
     private $_auditor;
@@ -205,6 +205,7 @@ class DefaultEncoder implements Encoder
                 );
             }
         }
+
         return $working;
     }
 
@@ -216,6 +217,7 @@ class DefaultEncoder implements Encoder
         if ($input === null) {
             return null;
         }
+
         return $this->_cssCodec->encode($this->_immune_css, $input);
     }
 
@@ -227,6 +229,7 @@ class DefaultEncoder implements Encoder
         if ($input === null) {
             return null;
         }
+
         return $this->_htmlCodec->encode($this->_immune_html, $input);
     }
 
@@ -238,6 +241,7 @@ class DefaultEncoder implements Encoder
         if ($input === null) {
             return null;
         }
+
         return $this->_htmlCodec->encode($this->_immune_htmlattr, $input);
     }
 
@@ -249,6 +253,7 @@ class DefaultEncoder implements Encoder
         if ($input === null) {
             return null;
         }
+
         return $this->_javascriptCodec->encode($this->_immune_javascript, $input);
     }
 
@@ -260,6 +265,7 @@ class DefaultEncoder implements Encoder
         if ($input === null) {
             return null;
         }
+
         return $this->_vbscriptCodec->encode($this->_immune_vbscript, $input);
     }
 
@@ -271,6 +277,7 @@ class DefaultEncoder implements Encoder
         if ($input === null) {
             return null;
         }
+
         return $codec->encode($this->_immune_sql, $input);
     }
 
@@ -289,6 +296,7 @@ class DefaultEncoder implements Encoder
                 false,
                 'Invalid Argument, expected an instance of an OS Codec.'
             );
+
             return null;
         }
         
@@ -303,6 +311,7 @@ class DefaultEncoder implements Encoder
         if ($input === null) {
             return null;
         }
+
         return $this->_htmlCodec->encode($this->_immune_xpath, $input);
     }
 
@@ -314,6 +323,7 @@ class DefaultEncoder implements Encoder
         if ($input === null) {
             return null;
         }
+
         return $this->_xmlCodec->encode($this->_immune_xml, $input);
     }
 
@@ -325,6 +335,7 @@ class DefaultEncoder implements Encoder
         if ($input === null) {
             return null;
         }
+
         return $this->_xmlCodec->encode($this->_immune_xmlattr, $input);
     }
 
@@ -353,8 +364,8 @@ class DefaultEncoder implements Encoder
                 continue; // already dealt with this character
             }
             $c = mb_substr($encoded, $i, 1, $initialEncoding);
-            $d = mb_substr($encoded, $i+1, 1, $initialEncoding);
-            $e = mb_substr($encoded, $i+2, 1, $initialEncoding);
+            $d = mb_substr($encoded, $i + 1, 1, $initialEncoding);
+            $e = mb_substr($encoded, $i + 2, 1, $initialEncoding);
             if ($this->_percentCodec->normalizeEncoding($c) == $pcnt
                 && $this->_percentCodec->normalizeEncoding($d) == $two
                 && $this->_percentCodec->normalizeEncoding($e) == $zero
@@ -408,6 +419,7 @@ class DefaultEncoder implements Encoder
         if ($input === null) {
             return null;
         }
+
         return $this->_base64Codec->encode($input, $wrap);
     }
 
@@ -419,6 +431,7 @@ class DefaultEncoder implements Encoder
         if ($input === null) {
             return null;
         }
+
         return $this->_base64Codec->decode($input);
     }
 }

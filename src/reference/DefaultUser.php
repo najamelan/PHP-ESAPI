@@ -159,6 +159,7 @@ class DefaultUser implements User
         if (! array_key_exists($field, $this->_userInfo)) {
             return null;
         }
+
         return $this->_userInfo[$field];
     }
 
@@ -257,13 +258,13 @@ class DefaultUser implements User
             ESAPI::getLogger("DefaultUser")->info(
                 ESAPILogger::SECURITY,
                 true,
-                "Role ".$roleName." added to ".$this->getAccountName()
+                "Role " . $roleName . " added to " . $this->getAccountName()
             );
         } else {
             //TODO: Not done in Java, but shouldn't this be logged as well?
             throw new AuthenticationAccountsException(
                 "Add role failed",
-                "Attempt to add invalid role ".$roleName." to ".$this->getAccountName()
+                "Attempt to add invalid role " . $roleName . " to " . $this->getAccountName()
             );
         }
     }
@@ -301,7 +302,7 @@ class DefaultUser implements User
     public function enable()
     {
         $this->enable = true;
-        ESAPI::getLogger("DefaultUser")->info(ESAPILogger::SECURITY, true, "Account enabled: ".$this->getAccountName());
+        ESAPI::getLogger("DefaultUser")->info(ESAPILogger::SECURITY, true, "Account enabled: " . $this->getAccountName());
     }
 
     /**
@@ -526,6 +527,7 @@ class DefaultUser implements User
         if (isset($_SESSION[$this->getAccountId()][$session]['start'])) {
             return (time() - $_SESSION[$this->getAccountId()][$session]['start']) > $this->sessionAbsoluteTimeout;
         }
+
         return true;
     }
 
@@ -544,6 +546,7 @@ class DefaultUser implements User
         if (isset($_SESSION[$this->getAccountId()][$session]['lastUpdate'])) {
             return (time() - $_SESSION[$this->getAccountId()][$session]['lastUpdate']) > $this->sessionTimeout;
         }
+
         return true;
     }
 
@@ -553,7 +556,7 @@ class DefaultUser implements User
     public function lock()
     {
         $this->_locked = true;
-        ESAPI::getLogger("DefaultUser")->info(ESAPILogger::SECURITY, true, "Account locked: ".$this->getAccountName());
+        ESAPI::getLogger("DefaultUser")->info(ESAPILogger::SECURITY, true, "Account locked: " . $this->getAccountName());
     }
 
     /**
@@ -612,14 +615,14 @@ class DefaultUser implements User
     public function logout()
     {
         //TODO: Redo
-        //TODO: ESAPI.httpUtilities().killCookie( ESAPI.currentRequest(), ESAPI.currentResponse(), HTTPUtilities.REMEMBER_TOKEN_COOKIE_NAME );
+        //TODO: ESAPI.httpUtilities().killCookie(ESAPI.currentRequest(), ESAPI.currentResponse(), HTTPUtilities.REMEMBER_TOKEN_COOKIE_NAME);
         //HttpSession session = ESAPI.currentRequest().getSession(false);
         if (isset($_SESSION[$this->getAccountId()])) {
             unset($_SESSION[$this->getAccountId()]);
         }
         //TODO: ESAPI.httpUtilities().killCookie(ESAPI.currentRequest(), ESAPI.currentResponse(), "PHPSESSIONID");
         $this->_loggedIn = false;
-        //logger.info(Logger.SECURITY_SUCCESS, "Logout successful" );
+        //logger.info(Logger.SECURITY_SUCCESS, "Logout successful");
         //ESAPI.authenticator().setCurrentUser(User.ANONYMOUS);
     }
 
@@ -689,7 +692,7 @@ class DefaultUser implements User
     public function setScreenName($screenName)
     {
         $this->_screenName = $screenName;
-        ESAPI::getLogger("DefaultUser")->info(ESAPILogger::SECURITY, true, "ScreenName changed to ". $screenName . " for " . $this->getAccountName());
+        ESAPI::getLogger("DefaultUser")->info(ESAPILogger::SECURITY, true, "ScreenName changed to " . $screenName . " for " . $this->getAccountName());
     }
 
     /**

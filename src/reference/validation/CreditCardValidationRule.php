@@ -54,7 +54,7 @@ require_once __DIR__ . '/StringValidationRule.php';
 class CreditCardValidationRule extends BaseValidationRule
 {
 
-    private $_ccrule = null ;
+    private $_ccrule = null;
     const CREDIT_CARD_VALIDATOR_KEY = 'CreditCard';
 
     /**
@@ -100,6 +100,7 @@ class CreditCardValidationRule extends BaseValidationRule
         );
         $ccr->setMaximumLength(19);
         $ccr->setAllowNull(false);
+
         return $ccr;
     }
 
@@ -164,7 +165,7 @@ class CreditCardValidationRule extends BaseValidationRule
         if (($sum % 10) != 0) {
             throw new ValidationException(
                 "{$context}: Invalid Credit Card Number",
-                "Input Credit Card Number contains errors - check digit failure:".
+                "Input Credit Card Number contains errors - check digit failure:" .
                 " context={$context}",
                 $context
             );
