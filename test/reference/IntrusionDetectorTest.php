@@ -49,8 +49,6 @@ class IntrusionDetectorTest extends PHPUnit_Framework_TestCase
     /**
      * Constructor swaps the SecurityConfiguration currently in use with one which
      * contains custom IDS events designed specifically for this UnitTestCase.
-     *
-     * @return null
      */
     protected function setUp()
     {
@@ -67,8 +65,6 @@ class IntrusionDetectorTest extends PHPUnit_Framework_TestCase
 
     /**
      * Destructor restores the original SecurityConfiguration.
-     *
-     * @return null
      */
     public function __destruct()
     {
