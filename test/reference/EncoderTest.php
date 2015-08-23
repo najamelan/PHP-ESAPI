@@ -19,12 +19,12 @@
 /**
  * 
  */
-require_once dirname(__FILE__).'/../../src/ESAPI.php';
-require_once dirname(__FILE__).'/../../src/reference/DefaultEncoder.php';
-require_once dirname(__FILE__).'/../../src/codecs/MySQLCodec.php';
-require_once dirname(__FILE__).'/../../src/codecs/OracleCodec.php';
-require_once dirname(__FILE__).'/../../src/codecs/UnixCodec.php';
-require_once dirname(__FILE__).'/../../src/codecs/WindowsCodec.php';
+require_once __DIR__.'/../../src/ESAPI.php';
+require_once __DIR__.'/../../src/reference/DefaultEncoder.php';
+require_once __DIR__.'/../../src/codecs/MySQLCodec.php';
+require_once __DIR__.'/../../src/codecs/OracleCodec.php';
+require_once __DIR__.'/../../src/codecs/UnixCodec.php';
+require_once __DIR__.'/../../src/codecs/WindowsCodec.php';
 
 
 /**
@@ -43,7 +43,7 @@ class EncoderTest extends PHPUnit_Framework_TestCase
 
         if ( !isset($ESAPI))
         {
-            $ESAPI = new ESAPI(dirname(__FILE__).'/../testresources/ESAPI.xml');
+            $ESAPI = new ESAPI(__DIR__.'/../testresources/ESAPI.xml');
         }
         
 		$codecArray = array();

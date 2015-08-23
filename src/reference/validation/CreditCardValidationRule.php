@@ -26,8 +26,8 @@
  * CreditCardValidationRule requires the BaseValidationRule and
  * StringValidationRule.
  */
-require_once dirname(__FILE__) . '/BaseValidationRule.php';
-require_once dirname(__FILE__) . '/StringValidationRule.php';
+require_once __DIR__ . '/BaseValidationRule.php';
+require_once __DIR__ . '/StringValidationRule.php';
 
 
 /**

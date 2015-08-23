@@ -27,8 +27,8 @@
 /**
  * 
  */
-require_once dirname(__FILE__).'/../AuditorFactory.php';
-require_once dirname(__FILE__).'/DefaultAuditor.php';
+require_once __DIR__.'/../AuditorFactory.php';
+require_once __DIR__.'/DefaultAuditor.php';
 
 
 /**

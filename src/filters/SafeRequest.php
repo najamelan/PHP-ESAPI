@@ -24,9 +24,9 @@
 /**
  * SafeRequest requires the DefaultEncoder, HTMLEntityCodec and PercentCodec.
  */
-require_once dirname(__FILE__) . '/../reference/DefaultEncoder.php';
-require_once dirname(__FILE__) . '/../codecs/HTMLEntityCodec.php';
-require_once dirname(__FILE__) . '/../codecs/PercentCodec.php';
+require_once __DIR__ . '/../reference/DefaultEncoder.php';
+require_once __DIR__ . '/../codecs/HTMLEntityCodec.php';
+require_once __DIR__ . '/../codecs/PercentCodec.php';
 
 
 /**

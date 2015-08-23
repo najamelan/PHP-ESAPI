@@ -16,10 +16,10 @@
  */
 
 
-require_once dirname(__FILE__).'/../../src/ESAPI.php';
-require_once dirname(__FILE__).'/../../src/reference/DefaultValidator.php';
-require_once dirname(__FILE__) . '/../testresources/TestHelpers.php';
-// require_once dirname(__FILE__).'/HTTPUtilitiesTest.php';
+require_once __DIR__ .'/../../src/ESAPI.php';
+require_once __DIR__ .'/../../src/reference/DefaultValidator.php';
+require_once __DIR__ . '/../testresources/TestHelpers.php';
+// require_once __DIR__ .'/HTTPUtilitiesTest.php';
 
 
 class ValidatorTest extends PHPUnit_Framework_TestCase
@@ -64,7 +64,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
 
         // make a new threshold with a dummy action that can be detected in the
         // logfile
-        require_once dirname(__FILE__) . '/../../src/SecurityConfiguration.php';
+        require_once __DIR__ . '/../../src/SecurityConfiguration.php';
         $dummyAction = 'TEST' . getRandomAlphaNumString(16);
         $moddedThreshold = new Threshold(
             $eventName, 10, 10, array('log', $dummyAction)

@@ -21,7 +21,7 @@
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 
-require_once  dirname(__FILE__).'/EnterpriseSecurityException.php';
+require_once  __DIR__.'/EnterpriseSecurityException.php';
 
 /**
  * An EncodingException should be thrown for any problems that occur when

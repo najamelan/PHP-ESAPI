@@ -23,7 +23,7 @@
 /**
  * URLValidationRule requires the StringValidationRule.
  */
-require_once dirname(__FILE__) . '/StringValidationRule.php';
+require_once __DIR__ . '/StringValidationRule.php';
 
 
 /**

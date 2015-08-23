@@ -27,7 +27,7 @@
 /**
  * XMLEntityCodec extends Codec.
  */
-require_once dirname(__FILE__) . '/Codec.php';
+require_once __DIR__ . '/Codec.php';
 
 
 /**

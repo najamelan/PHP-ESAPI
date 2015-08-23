@@ -17,8 +17,8 @@
  * @package ESAPI_Reference
  */
 
-require_once dirname(__FILE__).'/../Authenticator.php';
-require_once dirname(__FILE__).'/DefaultUser.php';
+require_once __DIR__.'/../Authenticator.php';
+require_once __DIR__.'/DefaultUser.php';
 
 define('MAX_ACCOUNT_NAME_LENGTH', 250);
 /**
@@ -426,7 +426,7 @@ class FileBasedAuthenticator implements Authenticator {
             return $this->users;
         }
 
-        $usersFile = dirname(__FILE__) . '/../../test/testresources/users.txt';
+        $usersFile = __DIR__ . '/../../test/testresources/users.txt';
         $rawusers = file($usersFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
         $users = array();

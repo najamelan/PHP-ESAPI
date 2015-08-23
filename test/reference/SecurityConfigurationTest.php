@@ -19,8 +19,8 @@
  * @since 1.6
  */
 
-require_once dirname(__FILE__).'/../../src/ESAPI.php';
-require_once dirname(__FILE__).'/../../src/reference/DefaultSecurityConfiguration.php';
+require_once __DIR__.'/../../src/ESAPI.php';
+require_once __DIR__.'/../../src/reference/DefaultSecurityConfiguration.php';
 
 class SecurityConfigurationTest extends PHPUnit_Framework_TestCase
 {
@@ -30,7 +30,7 @@ class SecurityConfigurationTest extends PHPUnit_Framework_TestCase
 
         if ( !isset($ESAPI))
         {
-            $ESAPI = new ESAPI(dirname(__FILE__).'/../testresources/ESAPI.xml');
+            $ESAPI = new ESAPI(__DIR__.'/../testresources/ESAPI.xml');
         }
     }
 
@@ -41,7 +41,7 @@ class SecurityConfigurationTest extends PHPUnit_Framework_TestCase
 
     function testConfigExists()
     {
-        $this->assertTrue(file_exists(dirname(__FILE__).'/../testresources/ESAPI.xml'));
+        $this->assertTrue(file_exists(__DIR__.'/../testresources/ESAPI.xml'));
     }
 //
 //    /**
@@ -393,14 +393,14 @@ class SecurityConfigurationTest extends PHPUnit_Framework_TestCase
 //    {
 //        $config = ESAPI::getSecurityConfiguration();
 //
-//        $this->assertEquals($config->getResourceDirectory(), realpath(dirname(__FILE__).'/../testresources/'));
+//        $this->assertEquals($config->getResourceDirectory(), realpath(__DIR__.'/../testresources/'));
 //    }
 
 //    function testSetResourceDirectoryRealPath() {
 //        $config = ESAPI::getSecurityConfiguration();
 //
-//        $config->setResourceDirectory(realpath(dirname(__FILE__).'/../testresources/'));
-//        $this->assertEquals($config->getResourceDirectory(), realpath(dirname(__FILE__).'/../testresources/'));
+//        $config->setResourceDirectory(realpath(__DIR__.'/../testresources/'));
+//        $this->assertEquals($config->getResourceDirectory(), realpath(__DIR__.'/../testresources/'));
 //    }
 
 //    function testSetResourceDirectoryNullPath() {

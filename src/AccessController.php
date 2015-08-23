@@ -24,7 +24,7 @@
 /**
  * Implementations will require AccessControlException.
  */
-require_once dirname(__FILE__) . '/errors/AccessControlException.php';
+require_once __DIR__ . '/errors/AccessControlException.php';
 
 /**
  * Use this ESAPI security control to wrap your access control functions.

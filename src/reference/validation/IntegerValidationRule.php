@@ -26,7 +26,7 @@
 /**
  * IntegerValidationRule requires the BaseValidationRule.
  */
-require_once dirname(__FILE__) . '/BaseValidationRule.php';
+require_once __DIR__ . '/BaseValidationRule.php';
 
 
 /**

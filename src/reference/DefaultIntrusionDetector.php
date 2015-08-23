@@ -25,7 +25,7 @@
 /**
  * DefaultIntrusionDetector requires the IntrusionDetector interface.
  */
-require_once dirname(__FILE__) . '/../IntrusionDetector.php';
+require_once __DIR__ . '/../IntrusionDetector.php';
 
 
 /**

@@ -27,7 +27,7 @@
 /**
  * SafeFile requires ValidationException and EnterpriseSecurityException.
  */
-require_once dirname(__FILE__).'/errors/ValidationException.php';
+require_once __DIR__.'/errors/ValidationException.php';
 
 
 /**

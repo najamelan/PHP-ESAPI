@@ -22,8 +22,8 @@
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 
-require_once dirname(__FILE__) . '/Codec.php';
-require_once dirname(__FILE__) . '/../ESAPI.php';
+require_once __DIR__ . '/Codec.php';
+require_once __DIR__ . '/../ESAPI.php';
 
 /**
  * Reference implementation of the base 64 codec.

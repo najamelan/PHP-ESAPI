@@ -27,9 +27,9 @@
 /**
  *
  */
-require_once dirname(__FILE__) .
+require_once __DIR__ .
     '/../../lib/apache-log4php/trunk/src/main/php/Logger.php';
-require_once dirname(__FILE__).'/../Auditor.php';
+require_once __DIR__.'/../Auditor.php';
 
 
 /**

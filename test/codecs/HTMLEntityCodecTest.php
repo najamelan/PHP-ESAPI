@@ -20,8 +20,8 @@
 /**
  *
  */
-require_once dirname(__FILE__).'/../../src/ESAPI.php';
-require_once dirname(__FILE__).'/../../src/codecs/HTMLEntityCodec.php';
+require_once __DIR__.'/../../src/ESAPI.php';
+require_once __DIR__.'/../../src/codecs/HTMLEntityCodec.php';
 
 
 /**

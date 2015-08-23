@@ -20,7 +20,7 @@
 
 //FIXME: Cleanup to be done, as suggested by Mike
 
-require_once dirname(__FILE__) . '/../User.php';
+require_once __DIR__ . '/../User.php';
 define("MAX_ROLE_LENGTH", 250);
 
 /**
@@ -154,7 +154,7 @@ class DefaultUser implements User
     }
     private function readUserInfo () {
         $Compare = $this->_username;
-        $fp = fopen(dirname(__FILE__) . "/" . $this->_PathToUsersFiles, "r");
+        $fp = fopen(__DIR__ . "/" . $this->_PathToUsersFiles, "r");
         if (! $fp)
         throw new Exception("Can not open the users.txt file!");
         while (! feof($fp)) {
@@ -169,7 +169,7 @@ class DefaultUser implements User
     }
     private function writeUserInfo () {
         $Compare = $this->_username;
-        $fp = fopen(dirname(__FILE__) . "/" . $this->_PathToUsersFiles, "r");
+        $fp = fopen(__DIR__ . "/" . $this->_PathToUsersFiles, "r");
         if (! $fp)
         throw new Exception("Can not open the users.txt file!");
         $Data = "";
@@ -180,7 +180,7 @@ class DefaultUser implements User
             $Data .= $Line . "\n";
         }
         fclose($fp);
-        $fp = fopen(dirname(__FILE__) . "/" . $this->_PathToUsersFiles, "w+");
+        $fp = fopen(__DIR__ . "/" . $this->_PathToUsersFiles, "w+");
         if (! $fp)
         throw new Exception("Can not open the users.txt file for writing!!");
         fwrite($fp, $Data);

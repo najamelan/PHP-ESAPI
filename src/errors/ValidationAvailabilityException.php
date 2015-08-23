@@ -21,7 +21,7 @@
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 
-require_once  dirname(__FILE__).'/ValidationException.php';
+require_once  __DIR__.'/ValidationException.php';
 
 /**
  * A ValidationAvailabilityException should be thrown when a validator is not

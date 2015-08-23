@@ -24,13 +24,13 @@
 /**
  * HTTPUtilities requires various Exceptions and SafeRequest.
  */
-require_once dirname(__FILE__) . '/errors/AccessControlException.php';
-require_once dirname(__FILE__) . '/errors/AuthenticationException.php';
-require_once dirname(__FILE__) . '/errors/EncryptionException.php';
-require_once dirname(__FILE__) . '/errors/EnterpriseSecurityException.php';
-require_once dirname(__FILE__) . '/errors/IntrusionException.php';
-require_once dirname(__FILE__) . '/errors/ValidationException.php';
-require_once dirname(__FILE__) . '/filters/SafeRequest.php';
+require_once __DIR__ . '/errors/AccessControlException.php';
+require_once __DIR__ . '/errors/AuthenticationException.php';
+require_once __DIR__ . '/errors/EncryptionException.php';
+require_once __DIR__ . '/errors/EnterpriseSecurityException.php';
+require_once __DIR__ . '/errors/IntrusionException.php';
+require_once __DIR__ . '/errors/ValidationException.php';
+require_once __DIR__ . '/filters/SafeRequest.php';
 
 /**
  * Use this ESAPI security control to assist with HTTP security.

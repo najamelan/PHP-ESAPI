@@ -24,7 +24,7 @@
 /**
  * DefaultHTTPUtilities requires the HTTPUtilities interface.
  */
-require_once dirname(__FILE__) . '/../HTTPUtilities.php';
+require_once __DIR__ . '/../HTTPUtilities.php';
 
 
 /**

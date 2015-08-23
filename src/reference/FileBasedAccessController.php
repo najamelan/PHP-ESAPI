@@ -17,7 +17,7 @@
  * @package ESAPI_Reference
  */
 
-require_once dirname(__FILE__).'/../AccessController.php';
+require_once __DIR__.'/../AccessController.php';
 
 /**
  * Reference Implementation of the FileBasedAccessController interface.

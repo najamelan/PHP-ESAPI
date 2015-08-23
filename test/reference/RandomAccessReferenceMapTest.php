@@ -15,11 +15,11 @@
  * @created 2009
  * @since 1.6
  */
- 
-require_once dirname(__FILE__).'/../../src/ESAPI.php';
-require_once dirname(__FILE__).'/../../src/reference/RandomAccessReferenceMap.php';
- 
-class RandomAccessReferenceMapTest extends PHPUnit_Framework_TestCase 
+
+require_once __DIR__.'/../../src/ESAPI.php';
+require_once __DIR__.'/../../src/reference/RandomAccessReferenceMap.php';
+
+class RandomAccessReferenceMapTest extends PHPUnit_Framework_TestCase
 {
 	function setUp() 
 	{

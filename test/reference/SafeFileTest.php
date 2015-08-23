@@ -25,8 +25,8 @@
 /**
  * Require ESAPI and SafeFile.
  */
-require_once dirname(__FILE__).'/../../src/ESAPI.php';
-require_once dirname(__FILE__).'/../../src/SafeFile.php';
+require_once __DIR__.'/../../src/ESAPI.php';
+require_once __DIR__.'/../../src/SafeFile.php';
 
 
 /**
@@ -53,7 +53,7 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
         global $ESAPI;
 
         if (!isset($ESAPI)) {
-            $ESAPI = new ESAPI(dirname(__FILE__) . '/../testresources/ESAPI.xml');
+            $ESAPI = new ESAPI(__DIR__ . '/../testresources/ESAPI.xml');
         }
     }
 

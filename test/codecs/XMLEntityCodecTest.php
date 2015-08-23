@@ -24,8 +24,8 @@
 /**
  * Require ESAPI and XMLEntityCodec.
  */
-require_once dirname(__FILE__).'/../../src/ESAPI.php';
-require_once dirname(__FILE__).'/../../src/codecs/XMLEntityCodec.php';
+require_once __DIR__.'/../../src/ESAPI.php';
+require_once __DIR__.'/../../src/codecs/XMLEntityCodec.php';
 
 
 /**

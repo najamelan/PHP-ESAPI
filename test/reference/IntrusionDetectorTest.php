@@ -24,8 +24,8 @@
 /**
  * Require Test Helpers and SecurityConfiguration
  */
-require_once dirname(__FILE__) . '/../testresources/TestHelpers.php';
-require_once dirname(__FILE__) . '/../../src/SecurityConfiguration.php';
+require_once __DIR__ . '/../testresources/TestHelpers.php';
+require_once __DIR__ . '/../../src/SecurityConfiguration.php';
 
 
 /**
@@ -60,14 +60,14 @@ class IntrusionDetectorTest extends PHPUnit_Framework_TestCase
         global $ESAPI;
         if (! isset($ESAPI)) {
             $ESAPI = new ESAPI(
-                dirname(__FILE__) . '/../testresources/ESAPI.xml'
+                __DIR__ . '/../testresources/ESAPI.xml'
             );
         }
         $this->_restoreSecCon = ESAPI::getSecurityConfiguration();
         ESAPI::setSecurityConfiguration(null);
         // Use a custom properties file.
         $sc = ESAPI::getSecurityConfiguration(
-            dirname(__FILE__) . '/../testresources/ESAPI_IDS_Tests.xml'
+            __DIR__ . '/../testresources/ESAPI_IDS_Tests.xml'
         );
 
         $this->_logFileLoc = getLogFileLoc();

@@ -17,7 +17,7 @@
  * @package ESAPI_Errors
  */
 
-require_once  dirname(__FILE__).'/EnterpriseSecurityException.php';
+require_once  __DIR__.'/EnterpriseSecurityException.php';
 
 /**
  * An AvailabilityException should be thrown when the availability of a limited

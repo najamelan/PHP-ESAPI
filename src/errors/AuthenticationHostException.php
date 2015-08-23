@@ -21,7 +21,7 @@
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 
-require_once dirname(__FILE__).'/AuthenticationException.php';
+require_once __DIR__.'/AuthenticationException.php';
 
 /**
  * An AuthenticationHostException should be thrown when there is a problem with

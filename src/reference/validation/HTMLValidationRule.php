@@ -25,8 +25,8 @@
 /**
  * HTMLValidationRule requires the StringValidationRule and HTMLPurifier.
  */
-require_once dirname(__FILE__) . '/StringValidationRule.php';
-require_once dirname(__FILE__)
+require_once __DIR__ . '/StringValidationRule.php';
+require_once __DIR__
     . '/../../../lib/htmlpurifier/HTMLPurifier.includes.php';
 
 

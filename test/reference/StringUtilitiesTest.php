@@ -19,9 +19,9 @@
  * @since 1.6
  */
 
-require_once dirname(__FILE__).'/../../src/StringUtilities.php';
  
 class StringUtilitiesTest extends PHPUnit_Framework_TestCase 
+require_once __DIR__.'/../../src/StringUtilities.php';
 {
 	function setUp() 
 	{

@@ -24,8 +24,8 @@
 /**
  * Require ESAPI and SafeRequest.
  */
-require_once dirname(__FILE__) . '/../../src/ESAPI.php';
-require_once dirname(__FILE__) . '/../../src/filters/SafeRequest.php';
+require_once __DIR__ . '/../../src/ESAPI.php';
+require_once __DIR__ . '/../../src/filters/SafeRequest.php';
 
 
 /**
@@ -55,7 +55,7 @@ class SafeRequestTest extends PHPUnit_Framework_TestCase
     {
         global $ESAPI;
         if (!isset($ESAPI)) {
-            $ESAPI = new ESAPI(dirname(__FILE__) . '/../../testresources/ESAPI.xml');
+            $ESAPI = new ESAPI(__DIR__ . '/../../testresources/ESAPI.xml');
         }
     }
 

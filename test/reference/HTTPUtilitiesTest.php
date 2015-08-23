@@ -25,7 +25,7 @@
 /**
  * HttpUtilitiesTest requires SafeRequest.
  */
-require_once dirname(__FILE__) . '/../../src/filters/SafeRequest.php';
+require_once __DIR__ . '/../../src/filters/SafeRequest.php';
 
 
 /**

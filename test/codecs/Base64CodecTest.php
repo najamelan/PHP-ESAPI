@@ -15,8 +15,8 @@
  * @created 2009
  */
 
-require_once dirname(__FILE__).'/../../src/ESAPI.php';
-require_once dirname(__FILE__).'/../../src/codecs/Base64Codec.php';
+require_once __DIR__.'/../../src/ESAPI.php';
+require_once __DIR__.'/../../src/codecs/Base64Codec.php';
 
 class Base64CodecTest extends PHPUnit_Framework_TestCase
 {

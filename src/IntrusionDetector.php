@@ -25,7 +25,7 @@
 /**
  * Implementations require IntrusionException.
  */
-require_once dirname(__FILE__) . '/errors/IntrusionException.php';
+require_once __DIR__ . '/errors/IntrusionException.php';
 
 
 /**

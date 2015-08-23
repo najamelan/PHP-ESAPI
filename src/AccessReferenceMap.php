@@ -21,7 +21,7 @@
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 
-require_once dirname(__FILE__) . '/errors/AccessControlException.php';
+require_once __DIR__ . '/errors/AccessControlException.php';
 
 /**
  * Use this ESAPI security control to create access reference maps.

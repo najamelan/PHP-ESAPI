@@ -18,8 +18,8 @@
  */
 
 
-require_once dirname(__FILE__).'/../../src/ESAPI.php';
-require_once dirname(__FILE__).'/../../src/reference/DefaultSanitizer.php';
+require_once __DIR__.'/../../src/ESAPI.php';
+require_once __DIR__.'/../../src/reference/DefaultSanitizer.php';
 
 
 class SanitizerTest extends PHPUnit_Framework_TestCase

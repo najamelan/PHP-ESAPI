@@ -24,7 +24,7 @@
 /**
  * Implementations will require EncryptionException.
  */
-require_once dirname(__FILE__) . '/errors/EncryptionException.php';
+require_once __DIR__ . '/errors/EncryptionException.php';
 
 
 /**

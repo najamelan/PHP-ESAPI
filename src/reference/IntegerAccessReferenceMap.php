@@ -17,8 +17,8 @@
  * @package ESAPI_Reference
  */
 
-require_once dirname(__FILE__).'/../AccessReferenceMap.php';
-require_once dirname(__FILE__).'/../StringUtilities.php';
+require_once __DIR__.'/../AccessReferenceMap.php';
+require_once __DIR__.'/../StringUtilities.php';
 
 /**
  * Reference Implementation of the IntegerAccessReferenceMap interface.

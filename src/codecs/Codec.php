@@ -26,8 +26,8 @@
  * DefaultSanitizer requires the Sanitizer Interface and the various
  * ValidationRule implementations.
  */
-require_once dirname(__FILE__) . '/CodecDebug.php';
-require_once dirname(__FILE__) . '/../Encoder.php';
+require_once __DIR__ . '/CodecDebug.php';
+require_once __DIR__ . '/../Encoder.php';
 
 /**
  * The Codec interface defines a set of methods for encoding and decoding

@@ -21,7 +21,7 @@
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 
-require_once  dirname(__FILE__).'/EnterpriseSecurityException.php';
+require_once  __DIR__.'/EnterpriseSecurityException.php';
 
 /**
  * An AuthenticationException should be thrown when anything goes wrong during
