@@ -49,7 +49,7 @@ class URLValidationRule extends StringValidationRule
 {
 
     private $_auditor;
- 
+
     /**
      * Constructor sets-up the validation rule with a descriptive name for this
      * validator, an optional Encoder instance (for canonicalization) and an

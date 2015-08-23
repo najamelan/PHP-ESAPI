@@ -47,9 +47,9 @@ require_once __DIR__ . '/StringValidationRule.php';
  */
 class WordValidationRule extends StringValidationRule
 {
-    
+
     private $_auditor;
- 
+
     /**
      * Constructor sets-up the validation rule with a descriptive name for this
      * validator, an optional Encoder instance (for canonicalization) and an
@@ -112,10 +112,10 @@ class WordValidationRule extends StringValidationRule
         if (count($input) != 2) {
             return "";
         }
-        
+
         $unsanitized = $input[0];
         $guess = $input[1];
-        
+
         if (strcmp(metaphone($unsanitized), metaphone($guess)) == 0) {
             return $guess;
         } else {

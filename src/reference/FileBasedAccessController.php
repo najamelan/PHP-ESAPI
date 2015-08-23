@@ -276,7 +276,7 @@ class FileBasedAccessController implements AccessController
             'Method "' . __METHOD__ . '" not implemented'
         );
     }
-     
+
     /**
      * Checks if an account is authorized to access the referenced file. The implementation should validate and canonicalize the
      * input to be sure the filepath is not malicious.

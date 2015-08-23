@@ -22,23 +22,23 @@ require_once __DIR__.'/../../src/codecs/JavaScriptCodec.php';
 class JavaScriptCodecTest extends PHPUnit_Framework_TestCase
 {
     private $javascriptCodec;
-    
+
     protected function setUp()
     {
         $this->javascriptCodec = new JavaScriptCodec();
     }
-        
+
 /*	function testEncode()
     {
         $immune = array();
-        
+
         $this->assertEquals('TODO', $this->javascriptCodec->encode($immune, '"; eval(alert(/XSS/));'));
     }
 */
     public function testEncodeCharacter()
     {
         $immune = array();
-        
+
         $this->assertEquals("\\x3C", $this->javascriptCodec->encode($immune, "<"));
     }
 /*

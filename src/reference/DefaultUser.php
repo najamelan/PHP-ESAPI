@@ -141,14 +141,14 @@ class DefaultUser implements User
         //TODO: code this
         return "";
     }
-    
+
     /**
      * This array holds the keys for users fields in order and is used in parseUserInfo().
      *
      * @var array
      */
     private $UserInfoFields = array("accountName" , "hashedPassword" , "roles" , "locked" , "enabled" , "rememberToken" , "csrfToken" , "oldPasswordHashes" , "lastPasswordChangeTime" , "lastLoginTime" , "lastFailedLoginTime" , "expirationTime" , "failedLoginCount");
-    
+
     private function setUserInfo($field, $value)
     {
         $this->_userInfo[$field] = $value;
@@ -234,7 +234,7 @@ class DefaultUser implements User
             'Method "' . __METHOD__ . '" not implemented'
         );
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -245,7 +245,7 @@ class DefaultUser implements User
             'Method "' . __METHOD__ . '" not implemented'
         );
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -290,7 +290,7 @@ class DefaultUser implements User
     /**
      * {@inheritDoc}
      */
-    public function disable() 
+    public function disable()
     {
         $this->_enabled = false;
         ESAPI::getLogger("DefaultUser")->info(ESAPILogger::SECURITY, true, "Account disabled: " . $this->getAccountName());
@@ -404,11 +404,11 @@ class DefaultUser implements User
         if (session_id() == "") {
             //TODO no session established, throw some errors
         }
-        
+
         if ($HttpSession === null) {
             $HttpSession = session_id();
         }
-        
+
         $_SESSION[$this->getAccountId()][$HttpSession] = array("start" => time() , "lastUpdate" => time());
     }
 
@@ -760,7 +760,7 @@ class DefaultUser implements User
             'Method "' . __METHOD__ . '" not implemented'
         );
     }
-    
+
     /*
      * The ANONYMOUS user is used to represent an unidentified user. Since there is
      * always a real user, the ANONYMOUS user is better than using NULL to represent

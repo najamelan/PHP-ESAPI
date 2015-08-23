@@ -55,14 +55,14 @@ define('CD_LOG', 'CodecDebug');
  */
 class CodecDebug
 {
-    
+
     private $_verb;
     private $_buf;
     private $_allowRecurse = true;
     private $_enabled = false;
 
     private static $_instance;
-    
+
     /**
      * Prevents public cloning of this singleton class.
      */
@@ -151,7 +151,7 @@ class CodecDebug
             return; // the codec being tested has not added any normalised inputs.
         }
         $output = '';
-    
+
         $this->_allowRecurse = false;
         $htmlCodecOutput = ESAPI::getEncoder()->encodeForHTML($codecOutput);
         if ($htmlCodecOutput == '') {
@@ -263,7 +263,7 @@ class CodecDebug
         $trace .= $dt[$pos]['class'] . '::' .  $dt[$pos--]['function'] . ', ';
         $trace .= $dt[$pos]['class'] . '::' .  $dt[$pos--]['function'] . ', ';
         $trace .= $dt[$pos]['class'] . '::' .  $dt[$pos]['function']   . $objName;
-    
+
         return $trace;
     }
 }

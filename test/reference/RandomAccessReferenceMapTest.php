@@ -27,12 +27,12 @@ class RandomAccessReferenceMapTest extends PHPUnit_Framework_TestCase
     public function testIterator()
     {
         $users = array("andrew", "bipin", "laura", "jah", "linden", "mike", "arnaud");
-        
+
         $arm = new RandomAccessReferenceMap();
         $arm->update($users);
-        
+
         $i = $arm->iterator();
-        
+
         while ($i->valid()) {
             $userName = $arm->getDirectReference($i->current());
             if (in_array($userName, $users) === false) {
@@ -40,11 +40,11 @@ class RandomAccessReferenceMapTest extends PHPUnit_Framework_TestCase
             }
             $i->next();
         }
-        
+
         // TODO: Probably should try to prove something here. Equivalent to SimpleTest's pass method
         $this->assertTrue(true);
     }
-    
+
     /**
      *
      * @throws org.owasp.esapi.errors.AccessControlException
@@ -52,14 +52,14 @@ class RandomAccessReferenceMapTest extends PHPUnit_Framework_TestCase
     public function testRemoveDirectReference()
     {
         $directReference = "234";
-        
+
         $directArray = array();
         $directArray[] = "123";
         $directArray[] = $directReference;
         $directArray[] = "345";
-        
+
         $instance = new RandomAccessReferenceMap($directArray);
-        
+
         $indirect = $instance->getIndirectReference($directReference);
         $this->assertNotNull($indirect);
         $deleted = $instance->removeDirectReference($directReference);
@@ -67,7 +67,7 @@ class RandomAccessReferenceMapTest extends PHPUnit_Framework_TestCase
         $deleted = $instance->removeDirectReference("ridiculous");
         $this->assertNull($deleted);
     }
-    
+
     /**
      * Test of getIndirectReference method, of class
      * org.owasp.esapi.AccessReferenceMap.
@@ -75,14 +75,14 @@ class RandomAccessReferenceMapTest extends PHPUnit_Framework_TestCase
     public function testGetIndirectReference()
     {
         $directReference = "234";
-        
+
         $directArray = array();
         $directArray[] = "123";
         $directArray[] = $directReference;
         $directArray[] = "345";
-        
+
         $instance = new RandomAccessReferenceMap($directArray);
-        
+
         $expResult = $directReference;
         $result = $instance->getIndirectReference($directReference);
         $this->assertNotSame($expResult, $result);
@@ -98,19 +98,19 @@ class RandomAccessReferenceMapTest extends PHPUnit_Framework_TestCase
     public function testGetDirectReference()
     {
         $directReference = "234";
-        
+
         $directArray = array();
         $directArray[] = "123";
         $directArray[] = $directReference;
         $directArray[] = "345";
-        
+
         $instance = new RandomAccessReferenceMap($directArray);
-        
+
         $ind = $instance->getIndirectReference($directReference);
         $dir = $instance->getDirectReference($ind);
-        
+
         // echo "<p>ind = [$ind], dir = [$dir], directreference = [$directReference]";
-        
+
         $this->assertEquals($directReference, $dir);
         try {
             $instance->getDirectReference("invalid");
@@ -119,7 +119,7 @@ class RandomAccessReferenceMapTest extends PHPUnit_Framework_TestCase
             // success
         }
     }
-    
+
     /**
      *
      * @throws org.owasp.esapi.errors.AccessControlException
@@ -127,14 +127,14 @@ class RandomAccessReferenceMapTest extends PHPUnit_Framework_TestCase
     public function testAddDirectReference()
     {
         $directReference = "234";
-        
+
         $directArray = array();
         $directArray[] = "123";
         $directArray[] = $directReference;
         $directArray[] = "345";
-        
+
         $instance = new RandomAccessReferenceMap($directArray);
-        
+
         $newDirect = $instance->addDirectReference("newDirect");
         $this->assertNotNull($newDirect);
         $ind = $instance->addDirectReference($directReference);
@@ -143,55 +143,55 @@ class RandomAccessReferenceMapTest extends PHPUnit_Framework_TestCase
         $newInd = $instance->addDirectReference($directReference);
         $this->assertEquals($ind, $newInd);
     }
-    
+
     public function testUpdatePass()
     {
         $users = array('alpha', 'juliet', 'victor');
-        
+
         $arm = new RandomAccessReferenceMap();
         $arm->update($users);
 
         $indirect = $arm->getIndirectReference('victor');
         $this->assertNotNull($indirect);
     }
-    
+
     public function testUpdateFail()
     {
         $users = array('alpha', 'juliet', 'victor');
-        
+
         $arm = new RandomAccessReferenceMap();
         $arm->update($users);
 
         $indirect = $arm->getIndirectReference('ridiculous');
         $this->assertNull($indirect);
     }
-    
+
     public function testUpdateRemoveItem()
     {
         $users = array('alpha', 'juliet', 'victor');
-        
+
         $arm = new RandomAccessReferenceMap();
         $arm->update($users);
 
         unset($users[1]);
         $arm->update($users);
-        
+
         $indirect = $arm->getIndirectReference('juliet');
         $this->assertNull($indirect);
     }
-    
+
     public function testUpdateStableReference()
     {
         $users = array('alpha', 'juliet', 'victor');
-        
+
         $arm = new RandomAccessReferenceMap();
         $arm->update($users);
         $indirect = $arm->getIndirectReference('juliet');
 
         $users[] = 'omega';
-        
+
         $arm->update($users);
-        
+
         $indirect2 = $arm->getIndirectReference('juliet');
         $this->assertEquals($indirect, $indirect2);
     }

@@ -100,7 +100,7 @@ class SafeFile extends SplFileObject
     private function _doDirCheck($path)
     {
         $dir = $this->getPath();
-        
+
         if (preg_match($this->_DIR_BLACKLIST_PAT, $dir)) {
             throw new ValidationException(
                 'Invalid directory',

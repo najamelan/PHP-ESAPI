@@ -33,7 +33,7 @@ require_once __DIR__ . '/errors/IntrusionException.php';
 require_once __DIR__ . '/errors/ValidationException.php';
 
 /**
- * Use this ESAPI security control to wrap your data type-specific 
+ * Use this ESAPI security control to wrap your data type-specific
  * validation rules.
  *
  * The idea behind this interface is to encapsulate data type-specific

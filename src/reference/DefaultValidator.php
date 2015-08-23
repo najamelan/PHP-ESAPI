@@ -65,7 +65,7 @@ class DefaultValidator implements Validator
     private $_auditor;
     private $_encoder;
     private $_fileValidator;
-     
+
     const MAX_PARAMETER_NAME_LENGTH = 100;
     const MAX_PARAMETER_VALUE_LENGTH = 65535;
 
@@ -239,7 +239,7 @@ class DefaultValidator implements Validator
         $ccvr->setAllowNull($allowNull);
 
         $ccvr->assertValid($context, $input);
-         
+
         return null;
     }
 
@@ -494,7 +494,7 @@ class DefaultValidator implements Validator
                 $context
             );
         }
-         
+
         if ($maxBytes !== null && $inputLen > $maxBytes) {
             throw new ValidationException(
                 "{$context}: Invalid file content. Size must not exceed " .
@@ -609,10 +609,10 @@ class DefaultValidator implements Validator
     private function _assertValidPrintable($context, $input, $maxLength, $allowNull)
     {
         $this->_assertValidInput($context, $input, 'PrintableASCII', $maxLength, $allowNull);
-        
+
         return null;
     }
-  
+
     /**
      * @inheritdoc
      */

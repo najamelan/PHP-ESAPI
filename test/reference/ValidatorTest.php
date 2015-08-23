@@ -25,10 +25,10 @@ require_once __DIR__ . '/../testresources/TestHelpers.php';
 class ValidatorTest extends PHPUnit_Framework_TestCase
 {
     private $_os;
-    
+
     const PLATFORM_WINDOWS = 1;
     const PLATFORM_UNIX    = 2;
-    
+
     protected function setUp()
     {
         if (substr(PHP_OS, 0, 3) == 'WIN') {
@@ -104,7 +104,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $instance = ESAPI::getValidator();
         $this->assertTrue($instance->isValidInput('test', 'jeff.williams@aspectsecurity.com', 'Email', 100, false));
     }
-    
+
 
     /**
      * Test isValidInput method of class Validator with a valid type: Email.
@@ -306,7 +306,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     public function testAssertValidInput_Email_valid_01()
     {
         $this->markTestIncomplete();
-        
+
         $instance = ESAPI::getValidator();
         try {
             $instance->assertValidInput('test', 'jeff.williams@aspectsecurity.com', 'Email', 100, false);
@@ -321,7 +321,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     public function testAssertValidInput_Email_valid_02()
     {
         $this->markTestIncomplete();
-        
+
         $instance = ESAPI::getValidator();
         try {
             $instance->assertValidInput('test', null, 'Email', 100, true);
@@ -336,7 +336,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     public function testAssertValidInput_Email_invalid_01()
     {
         $this->markTestIncomplete();
-        
+
         $instance = ESAPI::getValidator();
         $this->setExpectedException('ValidationException');
         $instance->assertValidInput('test', 'jeff.williams@@aspectsecurity.com', 'Email', 100, false);
@@ -349,7 +349,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     public function testAssertValidInput_Email_invalid_02()
     {
         $this->markTestIncomplete();
-        
+
         $instance = ESAPI::getValidator();
         $this->setExpectedException('ValidationException');
         $instance->assertValidInput('test', 'jeff.williams@aspectsecurity', 'Email', 100, false);
@@ -362,7 +362,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     public function testAssertValidInput_Email_invalid_03()
     {
         $this->markTestIncomplete();
-        
+
         $instance = ESAPI::getValidator();
         $this->setExpectedException('ValidationException');
         $instance->assertValidInput('test', null, 'Email', 100, false);
@@ -625,7 +625,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         // This would be nice to catch, but just looks like text to AntiSamy
         // $this->assertFalse($instance->isValidSafeHTML('test', "\" onload=\"alert(document.cookie)\" "));
     }
-    
+
 
 
     /**
@@ -900,7 +900,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         array_push($list, new HTMLEntityCodec());
         $encoder = new DefaultEncoder($list);
         $instance = ESAPI::getValidator();
-        
+
         switch ($this->_os) {
             case self::PLATFORM_WINDOWS:
                 // Windows paths that should pass
@@ -925,9 +925,9 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
                 // Unix specific paths that should not exist or work
                 $this->assertFalse($instance->isValidDirectoryPath('test', '/etc/ridiculous', false));
                 $this->assertFalse($instance->isValidDirectoryPath('test', '/tmp/../etc', false));
-                
+
                 break;
-                
+
             case self::PLATFORM_UNIX:
                 // Unix specific paths should pass
                 $this->assertTrue($instance->isValidDirectoryPath('test', '/', false));                               // Root directory
@@ -938,7 +938,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
 
                 // Unix specific path that exists but is not canonical
                 $this->assertFalse($instance->isValidDirectoryPath('test', '/bin/../', false));
-                
+
                 // Unix specific paths that should not exist or work
                 $this->assertFalse($instance->isValidDirectoryPath('test', '/etc/ridiculous', false));
                 $this->assertFalse($instance->isValidDirectoryPath('test', '/tmp/../etc', false));
@@ -951,7 +951,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
                 $this->assertFalse($instance->isValidDirectoryPath('test', 'c:\\', false));                           // Windows root directory
                 $this->assertFalse($instance->isValidDirectoryPath('test', 'c:\\Windows\\temp', false));              // Windows temporary directory
                 $this->assertFalse($instance->isValidDirectoryPath('test', 'c:\\Windows\\System32\\cmd.exe', false)); // Windows command shell
-    
+
                 break;
         }
     }
@@ -968,7 +968,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
             )
         );
     }
-    
+
     function testIsRedirectLocation_02()
     {
         $val = ESAPI::getValidator();

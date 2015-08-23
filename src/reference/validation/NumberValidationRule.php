@@ -71,20 +71,20 @@ class NumberValidationRule extends BaseValidationRule
     public function __construct($typeName, $encoder, $minValue = null, $maxValue = null)
     {
         parent::__construct($typeName, $encoder);
-        
+
         if ($minValue === null || ! is_numeric($minValue)) {
             $this->_minValue = null;
         } else {
             $this->_minValue = (double) $minValue;
         }
-        
+
         if ($maxValue === null || ! is_numeric($maxValue)) {
             $this->_maxValue = null;
         } else {
             $this->_maxValue = (double) $maxValue;
         }
     }
-    
+
     /**
      * Returns the canonicalized, valid input.
      * Throws ValidationException if the input is not valid or
@@ -106,7 +106,7 @@ class NumberValidationRule extends BaseValidationRule
         if (! is_string($context)) {
             $context = 'NoContextSupplied'; // TODO Invalid Arg Exception?
         }
-        
+
         if (! is_string($input) && $input !== null) {
             throw new ValidationException(
                 "{$context}: Input required",
@@ -114,7 +114,7 @@ class NumberValidationRule extends BaseValidationRule
                 $context
             );
         }
-        
+
         if ($this->_minValue !== null
             && $this->_maxValue !== null
             && $this->_minValue > $this->_maxValue
@@ -124,12 +124,12 @@ class NumberValidationRule extends BaseValidationRule
                 ' than $maxValue!'
             );
         }
-        
+
         if ($input === null || $input == '') {
             if ($this->allowNull) {
                 return null;
             }
-            
+
             throw new ValidationException(
                 "{$context}: Input required",
                 "Input required: context={$context}",
@@ -160,7 +160,7 @@ class NumberValidationRule extends BaseValidationRule
                     $context
                 );
             }
-            
+
             $d = (double) $d;
             if (is_infinite($d)) {
                 throw new ValidationException(
@@ -170,7 +170,7 @@ class NumberValidationRule extends BaseValidationRule
                     $context
                 );
             }
-            
+
             if (is_nan($d)) {
                 throw new ValidationException(
                     'Invalid number input: context=' . $context,
@@ -179,7 +179,7 @@ class NumberValidationRule extends BaseValidationRule
                     $context
                 );
             }
-            
+
             if ($this->_minValue !== null && $d < $this->_minValue) {
                 throw new ValidationException(
                     'Invalid number input must not be less than ' . $this->_minValue,
@@ -188,7 +188,7 @@ class NumberValidationRule extends BaseValidationRule
                     $context
                 );
             }
-            
+
             if ($this->_maxValue !== null && $d > $this->_maxValue) {
                 throw new ValidationException(
                     'Invalid number input must not be greater than ' .
@@ -198,7 +198,7 @@ class NumberValidationRule extends BaseValidationRule
                     $context
                 );
             }
-            
+
             return $d;
         } catch (NumberFormatException $e) {
             throw new ValidationException(

@@ -83,18 +83,18 @@ class DefaultHTTPUtilities implements HTTPUtilities
         if (! isset($_SESSION)) {
             return $href;
         }
-        
+
         $token = $this->getCSRFToken();
         if ($token === null) {
             return $href;
         }
-        
+
         if (strpos($href, '?') === false) {
             $href .= '?' . $token;
         } else {
             $href .= '&' . $token;
         }
-        
+
         return $href;
     }
 
@@ -111,14 +111,14 @@ class DefaultHTTPUtilities implements HTTPUtilities
         if (! isset($_SESSION)) {
             return null;
         }
-        
+
         if (! array_key_exists('ESAPI', $_SESSION)
             || ! array_key_exists('HTTPUtilities', $_SESSION['ESAPI'])
             || ! array_key_exists('CSRFToken', $_SESSION['ESAPI']['HTTPUtilities'])
         ) {
             $this->setCSRFToken();
         }
-        
+
         return $_SESSION['ESAPI']['HTTPUtilities']['CSRFToken'];
     }
 
@@ -156,7 +156,7 @@ class DefaultHTTPUtilities implements HTTPUtilities
         if (! isset($_SESSION)) {
             return null;
         }
-        
+
         if (! array_key_exists('ESAPI', $_SESSION)) {
             $_SESSION['ESAPI'] = array(
                 'HTTPUtilities' => array(
@@ -168,7 +168,7 @@ class DefaultHTTPUtilities implements HTTPUtilities
                 'CSRFToken' => ''
             );
         }
-        
+
         $_SESSION['ESAPI']['HTTPUtilities']['CSRFToken']
             = ESAPI::getRandomizer()->getRandomGUID();
     }
@@ -443,7 +443,7 @@ class DefaultHTTPUtilities implements HTTPUtilities
                 'logHTTPRequestObfuscate expects an array $paramsToObfuscate or null.'
             );
         }
-        
+
         $msg  = '';
         $msg .= $request->getRemoteAddr();
         if ($msg !== '') {
@@ -479,7 +479,7 @@ class DefaultHTTPUtilities implements HTTPUtilities
             }
         }
         $msg .= implode('&', $paramBuilder);
-        
+
         $cookies = $request->getCookies();
         $sessName = session_name();
         foreach ($cookies as $cName => $cValue) {
@@ -487,7 +487,7 @@ class DefaultHTTPUtilities implements HTTPUtilities
                 $msg .= "+{$cName}={$cValue}";
             }
         }
-        
+
         $auditor->info(Auditor::SECURITY, true, $msg);
     }
 

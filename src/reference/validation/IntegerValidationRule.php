@@ -77,7 +77,7 @@ class IntegerValidationRule extends BaseValidationRule
         } else {
             $this->_minValue = (int) $minValue;
         }
-        
+
         if ($maxValue === null || ! is_numeric($maxValue)) {
             $this->_maxValue = PHP_INT_MAX;
         } else {

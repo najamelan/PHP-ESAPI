@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-	
+
 <!--
 W3C rules retrieved from:
 http://www.w3.org/TR/html401/struct/global.html
 -->
-	
+
 <anti-samy-rules>
-	
+
 	<directives>
 		<directive name="omitXmlDeclaration" value="true"/>
 		<directive name="omitDoctypeDeclaration" value="true"/>
 		<directive name="maxInputSize" value="100000"/>
 		<directive name="embedStyleSheets" value="true"/>
 	</directives>
-	
+
 	<common-regexps>
-		
+
 		<!--
 		From W3C:
 		This attribute assigns a class name or set of class names to an
@@ -23,7 +23,7 @@ http://www.w3.org/TR/html401/struct/global.html
 		name or names. Multiple class names must be separated by white
 		space characters.
 		-->
-		
+
 		<regexp name="colorNameOrCode" value="(#[0-9a-zA-Z]{6}|(aqua|black|blue|fuchsia|gray|green|lime|maroon|navy|olive|purple|red|silver|teal|white|yellow))"/>
 		<regexp name="number" value="[0-9]+"/>
 		<regexp name="anything" value=".*"/>
@@ -35,46 +35,46 @@ http://www.w3.org/TR/html401/struct/global.html
 
 		<regexp name="onsiteURL" value="([\w\\/\.\?=&amp;;#-]+|#(\w)+)"/>
 		<regexp name="offsiteURL" value="(http|https|mailto):\/\/[\w-\?\./=#&amp;,;]+"/>
-		
+
 		<regexp name="boolean" value="(true|false)"/>
 		<regexp name="singlePrintable" value="[a-zA-Z0-9]{1}"/> <!-- \w allows the '_' character -->
 
 		<!-- This is for elements (ex: elemName { ... }) -->
 		<regexp name="cssElementSelector" value="[a-zA-Z0-9-_]+|\*"/>
-		
+
 		<!--  This is to list out any element names that are *not* valid -->
 		<regexp name="cssElementExclusion" value=""/>
-		
+
 		<!--  This if for classes (ex: .className { ... }) -->
 		<regexp name="cssClassSelector" value="\.[a-zA-Z0-9-_]+"/>
 
 		<!--  This is to list out any class names that are *not* valid -->
 		<regexp name="cssClassExclusion" value=""/>
-		
+
 		<!--  This is for ID selectors (ex: #myId { ... } -->
 		<regexp name="cssIDSelector" value="#[a-zA-Z0-9-_]+"/>
-		
+
 		<!--  This is to list out any IDs that are *not* valid -->
 		<regexp name="cssIDExclusion" value=""/>
-		
+
 		<!--  This is for pseudo-element selector (ex. foo:pseudo-element { ... } -->
 		<regexp name="cssPseudoElementSelector" value=":[a-zA-Z0-9-_]+"/>
-		
+
 		<!--  This is to list out any psuedo-element names that are *not* valid -->
 		<regexp name="cssPsuedoElementExclusion" value=""/>
-		
+
 		<!--  This is for attribute selectors (ex. foo[attr=value] { ... } -->
 		<regexp name="cssAttributeSelector" value="\[[a-zA-Z0-9-_]+((=|~=|\|=){1}[a-zA-Z0-9-_]+){1}\]"/>
-		
+
 		<!--  This is to list out any attribute names that are *not* valid -->
 		<regexp name="cssAttributeExclusion" value=""/>
-		
+
 		<!--  This is for resources referenced from CSS (such as background images and other imported stylesheets) -->
 		<regexp name="cssUri" value="url\((\.\.|/|[a-zA-Z0-9\. ]+)*[a-zA-Z0-9\_]+\.(gif|jpg|ico|png|css)\)|url\((http|https|mailto)://[a-zA-Z0-9][a-zA-Z0-9\.]*\.[a-zA-Z]{2,5}(:[\d]+){0,1}/(\.\.|/|[a-zA-Z0-9 ]+)*[a-zA-Z0-9\\_]+\.(gif|jpg|ico|png|css)\)"/>
 
 		<!--  This is for comments within CSS (ex. /* comment */) -->
 		<regexp name="cssCommentText" value="[a-zA-Z0-9-_,\.\s]+"/>
-		
+
 		<regexp name="integer" value="(-|\+)?[0-9]+"/>
 		<regexp name="number" value="(-|\+)?([0-9]+(.[0-9]+)?)"/>
 		<regexp name="angle" value="(-|\+)?([0-9]+(.[0-9]+)?)(deg|grads|rad)"/>
@@ -86,15 +86,15 @@ http://www.w3.org/TR/html401/struct/global.html
 		<regexp name="absolute-size" value="(xx-small|x-small|small|medium|large|x-large|xx-large)"/>
 		<regexp name="relative-size" value="(larger|smaller)"/>
 	</common-regexps>
-	
+
 	<!--
-	
+
 	Tag.name = a, b, div, body, etc.
 	Tag.action = filter: remove tags, but keep content, validate: keep content as long as it passes rules, remove: remove tag and contents
 	Attribute.name = id, class, href, align, width, etc.
 	Attribute.onInvalid = what to do when the attribute is invalid, e.g., remove the tag (removeTag), remove the attribute (removeAttribute), filter the tag (filterTag)
 	Attribute.description = What rules in English you want to tell the users they can have for this attribute. Include helpful things so they'll be able to tune their HTML
-	 
+
 	 -->
 
 	<!--
@@ -103,16 +103,16 @@ http://www.w3.org/TR/html401/struct/global.html
 	-->
 
 	<common-attributes>
-		
+
 
 		<!-- Common to all HTML tags  -->
-		
+
 		<attribute name="id" description="The 'id' of any HTML attribute should not contain anything besides letters and numbers">
 			<regexp-list>
 				<regexp value="[a-zA-Z0-9_\-\:]+"/>
 			</regexp-list>
 		</attribute>
-	
+
 		<attribute name="class" description="The 'class' of any HTML attribute is usually a single word, but it can also be a list of class names separated by spaces">
 			<regexp-list>
 				<regexp name="htmlClass"/>
@@ -129,22 +129,22 @@ http://www.w3.org/TR/html401/struct/global.html
 		 		<regexp name="htmlTitle"/>
 		 	</regexp-list>
 		 </attribute>
-		 
+
 		 <attribute name="alt" description="The 'alt' attribute provides alternative text to users when its visual representation is not available">
 		 	<regexp-list>
 		 		<regexp name="paragraph"/>
 		 	</regexp-list>
 		 </attribute>
 
-		 
+
  		<!-- the "style" attribute will be validated by an inline stylesheet scanner, so no need to define anything here - i hate having to special case this but no other choice -->
 		 <attribute name="style" description="The 'style' attribute provides the ability for users to change many attributes of the tag's contents using a strict syntax"/>
-		 
-		 
-		 
-		 
+
+
+
+
 		 <!-- Anchor related -->
-		 
+
 		<attribute name="href" onInvalid="filterTag">
 			<regexp-list>
 				<regexp name="onsiteURL"/>
@@ -157,14 +157,14 @@ http://www.w3.org/TR/html401/struct/global.html
 				<literal value="javascript:location.reload()"/>
 			</literal-list>
 		</attribute>
-		
+
 		<attribute name="name">
 		 	<regexp-list>
 		 		<regexp value="[a-zA-Z0-9-_]+"/>
 		 	</regexp-list>
 		 </attribute>
-		
-		
+
+
 		<attribute name="shape" description="The 'shape' attribute defines the shape of the selectable area">
 			<literal-list>
 				<literal value="default"/>
@@ -173,17 +173,17 @@ http://www.w3.org/TR/html401/struct/global.html
 				<literal value="poly"/>
 			</literal-list>
 		</attribute>
-		
-		
-		
+
+
+
 		<!--  Table attributes  -->
-		
+
 		<attribute name="border">
 			<regexp-list>
 				<regexp name="number"/>
 			</regexp-list>
 		</attribute>
-		
+
 		<attribute name="cellpadding">
 			<regexp-list>
 				<regexp name="number"/>
@@ -195,7 +195,7 @@ http://www.w3.org/TR/html401/struct/global.html
 				<regexp name="number"/>
 			</regexp-list>
 		</attribute>
-		
+
 		<attribute name="colspan">
 			<regexp-list>
 				<regexp name="number"/>
@@ -207,7 +207,7 @@ http://www.w3.org/TR/html401/struct/global.html
 				<regexp name="number"/>
 			</regexp-list>
 		</attribute>
-		
+
 		<attribute name="background">
 			<regexp-list>
 				<regexp name="onsiteURL"/>
@@ -219,23 +219,23 @@ http://www.w3.org/TR/html401/struct/global.html
 				<regexp name="colorNameOrCode"/>
 			</regexp-list>
 		</attribute>
-		 
+
 		 <attribute name="abbrev">
 		 	<regexp name="paragraph"/>
 		 </attribute>
-		 
+
 		 <attribute name="headers" description="The 'headers' attribute is a space-separated list of cell IDs">
 		 	<regexp-list>
 			 	<regexp value="[a-zA-Z0-9\s*]*"/>
 		 	</regexp-list>
 		 </attribute>
-		 
+
 		 <attribute name="charoff">
 		 	<regexp-list>
 		 		<regexp value="numberOrPercent"/>
 		 	</regexp-list>
 		 </attribute>
-		 
+
 		 <attribute name="char">
 			<regexp value=".*{0,1}"/>
 		 </attribute>
@@ -246,15 +246,15 @@ http://www.w3.org/TR/html401/struct/global.html
 			 	<regexp value="[a-zA-Z0-9\s*,]*"/>
 		 	</regexp-list>
 		</attribute>
-		
+
 		<attribute name="nowrap" description="The 'nowrap' attribute tells the browser not to wrap text that goes over one line">
 			<regexp-list>
 				<regexp name="anything"/>
 				<!-- <regexp value="(nowrap){0,1}"/>  -->
 			</regexp-list>
 		</attribute>
-		
-		
+
+
 		<!--  Common positioning attributes  -->
 
 		<attribute name="width">
@@ -262,13 +262,13 @@ http://www.w3.org/TR/html401/struct/global.html
 				<regexp name="numberOrPercent"/>
 			</regexp-list>
 		</attribute>
-		
+
 		<attribute name="height">
 			<regexp-list>
 				<regexp name="numberOrPercent"/>
 			</regexp-list>
 		</attribute>
-		
+
 		<attribute name="align" description="The 'align' attribute of an HTML element is a direction word, like 'left', 'right' or 'center'">
 			<literal-list>
 				<literal>center</literal>
@@ -278,7 +278,7 @@ http://www.w3.org/TR/html401/struct/global.html
 				<literal>char</literal>
 			</literal-list>
 		</attribute>
-		
+
 		<attribute name="valign" description="The 'valign' attribute of an HTML attribute is a direction word, like 'baseline','bottom','middle' or 'top'">
 			<literal-list>
 				<literal>baseline</literal>
@@ -287,11 +287,11 @@ http://www.w3.org/TR/html401/struct/global.html
 				<literal>top</literal>
 			</literal-list>
 		</attribute>
-		
-		
-		
+
+
+
 		<!-- Intrinsic JavaScript Events -->
-		
+
 		<attribute name="onFocus" description="The 'onFocus' event is executed when the control associated with the tag gains focus">
 			<literal-list>
 				<literal>javascript:void(0)</literal>
@@ -305,7 +305,7 @@ http://www.w3.org/TR/html401/struct/global.html
 				<literal>javascript:history.go(-1)</literal>
 			</literal-list>
 		</attribute>
-		 
+
 		 <attribute name="onClick" description="The 'onClick' event is executed when the control associated with the tag is clicked">
 			<literal-list>
 				<literal>javascript:void(0)</literal>
@@ -319,28 +319,28 @@ http://www.w3.org/TR/html401/struct/global.html
 				<literal>javascript:history.go(-1)</literal>
 			</literal-list>
 		 </attribute>
-		 
+
 		  <attribute name="onMouseDown" description="The 'onMouseDown' event is executed when the control associated with the tag is clicked but not yet released">
 			<literal-list>
 				<literal>javascript:void(0)</literal>
 				<literal>javascript:history.go(-1)</literal>
 			</literal-list>
 		 </attribute>
-		 
+
 		 <attribute name="onMouseUp" description="The 'onMouseUp' event is executed when the control associated with the tag is clicked after the button is released">
 			<literal-list>
 				<literal>javascript:void(0)</literal>
 				<literal>javascript:history.go(-1)</literal>
 			</literal-list>
 		 </attribute>
-		 
+
  		 <attribute name="onMouseOver" description="The 'onMouseOver' event is executed when the user's mouse hovers over the control associated with the tag">
 			<literal-list>
 				<literal>javascript:void(0)</literal>
 				<literal>javascript:history.go(-1)</literal>
 			</literal-list>
 		 </attribute>
-		 
+
 		 <attribute name="scope" description="The 'scope' attribute defines what's covered by the header cells">
 		 	<literal-list>
 		 		<literal>row</literal>
@@ -349,9 +349,9 @@ http://www.w3.org/TR/html401/struct/global.html
 		 		<literal>colgroup</literal>
 		 	</literal-list>
 		 </attribute>
-		
-		
-		
+
+
+
 		 <!-- If you want users to be able to mess with tabindex, uncomment this -->
 		 <!--
 		 <attribute name="tabindex" description="...">
@@ -360,42 +360,42 @@ http://www.w3.org/TR/html401/struct/global.html
 		 	</regexp-list>
 		 </attribute>
 		  -->
-		 
-		 
+
+
 		 <!-- Input/form related common attributes -->
-		 
+
 		 <attribute name="disabled">
 		 	<regexp-list>
 		 		<regexp name="anything"/>
 		 	</regexp-list>
 		 </attribute>
-		 
+
 		 <attribute name="readonly">
 		 	<regexp-list>
 		 		<regexp name="anything"/>
 		 	</regexp-list>
 		 </attribute>
-		 
+
 		 <attribute name="accesskey">
 		 	<regexp-list>
 		 		<regexp name="anything"/>
 		 	</regexp-list>
 		 </attribute>
-		 
+
 		 <attribute name="size">
 		 	<regexp-list>
 		 		<regexp name="number"/>
 		 	</regexp-list>
 		 </attribute>
-		 
-		 
+
+
 		<attribute name="autocomplete">
 			<literal-list>
 				<literal value="on"/>
 				<literal value="off"/>
 			</literal-list>
 		</attribute>
-			
+
 		 <attribute name="rows">
 		 	<regexp-list>
 		 		<regexp name="number"/>
@@ -407,7 +407,7 @@ http://www.w3.org/TR/html401/struct/global.html
 		 		<regexp name="number"/>
 		 	</regexp-list>
 		 </attribute>
-		 
+
 	</common-attributes>
 
 
@@ -416,7 +416,7 @@ http://www.w3.org/TR/html401/struct/global.html
 	this is going to continue. I'm not sure war is the right word for what's going on. Doesn't somebody have to win a war after
 	a while? Even wars of attrition, surely?
 	 -->
-	
+
 	<global-tag-attributes>
 		<!-- Not valid in base, head, html, meta, param, script, style, and title elements. -->
 		<attribute name="id"/>
@@ -426,19 +426,19 @@ http://www.w3.org/TR/html401/struct/global.html
 		<!-- Not valid in base, br, frame, frameset, hr, iframe, param, and script elements.  -->
 		<attribute name="lang"/>
 	</global-tag-attributes>
-	
-	
-	
+
+
+
 	<tag-rules>
-	
+
 		<!-- You can mess with this stuff if you know what you're doing -->
-		
+
 		<tag name="html" action="filter"/>
-		
+
 		<tag name="body" action="validate">
 			<attribute name="bgcolor"/>
 		</tag>
-		
+
 		<tag name="meta" action="filter">
 			<attribute name="content">
 				<literal-list>
@@ -457,20 +457,20 @@ http://www.w3.org/TR/html401/struct/global.html
 
 		<tag name="script" action="remove"/>
 		<tag name="noscript" action="validate"/> <!-- although no javascript can fire inside a noscript tag, css is still a viable attack vector -->
-		
-		
-		
+
+
+
 		<!-- Frame & related tags -->
-		
+
 		<tag name="iframe" action="remove"/>
 		<tag name="frameset" action="remove"/>
 		<tag name="frame" action="remove"/>
-		
-		
-		
-		
+
+
+
+
 		<!-- Form related tags -->
-		
+
 		<tag name="label">
 			<attribute name="for">
 				<regexp-list>
@@ -478,35 +478,35 @@ http://www.w3.org/TR/html401/struct/global.html
 				</regexp-list>
 			</attribute>
 		</tag>
-		
+
 
 		<!--
 			If you wish to enable any of the form related tags, change the tag's action below from "filter" or "remove" to "validate". The attributes have been
 			hardened so this is safe to do, if it's something you want to allow. Beware the <><ing possibilities!
 		 -->
-			
+
 		<tag name="form" action="validate">
-			
+
 			<attribute name="action">
 				<regexp-list>
 					<regexp name="onsiteURL"/>
 					<regexp name="offsiteURL"/>
 				</regexp-list>
 			</attribute>
-			
+
 			<attribute name="name"/>
-			
+
 			<attribute name="autocomplete"/>
-			
+
 			<attribute name="method">
 				<literal-list>
 					<literal value="post"/>
 					<literal value="get"/>
 				</literal-list>
 			</attribute>
-			
+
 		</tag>
-		
+
 		<tag name="button">
 			<attribute name="name"/>
 			<attribute name="value">
@@ -514,7 +514,7 @@ http://www.w3.org/TR/html401/struct/global.html
 					<regexp name="anything"/>
 				</regexp-list>
 			</attribute>
-			
+
 			<attribute name="disabled"/>
 			<attribute name="accesskey"/>
 			<attribute name="type">
@@ -525,42 +525,42 @@ http://www.w3.org/TR/html401/struct/global.html
 				</literal-list>
 			</attribute>
 		</tag>
-		
+
 		<tag name="input" action="validate">
-			
+
 			<attribute name="name"/>
-			
+
 			<attribute name="size"/>
-			
+
 			<attribute name="maxlength">
 				<regexp-list>
 					<regexp name="number"/>
 				</regexp-list>
 			</attribute>
-			
+
 			<attribute name="autocomplete"/>
-			
+
 			<attribute name="checked">
 				<regexp-list>
 					<regexp name="anything"/>
 				</regexp-list>
 			</attribute>
-			
+
 			<attribute name="alt"/>
-			
+
 			<attribute name="src">
 				<regexp-list>
 					<regexp name="onsiteURL"/>
 					<regexp name="offsiteURL"/>
 				</regexp-list>
 			</attribute>
-			
+
 			<attribute name="usemap">
 				<regexp-list>
 					<regexp name="onsiteURL"/>
 				</regexp-list>
 			</attribute>
-			
+
 			<attribute name="type">
 				<literal-list>
 					<literal value="hidden"/>
@@ -575,54 +575,54 @@ http://www.w3.org/TR/html401/struct/global.html
 					<literal value="reset"/>
 				</literal-list>
 			</attribute>
-			
+
 			<attribute name="value">
 				<regexp-list>
 					<regexp name="anything"/>
 				</regexp-list>
 			</attribute>
-			
+
 			<attribute name="disabled"/>
 			<attribute name="readonly"/>
 			<attribute name="accesskey"/>
-			
+
 		</tag>
-		
+
 		<tag name="select" action="validate">
 
 			<attribute name="name"/>
 			<attribute name="disabled"/>
-			
+
 			<attribute name="multiple">
 				<regexp-list>
 					<regexp name="anything"/>
 				</regexp-list>
 			</attribute>
-			
+
 			<attribute name="size"/>
-			
+
 		</tag>
-		
+
 		<tag name="option" action="validate">
 			<attribute name="value">
 				<regexp-list>
 					<regexp name="anything"/>
 				</regexp-list>
 			</attribute>
-			
+
 			<attribute name="label">
 				<regexp-list>
 					<regexp name="anything"/>
 				</regexp-list>
 			</attribute>
-			
+
 			<attribute name="selected">
 				<regexp-list>
 					<regexp name="anything"/>
 				</regexp-list>
 			</attribute>
 		</tag>
-		
+
 		<tag name="textarea" action="validate">
 			<attribute name="rows"/>
 			<attribute name="cols"/>
@@ -631,12 +631,12 @@ http://www.w3.org/TR/html401/struct/global.html
 			<attribute name="readonly"/>
 			<attribute name="accesskey"/>
 		</tag>
-		
-		
-		
-		
+
+
+
+
 		<!-- All formatting tags -->
-		
+
 		<tag name="h1" action="validate"/>
 		<tag name="h2" action="validate"/>
 		<tag name="h3" action="validate"/>
@@ -645,7 +645,7 @@ http://www.w3.org/TR/html401/struct/global.html
 		<tag name="h6" action="validate"/>
 
 		<tag name="p" action="validate"/>
-		
+
 		<tag name="i" action="truncate"/>
 		<tag name="b" action="truncate"/>
 		<tag name="u" action="truncate"/>
@@ -662,37 +662,37 @@ http://www.w3.org/TR/html401/struct/global.html
 		<tag name="strike" action="truncate"/>
 		<tag name="center" action="truncate"/>
 		<tag name="blockquote" action="truncate"/>
-		
+
 		<tag name="hr" action="validate"/>
 		<tag name="br" action="truncate"/>
-		
+
 		<tag name="col" action="validate"/>
-		
+
 		<tag name="font" action="validate">
 			<attribute name="cssColor">
 				<regexp-list>
 					<regexp name="colorNameOrCode"/>
 				</regexp-list>
 			</attribute>
-			
+
 			<attribute name="face">
 				<regexp-list>
 					<regexp value="[\w;, ]+"/>
 				</regexp-list>
 			</attribute>
-			
+
 			<attribute name="size">
 				<regexp-list>
 					<regexp value="(\+|-){0,1}(\d)+"/>
 				</regexp-list>
 			</attribute>
 		</tag>
-		
 
 
-		
+
+
 		<!-- Anchor and anchor related tags -->
-		
+
 		<tag name="a" action="validate">
 
 			<attribute name="href" onInvalid="filterTag"/>
@@ -715,28 +715,28 @@ http://www.w3.org/TR/html401/struct/global.html
 		<tag name="base" action="validate">
 			<attribute name="href"/>
 		</tag>
-		
-		
-		
-		
+
+
+
+
 		<!-- Stylesheet Tags -->
-		
+
 		<tag name="style" action="validate"/>
 		<tag name="span" action="validate"/>
 
 		<tag name="div" action="validate">
 			<attribute name="align"/>
 		</tag>
-		
+
 		<!-- <attribute name="id"/>  what could an attacker do if they could overwrite an existing div definition? prolly something bad -->
 		<!-- <attribute name="class"/> what could an attacker do if they could specify any class in the namespace? prolly something bad -->
 
-		
-		
-		
-		
+
+
+
+
 		<!-- Image & image related tags -->
-		
+
 		<tag name="img" action="validate">
 			<attribute name="src" onInvalid="removeTag">
 				<regexp-list>
@@ -746,11 +746,11 @@ http://www.w3.org/TR/html401/struct/global.html
 			</attribute>
 			<attribute name="alt"/>
 		</tag>
-		
+
 		<tag name="link" action="validate">
 
 			<attribute name="href" onInvalid="removeTag"/>
-			
+
 			<attribute name="type" onInvalid="removeTag">
 				<literal-list>
 					<literal value="text/css"/>
@@ -758,7 +758,7 @@ http://www.w3.org/TR/html401/struct/global.html
 					<literal value="image/x-icon"/>
 				</literal-list>
 			</attribute>
-			
+
 			<attribute name="rel">
 				<literal-list>
 					<literal value="stylesheet"/>
@@ -770,52 +770,52 @@ http://www.w3.org/TR/html401/struct/global.html
 				</literal-list>
 			</attribute>
 		</tag>
-		
-		
-		
-				
+
+
+
+
 
 		<!-- List tags -->
 
 		<tag name="ul" action="validate"/>
 		<tag name="ol" action="validate"/>
 		<tag name="li" action="validate"/>
-		
 
-		
-		
+
+
+
 		<!-- Dictionary tags -->
-		
+
 		<tag name="dd" action="truncate"/>
 		<tag name="dl" action="truncate"/>
 		<tag name="dt" action="truncate"/>
-		
 
 
-		
+
+
 		<!-- Table tags (tbody, thead, tfoot)-->
-		
+
 		<tag name="thead" action="validate">
 			<attribute name="align"/>
 			<attribute name="char"/>
 			<attribute name="charoff"/>
 			<attribute name="valign"/>
 		</tag>
-		
+
 		<tag name="tbody" action="validate">
 			<attribute name="align"/>
 			<attribute name="char"/>
 			<attribute name="charoff"/>
 			<attribute name="valign"/>
 		</tag>
-		
+
 		<tag name="tfoot" action="validate">
 			<attribute name="align"/>
 			<attribute name="char"/>
 			<attribute name="charoff"/>
 			<attribute name="valign"/>
 		</tag>
-		
+
 		<tag name="table" action="validate">
 			<attribute name="width"/>
 			<attribute name="border"/>
@@ -824,7 +824,7 @@ http://www.w3.org/TR/html401/struct/global.html
 			<attribute name="background"/>
 			<attribute name="align"/>
 		</tag>
-		
+
 		<tag name="td" action="validate">
 			<attribute name="bgcolor"/>
 			<attribute name="abbrev"/>
@@ -842,7 +842,7 @@ http://www.w3.org/TR/html401/struct/global.html
 			<attribute name="rowspan"/>
 
 		</tag>
-		
+
 		<tag name="th" action="validate">
 			<attribute name="abbrev"/>
 			<attribute name="axis"/>
@@ -859,7 +859,7 @@ http://www.w3.org/TR/html401/struct/global.html
 			<attribute name="colspan"/>
 			<attribute name="rowspan"/>
 		</tag>
-		
+
 		<tag name="tr" action="validate">
 			<attribute name="height"/>
 			<attribute name="width"/>
@@ -868,7 +868,7 @@ http://www.w3.org/TR/html401/struct/global.html
 			<attribute name="charoff"/>
 			<attribute name="background"/>
 		</tag>
-		
+
 		<tag name="colgroup" action="validate">
 
 			<attribute name="span">
@@ -882,7 +882,7 @@ http://www.w3.org/TR/html401/struct/global.html
 			<attribute name="charoff"/>
 			<attribute name="valign"/>
 		</tag>
-		
+
 		<tag name="col" action="validate">
 			<attribute name="align"/>
 			<attribute name="char"/>
@@ -895,17 +895,17 @@ http://www.w3.org/TR/html401/struct/global.html
 			</attribute>
 			<attribute name="width"/>
 		</tag>
-				
+
 		<tag name="fieldset" action="validate"/>
 		<tag name="legend" action="validate"/>
-		
+
 	</tag-rules>
 
 
 	<!--  CSS validation processing rules  -->
 
 	<css-rules>
-	
+
 		<property name="azimuth" description="This property is most likely to be implemented by mixing the same signal into different channels at differing volumes.">
 			<literal-list>
 				<literal value="left-side"/>
@@ -926,7 +926,7 @@ http://www.w3.org/TR/html401/struct/global.html
 				<regexp name="angle"/>
 			</regexp-list>
 		</property>
-			
+
 		<property name="background" description="The 'background' property is a shorthand property for setting the individual background properties (i.e., 'background-color', 'background-image', 'background-repeat', 'background-attachment' and 'background-position') at the same place in the style sheet.">
 			<literal-list>
 				<literal value="inherit"/>
@@ -947,7 +947,7 @@ http://www.w3.org/TR/html401/struct/global.html
 				<literal value="inherit"/>
 			</literal-list>
 		</property>
-		
+
 		<property name="background-color" description="This property sets the background color of an element, either a &lt;color&gt; value or the keyword 'transparent', to make the underlying colors shine through.">
 			<literal-list>
 				<literal value="transparent"/>
@@ -957,7 +957,7 @@ http://www.w3.org/TR/html401/struct/global.html
 				<regexp name="cssColor"/>
 			</regexp-list>
 		</property>
-		
+
 		<property name="background-image" description="This property sets the background image of an element.">
 			<literal-list>
 				<literal value="none"/>
@@ -967,7 +967,7 @@ http://www.w3.org/TR/html401/struct/global.html
 				<regexp name="cssUri"/>
 			</regexp-list>
 		</property>
-		
+
 		<property name="background-position" description="If a background image has been specified, this property specifies its initial position.">
 			<literal-list>
 				<literal value="top"/>
@@ -1872,9 +1872,9 @@ http://www.w3.org/TR/html401/struct/global.html
 				<regexp name="integer"/>
 			</regexp-list>
 		</property>
-		
+
 		<!-- end simple properties -->
-		
+
 		<!-- begin medium properties -->
 		<property name="border-style" description="">
 			<category-list>
@@ -2032,7 +2032,7 @@ http://www.w3.org/TR/html401/struct/global.html
 			<category-list>
 				<category value="visual"/>
 			</category-list>
-			
+
 			<literal-list>
 				<literal value="inherit"/>
 			</literal-list>
@@ -2056,7 +2056,7 @@ http://www.w3.org/TR/html401/struct/global.html
 				<category value="visual"/>
 				<category value="interactive"/>
 			</category-list>
-			
+
 			<literal-list>
 				<literal value="inherit"/>
 			</literal-list>
@@ -2133,13 +2133,13 @@ http://www.w3.org/TR/html401/struct/global.html
 			</shorthand-list>
 		</property>
 		<!-- end medium properties -->
-		
+
 		<!-- begin hard properties -->
 		<property name="border" description="">
 			<category-list>
 				<category value="visual"/>
 			</category-list>
-			
+
 			<literal-list>
 				<literal value="inherit"/>
 			</literal-list>
@@ -2472,7 +2472,7 @@ http://www.w3.org/TR/html401/struct/global.html
 	<html-entities>
 		<entity name="amp" cdata="&amp;"/>
 		<entity name="nbsp" cdata="&amp;#160;"/>
-		
+
 		<entity name="iexcl" cdata="&amp;#161;"/> <!--inverted exclamation mark, U+00A1 ISOnum -->
 		<entity name="cent" cdata="&amp;#162;"/> <!--cent sign, U+00A2 ISOnum -->
 		<entity name="pound" cdata="&amp;#163;"/> <!--pound sign, U+00A3 ISOnum -->
@@ -2568,9 +2568,9 @@ http://www.w3.org/TR/html401/struct/global.html
 		<entity name="yacute" cdata="&amp;#253;"/> <!--latin small letter y with acute, U+00FD ISOlat1 -->
 		<entity name="thorn" cdata="&amp;#254;"/> <!--latin small letter thorn, U+00FE ISOlat1 -->
 		<entity name="yuml" cdata="&amp;#255;"/> <!--latin small letter y with diaeresis, U+00FF ISOlat1 -->
-		                                  
+
 		<entity name="fnof" cdata="&amp;#402;"/> <!--latin small f with hook = function = florin, U+0192 ISOtech -->
-		
+
 		<!-- Greek -->
 		<entity name="Alpha" cdata="&amp;#913;"/> <!--greek capital letter alpha, U+0391 -->
 		<entity name="Beta" cdata="&amp;#914;"/> <!--greek capital letter beta, U+0392 -->
@@ -2597,7 +2597,7 @@ http://www.w3.org/TR/html401/struct/global.html
 		<entity name="Chi" cdata="&amp;#935;"/> <!--greek capital letter chi, U+03A7 -->
 		<entity name="Psi" cdata="&amp;#936;"/> <!--greek capital letter psi,U+03A8 ISOgrk3 -->
 		<entity name="Omega" cdata="&amp;#937;"/> <!--greek capital letter omega,U+03A9 ISOgrk3 -->
-		
+
 		<entity name="alpha" cdata="&amp;#945;"/> <!--greek small letter alpha,U+03B1 ISOgrk3 -->
 		<entity name="beta" cdata="&amp;#946;"/> <!--greek small letter beta, U+03B2 ISOgrk3 -->
 		<entity name="gamma" cdata="&amp;#947;"/> <!--greek small letter gamma,U+03B3 ISOgrk3 -->
@@ -2626,7 +2626,7 @@ http://www.w3.org/TR/html401/struct/global.html
 		<entity name="thetasym" cdata="&amp;#977;"/> <!--greek small letter theta symbol, U+03D1 NEW -->
 		<entity name="upsih" cdata="&amp;#978;"/> <!--greek upsilon with hook symbol, U+03D2 NEW -->
 		<entity name="piv" cdata="&amp;#982;"/> <!--greek pi symbol, U+03D6 ISOgrk3 -->
-		
+
 		<!-- General Punctuation -->
 		<entity name="bull" cdata="&amp;#8226;"/> <!--bullet = black small circle, U+2022 ISOpub  -->
 		<!-- bullet is NOT the same as bullet operator, U+2219 -->
@@ -2635,7 +2635,7 @@ http://www.w3.org/TR/html401/struct/global.html
 		<entity name="Prime" cdata="&amp;#8243;"/> <!--double prime = seconds = inches, U+2033 ISOtech -->
 		<entity name="oline" cdata="&amp;#8254;"/> <!--overline = spacing overscore, U+203E NEW -->
 		<entity name="frasl" cdata="&amp;#8260;"/> <!--fraction slash, U+2044 NEW -->
-		
+
 		<!-- Letterlike Symbols -->
 		<entity name="weierp" cdata="&amp;#8472;"/> <!--script capital P = power set = Weierstrass p, U+2118 ISOamso -->
 		<entity name="image" cdata="&amp;#8465;"/> <!--blackletter capital I = imaginary part, U+2111 ISOamso -->
@@ -2644,7 +2644,7 @@ http://www.w3.org/TR/html401/struct/global.html
 		<entity name="alefsym" cdata="&amp;#8501;"/> <!--alef symbol = first transfinite cardinal, U+2135 NEW -->
 		<!-- alef symbol is NOT the same as hebrew letter alef,
 		     U+05D0 although the same glyph could be used to depict both characters -->
-		
+
 		<!-- Arrows -->
 		<entity name="larr" cdata="&amp;#8592;"/> <!--leftwards arrow, U+2190 ISOnum -->
 		<entity name="uarr" cdata="&amp;#8593;"/> <!--upwards arrow, U+2191 ISOnum-->
@@ -2654,21 +2654,21 @@ http://www.w3.org/TR/html401/struct/global.html
 		<entity name="crarr" cdata="&amp;#8629;"/> <!--downwards arrow with corner leftwards
 		                                     = carriage return, U+21B5 NEW -->
 		<entity name="lArr" cdata="&amp;#8656;"/> <!--leftwards double arrow, U+21D0 ISOtech -->
-		
+
 		<!-- ISO 10646 does not say that lArr is the same as the 'is implied by' arrow
 		    but also does not have any other character for that function. So ? lArr can
 		    be used for 'is implied by' as ISOtech suggests -->
-		    
+
 		<entity name="uArr" cdata="&amp;#8657;"/> <!--upwards double arrow, U+21D1 ISOamsa -->
 		<entity name="rArr" cdata="&amp;#8658;"/> <!--rightwards double arrow, U+21D2 ISOtech -->
-		
+
 		<!-- ISO 10646 does not say this is the 'implies' character but does not have
 		     another character with this function so ?
 		     rArr can be used for 'implies' as ISOtech suggests -->
-		     
+
 		<entity name="dArr" cdata="&amp;#8659;"/> <!--downwards double arrow, U+21D3 ISOamsa -->
 		<entity name="hArr" cdata="&amp;#8660;"/> <!--left right double arrow, U+21D4 ISOamsa -->
-		
+
 		<!-- Mathematical Operators -->
 		<entity name="forall" cdata="&amp;#8704;"/> <!--for all, U+2200 ISOtech -->
 		<entity name="part" cdata="&amp;#8706;"/> <!--partial differential, U+2202 ISOtech  -->
@@ -2678,18 +2678,18 @@ http://www.w3.org/TR/html401/struct/global.html
 		<entity name="isin" cdata="&amp;#8712;"/> <!--element of, U+2208 ISOtech -->
 		<entity name="notin" cdata="&amp;#8713;"/> <!--not an element of, U+2209 ISOtech -->
 		<entity name="ni" cdata="&amp;#8715;"/> <!--contains as member, U+220B ISOtech -->
-	
+
 		<!-- should there be a more memorable name than 'ni'? -->
 		<entity name="prod" cdata="&amp;#8719;"/> <!--n-ary product = product sign, U+220F ISOamsb -->
-		
+
 		<!-- prod is NOT the same character as U+03A0 'greek capital letter pi' though
 		     the same glyph might be used for both -->
-		     
+
 		<entity name="sum" cdata="&amp;#8721;"/> <!--n-ary sumation, U+2211 ISOamsb -->
-		
+
 		<!-- sum is NOT the same character as U+03A3 'greek capital letter sigma'
 		     though the same glyph might be used for both -->
-		
+
 		<entity name="minus" cdata="&amp;#8722;"/> <!--minus sign, U+2212 ISOtech -->
 		<entity name="lowast" cdata="&amp;#8727;"/> <!--asterisk operator, U+2217 ISOtech -->
 		<entity name="radic" cdata="&amp;#8730;"/> <!--square root = radical sign, U+221A ISOtech -->
@@ -2703,10 +2703,10 @@ http://www.w3.org/TR/html401/struct/global.html
 		<entity name="int" cdata="&amp;#8747;"/> <!--integral, U+222B ISOtech -->
 		<entity name="there4" cdata="&amp;#8756;"/> <!--therefore, U+2234 ISOtech -->
 		<entity name="sim" cdata="&amp;#8764;"/> <!--tilde operator = varies with = similar to, U+223C ISOtech -->
-		
+
 		<!-- tilde operator is NOT the same character as the tilde, U+007E,
 		     although the same glyph might be used to represent both  -->
-		     
+
 		<entity name="cong" cdata="&amp;#8773;"/> <!--approximately equal to, U+2245 ISOtech -->
 		<entity name="asymp" cdata="&amp;#8776;"/> <!--almost equal to = asymptotic to, U+2248 ISOamsr -->
 		<entity name="ne" cdata="&amp;#8800;"/> <!--not equal to, U+2260 ISOtech -->
@@ -2715,11 +2715,11 @@ http://www.w3.org/TR/html401/struct/global.html
 		<entity name="ge" cdata="&amp;#8805;"/> <!--greater-than or equal to, U+2265 ISOtech -->
 		<entity name="sub" cdata="&amp;#8834;"/> <!--subset of, U+2282 ISOtech -->
 		<entity name="sup" cdata="&amp;#8835;"/> <!--superset of, U+2283 ISOtech -->
-		
+
 		<!-- note that nsup, 'not a superset of, U+2283' is not covered by the Symbol
 		     font encoding and is not included. Should it be, for symmetry?
 		     It is in ISOamsn  -->
-		
+
 		<entity name="nsub" cdata="&amp;#8836;"/> <!--not a subset of, U+2284 ISOamsn -->
 		<entity name="sube" cdata="&amp;#8838;"/> <!--subset of or equal to, U+2286 ISOtech -->
 		<entity name="supe" cdata="&amp;#8839;"/> <!--superset of or equal to, U+2287 ISOtech -->
@@ -2728,7 +2728,7 @@ http://www.w3.org/TR/html401/struct/global.html
 		<entity name="perp" cdata="&amp;#8869;"/> <!--up tack = orthogonal to = perpendicular, U+22A5 ISOtech -->
 		<entity name="sdot" cdata="&amp;#8901;"/> <!--dot operator, U+22C5 ISOamsb -->
 		<!-- dot operator is NOT the same character as U+00B7 middle dot -->
-		
+
 		<!-- Miscellaneous Technical -->
 		<entity name="lceil" cdata="&amp;#8968;"/> <!--left ceiling = apl upstile, U+2308 ISOamsc  -->
 		<entity name="rceil" cdata="&amp;#8969;"/> <!--right ceiling, U+2309 ISOamsc  -->
@@ -2739,17 +2739,17 @@ http://www.w3.org/TR/html401/struct/global.html
 		     or U+2039 'single left-pointing angle quotation mark' -->
 		<entity name="rang" cdata="&amp;#9002;"/> <!--right-pointing angle bracket = ket, U+232A ISOtech -->
 		<!-- rang is NOT the same character as U+003E 'greater than' or U+203A 'single right-pointing angle quotation mark' -->
-		
+
 		<!-- Geometric Shapes -->
 		<entity name="loz" cdata="&amp;#9674;"/> <!--lozenge, U+25CA ISOpub -->
-		
+
 		<!-- Miscellaneous Symbols -->
 		<entity name="spades" cdata="&amp;#9824;"/> <!--black spade suit, U+2660 ISOpub -->
 		<!-- black here seems to mean filled as opposed to hollow -->
 		<entity name="clubs" cdata="&amp;#9827;"/> <!--black club suit = shamrock, U+2663 ISOpub -->
 		<entity name="hearts" cdata="&amp;#9829;"/> <!--black heart suit = valentine, U+2665 ISOpub -->
 		<entity name="diams" cdata="&amp;#9830;"/> <!--black diamond suit, U+2666 ISOpub -->
-		
+
 		<entity name="quot" cdata="&amp;#34;"  /> <!--quotation mark = APL quote, U+0022 ISOnum -->
 		<!-- Latin Extended-A -->
 		<entity name="OElig" cdata="&amp;#338;" /> <!--latin capital ligature OE, U+0152 ISOlat2 -->
@@ -2758,11 +2758,11 @@ http://www.w3.org/TR/html401/struct/global.html
 		<entity name="Scaron" cdata="&amp;#352;" /> <!--latin capital letter S with caron, U+0160 ISOlat2 -->
 		<entity name="scaron" cdata="&amp;#353;" /> <!--latin small letter s with caron, U+0161 ISOlat2 -->
 		<entity name="Yuml" cdata="&amp;#376;" /> <!--latin capital letter Y with diaeresis, U+0178 ISOlat2 -->
-		
+
 		<!-- Spacing Modifier Letters -->
 		<entity name="circ" cdata="&amp;#710;" /> <!--modifier letter circumflex accent, U+02C6 ISOpub -->
 		<entity name="tilde" cdata="&amp;#732;" /> <!--small tilde, U+02DC ISOdia -->
-		
+
 		<!-- General Punctuation -->
 		<entity name="ensp" cdata="&amp;#8194;"/> <!--en space, U+2002 ISOpub -->
 		<entity name="emsp" cdata="&amp;#8195;"/> <!--em space, U+2003 ISOpub -->

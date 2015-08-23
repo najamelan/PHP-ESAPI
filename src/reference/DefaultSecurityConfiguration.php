@@ -167,7 +167,7 @@ class DefaultSecurityConfiguration implements SecurityConfiguration
                 'SecurityConfiguration for ' .
                 '/esapi-properties/IntrusionDetector/event not found in ESAPI.xml.'
             );
-            
+
             return false;
         }
 
@@ -200,7 +200,7 @@ class DefaultSecurityConfiguration implements SecurityConfiguration
                 'SecurityConfiguration found no valid events in ' .
                 'the Intrusion Detection section.'
             );
-            
+
             return false;
         }
 
@@ -300,7 +300,7 @@ class DefaultSecurityConfiguration implements SecurityConfiguration
                 'getESAPIValidationExpression: No regular ' .
                 'expressions in the config file.'
             );
-            
+
             return false;
         }
 
@@ -328,7 +328,7 @@ class DefaultSecurityConfiguration implements SecurityConfiguration
                 'getESAPIValidationExpression: Cannot find ' .
                 'regular expression: ' . $type
             );
-            
+
             return false;
         }
     }

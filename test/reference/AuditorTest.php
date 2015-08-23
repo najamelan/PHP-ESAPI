@@ -52,7 +52,7 @@ class AuditorTest extends PHPUnit_Framework_TestCase
      * @var boolean
      */
     private $logfileIsReadable = false;
-    
+
     protected function setUp()
     {
         $this->logFileLoc = getLogFileLoc();
@@ -975,7 +975,7 @@ class AuditorTest extends PHPUnit_Framework_TestCase
         $expected = $this->getExpected('FATAL', 'SECURITY', true, "{$r}_{$r}");
         $this->testLogger->fatal(Auditor::SECURITY, true, "{$r}\n{$r}");
         $result = $this->verifyLogEntry($expected, $testMsg);
-        
+
         $this->assertTrue($result, $failMessage);
     }
 
@@ -1000,7 +1000,7 @@ class AuditorTest extends PHPUnit_Framework_TestCase
         $expected = $this->getExpected('FATAL', 'SECURITY', true, "{$r}&amp;{$r}");
         $this->testLogger->fatal(Auditor::SECURITY, true, "{$r}&{$r}");
         $result = $this->verifyLogEntry($expected, $testMsg);
-        
+
         $this->assertTrue($result, $failMessage);
     }
 

@@ -46,8 +46,8 @@ class XMLEntityCodecTest extends PHPUnit_Framework_TestCase
     // these immune characters are the ones defined in DefaultEncoder.
     private $_immune_xml     = array(',', '.', '-', '_', ' ');
     private $_immune_xmlattr = array(',', '.', '-', '_');
-    
-    
+
+
     /**
      * Use a new Codec for each test.
      */

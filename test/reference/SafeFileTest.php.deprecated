@@ -61,7 +61,7 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
         if ($sf && !$sf->isReadable()) {
             $this->fail("{$file} is not readable");
         }
-        
+
         $this->assertTrue($sf && $sf->isReadable());
     }
 
@@ -94,11 +94,11 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
         }
 
         $sf = new SafeFile($file);
-        
+
         if (!$sf->isReadable()) {
             $this->fail("{$file} is not readable - %s");
         }
-        
+
         $this->assertTrue($sf->isReadable());
     }
 
@@ -242,7 +242,7 @@ class SafeFileTest extends PHPUnit_Framework_TestCase
                 //Expected
             }
         }
-        
+
         $this->assertTrue(true);
     }
 

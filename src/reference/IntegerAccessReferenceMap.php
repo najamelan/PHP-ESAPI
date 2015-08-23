@@ -184,13 +184,13 @@ class IntegerAccessReferenceMap implements AccessReferenceMap
             $indirect = null;
             $direct = $directIterator->current();
             $hash = $this->getHash($direct);
-            
+
             // Try to get the old direct object reference (if it exists)
             // otherwise, create a new entry
             if (!empty($direct) && $dtoi_old->offsetExists($hash)) {
                 $indirect = $dtoi_old->offsetGet($hash);
             }
-            
+
             if (empty($indirect)) {
                 $indirect = $this->getUniqueReference();
             }

@@ -127,14 +127,14 @@ class StringValidationRule extends BaseValidationRule
                 'string $pattern'
             );
         }
-        
+
         if ($pattern == '') {
             ESAPI::getLogger()->warning(
                 ESAPILogger::SECURITY, false,
                 'addBlacklistPattern received $pattern as an empty string.'
             );
         }
-        
+
         array_push($this->blacklistPatterns, $pattern);
     }
 

@@ -51,7 +51,7 @@ class JavaScriptCodec extends Codec
     {
         parent::__construct();
     }
-    
+
     /**
      * Returns backslash encoded numeric format. Does not use backslash
      * character escapes such as, \" or \' as these may cause parsing problems.
@@ -66,31 +66,31 @@ class JavaScriptCodec extends Codec
         //detect encoding, special-handling for chr(172) and chr(128) to
         //chr(159) which fail to be detected by mb_detect_encoding()
         $initialEncoding = $this->detectEncoding($c);
-        
+
         // Normalize encoding to UTF-32
         $_4ByteUnencodedOutput = $this->normalizeEncoding($c);
-        
+
         // Start with nothing; format it to match the encoding of the string
         //passed as an argument.
         $encodedOutput = mb_convert_encoding("", $initialEncoding);
-        
+
         // Grab the 4 byte character.
         $_4ByteCharacter = $this->forceToSingleCharacter($_4ByteUnencodedOutput);
-        
+
         // Get the ordinal value of the character.
         list(, $ordinalValue) = unpack("N", $_4ByteCharacter);
-        
+
         // check for immune characters
         if ($this->containsCharacter($_4ByteCharacter, $immune)) {
             return $encodedOutput . chr($ordinalValue);
         }
-        
+
         // Check for alphanumeric characters
         $hex = $this->getHexForNonAlphanumeric($_4ByteCharacter);
         if ($hex === null) {
             return $encodedOutput . chr($ordinalValue);
         }
-        
+
         // Do not use these shortcuts as they can be used to break out of a context
         // if (ch == 0x00) return "\\0";
         // if (ch == 0x08) return "\\b";
@@ -102,19 +102,19 @@ class JavaScriptCodec extends Codec
         // if (ch == 0x22) return "\\\"";
         // if (ch == 0x27) return "\\'";
         // if (ch == 0x5c) return "\\\\";
-        
+
         // encode up to 256 with \\xHH
         $pad = mb_substr("00", mb_strlen($hex));
         if ($ordinalValue < 256) {
             return "\\x" . $pad . strtoupper($hex);
         }
-        
+
         // otherwise encode with \\uHHHH
         $pad = mb_substr("0000", mb_strlen($hex));
 
         return "\\u" . $pad . strtoupper($hex);
     }
-    
+
     /**
      * Returns the decoded version of the character starting at index, or
      * NULL if no decoding is possible.
@@ -131,7 +131,7 @@ class JavaScriptCodec extends Codec
     {
         // Assumption/prerequisite: $c is a UTF-32 encoded string
         $_4ByteEncodedInput = $input;
-        
+
         if (mb_substr($_4ByteEncodedInput, 0, 1, "UTF-32") === null) {
             // 1st character is null, so return null
             // eat the 1st character off the string and return null
@@ -140,7 +140,7 @@ class JavaScriptCodec extends Codec
                 'encodedString' => null
             );
         }
-        
+
         // if this is not an encoded character, return null
         if (mb_substr($_4ByteEncodedInput, 0, 1, "UTF-32") != $this->normalizeEncoding('\\')) {
             // 1st character is not part of encoding pattern, so return null
@@ -149,10 +149,10 @@ class JavaScriptCodec extends Codec
                 'encodedString' => null
             );
         }
-        
+
         // 1st character is part of encoding pattern...
         $second = mb_substr($_4ByteEncodedInput, 1, 1, "UTF-32");
-        
+
         // There is no second character, return null.
         if ($second == '') {
             return array(
@@ -160,7 +160,7 @@ class JavaScriptCodec extends Codec
                 'encodedString' => null
             );
         }
-        
+
         // \0 collides with the octal decoder and is non-standard
         // if (second.charValue() == '0') {
         //    return Character.valueOf((char)0x00);
@@ -286,14 +286,14 @@ class JavaScriptCodec extends Codec
                     => mb_substr($_4ByteEncodedInput, 0, 1, "UTF-32") . $digits
             );
         }
-        
+
         // ignore the backslash and return the character
         return array(
             'decodedCharacter' => $second,
             'encodedString' => mb_substr($_4ByteEncodedInput, 0, 2, "UTF-32")
         );
     }
-    
+
     /**
      * Utility function.
      *
@@ -309,7 +309,7 @@ class JavaScriptCodec extends Codec
         for ($i = 0; $i < $inputLength; $i++) {
             // Get the ordinal value of the character.
             list(, $ordinalValue) = unpack("N", mb_substr($input, $i, 1, "UTF-32"));
-            
+
             // if character is a hex digit, add it and keep on going
             if (preg_match("/^[0-9a-fA-F]/", chr($ordinalValue))) {
                 // hex digit found, add it and continue...
@@ -324,10 +324,10 @@ class JavaScriptCodec extends Codec
                 break;
             }
         }
-        
+
         try {
             // trying to convert hexString to integer...
-            
+
             $parsedInteger = (int) hexdec($hexString);
             if ($parsedInteger <= 0xFF) {
                 $parsedCharacter = chr($parsedInteger);

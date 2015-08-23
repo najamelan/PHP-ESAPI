@@ -22,7 +22,7 @@ require_once __DIR__ .'/../../src/ESAPI.php';
 class LDAPCodecTest extends PHPUnit_Framework_TestCase
 {
 	private $ldapCodec = null;
-	
+
 	function setUp()
 	{
 		global $ESAPI;
@@ -31,37 +31,37 @@ class LDAPCodecTest extends PHPUnit_Framework_TestCase
 		{
 			$ESAPI = new ESAPI();
 		}
-		
+
 		// $this->ldapCodec = new LDAPCodec();
 	}
-		
+
 	function testEncode()
 	{
 		$immune = array("");
-		
+
 		$this->fail();
-		
+
 		$this->assertEquals( 'TODO', $this->ldapCodec->encode($immune, "esapi)(|(password=*)") );
 	}
-	
+
 	function testEncodeCharacter()
 	{
 		$immune = array("");
 		$this->fail();
 		$this->assertEquals( "TODO", $this->ldapCodec->encode($immune, "<") );
-	}	
-	
+	}
+
 	function testDecode()
 	{
 		$this->fail();
 		$this->assertEquals( "esapi)(|(password=*)", $this->ldapCodec->decode('TODO') );
 	}
-		
+
 	function testDecodeCharacter()
 	{
 		$this->fail();
 		$this->assertEquals( "<", $this->ldapCodec->decode("TODO") );
 	}
-	
+
 }
 ?>

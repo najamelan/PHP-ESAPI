@@ -170,7 +170,7 @@ class SafeRequest
     public function getAuthType()
     {
         $defaultValue = '';
-        
+
         if ($this->_authType !== null) {
             return $this->_authType;
         } else {
@@ -193,7 +193,7 @@ class SafeRequest
         if ($authType !== null) {
             $this->_authType = $authType;
         }
-        
+
         return $this->_authType;
     }
 
@@ -206,7 +206,7 @@ class SafeRequest
     public function getContentLength()
     {
         $defaultValue = 0;
-        
+
         if ($this->_contentLength !== null) {
             return $this->_contentLength;
         } else {
@@ -235,7 +235,7 @@ class SafeRequest
     public function getContentType()
     {
         $defaultValue = '';
-        
+
         if ($this->_contentType !== null) {
             return $this->_contentType;
         } else {
@@ -261,7 +261,7 @@ class SafeRequest
         if ($contentType !== null) {
             $this->_contentType = $contentType;
         }
-        
+
         return $this->_contentType;
     }
 
@@ -274,7 +274,7 @@ class SafeRequest
     public function getPathInfo()
     {
         $defaultValue = '';
-        
+
         if ($this->_pathInfo !== null) {
             return $this->_pathInfo;
         } else {
@@ -300,7 +300,7 @@ class SafeRequest
         if ($pathInfo !== null) {
             $this->_pathInfo = $pathInfo;
         }
-        
+
         return $this->_pathInfo;
     }
 
@@ -313,7 +313,7 @@ class SafeRequest
     public function getPathTranslated()
     {
         $defaultValue = '';
-        
+
         if ($this->_pathTranslated !== null) {
             return $this->_pathTranslated;
         } else {
@@ -352,7 +352,7 @@ class SafeRequest
     public function getQueryString()
     {
         $defaultValue = '';
-        
+
         if ($this->_queryString !== null) {
             return $this->_queryString;
         } else {
@@ -391,7 +391,7 @@ class SafeRequest
     public function getRemoteAddr()
     {
         $defaultValue = '';
-        
+
         if ($this->_remoteAddr !== null) {
             return $this->_remoteAddr;
         } else {
@@ -428,7 +428,7 @@ class SafeRequest
     public function getRemoteHost()
     {
         $defaultValue = '';
-        
+
         if ($this->_remoteHost !== null) {
             return $this->_remoteHost;
         } else {
@@ -465,7 +465,7 @@ class SafeRequest
     public function getRemoteUser()
     {
         $defaultValue = '';
-        
+
         if ($this->_remoteUser !== null) {
             return $this->_remoteUser;
         } else {
@@ -504,7 +504,7 @@ class SafeRequest
     public function getMethod()
     {
         $defaultValue = '';
-        
+
         if ($this->_method !== null) {
             return $this->_method;
         } else {
@@ -540,7 +540,7 @@ class SafeRequest
     public function getRequestURI()
     {
         $defaultValue = '';
-        
+
         if ($this->_requestURI !== null) {
             return $this->_requestURI;
         } else {
@@ -578,7 +578,7 @@ class SafeRequest
     public function getServerName()
     {
         $defaultValue = '';
-        
+
         if ($this->_serverName !== null) {
             return $this->_serverName;
         } else {
@@ -619,7 +619,7 @@ class SafeRequest
     public function getServerPort()
     {
         $defaultValue = 0;
-        
+
         if ($this->_serverPort !== null) {
             return $this->_serverPort;
         } else {

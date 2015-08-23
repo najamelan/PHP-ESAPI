@@ -161,7 +161,7 @@ interface SecurityConfiguration
      * @return array an array of allowed includes
      */
     public function getAllowedIncludes();
-    
+
     /**
      * getAllowedResources returns an array of resources (files) that are permitted.
      * This is a new addition for the ESAPI for PHP project, but may be relevant
@@ -170,7 +170,7 @@ interface SecurityConfiguration
      * @return array an array of allowed resources
      */
     public function getAllowedResources();
-    
+
     /**
      * Gets the maximum number of old password hashes that should be retained.
      * These hashes can be used to ensure that the user doesn't reuse the specified
@@ -285,7 +285,7 @@ interface SecurityConfiguration
      * @return int the maximum size of a single log file (in bytes).
      */
     public function getMaxLogFileSize();
-    
+
     /**
      * Get the specified validation pattern from the ESAPI configuration properties
      * file.
@@ -295,7 +295,7 @@ interface SecurityConfiguration
      * @return string the regular expression.
      */
     public function getValidationPattern($type);
-    
+
     /**
      * getWorkingDirectory returns the default directory where processes will be
      * executed by the Executor.

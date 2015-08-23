@@ -54,12 +54,12 @@ require_once __DIR__ . '/Codec.php';
  */
 class XMLEntityCodec extends Codec
 {
-    
+
     private static $_characterToEntityMap = array();
     private static $_entityToCharacterMap = array();
     private static $_longestEntity = 0;
     private static $_mapIsInitialized = false;
-    
+
     /**
      * Public Constructor calls the parent construcor and initialises the character
      * to entity and entity to character maps.
@@ -67,7 +67,7 @@ class XMLEntityCodec extends Codec
     public function __construct()
     {
         parent::__construct();
-        
+
         if (self::$_mapIsInitialized == false) {
             $this->_initializeMaps();
             self::$_mapIsInitialized = true;
@@ -141,13 +141,13 @@ class XMLEntityCodec extends Codec
             // return null
             return array('decodedCharacter' => null, 'encodedString' => null);
         }
-    
+
         // if this is not an encoded character, return null
         if (mb_substr($input, 0, 1, 'UTF-32') != $this->normalizeEncoding('&')) {
             // 1st character is not part of encoding pattern, so return null
             return array('decodedCharacter' => null,'encodedString' => null);
         }
-    
+
         // 1st character is part of encoding pattern...
 
         // test for numeric encodings
@@ -159,7 +159,7 @@ class XMLEntityCodec extends Codec
                 'encodedString' => mb_substr($input, 0, 1, 'UTF-32')
             );
         }
-    
+
         if (mb_substr($input, 1, 1, 'UTF-32') == $this->normalizeEncoding('#')) {
             // 2nd character is hash, so handle numbers...
             $decodeResult = $this->_getNumericEntity($input);
@@ -170,7 +170,7 @@ class XMLEntityCodec extends Codec
         } else {
             // Get the ordinal value of the 2nd character.
             list(, $ordinalValue) = unpack("N", mb_substr($input, 1, 1, 'UTF-32'));
-        
+
             if (preg_match("/^[a-zA-Z]/", chr($ordinalValue))) {
                 // 2nd character is an alphabetical char, so handle entities...
                 $decodeResult = $this->_getNamedEntity($input);
@@ -183,7 +183,7 @@ class XMLEntityCodec extends Codec
                 return array('decodedCharacter' => null, 'encodedString' => null);
             }
         }
-    
+
         // at this stage: decodedCharacter could only be null, encodedString could
         // only be anything between 1st character (i.e. '&') and all remaining
         // characters
@@ -213,7 +213,7 @@ class XMLEntityCodec extends Codec
             // _getNumericEntity, so return null
             return array('decodedCharacter' => null,'encodedString' => null);
         }
-    
+
         if (mb_substr($input, 2, 1, 'UTF-32') == $this->normalizeEncoding('x')
             || mb_substr($input, 2, 1, 'UTF-32') == $this->normalizeEncoding('X')
         ) {
@@ -246,17 +246,17 @@ class XMLEntityCodec extends Codec
             // so return null
             return array('decodedCharacter' => null, 'encodedString' => null);
         }
-    
+
         // get numeric characters up until first occurance of ';', return null if
         // format doesn't conform
         $integerStringAscii = '';
         $integerString = mb_substr($input, 0, 2, 'UTF-32');
         $inputLength = mb_strlen($input, 'UTF-32');
-    
+
         for ($i = 2; $i < $inputLength; $i++) {
             // Get the ordinal value of the character.
             list(, $ordinalValue) = unpack("N", mb_substr($input, $i, 1, 'UTF-32'));
-        
+
             // if character is a digit, add it and keep on going
             if (preg_match('/^[0-9]/', chr($ordinalValue))) {
                 $integerString .= mb_substr($input, $i, 1, 'UTF-32');
@@ -270,7 +270,7 @@ class XMLEntityCodec extends Codec
                 break;
             }
         }
-    
+
         try {
             $parsedInteger = (int) $integerStringAscii;
             $parsedCharacter = $this->normalizeEncoding(chr($parsedInteger));
@@ -314,15 +314,15 @@ class XMLEntityCodec extends Codec
             // return null
             return array('decodedCharacter' => null, 'encodedString' => null);
         }
-    
+
         $hexString = '';
         $trailingSemicolon = '';
         $inputLength = mb_strlen($input, 'UTF-32');
-    
+
         for ($i = 3; $i < $inputLength; $i++) {
             // Get the ordinal value of the character.
             list(, $ordinalValue) = unpack("N", mb_substr($input, $i, 1, 'UTF-32'));
-        
+
             if (preg_match('/^[0-9a-fA-F]/', chr($ordinalValue))) {
                 // hex digit found, add it and continue...
                 $hexString .= mb_substr($input, $i, 1, 'UTF-32');
@@ -335,7 +335,7 @@ class XMLEntityCodec extends Codec
                 break;
             }
         }
-    
+
         // try to convert hexString to integer...
         try {
             $parsedInteger = (int) hexdec($hexString);
@@ -397,7 +397,7 @@ class XMLEntityCodec extends Codec
             // so return null
             return array('decodedCharacter' => null, 'encodedString' => null);
         }
-    
+
         // Get the first alpanum input character
         $inputCaseUnchanged = mb_substr($input, 1, 1, 'UTF-32');
         if ($inputCaseUnchanged === '') {
@@ -405,32 +405,32 @@ class XMLEntityCodec extends Codec
         }
         list(, $ordinalValue) = unpack('N', $inputCaseUnchanged);
         $asciiCaseUnchanged = chr($ordinalValue);
-    
+
         // Is it alphanumeric
         $alphanums = str_split(Encoder::CHAR_ALPHANUMERICS, 1);
         if ($this->containsCharacter($inputCaseUnchanged, $alphanums) !== true) {
             return array('decodedCharacter' => null, 'encodedString' => null);
         }
-    
+
         // Preserving the case of the first character
         $inputCaseLowerPreserveFirst = $inputCaseUnchanged;
         $asciiCaseLowerPreserveFirst = $asciiCaseUnchanged;
-    
+
         // The first character as lower case.
         $inputCaseLower = strtolower($inputCaseUnchanged);
         $ordinalValue = null;
         list(, $ordinalValue) = unpack('N', $inputCaseLower);
         $asciiCaseLower = chr($ordinalValue);
-    
+
         $entityValue   = null; // the most recently found entity name
         $originalInput = null; // the corresponding original input
-    
+
         // If first char is lowercase CaseLowerPreserveFirst can be discarded.
         if ($asciiCaseUnchanged === $asciiCaseLower) {
             $inputCaseLowerPreserveFirst = null;
             $asciiCaseLowerPreserveFirst = null;
         }
-    
+
         // Test for a valid entity
         if ($asciiCaseLowerPreserveFirst !== null
             && array_key_exists($asciiCaseLower, self::$_entityToCharacterMap)
@@ -438,12 +438,12 @@ class XMLEntityCodec extends Codec
             $entityValue = self::$_entityToCharacterMap[$asciiCaseLower];
             $originalInput = $inputCaseLower;
         }
-    
+
         if (array_key_exists($asciiCaseUnchanged, self::$_entityToCharacterMap)) {
             $entityValue = self::$_entityToCharacterMap[$asciiCaseUnchanged];
             $originalInput = $inputCaseUnchanged;
         }
-    
+
         // Loop through remaining characters or as far as the longest known entity.
         $limit = min(mb_strlen($input, 'UTF-32'), self::$_longestEntity);
         for ($i = 2; $i < $limit; $i++) {
@@ -474,7 +474,7 @@ class XMLEntityCodec extends Codec
                 $asciiCaseLowerPreserveFirst .= chr($ordValL);
             }
             $asciiCaseLower .= chr($ordValL);
-        
+
             if ($asciiCaseLower !== $asciiCaseUnchanged
                 && array_key_exists($asciiCaseLower, self::$_entityToCharacterMap)
             ) {
@@ -498,7 +498,7 @@ class XMLEntityCodec extends Codec
         if ($originalInput !== null) {
             $originalInput = $this->normalizeEncoding('&') . $originalInput;
         }
-    
+
         return array(
             'decodedCharacter' => $entityValue,
             'encodedString'    => $originalInput,
@@ -784,7 +784,7 @@ class XMLEntityCodec extends Codec
         foreach ($entityNamesForEncoding as $name => $ord) {
             $character = pack('N', $ord);
             self::$_characterToEntityMap[$character] = $name;
-            
+
             // get the length of the longest entity name
             $len = mb_strlen($name, 'ASCII');
             if ($len > $longestEntity) {
@@ -796,7 +796,7 @@ class XMLEntityCodec extends Codec
         foreach ($entityNamesForDecoding as $name => $ord) {
             $character = pack('N', $ord);
             self::$_entityToCharacterMap[$name] = $character;
-            
+
             // get the length of the longest entity name
             $len = mb_strlen($name, 'ASCII');
             if ($len > $longestEntity) {

@@ -57,7 +57,7 @@ if ($req->getParameter('req') == 'test1') {
         $view .= '<p>Your Request did NOT contain the CSRF token we have in your session. Did you tamper??</p>';
     }
     $tests['token'] .= ' - DONE';
-    
+
     $oldSessID = session_id();
     $sr = $util->changeSessionIdentifier();
     if ($sr === true) {
@@ -70,7 +70,7 @@ if ($req->getParameter('req') == 'test1') {
         $view .= '<p>Your session was not regenerated. Is the session started?';
     }
     $tests['csi'] .= ' - DONE';
-    
+
     $util->killAllCookies($req);
     $view .= '<p>The response should have requested your User Agent to delete your cookies. Let us see if it will honour that request.';
     $view .= " <a href=\"{$uri}?req=test2\">click me!</a></p>";
@@ -86,7 +86,7 @@ if ($req->getParameter('req') == 'test1') {
     }
     $view .= '</p>';
     $tests['cookie'] .= ' - DONE';
-    
+
     $a = ESAPI::getAuditor('HTTPUtilsExtraTests');
     $log = $util->logHTTPRequest($req, $a);
     $logO = $util->logHTTPRequestObfuscate($req, $a, array('req'));
@@ -111,7 +111,7 @@ $view .= '</ul>';
 ?>
 <html>
 <head>
-	
+
 </head>
 <body>
 	<div><?php echo $view; ?></div>

@@ -54,7 +54,7 @@ class CSSCodec extends Codec
     {
         parent::__construct();
     }
-    
+
     /**
      * {@inheritdoc}
      *
@@ -65,20 +65,20 @@ class CSSCodec extends Codec
         //detect encoding, special-handling for chr(172) and chr(128) to chr(159)
         //which fail to be detected by mb_detect_encoding()
         $initialEncoding = $this->detectEncoding($c);
-        
+
         // Normalize encoding to UTF-32
         $_4ByteUnencodedOutput = $this->normalizeEncoding($c);
-        
+
         // Start with nothing; format it to match the encoding of the string passed
         //as an argument.
         $encodedOutput = mb_convert_encoding("", $initialEncoding);
-        
+
         // Grab the 4 byte character.
         $_4ByteCharacter = $this->forceToSingleCharacter($_4ByteUnencodedOutput);
-        
+
         // Get the ordinal value of the character.
         list(, $ordinalValue) = unpack("N", $_4ByteCharacter);
-        
+
         // CSS 2.1 section 4.1.3: "It is undefined in CSS 2.1 what happens if a
         // style sheet does contain a character with Unicode codepoint zero."
         if ($ordinalValue === 0) {
@@ -86,23 +86,23 @@ class CSSCodec extends Codec
               "InvalidArgumentException - Chracter value zero is not valid in CSS"
             );
         }
-        
+
         // check for immune characters
         if ($this->containsCharacter($_4ByteCharacter, $immune)) {
             // character is immune, therefore return character...
             return $encodedOutput . chr($ordinalValue);
         }
-        
+
         // check for alphanumeric characters
         $hex = $this->getHexForNonAlphanumeric($_4ByteCharacter);
         if ($hex === null) {
             //character is alphanumric, therefore return the character...
             return $encodedOutput . chr($ordinalValue);
         }
-        
+
         return "\\" . $hex . " ";
     }
-    
+
     /**
      * {@inheritdoc}
      *
@@ -123,7 +123,7 @@ class CSSCodec extends Codec
                 'encodedString' => null
             );
         }
-        
+
         // if this is not an encoded character, return null
         if (mb_substr($input, 0, 1, "UTF-32") != $this->normalizeEncoding("\\")) {
             // 1st character is not part of encoding pattern, so return null
@@ -132,9 +132,9 @@ class CSSCodec extends Codec
                 'encodedString' => null
             );
         }
-        
+
         // 1st character is part of encoding pattern...
-        
+
         // look for \HHH format
         // Search for up to 6 hex digits following until a space
         $potentialHexString = $this->normalizeEncoding('');
@@ -197,13 +197,13 @@ class CSSCodec extends Codec
                 'encodedString' => mb_substr($input, 0, 1, "UTF-32")
             );
         }
-        
+
         return array(
             'decodedCharacter' => null,
             'encodedString' => null
         );
     }
-    
+
     /**
      * Parse a hex encoded entity (special purposes for CSSCodec).
      *
@@ -219,7 +219,7 @@ class CSSCodec extends Codec
         for ($i = 0; $i < $inputLength; $i++) {
             // Get the ordinal value of the character.
             $_4ByteCharacter = mb_substr($input, $i, 1, "UTF-32");
-            
+
             // if character is a hex digit, add it and keep on going
             if ($this->isHexDigit($_4ByteCharacter)) {
                 // hex digit found, add it and continue...
@@ -230,7 +230,7 @@ class CSSCodec extends Codec
         }
         try {
             // trying to convert hexString to integer...
-            
+
             $parsedInteger = (int) hexdec($hexString);
             if ($parsedInteger == 0) {
                 // codepoint of zero not recognised in CSS, therefore return null

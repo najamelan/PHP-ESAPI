@@ -289,7 +289,7 @@ class DefaultEncoder implements Encoder
         if ($input === null) {
             return null;
         }
-        
+
         if ($codec instanceof Codec == false) {
             ESAPI::getLogger('Encoder')->error(
                 ESAPILogger::SECURITY,
@@ -299,7 +299,7 @@ class DefaultEncoder implements Encoder
 
             return null;
         }
-        
+
         return $codec->encode($this->_immune_os, $input);
     }
 

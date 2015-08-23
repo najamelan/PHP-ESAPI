@@ -22,31 +22,31 @@ require_once __DIR__.'/../../src/codecs/VBScriptCodec.php';
 class VBScriptCodecTest extends PHPUnit_Framework_TestCase
 {
     private $vbScriptCodec;
-    
+
     protected function setUp()
     {
         $this->vbScriptCodec = new VBScriptCodec();
     }
-        
+
     public function testEncode()
     {
         $immune = array(" ");
 
         $this->assertEquals(" \"!\"@\"$\"%\"(\")\"=\"+\"{\"}\"[\"]\"\"\"<script\">", $this->vbScriptCodec->encode($immune, " !@$%()=+{}[]\"<script>"));
     }
-    
+
     public function testEncodeCharacter()
     {
         $immune = array(" ");
-        
+
         $this->assertEquals("\"<", $this->vbScriptCodec->encode($immune, "<"));
     }
-    
+
     public function testDecode()
     {
         $this->assertEquals(" !@$%()=+{}[]\"", $this->vbScriptCodec->decode(" \"!\"@\"$\"%\"(\")\"=\"+\"{\"}\"[\"]\"\""));
     }
-        
+
     public function testDecodeCharacter()
     {
         $this->assertEquals("<", $this->vbScriptCodec->decode("\"<"));

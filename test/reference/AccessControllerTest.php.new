@@ -1,16 +1,16 @@
 <?php
 /**
  * OWASP Enterprise Security API (ESAPI)
- * 
+ *
  * This file is part of the Open Web Application Security Project (OWASP)
  * Enterprise Security API (ESAPI) project. For details, please see
  * <a href='http://www.owasp.org/index.php/ESAPI'>http://www.owasp.org/index.php/ESAPI</a>.
  *
  * Copyright (c) 2007 - 2009 The OWASP Foundation
- * 
+ *
  * The ESAPI is published by OWASP under the BSD license. You should read and accept the
  * LICENSE before you use, modify, and/or redistribute this software.
- * 
+ *
  * @author Andrew van der Stock (vanderaj @ owasp.org)
  * @created 2009
  */
@@ -33,7 +33,7 @@ class AccessControllerTest extends PHPUnit_Framework_TestCase
     {
         //$this->testLogger = null; // TODO - working?
     }
-    
+
     /**
      * Test of isAuthorizedForURL method, of class AccessController.
      *
@@ -43,9 +43,9 @@ class AccessControllerTest extends PHPUnit_Framework_TestCase
     {
         $instance = ESAPI::getAccessController();
         $auth = ESAPI::getAuthenticator();
-        
+
         $auth->setCurrentUser($auth->getUser('testuser1'));
-    
+
         assertFalse($instance->isAuthorizedForURL('/nobody'));
         assertFalse($instance->isAuthorizedForURL('/test/admin'));
         assertTrue($instance->isAuthorizedForURL('/test/user'));
@@ -57,9 +57,9 @@ class AccessControllerTest extends PHPUnit_Framework_TestCase
         assertFalse($instance->isAuthorizedForURL('/test/moderator'));
         assertTrue($instance->isAuthorizedForURL('/test/profile'));
         assertFalse($instance->isAuthorizedForURL('/upload'));
-    
+
         $auth->setCurrentUser($auth->getUser('testuser2'));
-    
+
         assertFalse($instance->isAuthorizedForURL('/nobody'));
         assertTrue($instance->isAuthorizedForURL('/test/admin'));
         assertFalse($instance->isAuthorizedForURL('/test/user'));
@@ -69,9 +69,9 @@ class AccessControllerTest extends PHPUnit_Framework_TestCase
         assertFalse($instance->isAuthorizedForURL('/test/moderator'));
         assertTrue($instance->isAuthorizedForURL('/test/profile'));
         assertFalse($instance->isAuthorizedForURL('/upload'));
-    
+
         $auth->setCurrentUser($auth->getUser('testuser3'));
-    
+
         assertFalse($instance->isAuthorizedForURL('/nobody'));
         assertTrue($instance->isAuthorizedForURL('/test/admin'));
         assertTrue($instance->isAuthorizedForURL('/test/user'));
@@ -81,7 +81,7 @@ class AccessControllerTest extends PHPUnit_Framework_TestCase
         assertFalse($instance->isAuthorizedForURL('/test/moderator'));
         assertTrue($instance->isAuthorizedForURL('/test/profile'));
         assertFalse($instance->isAuthorizedForURL('/upload'));
-    
+
         try {
             $instance->assertAuthorizedForURL('/test/admin');
             $instance->assertAuthorizedForURL('/nobody');
@@ -90,7 +90,7 @@ class AccessControllerTest extends PHPUnit_Framework_TestCase
             // expected
         }
     }
-    
+
     /**
      * Test of isAuthorizedForFunction method, of class AccessController.
      */
@@ -98,34 +98,34 @@ class AccessControllerTest extends PHPUnit_Framework_TestCase
     {
         $instance = ESAPI::getAccessController();
         $auth = ESAPI::getAuthenticator();
-        
+
         $auth->setCurrentUser($auth->getUser('testuser1'));
-    
+
         assertTrue($instance->isAuthorizedForFunction('/FunctionA'));
         assertFalse($instance->isAuthorizedForFunction('/FunctionAdeny'));
         assertFalse($instance->isAuthorizedForFunction('/FunctionB'));
         assertFalse($instance->isAuthorizedForFunction('/FunctionBdeny'));
         assertTrue($instance->isAuthorizedForFunction('/FunctionC'));
         assertFalse($instance->isAuthorizedForFunction('/FunctionCdeny'));
-    
+
         $auth->setCurrentUser($auth->getUser('testuser2'));
-    
+
         assertFalse($instance->isAuthorizedForFunction('/FunctionA'));
         assertFalse($instance->isAuthorizedForFunction('/FunctionAdeny'));
         assertTrue($instance->isAuthorizedForFunction('/FunctionB'));
         assertFalse($instance->isAuthorizedForFunction('/FunctionBdeny'));
         assertTrue($instance->isAuthorizedForFunction('/FunctionD'));
         assertFalse($instance->isAuthorizedForFunction('/FunctionDdeny'));
-    
+
         $auth->setCurrentUser($auth->getUser('testuser3'));
-    
+
         assertTrue($instance->isAuthorizedForFunction('/FunctionA'));
         assertFalse($instance->isAuthorizedForFunction('/FunctionAdeny'));
         assertTrue($instance->isAuthorizedForFunction('/FunctionB'));
         assertFalse($instance->isAuthorizedForFunction('/FunctionBdeny'));
         assertTrue($instance->isAuthorizedForFunction('/FunctionC'));
         assertFalse($instance->isAuthorizedForFunction('/FunctionCdeny'));
-    
+
         try {
             $instance->assertAuthorizedForFunction('/FunctionA');
             $instance->assertAuthorizedForFunction('/FunctionDdeny');
@@ -134,7 +134,7 @@ class AccessControllerTest extends PHPUnit_Framework_TestCase
             // expected
         }
     }
-    
+
     /**
      * Test of isAuthorizedForData method, of class AccessController.
      */
@@ -142,7 +142,7 @@ class AccessControllerTest extends PHPUnit_Framework_TestCase
     {
         $instance = ESAPI::getAccessController();
         $auth = ESAPI::getAuthenticator();
-        
+
         /*
          Class adminR = null;
         Class adminRW = null;
@@ -165,7 +165,7 @@ class AccessControllerTest extends PHPUnit_Framework_TestCase
         $System->o$ut->println('CLASS NOT FOUND.');
         $cnf->printStackTrace();
         }
-    
+
         //test User
         $auth->setCurrentUser($auth->getUser('testuser1'));
         assertTrue($instance->isAuthorizedForData('read', userRW));
@@ -219,28 +219,28 @@ class AccessControllerTest extends PHPUnit_Framework_TestCase
     {
         $instance = ESAPI::getAccessController();
         $auth = ESAPI::getAuthenticator();
-        
+
         $auth->setCurrentUser($auth->getUser('testuser1'));
-    
+
         assertTrue($instance->isAuthorizedForFile('/Dir/File1'));
         assertFalse($instance->isAuthorizedForFile('/Dir/File2'));
         assertTrue($instance->isAuthorizedForFile('/Dir/File3'));
         assertFalse($instance->isAuthorizedForFile('/Dir/ridiculous'));
-    
+
         $auth->setCurrentUser($auth->getUser('testuser2'));
-    
+
         assertFalse($instance->isAuthorizedForFile('/Dir/File1'));
         assertTrue($instance->isAuthorizedForFile('/Dir/File2'));
         assertTrue($instance->isAuthorizedForFile('/Dir/File4'));
         assertFalse($instance->isAuthorizedForFile('/Dir/ridiculous'));
-    
+
         $auth->setCurrentUser($auth->getUser('testuser3'));
-    
+
         assertTrue($instance->isAuthorizedForFile('/Dir/File1'));
         assertTrue($instance->isAuthorizedForFile('/Dir/File2'));
         assertFalse($instance->isAuthorizedForFile('/Dir/File5'));
         assertFalse($instance->isAuthorizedForFile('/Dir/ridiculous'));
-    
+
         try {
             $instance->assertAuthorizedForFile('/Dir/File1');
             $instance->assertAuthorizedForFile('/Dir/File6');
@@ -249,7 +249,7 @@ class AccessControllerTest extends PHPUnit_Framework_TestCase
             // expected
         }
     }
-    
+
     /**
      * Test of isAuthorizedForService method, of class AccessController.
      */
@@ -257,28 +257,28 @@ class AccessControllerTest extends PHPUnit_Framework_TestCase
     {
         $instance = ESAPI::getAccessController();
         $auth = ESAPI::getAuthenticator();
-        
+
         $auth->setCurrentUser($auth->getUser('testuser1'));
-    
+
         assertTrue($instance->isAuthorizedForService('/services/ServiceA'));
         assertFalse($instance->isAuthorizedForService('/services/ServiceB'));
         assertTrue($instance->isAuthorizedForService('/services/ServiceC'));
         assertFalse($instance->isAuthorizedForService('/test/ridiculous'));
-    
+
         $auth->setCurrentUser($auth->getUser('testuser2'));
-    
+
         assertFalse($instance->isAuthorizedForService('/services/ServiceA'));
         assertTrue($instance->isAuthorizedForService('/services/ServiceB'));
         assertFalse($instance->isAuthorizedForService('/services/ServiceF'));
         assertFalse($instance->isAuthorizedForService('/test/ridiculous'));
-    
+
         $auth->setCurrentUser($auth->getUser('testuser3'));
-    
+
         assertTrue($instance->isAuthorizedForService('/services/ServiceA'));
         assertTrue($instance->isAuthorizedForService('/services/ServiceB'));
         assertFalse($instance->isAuthorizedForService('/services/ServiceE'));
         assertFalse($instance->isAuthorizedForService('/test/ridiculous'));
-    
+
         try {
             $instance->assertAuthorizedForService('/services/ServiceD');
             $instance->assertAuthorizedForService('/test/ridiculous');

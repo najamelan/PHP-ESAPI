@@ -61,7 +61,7 @@ interface Sanitizer
      * @return string valid, "safe" HTML.
      */
     public function getSanitizedHTML($context, $input);
-    
+
     /**
      * Returns valid, "safe" email address.
      *
@@ -77,7 +77,7 @@ interface Sanitizer
      * @return string valid, "safe" email address.
      */
     public function getSanitizedEmailAddress($context, $input);
-    
+
     /**
      * Returns valid, "safe" URL.
      *

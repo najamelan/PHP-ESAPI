@@ -45,7 +45,7 @@ require_once  __DIR__.'/../Executor.php';
  */
 class DefaultExecutor implements Executor
 {
-        
+
     // Logger
     private $_auditor;
     private $_ApplicationName;
@@ -53,10 +53,10 @@ class DefaultExecutor implements Executor
     private $_LogLevel;
     private $_LogFileName;
     private $_MaxLogFileSize;
-    
+
     //SecurityConfiguration
     private $_config;
-    
+
     /**
      * Executor constructor.
      *
@@ -78,7 +78,7 @@ class DefaultExecutor implements Executor
 
         return $this->executeSystemCommandLonghand($executable, $params, $workdir, $logParams);
     }
-     
+
     /**
      * @inheritdoc
      */
@@ -87,21 +87,21 @@ class DefaultExecutor implements Executor
         try {
             // executable must exist
             $resolved = $executable;
-            
+
             // resolve environment variables on Windows
             if (substr(PHP_OS, 0, 3) == 'WIN') {
                 $resolved = preg_replace_callback('/%(\w+)%/', function ($matches) {
                     return getenv($matches[1]);
                 }, $executable);
             }
-            
+
             if (!file_exists($resolved)) {
                 throw new ExecutorException(
                     "Execution failure, No such " .
                     "executable: $executable"
                 );
             }
-            
+
             // executable must use canonical path
             if (substr(PHP_OS, 0, 3) == 'WIN') {
                 if (strcasecmp($resolved, realpath($resolved)) != 0) {
@@ -118,7 +118,7 @@ class DefaultExecutor implements Executor
                     );
                 }
             }
-                             
+
             // exact, absolute, canonical path to executable must be listed in ESAPI configuration
             $approved = $this->_config->getAllowedExecutables();
             if (substr(PHP_OS, 0, 3) == 'WIN') {
@@ -140,10 +140,10 @@ class DefaultExecutor implements Executor
                     );
                 }
             }
-        
+
             // escape any special characters in the parameters
             $params = array_map('escapeshellcmd', $params);
-             
+
             // working directory must exist
             $resolved_workdir = $workdir;
             if (substr(PHP_OS, 0, 3) == 'WIN') {
@@ -151,14 +151,14 @@ class DefaultExecutor implements Executor
                     return getenv($matches[1]);
                 }, $workdir);
             }
-            
+
             if (!file_exists($resolved_workdir)) {
                 throw new ExecutorException(
                     "Execution failure, No such" .
                     " working directory for running executable: $workdir"
                 );
             }
- 
+
             // run the command
             $paramstr = "";
             foreach ($params as $param) {

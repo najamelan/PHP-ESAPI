@@ -93,7 +93,7 @@ interface User
      * @return int The account id
      */
     public function getAccountId();
-    
+
     /**
      * Gets this user's account name.
      *
@@ -178,21 +178,21 @@ interface User
      * @param $session The session to associate with this user.
      */
     public function addSession($session);
-    
+
     /**
      * Removes a session for this User.
      *
      * @param $session The session to remove from being associated with this user.
      */
     public function removeSession($session);
-    
+
     /**
      * Returns the list of sessions associated with this User.
      *
      * @return array
      */
     public function getSessions();
-    
+
     /**
      * Increment failed login count.
      */
@@ -360,21 +360,21 @@ interface User
      * @param DateTime $lastFailedLoginTime The date and time when the user just failed to login correctly.
      */
     public function setLastFailedLoginTime(DateTime $lastFailedLoginTime);
-    
+
     /**
      * Set the last remote host address used by this user.
      *
      * @param string $remoteHost The address of the user's current source host.
      */
     public function setLastHostAddress($remoteHost);
-    
+
     /**
      * Set the time of the last successful login for this user.
      *
      * @param DateTime $lastLoginTime the date and time when the user just successfully logged in.
      */
     public function setLastLoginTime(DateTime $lastLoginTime);
-    
+
     /**
      * Set the time of the last password change for this user.
      *

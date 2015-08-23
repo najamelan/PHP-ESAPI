@@ -24,14 +24,14 @@ require_once dirname(__FILE__) . '/../Randomizer.php';
 
 class DefaultRandomizer implements Randomizer
 {
-    
+
     private $maxRand;
 
     public function __construct()
     {
         $this->maxRand = mt_getrandmax();
     }
-    
+
     /**
      * {@inheritDoc}
      */

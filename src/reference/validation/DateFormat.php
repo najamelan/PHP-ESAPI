@@ -47,12 +47,12 @@ class DateFormat
 {
 
     private $_format = array();
-        
+
     const DATE_SMALL = 'SMALL';
     const DATE_MEDIUM = 'MEDIUM';
     const DATE_LONG = 'LONG';
     const DATE_FULL = 'FULL';
-    
+
     /**
      * Constructor.
      *
@@ -65,7 +65,7 @@ class DateFormat
     {
         $this->setformat($format, $type);
     }
-    
+
     /**
      * Helper function.
      *

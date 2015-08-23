@@ -123,7 +123,7 @@ class DefaultSanitizer implements Sanitizer
 
         return $uvr->sanitize($context, $input);
     }
-    
+
     /**
      * Returns valid, "safe" English language word based on the provided guess.
      *
@@ -138,7 +138,7 @@ class DefaultSanitizer implements Sanitizer
     public function getSanitizedWord($context, $input)
     {
         $wvr = new WordValidationRule('Word_Validator', $this->encoder);
-        
+
         return $wvr->sanitize($context, $input);
     }
 }
