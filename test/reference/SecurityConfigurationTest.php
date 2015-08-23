@@ -24,14 +24,6 @@ require_once __DIR__.'/../../src/reference/DefaultSecurityConfiguration.php';
 
 class SecurityConfigurationTest extends PHPUnit_Framework_TestCase
 {
-    public function setUp()
-    {
-    }
-
-    public function tearDown()
-    {
-    }
-
     public function testConfigExists()
     {
         $this->assertTrue(file_exists(__DIR__ . '/../testresources/ESAPI.xml'));

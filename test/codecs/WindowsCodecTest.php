@@ -23,15 +23,11 @@ class WindowsCodecTest extends PHPUnit_Framework_TestCase
 {
     private $windowsCodec;
     
-    public function setUp()
+    protected function setUp()
     {
         $this->windowsCodec = new WindowsCodec();
     }
 
-    public function tearDown()
-    {
-    }
-    
     public function testEncode()
     {
         $immune = array();

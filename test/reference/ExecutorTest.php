@@ -31,7 +31,7 @@ class ExecutorTest extends PHPUnit_Framework_TestCase
     const PLATFORM_WINDOWS    = 1;
     const PLATFORM_UNIX    = 2;
      
-    public function setUp()
+    protected function setUp()
     {
         if (substr(PHP_OS, 0, 3) == 'WIN') {
             $this->_os = self::PLATFORM_WINDOWS;
@@ -40,16 +40,12 @@ class ExecutorTest extends PHPUnit_Framework_TestCase
             $this->_workdir = '%SYSTEMROOT%\\Temp';
         } else {
             $this->_os = self::PLATFORM_UNIX;
-            $this->_executable = '/bin/sh';
+            $this->_executable = realpath('/bin/sh');
             $this->_params = array("-c", "'ls /'");
             $this->_workdir = '/tmp';
         }
         
         $this->_instance = new DefaultExecutor();
-    }
-        
-    public function tearDown()
-    {
     }
         
     /**
@@ -179,7 +175,7 @@ class ExecutorTest extends PHPUnit_Framework_TestCase
         }
                 
         try {
-            $this->_params[] = "c:\\autoexec.bat c:\\config.sys";
+            $this->_params[] = "%SYSTEMROOT%\\explorer.exe %SYSTEMROOT%\\notepad.exe";
             $result = $this->_instance->executeSystemCommand($this->_executable, $this->_params);
             $this->assertNotNull($result);
         } catch (ExecutorException $e) {

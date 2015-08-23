@@ -56,7 +56,7 @@ class StringUtilities
      *
      * @return string the stripped header
      */
-    public static function stripControls($input)
+    public static function stripControls( $input )
     {
         if (empty($input)) {
             return '';
@@ -65,8 +65,8 @@ class StringUtilities
         $i = str_split($input);
 
         $sb = '';
-        foreach ($i as $c) {
-            if ($c > chr(32) && $c < chr(127)) {
+        foreach ( $i as $c ) {
+            if ( $c > chr(32) && $c < chr(127) ) {
                 $sb .= $c;
             } else {
                 $sb .= ' ';
@@ -75,6 +75,7 @@ class StringUtilities
 
         return $sb;
     }
+
 
     /**
      * Union two character arrays.
@@ -90,7 +91,11 @@ class StringUtilities
             return null;
         }
 
-        return sort(array_unique(array_merge($c1, $c2)));
+        $result = array_unique(array_merge($c1, $c2));
+
+        sort($result);
+
+        return $result;
     }
 
     /**

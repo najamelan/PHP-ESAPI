@@ -24,14 +24,6 @@ require_once __DIR__.'/../../src/reference/DefaultSanitizer.php';
 
 class SanitizerTest extends PHPUnit_Framework_TestCase
 {
-    public function setUp()
-    {
-    }
-
-    public function tearDown()
-    {
-    }
-
     /**
      * Test of getSanitizedHTML method of class Sanitizer.
      */

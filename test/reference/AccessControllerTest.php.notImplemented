@@ -16,16 +16,10 @@
  */
 class AccessControllerTest extends PHPUnit_Framework_TestCase
 {
-    public function setUp()
-    {
-    }
     
-    public function tearDown()
-    {
-    }
+    //TODO: write tests for AccessController
     
-    public function testFail()
+    public function test()
     {
-        $this->fail();
     }
 }

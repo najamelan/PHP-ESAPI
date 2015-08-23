@@ -96,17 +96,22 @@ class Base64Codec extends Codec
     /**
      * Encodes a single character to Base64.
      *
-     * @param string $input The character to encode
-     *
+     * @param string $immune: not used, but needs to be here to be compatible with Codec::encodeCharacter
+     * @param string $input the character to encode
+     * 
      * @return string the base64 encoded character
      */
-    public function encodeCharacter($input)
+    public function encodeCharacter( $immune = '', $c )
     {
-        $detectedCharacterEncoding = Codec::detectEncoding($input);
-        $c = mb_substr($input, 0, 1, $detectedCharacterEncoding);
+        $detectedCharacterEncoding = Codec::detectEncoding($c);
+        $c = mb_substr(
+            $c, 0, 1,
+            $detectedCharacterEncoding
+        );
         
         return $this->encode($c, false);
     }
+    
     
     /**
      * Decodes the given input string from Base64 to plain text.

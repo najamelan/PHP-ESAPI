@@ -55,10 +55,8 @@ class HTTPUtilitiesTest extends PHPUnit_Framework_TestCase
     /**
      * Constructor ensures global ESAPI is set and stores an instance of
      * DefaultHTTPUtilities.
-     *
-     * @return null
      */
-    public function __construct()
+    protected function setUp()
     {
         $this->_httpUtils = ESAPI::getHTTPUtilities();
     }
