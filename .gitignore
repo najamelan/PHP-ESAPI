@@ -2,4 +2,5 @@
 *~
 Thumbs.db
 Desktop.ini
-test/testoutput/
+test/testoutput
+/lib/htmlpurifier/HTMLPurifier/DefinitionCache
