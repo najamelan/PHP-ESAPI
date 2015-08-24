@@ -6,9 +6,9 @@ This repository is my personal copy in order to get ESAPI ready for use in my ow
 
 I will push my work to github so others can benefit from it as well. I plan to make a production branch with a stripped down library in which I only include those classes that I have reviewed, cleaned up and for which I will try to complete the unit tests.
 
-**Until further notice, none of the code in this repository has been peer-reviewed and comes without warranty.
+**Until further notice, none of the code in this repository has been peer-reviewed and comes without warranty.**
 
-As long as this readme does not contain any usage instructions, it means I haven't reached a point where I feel the library will be usable for others.**
+**As long as this readme does not contain any usage instructions, it means I haven't reached a point where I feel the library will be usable for others.**
 
 ## Current status
 
