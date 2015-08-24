@@ -500,6 +500,7 @@ class DefaultAuditor implements Auditor
         // d date, p priority (level), m message, n newline
         $dateFormat = $secConfig->getLogFileDateFormat();
         $logfileLayoutPattern = "%d{{$dateFormat}} %m %n";
+        $logfileLayoutPattern = "%d{{$dateFormat}} %m %n%n";
 
         // LogFile properties.
         $logFileName = $secConfig->getLogFileName();
