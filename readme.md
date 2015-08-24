@@ -17,3 +17,9 @@ I will push my work to github so others can benefit from it as well. I plan to m
 - HTMLPurifier updated to v 4.7.0
 - Unit tests pass with the exception of incomplete ones (without errors or warnings)
 - Basic code cleanup (trailing whitespace removed)
+
+## Requirements
+
+- php >= 5.3
+- phpunit
+- xdebug for code coverage in unit tests
