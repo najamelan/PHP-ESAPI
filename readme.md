@@ -1,4 +1,4 @@
-# ESAPI-PHP [![Build Status](https://travis-ci.org/najamelan/PHP-ESAPI.svg)](https://travis-ci.org/najamelan/PHP-ESAPI)
+# ESAPI-PHP [![Build Status](https://travis-ci.org/najamelan/PHP-ESAPI.svg?branch=develop)](https://travis-ci.org/najamelan/PHP-ESAPI?branch=develop)
 
 This is the ESAPI php library. Development died out more or less in 2011 leaving a broken library but with a bunch of security classes that in my opinion are worth salvaging. From then on some people on Github worked on some basic clean up and getting the existing unit tests running.
 
