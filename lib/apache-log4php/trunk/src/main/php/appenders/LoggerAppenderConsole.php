@@ -14,73 +14,53 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
 /**
- * ConsoleAppender appends log events to STDOUT or STDERR using a layout specified by the user. 
+ * LoggerAppenderConsole appends log events either to the standard output 
+ * stream (php://stdout) or the standard error stream (php://stderr).
  * 
- * <p>Optional parameter is {@link $target}. The default target is Stdout.</p>
- * <p><b>Note</b>: Use this Appender with command-line php scripts. 
- * On web scripts this appender has no effects.</p>
- * <p>This appender requires a layout.</p>	
+ * **Note**: Use this Appender with command-line php scripts. On web scripts 
+ * this appender has no effects.
  *
- * @version $Revision: 806678 $
+ * This appender uses a layout.
+ *
+ * ## Configurable parameters: ##
+ * 
+ * - **target** - the target stream: "stdout" or "stderr"
+ * 
+ * @version $Revision: 1343601 $
  * @package log4php
  * @subpackage appenders
+ * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ * @link http://logging.apache.org/log4php/docs/appenders/console.html Appender documentation
  */
-class LoggerAppenderConsole extends LoggerAppender {
+ class LoggerAppenderConsole extends LoggerAppender {
 
+	/** The standard otuput stream.  */
 	const STDOUT = 'php://stdout';
+	
+	/** The standard error stream.*/
 	const STDERR = 'php://stderr';
 
-	/**
-	 * Can be 'php://stdout' or 'php://stderr'. But it's better to use keywords <b>STDOUT</b> and <b>STDERR</b> (case insensitive). 
-	 * Default is STDOUT
-	 * @var string	  
-	 */
-	private $target = self::STDOUT;
+	/** The 'target' parameter. */
+	protected $target = self::STDOUT;
 	
 	/**
-	 * @var boolean
-	 * @access private	   
-	 */
-	protected $requiresLayout = true;
-
-	/**
-	 * @var mixed the resource used to open stdout/stderr
-	 * @access private	   
+	 * Stream resource for the target stream.
+	 * @var resource
 	 */
 	protected $fp = null;
-
-	public function __destruct() {
-       $this->close();
-   	}
-   	
-	/**
-	 * Set console target.
-	 * @param mixed $value a constant or a string
-	 */
-	public function setTarget($value) {
-		$v = trim($value);
-		if ($v == self::STDOUT || strtoupper($v) == 'STDOUT') {
-			$this->target = self::STDOUT;
-		} elseif ($v == self::STDERR || strtoupper($v) == 'STDERR') {
-			$this->target = self::STDERR;
-		} 
-	}
 
 	public function activateOptions() {
 		$this->fp = fopen($this->target, 'w');
 		if(is_resource($this->fp) && $this->layout !== null) {
 			fwrite($this->fp, $this->layout->getHeader());
 		}
-		$this->closed = (bool)is_resource($this->fp) === false; 
+		$this->closed = (bool)is_resource($this->fp) === false;
 	}
 	
-	/**
-	 * @see LoggerAppender::close()
-	 */
+	
 	public function close() {
 		if($this->closed != true) {
 			if (is_resource($this->fp) && $this->layout !== null) {
@@ -88,13 +68,36 @@ class LoggerAppenderConsole extends LoggerAppender {
 				fclose($this->fp);
 			}
 			$this->closed = true;
-		}			 
+		}
 	}
 
 	public function append(LoggerLoggingEvent $event) {
 		if (is_resource($this->fp) && $this->layout !== null) {
 			fwrite($this->fp, $this->layout->format($event));
-		} 
+		}
+	}
+	
+	/**
+	 * Sets the 'target' parameter.
+	 * @param string $target
+	 */
+	public function setTarget($target) {
+		$value = trim($target);
+		if ($value == self::STDOUT || strtoupper($value) == 'STDOUT') {
+			$this->target = self::STDOUT;
+		} elseif ($value == self::STDERR || strtoupper($value) == 'STDERR') {
+			$this->target = self::STDERR;
+		} else {
+			$target = var_export($target);
+			$this->warn("Invalid value given for 'target' property: [$target]. Property not set.");
+		}
+	}
+	
+	/**
+	 * Returns the value of the 'target' parameter.
+	 * @return string
+	 */
+	public function getTarget() {
+		return $this->target;
 	}
 }
-

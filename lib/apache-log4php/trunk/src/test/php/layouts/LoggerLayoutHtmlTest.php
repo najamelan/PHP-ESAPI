@@ -19,10 +19,13 @@
  * @package    log4php
  * @subpackage appenders
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @version    SVN: $Id$
+ * @version    $Revision: 1379731 $
  * @link       http://logging.apache.org/log4php
  */
 
+/**
+ * @group layouts
+ */
 class LoggerLayoutHtmlTest extends PHPUnit_Framework_TestCase {
         
 	public function testErrorLayout() {
@@ -32,7 +35,7 @@ class LoggerLayoutHtmlTest extends PHPUnit_Framework_TestCase {
 		$v = $layout->format($event);
 
 		$e = PHP_EOL."<tr>".PHP_EOL.
-			"<td>".$event->getTime()."</td>".PHP_EOL.
+			"<td>".round(1000*$event->getRelativeTime())."</td>".PHP_EOL.
 			"<td title=\"".$event->getThreadName()." thread\">".$event->getThreadName()."</td>".PHP_EOL.
 			"<td title=\"Level\">ERROR</td>".PHP_EOL.
 			"<td title=\"TEST category\">TEST</td>".PHP_EOL.
@@ -49,7 +52,7 @@ class LoggerLayoutHtmlTest extends PHPUnit_Framework_TestCase {
 		$v = $layout->format($event);
 
 		$e = PHP_EOL."<tr>".PHP_EOL.
-			"<td>".$event->getTime()."</td>".PHP_EOL.
+			"<td>".round(1000*$event->getRelativeTime())."</td>".PHP_EOL.
 			"<td title=\"".$event->getThreadName()." thread\">".$event->getThreadName()."</td>".PHP_EOL.
 			"<td title=\"Level\"><font color=\"#993300\"><strong>WARN</strong></font></td>".PHP_EOL.
 			"<td title=\"TEST category\">TEST</td>".PHP_EOL.

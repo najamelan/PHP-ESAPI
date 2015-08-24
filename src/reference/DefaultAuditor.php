@@ -517,6 +517,7 @@ class DefaultAuditor implements Auditor
         $appenderLogfile->setMaxBackupIndex($maxLogFileBackups);
         $appenderLogfile->setLayout($logfileLayout);
         if ($logLevel !== 'OFF') {
+            $logfileLayout->activateOptions();
             $appenderLogfile->activateOptions();
         }
 

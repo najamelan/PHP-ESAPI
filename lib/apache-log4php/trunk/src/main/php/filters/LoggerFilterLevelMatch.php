@@ -15,6 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
+ * @package log4php
  */
 
 /**
@@ -28,8 +29,18 @@
  * option value is set to <i>true</i>, if it is <i>false</i> then 
  * {@link LoggerFilter::DENY} is returned. If there is no match, 
  * {@link LoggerFilter::NEUTRAL} is returned.</p>
+ * 
+ * <p>
+ * An example for this filter:
+ * 
+ * {@example ../../examples/php/filter_levelmatch.php 19}
  *
- * @version $Revision: 795643 $
+ * <p>
+ * The corresponding XML file:
+ * 
+ * {@example ../../examples/resources/filter_levelmatch.xml 18}
+ * 
+ * @version $Revision: 1213283 $
  * @package log4php
  * @subpackage filters
  * @since 0.6
@@ -40,30 +51,26 @@ class LoggerFilterLevelMatch extends LoggerFilter {
 	 * Indicates if this event should be accepted or denied on match
 	 * @var boolean
 	 */
-	private $acceptOnMatch = true;
+	protected $acceptOnMatch = true;
 
 	/**
 	 * The level, when to match
 	 * @var LoggerLevel
 	 */
-	private $levelToMatch;
+	protected $levelToMatch;
   
 	/**
 	 * @param boolean $acceptOnMatch
 	 */
 	public function setAcceptOnMatch($acceptOnMatch) {
-		$this->acceptOnMatch = LoggerOptionConverter::toBoolean($acceptOnMatch, true); 
+		$this->setBoolean('acceptOnMatch', $acceptOnMatch);
 	}
 	
 	/**
 	 * @param string $l the level to match
 	 */
-	public function setLevelToMatch($l) {
-		if($l instanceof LoggerLevel) {
-		    $this->levelToMatch = $l;
-		} else {
-			$this->levelToMatch = LoggerOptionConverter::toLevel($l, null);
-		}
+	public function setLevelToMatch($level) {
+		$this->setLevel('levelToMatch', $level);
 	}
 
 	/**

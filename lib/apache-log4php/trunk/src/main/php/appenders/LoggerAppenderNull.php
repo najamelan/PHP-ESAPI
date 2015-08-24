@@ -14,41 +14,31 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- *
- * @package log4php
- * @subpackage appenders
  */
 
 /**
  * A NullAppender merely exists, it never outputs a message to any device.	
  *
- * @version $Revision: 806678 $
+ * This appender has no configurable parameters.
+ * 
+ * @version $Revision: 1343601 $
  * @package log4php
  * @subpackage appenders
+ * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
+ * @link http://logging.apache.org/log4php/docs/appenders/null.html Appender documentation
  */
 class LoggerAppenderNull extends LoggerAppender {
 
+	/** 
+	 * This appender does not require a layout. 
+	 */
 	protected $requiresLayout = false;
-	
-	public function __destruct() {
-       $this->close();
-   	}
-   	
-	public function activateOptions() {
-		$this->closed = false;
-	}
-	
-	public function close() {
-		$this->closed = true;
-	}
 	
 	/**
 	 * Do nothing. 
 	 * 
 	 * @param LoggerLoggingEvent $event
 	 */
-	public function append($event) {
+	public function append(LoggerLoggingEvent $event) {
 	}
 }
-

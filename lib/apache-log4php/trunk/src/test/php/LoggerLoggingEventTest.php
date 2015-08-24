@@ -19,7 +19,7 @@
  * @category   tests
  * @package    log4php
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @version    SVN: $Id$
+ * @version    $Revision: 1374580 $
  * @link       http://logging.apache.org/log4php
  */
 
@@ -27,7 +27,7 @@ class LoggerLoggingEventTestCaseAppender extends LoggerAppenderNull {
         
 	protected $requiresLayout = true;
 
-	public function append($event) {
+	public function append(LoggerLoggingEvent $event) {
 		$this->layout->format($event);
 	}
 
@@ -40,13 +40,18 @@ class LoggerLoggingEventTestCaseLayout extends LoggerLayout {
 	}
         
 	public function format(LoggerLoggingEvent $event) {
-		LoggerLoggingEventTest::$locationInfo = $event->getLocationInformation();
+		LoggerLoggingEventTest::$locationInfo  = $event->getLocationInformation();
+        LoggerLoggingEventTest::$throwableInfo = $event->getThrowableInformation();
 	}
 }
 
+/**
+ * @group main
+ */
 class LoggerLoggingEventTest extends PHPUnit_Framework_TestCase {
         
 	public static $locationInfo;
+    public static $throwableInfo;
 
 	public function testConstructWithLoggerName() {
 		$l = LoggerLevel :: getLevelDebug();
@@ -63,7 +68,7 @@ class LoggerLoggingEventTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetStartTime() {
 		$time = LoggerLoggingEvent :: getStartTime();
-		self::assertType('float', $time);
+		self::assertInternalType('float', $time);
 		$time2 = LoggerLoggingEvent :: getStartTime();
 		self::assertEquals($time, $time2);
 	}
@@ -89,5 +94,42 @@ class LoggerLoggingEventTest extends PHPUnit_Framework_TestCase {
 		self::assertEquals($li->getMethodName(), __FUNCTION__);
 
 	}
+	
+	public function testGetThrowableInformation1() {
+		$hierarchy = Logger::getHierarchy();
+		$root	   = $hierarchy->getRootLogger();
+		
+		$a = new LoggerLoggingEventTestCaseAppender('A1');
+		$a->setLayout( new LoggerLoggingEventTestCaseLayout() );
+		$root->addAppender($a);
+				
+		$logger = $hierarchy->getLogger('test');
+		$logger->debug('test');
+		$hierarchy->shutdown();
+		
+		$ti = self::$throwableInfo;
+		
+		self::assertEquals($ti, null);				  
+	}
+	
+	public function testGetThrowableInformation2() {
+		$hierarchy = Logger::getHierarchy();
+		$root	   = $hierarchy->getRootLogger();
 
+		$a = new LoggerLoggingEventTestCaseAppender('A1');
+		$a->setLayout( new LoggerLoggingEventTestCaseLayout() );
+		$root->addAppender($a);
+				
+		$ex		= new Exception('Message1');
+		$logger = $hierarchy->getLogger('test');
+		$logger->debug('test', $ex);
+		$hierarchy->shutdown();
+
+		$ti = self::$throwableInfo;
+		
+		self::assertTrue($ti instanceof LoggerThrowableInformation);				
+		
+		$result	   = $ti->getStringRepresentation();
+		self::assertInternalType('array', $result);
+	}
 }

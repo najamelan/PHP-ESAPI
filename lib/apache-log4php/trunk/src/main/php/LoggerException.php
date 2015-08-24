@@ -15,12 +15,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
+ * @package log4php
  */
 
 /**
  * LoggerException class
  *
- * @version $Revision: 771547 $
+ * @version $Revision: 1334369 $
  * @package log4php
  */
 class LoggerException extends Exception {

@@ -16,24 +16,28 @@
  * limitations under the License.
  */
 
-$name = 'log4php';
-$summary = 'log4Php is a PHP port of log4j framework';
-$version = '2.0.0';
-$versionBuild = 'b1';
-$apiVersion = '2.0.0';
-$state = 'beta';
-$apiStability = 'stable';
+// parse pom.xml to get version in sync
+$xml = simplexml_load_file('../../pom.xml');
+$pom_version = (string) $xml->version;
+
+preg_match("/^([^-]+)(-SNAPSHOT)?$/", $pom_version, $matches);
+$version = $matches[1];
+
+// Maven release plugin always requires the version to have -SNAPSHOT in 
+// the version node. So this is not possible:  
+// $stability = empty($matches[2]) ? 'stable' : 'devel';
+
+// Hard coded to stable. Maybe find better solution.
+$stability = 'stable';
+
+$name = 'Apache_log4php';
+$summary = 'A versatile logging framework for PHP';
 
 $description = <<<EOT
-log4Php is a PHP port of log4j framework. It supports XML configuration, 
-logging to files, stdout/err, syslog, socket, configurable output layouts 
-and logging levels.
+Apache log4php is a versatile logging framework for PHP at the Apache Software Foundation (ASF).
 EOT;
 
-$notes = <<<EOT
-Changes since 0.9:
- - 
-EOT;
+$notes = 'Please see CHANGELOG and changes.xml!';
 
 $options = array(
 	'license' => 'Apache License 2.0',
@@ -46,9 +50,11 @@ $options = array(
 		'examples' => 'doc',
 	),
 	'exceptions' => array(
+	    'changes.xml' =>  'doc',
 		'CHANGELOG' => 'doc',
 		'LICENSE' => 'doc',
 		'README' => 'doc',
+		'NOTICE' => 'doc',
 	),
 );
 
@@ -58,25 +64,39 @@ $license = array(
 );
 
 $maintainer = array();
+$maintainer[]   =   array(
+	'role' => 'lead',
+	'handle' => 'grobmeier',
+	'name' => 'Christian Grobmeier',
+	'email' => 'grobmeier@apache.org',
+	'active' => 'yes'
+);
+$maintainer[]   =   array(
+    'role' => 'developer',
+    'handle' => 'ihabunek',
+    'name' => 'Ivan Habunek',
+    'email' => 'ihabunek@apache.org',
+    'active' => 'yes'
+);
 $maintainer[]  =   array(
 	'role' => 'lead',
 	'handle' => 'kurdalen',
 	'name' => 'Knut Urdalen',
 	'email' => 'kurdalen@apache.org',
-	'active' => 'yes'
+	'active' => 'no'
 );
 $maintainer[]   =   array(
-	'role' => 'lead',
-	'handle' => 'grobmeier',
-	'name' => 'Christian Grobmeier',
-	'email' => 'grobmeier@gmail.com',
-	'active' => 'yes'
+    'role' => 'developer',
+    'handle' => 'chammers',
+    'name' => 'Christian Hammers',
+    'email' => 'chammers@apache.org',
+    'active' => 'no'
 );
 
 $dependency = array();
 
-$channel = 'pear.php.net';
+$channel = 'pear.apache.org/log4php';
 $require = array(
 	'php' => '5.2.0',
-	'pear_installer' => '1.8.0',
+	'pear_installer' => '1.7.0',
 );

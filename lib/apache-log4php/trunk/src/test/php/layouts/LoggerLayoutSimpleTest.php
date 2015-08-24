@@ -19,19 +19,22 @@
  * @package    log4php
  * @subpackage appenders
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @version    SVN: $Id$
+ * @version    $Revision: 1374580 $
  * @link       http://logging.apache.org/log4php
  */
 
+/**
+ * @group layouts
+ */
 class LoggerLayoutSimpleTest extends PHPUnit_Framework_TestCase {
-        
+
 	public function testSimpleLayout() {
 		$event = new LoggerLoggingEvent("LoggerLayoutSimpleTest", new Logger("TEST"), LoggerLevel::getLevelError(), "testmessage");
 
 		$layout = new LoggerLayoutSimple();
-		$v = $layout->format($event);
-		$e = "ERROR - testmessage\n";
-		self::assertEquals($v, $e);
-    }
-    
+		$actual = $layout->format($event);
+		$expected = "ERROR - testmessage" . PHP_EOL;
+		self::assertEquals($expected, $actual);
+	}
+
 }

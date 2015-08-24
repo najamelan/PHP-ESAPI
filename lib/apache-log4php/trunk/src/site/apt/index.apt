@@ -5,7 +5,7 @@
 ~~ (the "License"); you may not use this file except in compliance with
 ~~ the License.  You may obtain a copy of the License at
 ~~
-~~      http://www.apache.org/licenses/LICENSE-2.0
+~~	    http://www.apache.org/licenses/LICENSE-2.0
 ~~
 ~~ Unless required by applicable law or agreed to in writing, software
 ~~ distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,31 +13,92 @@
 ~~ See the License for the specific language governing permissions and
 ~~ limitations under the License.
  ------
- Apache log4php
+Welcome
  ------
  ------
  ------
 
-   Log4php is logging framework for PHP undergoing incubation at the Apache Software Foundation (ASF), 
-   sponsored by the Apache Logging Services project. 
-   Incubation is required of all newly accepted projects until a further review 
-   indicates that the infrastructure, communications, and decision making process 
-   have stabilized in a manner consistent with other successful ASF projects. 
-   While incubation status is not necessarily a reflection of the completeness or 
-   stability of the code, it does indicate that the project has yet to be 
-   fully endorsed by the ASF. 
+What is Apache log4php?
+ 
+	Apache log4php\u2122 is a versatile logging framework for PHP. 
+  
+	Feature highlights:
+	
+	* Configuration through XML, properties or PHP files
 
+	* Various logging destinations, including:
+	
+		* Console (stdout, stderr)
+	
+		* Files (including daily and rolling files)
+	
+		* Email
+		
+		* Databases
+		
+		* Sockets
+		
+		* Syslog
+		
+		[]
 
-   log4php supports:
-   
-   * Configuration through xml and properties file (same structure as log4j).
+	* Several built-in log message formats, including: 
+	
+		* HTML
+		
+		* XML
+		
+		* User defined pattern
+		
+		[]
+	
+	* Nested (NDC) and Mapped (MDC) Diagnostic Contexts. 
+	
+	[]
+	
 
-   * File, RollingFile, DailyFile, Echo, Console, Mail, PEAR::Db, PHP error, 
-                    Syslog or NT events and Socket appenders.
+The Apache log4php project
+	
+	Apache log4php\u2122 is an open source project at the 
+	{{{http://www.apache.org}Apache Software Foundation}}, a part the 
+	{{{http://logging.apache.org}Apache Logging Services}} project.
 
-   * Simple, TTCC, Pattern, Html and Xml Layouts.
-   
-   * Nested (NDC) and Mapped (MDC) Diagnostic Contexts. 
+	Apache log4php\u2122 graduated in March 2010.
 
-   * Switchable internal debug.
+Who uses Apache log4php?
 
+	This sections lists some of the projects which use Apache log4php. 
+	
+	In alphabetic order:
+	
+	* {{{http://cmsmadesimple.org}CMS Made Simple}} - an open source (GPL) CMS
+	
+	* {{{http://marcelog.github.com/Ding/}Ding}} - a dependency injection, AOP, and MVC container, with features 
+	    similar to the Spring Framework
+	
+	* {{{http://sourceforge.net/projects/helpzilla/}Helpzilla}} - interactive solutions for customer care
+	
+	* {{{http://www.imento.dk}Imento}} - a danish company which uses log4php in their commercial
+		MVC framework
+	
+	* {{{http://www.paloose.org}Paloose}} - a simplified version of Cocoon using PHP
+	
+	* {{{http://marcelog.github.com/PAMI/}PAMI}} / {{{http://marcelog.github.com/PAGI/}PAGI}} - OOP clients for the 
+	    Asterisk Manager Protocol and the Asterisk Gateway Protocol, implemented in PHP.
+	
+	* {{{http://piwi.googlecode.com/}PIWI Framework}} - a framework for quick website building and
+		PHP Dependency Injection similar to Apache Cocoon and Apache Forrest.
+	
+	* {{{http://code.google.com/p/scalr/}Scalr}} - a fully redundant, self-curing and self-scaling hosting environment
+	    using Amazon's EC2
+	
+	* {{{http://www.sitesupra.com/}SiteSupra}} - an enterprise PHP platform
+	
+	* {{{http://www.sugarcrm.com}SugarCRM}} - low-cost customer relationship management solutions
+	
+	* {{{http://www.vtiger.com}vtiger}} - an open source CRM
+	
+	[]
+	
+	If you think that you should be on this list, please let us know by sending a 
+	message to the {{{./mail-lists.html}log4php user lists}}.

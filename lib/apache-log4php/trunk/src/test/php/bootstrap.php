@@ -18,25 +18,28 @@
  * @category   tests   
  * @package    log4php
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @version    SVN: $Id$
+ * @version    $Revision: 1374580 $
  * @link       http://logging.apache.org/log4php
  */
 
 error_reporting(E_ALL | E_STRICT); 
 
+// Required for testing logging of sessionID in pattern layout
+session_start();
+
 date_default_timezone_set('Europe/London');
 
-if(!defined('LOG4PHP_DIR')) {
-    define('LOG4PHP_DIR', dirname(__FILE__).'/../../main/php');
+// Define a temp dir where tests may write to
+$tmpDir = dirname(__FILE__) . '/../../../target/temp/phpunit';
+if (!is_dir($tmpDir)) {
+	mkdir($tmpDir, 0777, true);
 }
+define('PHPUNIT_TEMP_DIR', realpath($tmpDir));
 
-if(!defined('LOG4PHP_DEFAULT_INIT_OVERRIDE')) {
-    define('LOG4PHP_DEFAULT_INIT_OVERRIDE', true);
-}
+// Make the path to the configurations dir for easier access
+$confDir = dirname(__FILE__) . '/../resources/configs';
+define('PHPUNIT_CONFIG_DIR', realpath($confDir));
 
-require_once LOG4PHP_DIR.'/Logger.php';
+require dirname(__FILE__) . '/../../main/php/Logger.php';
+require dirname(__FILE__) . DIRECTORY_SEPARATOR . 'LoggerTestHelper.php';
 
-require_once 'PHPUnit/Framework/TestCase.php';
-require_once 'PHPUnit/Framework/TestSuite.php';
-require_once 'PHPUnit/TextUI/TestRunner.php';
-require_once 'PHPUnit/Util/Filter.php';

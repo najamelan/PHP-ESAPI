@@ -15,6 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
+ * @package log4php
  */
 
 /**
@@ -28,8 +29,18 @@
  * the <b>AcceptOnMatch</b> option value is true, if it is false then
  * {@link LoggerFilter::DENY} is returned. If there is no match, {@link LoggerFilter::NEUTRAL}
  * is returned.</p>
+ * 
+ * <p>
+ * An example for this filter:
+ * 
+ * {@example ../../examples/php/filter_stringmatch.php 19}
  *
- * @version $Revision: 795643 $
+ * <p>
+ * The corresponding XML file:
+ * 
+ * {@example ../../examples/resources/filter_stringmatch.xml 18}
+ *
+ * @version $Revision: 1213283 $
  * @package log4php
  * @subpackage filters
  * @since 0.3
@@ -39,25 +50,25 @@ class LoggerFilterStringMatch extends LoggerFilter {
 	/**
 	 * @var boolean
 	 */
-	private $acceptOnMatch = true;
+	protected $acceptOnMatch = true;
 
 	/**
 	 * @var string
 	 */
-	private $stringToMatch = null;
+	protected $stringToMatch;
 
 	/**
 	 * @param mixed $acceptOnMatch a boolean or a string ('true' or 'false')
 	 */
 	public function setAcceptOnMatch($acceptOnMatch) {
-		$this->acceptOnMatch = is_bool($acceptOnMatch) ? $acceptOnMatch : (bool)(strtolower($acceptOnMatch) == 'true');
+		$this->setBoolean('acceptOnMatch', $acceptOnMatch);
 	}
 	
 	/**
 	 * @param string $s the string to match
 	 */
-	public function setStringToMatch($s) {
-		$this->stringToMatch = $s;
+	public function setStringToMatch($string) {
+		$this->setString('stringToMatch', $string);
 	}
 
 	/**

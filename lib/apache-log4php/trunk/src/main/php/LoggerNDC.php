@@ -15,72 +15,89 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
+ * @package log4php
  */
 
-
 /**
- * This is the global repository of NDC stack
- */
-$GLOBALS['log4php.LoggerNDC.ht'] = array();
-
-/**
- * The NDC class implements <i>nested diagnostic contexts</i> as
- * defined by Neil Harrison in the article "Patterns for Logging
- * Diagnostic Messages" part of the book "<i>Pattern Languages of
- * Program Design 3</i>" edited by Martin et al.
+ * The NDC class implements <i>nested diagnostic contexts</i>.
+ * 
+ * NDC was defined by Neil Harrison in the article "Patterns for Logging
+ * Diagnostic Messages" part of the book <i>"Pattern Languages of
+ * Program Design 3"</i> edited by Martin et al.
  *
- * <p>A Nested Diagnostic Context, or NDC in short, is an instrument
+ * A Nested Diagnostic Context, or NDC in short, is an instrument
  * to distinguish interleaved log output from different sources. Log
  * output is typically interleaved when a server handles multiple
  * clients near-simultaneously.
  *
- * <p>Interleaved log output can still be meaningful if each log entry
+ * This class is similar to the {@link LoggerMDC} class except that it is
+ * based on a stack instead of a map.
+ *
+ * Interleaved log output can still be meaningful if each log entry
  * from different contexts had a distinctive stamp. This is where NDCs
  * come into play.
  *
- * <p><i><b>Note that NDCs are managed on a per thread
- * basis</b></i>. NDC operations such as {@link push()}, {@link pop()}, 
+ * <b>Note that NDCs are managed on a per thread basis</b>. 
+ * 
+ * NDC operations such as {@link push()}, {@link pop()}, 
  * {@link clear()}, {@link getDepth()} and {@link setMaxDepth()}
  * affect the NDC of the <i>current</i> thread only. NDCs of other
  * threads remain unaffected.
  *
- * <p>For example, a servlet can build a per client request NDC
+ * For example, a servlet can build a per client request NDC
  * consisting the clients host name and other information contained in
  * the the request. <i>Cookies</i> are another source of distinctive
  * information. To build an NDC one uses the {@link push()}
- * operation.</p>
+ * operation.
  * 
  * Simply put,
  *
  * - Contexts can be nested.
- * - When entering a context, call 
- *	 <code>LoggerNDC::push()</code>
+ * - When entering a context, call <kbd>LoggerNDC::push()</kbd>
  *	 As a side effect, if there is no nested diagnostic context for the
  *	 current thread, this method will create it.
- * - When leaving a context, call 
- *	 <code>LoggerNDC::pop()</code>
+ * - When leaving a context, call <kbd>LoggerNDC::pop()</kbd>
  * - <b>When exiting a thread make sure to call {@link remove()}</b>
  *	 
- * <p>There is no penalty for forgetting to match each
- * <code>push</code> operation with a corresponding <code>pop</code>,
+ * There is no penalty for forgetting to match each
+ * <kbd>push</kbd> operation with a corresponding <kbd>pop</kbd>,
  * except the obvious mismatch between the real application context
- * and the context set in the NDC.</p>
+ * and the context set in the NDC.
  *
- * <p>If configured to do so, {@link LoggerPatternLayout} and {@link LoggerLayoutTTCC} 
+ * If configured to do so, {@link LoggerPatternLayout} and {@link LoggerLayoutTTCC} 
  * instances automatically retrieve the nested diagnostic
  * context for the current thread without any user intervention.
  * Hence, even if a servlet is serving multiple clients
  * simultaneously, the logs emanating from the same code (belonging to
  * the same category) can still be distinguished because each client
- * request will have a different NDC tag.</p>
+ * request will have a different NDC tag.
  *
+ * Example:
  *	
- * @version $Revision: 795643 $
+ * {@example ../../examples/php/ndc.php 19}<br>
+ *
+ * With the properties file:
+ * 
+ * {@example ../../examples/resources/ndc.properties 18}<br>
+ * 
+ * Will result in the following (notice the conn and client ids):
+ * 
+ * <pre>
+ * 2009-09-13 19:04:27 DEBUG root conn=1234: just received a new connection in src/examples/php/ndc.php at 23
+ * 2009-09-13 19:04:27 DEBUG root conn=1234 client=ab23: some more messages that can in src/examples/php/ndc.php at 25
+ * 2009-09-13 19:04:27 DEBUG root conn=1234 client=ab23: now related to a client in src/examples/php/ndc.php at 26
+ * 2009-09-13 19:04:27 DEBUG root : back and waiting for new connections in src/examples/php/ndc.php at 29
+ * </pre>
+ *	
+ * @version $Revision: 1350602 $
  * @package log4php 
  * @since 0.3
  */
 class LoggerNDC {
-	const HT_SIZE = 7;
+	
+	/** This is the repository of NDC stack */
+	private static $stack = array();
+	
 	/**
 	 * Clear any nested diagnostic information if any. This method is
 	 * useful in cases where the same thread can be potentially used
@@ -88,23 +105,17 @@ class LoggerNDC {
 	 *
 	 * <p>This method is equivalent to calling the {@link setMaxDepth()}
 	 * method with a zero <var>maxDepth</var> argument.
-	 *
-	 * @static	
 	 */
 	public static function clear() {
-		$GLOBALS['log4php.LoggerNDC.ht'] = array();
+		self::$stack = array();
 	}
 
 	/**
 	 * Never use this method directly, use the {@link LoggerLoggingEvent::getNDC()} method instead.
-	 * @static
 	 * @return array
 	 */
 	public static function get() {
-		if(!array_key_exists('log4php.LoggerNDC.ht', $GLOBALS)) {
-			LoggerNDC::clear();
-		}
-		return $GLOBALS['log4php.LoggerNDC.ht'];
+		return implode(' ', self::$stack);
 	}
   
 	/**
@@ -112,10 +123,9 @@ class LoggerNDC {
 	 *
 	 * @see setMaxDepth()
 	 * @return integer
-	 * @static
 	 */
 	public static function getDepth() {
-		return count($GLOBALS['log4php.LoggerNDC.ht']);	  
+		return count(self::$stack);
 	}
 
 	/**
@@ -126,11 +136,10 @@ class LoggerNDC {
 	 * context is available, then the empty string "" is returned.</p>
 	 *
 	 * @return string The innermost diagnostic context.
-	 * @static
 	 */
 	public static function pop() {
-		if(count($GLOBALS['log4php.LoggerNDC.ht']) > 0) {
-			return array_pop($GLOBALS['log4php.LoggerNDC.ht']);
+		if(count(self::$stack) > 0) {
+			return array_pop(self::$stack);
 		} else {
 			return '';
 		}
@@ -143,16 +152,15 @@ class LoggerNDC {
 	 * <p>The returned value is the value that was pushed last. If no
 	 * context is available, then the empty string "" is returned.</p>
 	 * @return string The innermost diagnostic context.
-	 * @static
 	 */
-	public static function peek(){
-		if(count($GLOBALS['log4php.LoggerNDC.ht']) > 0) {
-			return end($GLOBALS['log4php.LoggerNDC.ht']);
+	public static function peek() {
+		if(count(self::$stack) > 0) {
+			return end(self::$stack);
 		} else {
 			return '';
 		}
 	}
-  
+	
 	/**
 	 * Push new diagnostic context information for the current thread.
 	 *
@@ -160,15 +168,13 @@ class LoggerNDC {
 	 * determined solely by the client.
 	 *	
 	 * @param string $message The new diagnostic context information.
-	 * @static	
 	 */
 	public static function push($message) {
-		array_push($GLOBALS['log4php.LoggerNDC.ht'], (string)$message);
+		array_push(self::$stack, (string)$message);
 	}
 
 	/**
 	 * Remove the diagnostic context for this thread.
-	 * @static
 	 */
 	public static function remove() {
 		LoggerNDC::clear();
@@ -187,15 +193,11 @@ class LoggerNDC {
 	 *
 	 * @param integer $maxDepth
 	 * @see getDepth()
-	 * @static
 	 */
 	public static function setMaxDepth($maxDepth) {
 		$maxDepth = (int)$maxDepth;
-		if($maxDepth <= self::HT_SIZE) {
-			if(LoggerNDC::getDepth() > $maxDepth) {
-				$GLOBALS['log4php.LoggerNDC.ht'] = array_slice($GLOBALS['log4php.LoggerNDC.ht'], $maxDepth);
-			}
+		if(LoggerNDC::getDepth() > $maxDepth) {
+			self::$stack = array_slice(self::$stack, 0, $maxDepth);
 		}
 	}
-
 }

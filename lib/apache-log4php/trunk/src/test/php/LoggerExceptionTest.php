@@ -18,11 +18,14 @@
  * @category   tests
  * @package    log4php
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @version    SVN: $Id$
+ * @version    $Revision: 1374580 $
  * @link       http://logging.apache.org/log4php
  */
 class MyException extends Exception { }
 
+/**
+ * @group main
+ */
 class LoggerExceptionTest extends PHPUnit_Framework_TestCase {
   	/**
 	 * @expectedException LoggerException

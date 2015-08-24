@@ -18,10 +18,13 @@
  * @category   tests
  * @package    log4php
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @version    SVN: $Id$
+ * @version    $Revision: 1374580 $
  * @link       http://logging.apache.org/log4php
  */
 
+/**
+ * @group main
+ */
 class LoggerHierarchyTest extends PHPUnit_Framework_TestCase {
         
 	private $hierarchy;
@@ -30,38 +33,23 @@ class LoggerHierarchyTest extends PHPUnit_Framework_TestCase {
 		$this->hierarchy = new LoggerHierarchy(new LoggerRoot());
 	}
 	
-	public function testIfLevelIsInitiallyLevelAllg() {
-		self::assertEquals('ALL', $this->hierarchy->getRootLogger()->getLevel()->toString());
-	}
-
-	public function testIfNameIsRoot() {
-		self::assertEquals('root', $this->hierarchy->getRootLogger()->getName());
-	}
-
-	public function testIfParentIsNull() {
-		self::assertSame(null, $this->hierarchy->getRootLogger()->getParent());
-	}
-
-	public function testSetParent() {
-		$l = $this->hierarchy->getLogger('dummy');
-		$this->hierarchy->getRootLogger()->setParent($l);
-		$this->testIfParentIsNull();
-	}
-        
 	public function testResetConfiguration() {
 		$root = $this->hierarchy->getRootLogger();
 		$appender = new LoggerAppenderConsole('A1');
 		$root->addAppender($appender);
+
 		$logger = $this->hierarchy->getLogger('test');
-		self::assertEquals(count($this->hierarchy->getCurrentLoggers()), 1);
+		self::assertEquals(1, count($this->hierarchy->getCurrentLoggers()));
+		
 		$this->hierarchy->resetConfiguration();
-		self::assertEquals($this->hierarchy->getRootLogger()->getLevel()->toString(), 'DEBUG');
-		self::assertEquals($this->hierarchy->getThreshold()->toString(), 'ALL');
-		self::assertEquals(count($this->hierarchy->getCurrentLoggers()), 1);
-		foreach($this->hierarchy->getCurrentLoggers() as $l) {
-			self::assertEquals($l->getLevel(), null);
-			self::assertTrue($l->getAdditivity());
-			self::assertEquals(count($l->getAllAppenders()), 0);
+		self::assertEquals(LoggerLevel::getLevelDebug(), $root->getLevel());
+		self::assertEquals(LoggerLevel::getLevelAll(), $this->hierarchy->getThreshold());
+		self::assertEquals(1, count($this->hierarchy->getCurrentLoggers()));
+		
+		foreach($this->hierarchy->getCurrentLoggers() as $logger) {
+			self::assertNull($logger->getLevel());
+			self::assertTrue($logger->getAdditivity());
+			self::assertEquals(0, count($logger->getAllAppenders()), 0);
 		}
 	}
 	

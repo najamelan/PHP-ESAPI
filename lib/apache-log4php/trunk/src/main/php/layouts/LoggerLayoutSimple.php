@@ -15,6 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
+ * @package log4php
  */
 
 /**
@@ -22,31 +23,34 @@
  *
  * Returns the log statement in a format consisting of the
  * <b>level</b>, followed by " - " and then the <b>message</b>. 
- * For example, 
- * <samp> INFO - A message </samp>
  *
- * @version $Revision: 795643 $
+ * For example the following php and properties files
+ * 
+ * {@example ../../examples/php/layout_simple.php 19}<br>
+ * 
+ * {@example ../../examples/resources/layout_simple.properties 18}<br>
+ *
+ * would result in:
+ * 
+ * <samp>INFO - Hello World!</samp>
+ *
+ * @version $Revision: 1213283 $
  * @package log4php
  * @subpackage layouts
  */  
 class LoggerLayoutSimple extends LoggerLayout {
-    /**
-     * Constructor
-     */
-    public function __construct() {
-    }
-
-    /**
-     * Returns the log statement in a format consisting of the
-     * <b>level</b>, followed by " - " and then the
-     * <b>message</b>. For example, 
-     * <samp> INFO - "A message" </samp>
-     *
-     * @param LoggerLoggingEvent $event
-     * @return string
-     */
-    public function format(LoggerLoggingEvent $event) {
-        $level = $event->getLevel();
-        return $level->toString() . ' - ' . $event->getRenderedMessage(). PHP_EOL;
-    }
+	/**
+	 * Returns the log statement in a format consisting of the
+	 * <b>level</b>, followed by " - " and then the
+	 * <b>message</b>. For example, 
+	 * <samp> INFO - "A message" </samp>
+	 *
+	 * @param LoggerLoggingEvent $event
+	 * @return string
+	 */
+	public function format(LoggerLoggingEvent $event) {
+		$level = $event->getLevel();
+		$message = $event->getRenderedMessage();
+		return "$level - $message" . PHP_EOL;
+	}
 }

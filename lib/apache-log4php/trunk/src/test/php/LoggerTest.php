@@ -18,11 +18,96 @@
  * @category   tests
  * @package    log4php
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @version    SVN: $Id$
+ * @version    $Revision: 1395241 $
  * @link       http://logging.apache.org/log4php
  */
 
+/**
+ * @group main
+ */
 class LoggerTest extends PHPUnit_Framework_TestCase {
+	
+	private $testConfig1 = array (
+		'rootLogger' =>	array (
+			'level' => 'ERROR',
+			'appenders' => array (
+				'default',
+			),
+		),
+		'appenders' => array (
+			'default' => array (
+				'class' => 'LoggerAppenderEcho',
+			),
+		),
+		'loggers' => array (
+			'mylogger' => array (
+				'additivity' => 'false',
+				'level' => 'DEBUG',
+				'appenders' => array (
+					'default',
+				),
+			),
+		),
+	);
+	
+	// For testing additivity
+	private $testConfig2 = array (
+		'appenders' => array (
+			'default' => array (
+				'class' => 'LoggerAppenderEcho',
+			),
+		),
+		'rootLogger' => array(
+			'appenders' => array('default'),
+		),
+		'loggers' => array (
+			'foo' => array (
+				'appenders' => array (
+					'default',
+				),
+			),
+			'foo.bar' => array (
+				'appenders' => array (
+					'default',
+				),
+			),
+			'foo.bar.baz' => array (
+				'appenders' => array (
+					'default',
+				),
+			),
+		),
+	);
+	
+	// For testing additivity
+	private $testConfig3 = array (
+		'appenders' => array (
+			'default' => array (
+				'class' => 'LoggerAppenderEcho',
+			),
+		),
+		'rootLogger' => array(
+			'appenders' => array('default'),
+		),
+		'loggers' => array (
+			'foo' => array (
+				'appenders' => array (
+					'default',
+				),
+			),
+			'foo.bar' => array (
+				'appenders' => array (
+					'default',
+				),
+			),
+			'foo.bar.baz' => array (
+				'level' => 'ERROR',
+				'appenders' => array (
+					'default',
+				),
+			),
+		),
+	);
 	
 	protected function setUp() {
 		Logger::clear();
@@ -37,7 +122,6 @@ class LoggerTest extends PHPUnit_Framework_TestCase {
 	public function testLoggerExist() {
 		$l = Logger::getLogger('test');
 		self::assertEquals($l->getName(), 'test');
-		$l->debug('test');
 		self::assertTrue(Logger::exists('test'));
 	}
 	
@@ -52,7 +136,7 @@ class LoggerTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	public function testCanLogToAllLevels() {
-		Logger::configure('LoggerTest.properties');
+		Logger::configure($this->testConfig1);
 		
 		$logger = Logger::getLogger('mylogger');
 		ob_start();
@@ -61,7 +145,6 @@ class LoggerTest extends PHPUnit_Framework_TestCase {
 		$logger->error('this is an error');
 		$logger->debug('this is a debug message');
 		$logger->fatal('this is a fatal message');
-		
 		$v = ob_get_contents();
 		ob_end_clean();
 		
@@ -75,17 +158,25 @@ class LoggerTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	public function testIsEnabledFor() {
-		Logger::configure('LoggerTest.properties');
+		Logger::configure($this->testConfig1);
 		
 		$logger = Logger::getLogger('mylogger');
 		
+		self::assertFalse($logger->isTraceEnabled());
 		self::assertTrue($logger->isDebugEnabled());
 		self::assertTrue($logger->isInfoEnabled());
+		self::assertTrue($logger->isWarnEnabled());
+		self::assertTrue($logger->isErrorEnabled());
+		self::assertTrue($logger->isFatalEnabled());
 		
 		$logger = Logger::getRootLogger();
 		
+		self::assertFalse($logger->isTraceEnabled());
 		self::assertFalse($logger->isDebugEnabled());
 		self::assertFalse($logger->isInfoEnabled());
+		self::assertFalse($logger->isWarnEnabled());
+		self::assertTrue($logger->isErrorEnabled());
+		self::assertTrue($logger->isFatalEnabled());
 	}
 	
 	public function testGetCurrentLoggers() {
@@ -94,34 +185,39 @@ class LoggerTest extends PHPUnit_Framework_TestCase {
 		
 		self::assertEquals(0, count(Logger::getCurrentLoggers()));
 		
-		Logger::configure('LoggerTest.properties');
-		Logger::initialize();
+		Logger::configure($this->testConfig1);
 		self::assertEquals(1, count(Logger::getCurrentLoggers()));
 		$list = Logger::getCurrentLoggers();
 		self::assertEquals('mylogger', $list[0]->getName());
 	}
 	
-	public function testConfigure() {
-		Logger::resetConfiguration();
-		Logger::configure();
-		self::assertEquals('LoggerConfiguratorBasic', Logger::getConfigurationClass());
-		self::assertEquals(null, Logger::getConfigurationFile());
-		
-		Logger::configure(null, 'MyLoggerClass');
-		self::assertEquals('MyLoggerClass', Logger::getConfigurationClass());
-		self::assertEquals(null, Logger::getConfigurationFile());
-		
-		Logger::configure('log4php.xml');
-		self::assertEquals('LoggerConfiguratorXml', Logger::getConfigurationClass());
-		self::assertEquals('log4php.xml', Logger::getConfigurationFile());
-		
-		Logger::configure('log4php.xml');
-		self::assertEquals('LoggerConfiguratorXml', Logger::getConfigurationClass());
-		self::assertEquals('log4php.xml', Logger::getConfigurationFile());
-		
-		Logger::configure('log4php.properties');
-		self::assertEquals('LoggerConfiguratorIni', Logger::getConfigurationClass());
-		self::assertEquals('log4php.properties', Logger::getConfigurationFile());
-		
+	public function testAdditivity() {
+		Logger::configure($this->testConfig2);
+	
+		$logger = Logger::getLogger('foo.bar.baz');
+		ob_start();
+		$logger->info('test');
+		$actual = ob_get_contents();
+		ob_end_clean();
+	
+		// The message should get logged 4 times: once by every logger in the 
+		//  hierarchy (including root)
+		$expected = str_repeat('INFO - test' . PHP_EOL, 4);
+		self::assertSame($expected, $actual);
+	}
+	
+	public function testAdditivity2() {
+		Logger::configure($this->testConfig3);
+	
+		$logger = Logger::getLogger('foo.bar.baz');
+		ob_start();
+		$logger->info('test');
+		$actual = ob_get_contents();
+		ob_end_clean();
+	
+		// The message should get logged 3 times: once by every logger in the
+		//  hierarchy, except foo.bar.baz which is set to level ERROR
+		$expected = str_repeat('INFO - test' . PHP_EOL, 3);
+		self::assertSame($expected, $actual);
 	}
 }

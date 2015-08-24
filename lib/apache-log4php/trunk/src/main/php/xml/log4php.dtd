@@ -15,11 +15,11 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  -->
-<!-- Authors: Chris Taylor, Ceki Gulcu. -->
+<!-- Authors: Chris Taylor, Ceki Gülcü. -->
 <!-- Version: 1.2 -->
 
 <!-- PHP Port Modifications Author: Marco Vassura -->
-<!-- PHP dtd Version: $Revision: 771185 $ -->
+<!-- PHP dtd Version: $Revision: 823875 $ -->
 
 <!-- A configuration element consists of optional renderer
 elements,appender elements, categories and an optional root

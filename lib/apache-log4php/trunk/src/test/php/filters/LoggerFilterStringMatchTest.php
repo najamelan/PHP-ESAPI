@@ -19,10 +19,13 @@
  * @package    log4php
  * @subpackage filters
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @version    SVN: $Id$
+ * @version    $Revision: 1374580 $
  * @link       http://logging.apache.org/log4php
  */
 
+/**
+ * @group filters
+ */
 class LoggerFilterStringMatchTest extends PHPUnit_Framework_TestCase {
         
 	public function testDecideAccept() {
@@ -101,7 +104,6 @@ class LoggerFilterStringMatchTest extends PHPUnit_Framework_TestCase {
 	public function testDecideNullMatch() {
 		$filter = new LoggerFilterStringMatch();
 		$filter->setAcceptOnMatch("false");
-		$filter->setStringToMatch(null);
 		
 		$event = new LoggerLoggingEvent("LoggerAppenderEchoTest", new Logger("TEST"), LoggerLevel::getLevelError(), "testmessage");
 		

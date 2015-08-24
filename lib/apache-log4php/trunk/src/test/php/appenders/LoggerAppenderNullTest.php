@@ -19,19 +19,29 @@
  * @package    log4php
  * @subpackage appenders
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @version    SVN: $Id$
+ * @version    $Revision: 1374580 $
  * @link       http://logging.apache.org/log4php
  */
 
+/**
+ * @group appenders
+ */
 class LoggerAppenderNullTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * The Null appender does nothing - nothing to assert.
 	 * Just here for the sake of completness and a good testing ratio :-)
 	 */
-	public function testActivateOptions() { 
+	public function testActivateOptions() {
+        $event = new LoggerLoggingEvent("LoggerAppenderNullTest", new Logger("TEST"), LoggerLevel::getLevelInfo(), "testmessage");
+	    
 		$appender = new LoggerAppenderNull("TEST");
 		$appender->activateOptions();
-		$appender->append(null);
+		$appender->append($event);
 		$appender->close();
     }
+    
+	public function testRequiresLayout() {
+		$appender = new LoggerAppenderNull();
+		self::assertFalse($appender->requiresLayout());
+	}
 }

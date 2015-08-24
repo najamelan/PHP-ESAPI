@@ -15,6 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
+ * @package log4php
  */
 
 /**
@@ -43,11 +44,20 @@
  * available to <b>all</b> appenders extending {@link LoggerAppender} 
  * for a more convenient way to filter out events by level.</p>
  *
- * @log4j-class org.apache.log4j.varia.LevelRangeFilter
- * @log4j-author Simon Kitching
- * @log4j-author based on code by Ceki G&uuml;lc&uuml; 
+ * <p>
+ * An example for this filter:
+ * 
+ * {@example ../../examples/php/filter_levelrange.php 19}
  *
- * @version $Revision: 795643 $
+ * <p>
+ * The corresponding XML file:
+ * 
+ * {@example ../../examples/resources/filter_levelrange.xml 18}
+ *
+ * @author Simon Kitching
+ * @author based on the org.apache.log4j.varia.LevelRangeFilte Java code by Ceki G&uuml;lc&uuml; 
+ *
+ * @version $Revision: 1213283 $
  * @package log4php
  * @subpackage filters
  * @since 0.6
@@ -57,45 +67,37 @@ class LoggerFilterLevelRange extends LoggerFilter {
 	/**
 	 * @var boolean
 	 */
-	private $acceptOnMatch = true;
+	protected $acceptOnMatch = true;
 
 	/**
 	 * @var LoggerLevel
 	 */
-	private $levelMin;
+	protected $levelMin;
   
 	/**
 	 * @var LoggerLevel
 	 */
-	private $levelMax;
+	protected $levelMax;
 
 	/**
 	 * @param boolean $acceptOnMatch
 	 */
 	public function setAcceptOnMatch($acceptOnMatch) {
-		$this->acceptOnMatch = LoggerOptionConverter::toBoolean($acceptOnMatch, true); 
+		$this->setBoolean('acceptOnMatch', $acceptOnMatch); 
 	}
 	
 	/**
 	 * @param string $l the level min to match
 	 */
-	public function setLevelMin($l) {
-		if($l instanceof LoggerLevel) {
-		    $this->levelMin = $l;
-		} else {
-			$this->levelMin = LoggerOptionConverter::toLevel($l, null);
-		}
+	public function setLevelMin($level) {
+		$this->setLevel('levelMin', $level);
 	}
 
 	/**
 	 * @param string $l the level max to match
 	 */
-	public function setLevelMax($l) {
-		if($l instanceof LoggerLevel) {
-		    $this->levelMax = $l;
-		} else {
-			$this->levelMax = LoggerOptionConverter::toLevel($l, null);
-		}
+	public function setLevelMax($level) {
+		$this->setLevel('levelMax', $level);
 	}
 
 	/**

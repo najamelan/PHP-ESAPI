@@ -15,17 +15,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
+ * @package log4php
  */
 
 /**
  * This filter drops all logging events. 
  * 
- * <p>You can add this filter to the end of a filter chain to
+ * You can add this filter to the end of a filter chain to
  * switch from the default "accept all unless instructed otherwise"
  * filtering behaviour to a "deny all unless instructed otherwise"
- * behaviour.</p>
+ * behaviour.
+ * 
+ * <p>
+ * An example for this filter:
+ * 
+ * {@example ../../examples/php/filter_denyall.php 19}
  *
- * @version $Revision: 795643 $
+ * <p>
+ * The corresponding XML file:
+ * 
+ * {@example ../../examples/resources/filter_denyall.xml 18}
+ *
+ * @version $Revision: 883108 $
  * @package log4php
  * @subpackage filters
  * @since 0.3

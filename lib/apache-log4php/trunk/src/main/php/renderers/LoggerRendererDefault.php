@@ -15,24 +15,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
+ * @package log4php
  */
 
 /**
- * The default Renderer renders objects by type casting
+ * The default renderer, which is used when no other renderer is found.
+ * 
+ * Renders the input using <var>print_r</var>.
  *
  * @package log4php
  * @subpackage renderers
  * @since 0.3
  */
-class LoggerRendererDefault extends LoggerRendererObject {
+class LoggerRendererDefault implements LoggerRenderer {
 
-	/**
-	 * Render objects by type casting
-	 *
-	 * @param mixed $o the object to render
-	 * @return string
-	 */
-	public function doRender($o) {
-		return var_export($o, true);
+	/** @inheritdoc */
+	public function render($input) {
+		return print_r($input, true);
 	}
 }

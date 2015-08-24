@@ -15,6 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
+ * @package log4php
  */
 
 /**
@@ -49,10 +50,10 @@
  * <p>The philosophy of log4php filters is largely inspired from the
  * Linux ipchains. 
  * 
- * @version $Revision: 795643 $
+ * @version $Revision: 1213283 $
  * @package log4php
  */
-abstract class LoggerFilter {
+abstract class LoggerFilter extends LoggerConfigurable {
 
 	/**
 	 * The log event must be logged immediately without consulting with
@@ -68,7 +69,7 @@ abstract class LoggerFilter {
 	
 	/**
 	 * The log event must be dropped immediately without consulting
-	 * with the remaining filters, if any, in the chain.  
+	 * with the remaining filters, if any, in the chain.
 	 */
 	const DENY = -1;
 
@@ -84,8 +85,8 @@ abstract class LoggerFilter {
 	public function activateOptions() {
 	}
 
-	/**	  
-	 * Decide what to do.  
+	/**
+	 * Decide what to do.
 	 * <p>If the decision is {@link LoggerFilter::DENY}, then the event will be
 	 * dropped. If the decision is {@link LoggerFilter::NEUTRAL}, then the next
 	 * filter, if any, will be invoked. If the decision is {@link LoggerFilter::ACCEPT} then
@@ -99,6 +100,25 @@ abstract class LoggerFilter {
 		return self::NEUTRAL;
 	}
 
+	/**
+	 * Adds a new filter to the filter chain this filter is a part of.
+	 * If this filter has already and follow up filter, the param filter
+	 * is passed on until it is the last filter in chain.
+	 * 
+	 * @param $filter - the filter to add to this chain
+	 */
+	public function addNext($filter) {
+		if($this->next !== null) {
+			$this->next->addNext($filter);
+		} else {
+			$this->next = $filter;
+		}
+	}
+	
+	/**
+	 * Returns the next filter in this chain
+	 * @return the next filter
+	 */
 	public function getNext() {
 		return $this->next;
 	}

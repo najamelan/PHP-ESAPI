@@ -15,85 +15,74 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
+ * @package log4php
  */
 
 /**
- * This is the global repository of user mappings
- */
-$GLOBALS['log4php.LoggerMDC.ht'] = array();
-
-/**
- * The LoggerMDC class is similar to the {@link LoggerNDC} class except that it is
- * based on a map instead of a stack. It provides <i>mapped diagnostic contexts</i>.
+ * The LoggerMDC class provides _mapped diagnostic contexts_.
  * 
- * A <i>Mapped Diagnostic Context</i>, or
- * MDC in short, is an instrument for distinguishing interleaved log
- * output from different sources. Log output is typically interleaved
- * when a server handles multiple clients near-simultaneously.
- *
- * <p><b><i>The MDC is managed on a per thread basis</i></b>.
+ * A Mapped Diagnostic Context, or MDC in short, is an instrument for 
+ * distinguishing interleaved log output from different sources. Log output 
+ * is typically interleaved when a server handles multiple clients 
+ * near-simultaneously.
  * 
- * @version $Revision: 795658 $
+ * This class is similar to the {@link LoggerNDC} class except that 
+ * it is based on a map instead of a stack.
+ * 
+ * @version $Revision: 1343630 $
  * @since 0.3
  * @package log4php
  */
 class LoggerMDC {
+	
+	/** Holds the context map. */
+	private static $map = array();
+		
 	/**
-	 * Put a context value as identified with the key parameter into the current thread's
-	 *	context map.
-	 *
-	 * <p>If the current thread does not have a context map it is
-	 *	created as a side effect.</p>
-	 *
-	 * <p>Note that you cannot put more than {@link self::HT_SIZE} keys.</p>
+	 * Stores a context value as identified with the key parameter into the 
+	 * context map.
 	 *
 	 * @param string $key the key
 	 * @param string $value the value
-	 * @static
 	 */
 	public static function put($key, $value) {
-		$GLOBALS['log4php.LoggerMDC.ht'][$key] = $value;
+		self::$map[$key] = $value;
 	}
   
 	/**
-	 * Get the context identified by the key parameter.
+	 * Returns the context value identified by the key parameter.
 	 *
-	 * <p>You can use special key identifiers to map values in 
-	 * PHP $_SERVER and $_ENV vars. Just put a 'server.' or 'env.'
-	 * followed by the var name you want to refer.</p>
-	 *
-	 * <p>This method has no side effects.</p>
-	 *
-	 * @param string $key
-	 * @return string
-	 * @static
+	 * @param string $key The key.
+	 * @return string The context or an empty string if no context found
+	 * 	for given key.
 	 */
 	public static function get($key) {
-		if(!empty($key)) {
-			if(strpos($key, 'server.') === 0) {
-				$varName = substr($key, 7);
-				return @$_SERVER[$varName];
-			} else if(strpos($key, 'env.') === 0) {
-				$varName = substr($key, 4);
-				return @$_ENV[$varName];
-			} else if (isset($GLOBALS['log4php.LoggerMDC.ht'][$key])) {
-				return $GLOBALS['log4php.LoggerMDC.ht'][$key];
-			}
-		}
-		return '';
+		return isset(self::$map[$key]) ? self::$map[$key] : '';
 	}
 
 	/**
-	 * Remove the the context identified by the key parameter. 
-	 *
-	 * It only affects user mappings.
-	 *
-	 * @param string $key
-	 * @return string
-	 * @static
+	 * Returns the contex map as an array.
+	 * @return array The MDC context map.
 	 */
-	public static function remove($key) {
-		unset($GLOBALS['log4php.LoggerMDC.ht'][$key]);
+	public static function getMap() {
+		return self::$map;
 	}
 
+	/**
+	 * Removes the the context identified by the key parameter. 
+	 *
+	 * Only affects user mappings, not $_ENV or $_SERVER.
+	 *
+	 * @param string $key The key to be removed.
+	 */
+	public static function remove($key) {
+		unset(self::$map[$key]);
+	}
+	
+	/**
+	 * Clears the mapped diagnostic context.
+	 */
+	public static function clear() {
+		self::$map = array();
+	}
 }

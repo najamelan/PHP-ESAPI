@@ -19,64 +19,71 @@
  * @package    log4php
  * @subpackage appenders
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @version    SVN: $Id$
+ * @version    $Revision: 1374580 $
  * @link       http://logging.apache.org/log4php
  */
 
+/** 
+ * @group appenders
+ */
 class LoggerAppenderConsoleTest extends PHPUnit_Framework_TestCase {
-     
-    public function testSimpleStdOutLogging() {
-    	$layout = new LoggerLayoutSimple();
+	
+	private $config = array(
+		'rootLogger' => array(
+			'appenders' => array('default'),
+		),
+		'appenders' => array(
+			'default' => array(
+				'class' => 'LoggerAppenderConsole',
+				'layout' => array(
+					'class' => 'LoggerLayoutPattern',
+					'params' => array(
+						// Intentionally blank so output doesn't clutter phpunit output
+						'conversionPattern' => '' 
+					)
+				),
+			)
+		)
+	);
+	
+	public function testRequiresLayout() {
+		$appender = new LoggerAppenderConsole(); 
+		self::assertTrue($appender->requiresLayout());
+	}
+	
+    public function testAppendDefault() {
+    	Logger::configure($this->config);
+    	$log = Logger::getRootLogger();
     	
-    	$event = new LoggerLoggingEvent('LoggerAppenderConsoleTest', 
-    									new Logger('mycategory'), 
-    									LoggerLevel::getLevelWarn(),
-    									"my message");
+    	$expected = LoggerAppenderConsole::STDOUT;
+    	$actual = $log->getAppender('default')->getTarget();
+    	$this->assertSame($expected, $actual);
     	
-    	$appender = new LoggerAppenderConsole("mylogger"); 
-    	$appender->setTarget('STDOUT');
-		$appender->setLayout($layout);
-		$appender->activateOptions();
-		
-		ob_start();
-		$appender->append($event);
-		$v = ob_get_contents();
-		ob_end_clean();
-		
-		$appender->close();
-		
-		//echo $v;
+    	$log->info("hello");
     }
-     
-    public function testSimpleStdErrLogging() {
-    	$layout = new LoggerLayoutSimple();
+
+    public function testAppendStdout() {
+    	$this->config['appenders']['default']['params']['target'] = 'stdout';
     	
-    	$event = new LoggerLoggingEvent('LoggerAppenderConsoleTest', 
-    									new Logger('mycategory'), 
-    									LoggerLevel::getLevelWarn(),
-    									"my message");
-    	
-    	$appender = new LoggerAppenderConsole("mylogger"); 
-		$appender->setTarget('STDERR');
-		$appender->setLayout($layout);
-		$appender->activateOptions();
-		$appender->append($event);
-		$appender->close();
-    }    
+    	Logger::configure($this->config);
+    	$log = Logger::getRootLogger();
+    	 
+    	$expected = LoggerAppenderConsole::STDOUT;
+    	$actual = $log->getAppender('default')->getTarget();
+    	$this->assertSame($expected, $actual);
+    	 
+    	$log->info("hello");
+    }
     
-    
-    public function testSimpleDefaultLogging() {
-    	$layout = new LoggerLayoutSimple();
-    	
-    	$event = new LoggerLoggingEvent('LoggerAppenderConsoleTest', 
-    									new Logger('mycategory'), 
-    									LoggerLevel::getLevelWarn(),
-    									"my message");
-    	
-    	$appender = new LoggerAppenderConsole("mylogger"); 
-		$appender->setLayout($layout);
-		$appender->activateOptions();
-		$appender->append($event);
-		$appender->close();
+    public function testAppendStderr() {
+    	$this->config['appenders']['default']['params']['target'] = 'stderr';
+    	Logger::configure($this->config);
+    	$log = Logger::getRootLogger();
+    	$expected = LoggerAppenderConsole::STDERR;
+    	 
+    	$actual = $log->getAppender('default')->getTarget();
+    	$this->assertSame($expected, $actual);
+    	 
+    	$log->info("hello");
     }
 }

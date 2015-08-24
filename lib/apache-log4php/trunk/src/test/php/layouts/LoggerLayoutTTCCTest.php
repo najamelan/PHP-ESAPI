@@ -19,16 +19,27 @@
  * @package    log4php
  * @subpackage appenders
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @version    SVN: $Id$
+ * @version    $Revision: 1374580 $
  * @link       http://logging.apache.org/log4php
  */
 
+/**
+ * @group layouts
+ */
 class LoggerLayoutTTCCTest extends PHPUnit_Framework_TestCase {
-        
+    
+	/**
+	 * @expectedException PHPUnit_Framework_Error
+	 * @expectedExceptionMessage LoggerLayout TTCC is deprecated and will be removed in a future release.
+	 */
+	public function testDeprecationWarning() {
+		$layout = new LoggerLayoutTTCC();
+	}
+	
 	public function testErrorLayout() {
 		$event = new LoggerLoggingEvent("LoggerLayoutTTCC", new Logger("TEST"), LoggerLevel::getLevelError(), "testmessage");
 
-		$layout = new LoggerLayoutTTCC();
+		$layout = @new LoggerLayoutTTCC();
 		$v = $layout->format($event);
 
 		$pos = strpos($v, "[".$event->getThreadName()."] ERROR TEST - testmessage");
@@ -43,7 +54,7 @@ class LoggerLayoutTTCCTest extends PHPUnit_Framework_TestCase {
     public function testWarnLayout() {
 		$event = new LoggerLoggingEvent("LoggerLayoutXml", new Logger("TEST"), LoggerLevel::getLevelWarn(), "testmessage");
 
-		$layout = new LoggerLayoutTTCC();
+		$layout = @new LoggerLayoutTTCC();
 		$v = $layout->format($event);
 
 		$pos = strpos($v, "[".$event->getThreadName()."] WARN TEST - testmessage");

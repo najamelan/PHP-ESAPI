@@ -15,16 +15,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
+ * @package log4php
  */
 
 /**
  * Extend this abstract class to create your own log layout format.
  *	
- * @version $Revision: 795643 $
+ * @version $Revision: 1213283 $
  * @package log4php
- * @abstract
  */
-abstract class LoggerLayout {
+abstract class LoggerLayout extends LoggerConfigurable {
 	/**
 	 * Activates options for this layout.
 	 * Override this method if you have options to be activated.
@@ -65,5 +65,10 @@ abstract class LoggerLayout {
 	 */
 	public function getHeader() {
 		return null;
+	}
+	
+	/** Triggers a warning for this layout with the given message. */
+	protected function warn($message) {
+		trigger_error("log4php: [" . get_class($this) . "]: $message", E_USER_WARNING);
 	}
 }

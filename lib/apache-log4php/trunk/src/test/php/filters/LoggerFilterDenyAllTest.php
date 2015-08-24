@@ -19,26 +19,53 @@
  * @package    log4php
  * @subpackage filters
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @version    SVN: $Id$
+ * @version    $Revision: 1374580 $
  * @link       http://logging.apache.org/log4php
  */
 
+/**
+ * @group filters
+ */
 class LoggerFilterDenyAllTest extends PHPUnit_Framework_TestCase {
         
 	public function testDecide() {
 		$filter = new LoggerFilterDenyAll();
 		
-		$eventError = new LoggerLoggingEvent("LoggerAppenderEchoTest", new Logger("TEST"), LoggerLevel::getLevelError(), "testmessage");
-		$eventDebug = new LoggerLoggingEvent("LoggerAppenderEchoTest", new Logger("TEST"), LoggerLevel::getLevelDebug(), "testmessage");
-		$eventWarn = new LoggerLoggingEvent("LoggerAppenderEchoTest", new Logger("TEST"), LoggerLevel::getLevelWarn(), "testmessage");
+		$events = array(
+			LoggerTestHelper::getTraceEvent(),
+			LoggerTestHelper::getDebugEvent(),
+			LoggerTestHelper::getInfoEvent(),
+			LoggerTestHelper::getWarnEvent(),
+			LoggerTestHelper::getErrorEvent(),
+			LoggerTestHelper::getFatalEvent(),
+		);
 		
-		$result = $filter->decide($eventError);
-		self::assertEquals($result, LoggerFilter::DENY);
-		
-		$result = $filter->decide($eventDebug);
-		self::assertEquals($result, LoggerFilter::DENY);
-		
-		$result = $filter->decide($eventWarn);
-		self::assertEquals($result, LoggerFilter::DENY);
+		foreach($events as $event) {
+			$actual = $filter->decide($event);
+			self::assertEquals(LoggerFilter::DENY, $actual);
+		}
+    }
+    
+    public function testConfiguration() {
+    	$config = LoggerConfiguratorDefault::getDefaultConfiguration();
+    	$config['appenders']['default']['filters'] = array(
+    		array(
+    			'class' => 'LoggerFilterDenyAll'
+    		)
+    	);
+    	
+    	Logger::configure($config);
+    	$logger = Logger::getRootLogger();
+    	
+    	ob_start();
+    	$logger->trace('Test');
+    	$logger->debug('Test');
+    	$logger->info('Test');
+    	$logger->warn('Test');
+    	$logger->error('Test');
+    	$logger->fatal('Test');
+    	$actual = ob_get_clean();
+    	
+    	$this->assertEmpty($actual);
     }
 }

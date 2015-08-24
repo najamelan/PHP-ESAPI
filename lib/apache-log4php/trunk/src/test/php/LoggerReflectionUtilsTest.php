@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -18,7 +18,7 @@
  * @category   tests   
  * @package    log4php
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @version    SVN: $Id$
+ * @version    $Revision: 1374589 $
  * @link       http://logging.apache.org/log4php
  */
 
@@ -43,8 +43,9 @@ class Simple {
         $this->male = $male;
     }
 }
+
 /**
- * Tests the LoggerReflectionUtils class
+ * @group main
  */
 class LoggerReflectionUtilsTest extends PHPUnit_Framework_TestCase {
 
