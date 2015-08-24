@@ -4,7 +4,7 @@
  *
  * This file is part of the Open Web Application Security Project (OWASP)
  * Enterprise Security API (ESAPI) project.
- * 
+ *
  * PHP version 5.2
  *
  * LICENSE: This source file is subject to the New BSD license.  You should read
@@ -19,11 +19,14 @@
  * @version   SVN: $Id$
  * @link      http://www.owasp.org/index.php/ESAPI
  */
-require_once dirname(__FILE__) . '/../src/ESAPI.php';
+require_once __DIR__ . '/../src/ESAPI.php';
 
 //Make sure to run this script as a "PHP Web Page"
+if (php_sapi_name() === 'cli') {
+    exit('ERROR: This script must be run from the browser.' . PHP_EOL);
+}
 
-$ESAPI = new ESAPI(dirname(__FILE__) . "/testresources/ESAPI.xml");
+$ESAPI = new ESAPI(__DIR__ . "/testresources/ESAPI.xml");
 ob_start();
 session_start();
 
@@ -54,7 +57,7 @@ if ($req->getParameter('req') == 'test1') {
         $view .= '<p>Your Request did NOT contain the CSRF token we have in your session. Did you tamper??</p>';
     }
     $tests['token'] .= ' - DONE';
-    
+
     $oldSessID = session_id();
     $sr = $util->changeSessionIdentifier();
     if ($sr === true) {
@@ -67,11 +70,11 @@ if ($req->getParameter('req') == 'test1') {
         $view .= '<p>Your session was not regenerated. Is the session started?';
     }
     $tests['csi'] .= ' - DONE';
-    
+
     $util->killAllCookies($req);
     $view .= '<p>The response should have requested your User Agent to delete your cookies. Let us see if it will honour that request.';
     $view .= " <a href=\"{$uri}?req=test2\">click me!</a></p>";
-} else if ($req->getParameter('req') == 'test2') {
+} elseif ($req->getParameter('req') == 'test2') {
     $view .= '<p>Cookies received in that request: ';
     $view .= ESAPI::getEncoder()->encodeForHTML(print_r($req->getCookies(), true));
     $view .= '</p>';
@@ -83,7 +86,7 @@ if ($req->getParameter('req') == 'test1') {
     }
     $view .= '</p>';
     $tests['cookie'] .= ' - DONE';
-    
+
     $a = ESAPI::getAuditor('HTTPUtilsExtraTests');
     $log = $util->logHTTPRequest($req, $a);
     $logO = $util->logHTTPRequestObfuscate($req, $a, array('req'));
@@ -108,7 +111,7 @@ $view .= '</ul>';
 ?>
 <html>
 <head>
-	
+
 </head>
 <body>
 	<div><?php echo $view; ?></div>

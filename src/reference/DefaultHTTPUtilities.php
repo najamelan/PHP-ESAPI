@@ -1,6 +1,6 @@
 <?php
 /**
- * OWASP Enterprise Security API (ESAPI)
+ * OWASP Enterprise Security API (ESAPI).
  *
  * This file is part of the Open Web Application Security Project (OWASP)
  * Enterprise Security API (ESAPI) project.
@@ -12,11 +12,15 @@
  * software.
  *
  * @category  OWASP
+ *
  * @package   ESAPI_Reference
+ *
  * @author    jah <jah@jahboite.co.uk>
  * @copyright 2009-2010 The OWASP Foundation
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD license
+ *
  * @version   SVN: $Id$
+ *
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 
@@ -24,7 +28,7 @@
 /**
  * DefaultHTTPUtilities requires the HTTPUtilities interface.
  */
-require_once dirname(__FILE__) . '/../HTTPUtilities.php';
+require_once __DIR__ . '/../HTTPUtilities.php';
 
 
 /**
@@ -33,41 +37,39 @@ require_once dirname(__FILE__) . '/../HTTPUtilities.php';
  * PHP version 5.2
  *
  * @category  OWASP
+ *
  * @package   ESAPI_Reference
+ *
  * @author    jah <jah@jahboite.co.uk>
  * @copyright 2009-2010 The OWASP Foundation
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD license
+ *
  * @version   Release: @package_version@
+ *
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 class DefaultHTTPUtilities implements HTTPUtilities
 {
 
-    private $_auditor        = null;
-    private $_currentRequest = null;
-    private $_validator      = null;
-
+    private $_auditor;
+    private $_currentRequest;
+    private $_validator;
 
     /**
      * The constructor stores an instance of Auditor for the purpose of logging.
-     * 
-     * @return null
      */
     public function __construct()
     {
-        Global $ESAPI;
         $this->_auditor = ESAPI::getAuditor('DefaultHTTPUtilities');
-	$this->_validator = ESAPI::getValidator();
-
+        $this->_validator = ESAPI::getValidator();
     }
-
 
     /**
      * Adds the CSRF token from the current session to the supplied URL for the
      * purposes of preventing CSRF attacks. This method should be used on all URLs
      * to be put into all links and forms the application generates.
      *
-     * @param string $href the URL to which the CSRF token will be appended.
+     * @param string $href The URL to which the CSRF token will be appended.
      *
      * @return string URL with the CSRF token parameter appended to it.
      */
@@ -81,54 +83,50 @@ class DefaultHTTPUtilities implements HTTPUtilities
         if (! isset($_SESSION)) {
             return $href;
         }
-        
+
         $token = $this->getCSRFToken();
         if ($token === null) {
             return $href;
         }
-        
+
         if (strpos($href, '?') === false) {
             $href .= '?' . $token;
         } else {
             $href .= '&' . $token;
         }
-        
+
         return $href;
     }
 
-
     /**
      * Returns the CSRF token from the current session. If there is no current
-     * session then null is returned. If the CSRF Token is not present in the
+     * session then NULL is returned. If the CSRF Token is not present in the
      * session it will be created.
      *
-     * @return string|null CSRF token for the current session or
-     *                     null.
+     * @return string|NULL CSRF token for the current session or
+     *                     NULL.
      */
     public function getCSRFToken()
     {
         if (! isset($_SESSION)) {
             return null;
         }
-        
-        if (   ! array_key_exists('ESAPI', $_SESSION)
+
+        if (! array_key_exists('ESAPI', $_SESSION)
             || ! array_key_exists('HTTPUtilities', $_SESSION['ESAPI'])
             || ! array_key_exists('CSRFToken', $_SESSION['ESAPI']['HTTPUtilities'])
         ) {
             $this->setCSRFToken();
         }
-        
+
         return $_SESSION['ESAPI']['HTTPUtilities']['CSRFToken'];
     }
-
 
     /**
      * Searches the GET and POST parameters in a request for the CSRF token stored
      * in the current session and throws an IntrusionException if it is missing.
      *
      * @param SafeRequest $request A request object.
-     *
-     * @return null
      *
      * @throws IntrusionException if the CSRF token is missing or incorrect.
      */
@@ -146,40 +144,34 @@ class DefaultHTTPUtilities implements HTTPUtilities
                 'Possibly forged HTTP request without proper CSRF token detected.'
             );
         }
-        
     }
-
 
     /**
      * Sets the CSRF Token for the current session.  If the session has not been
      * started at the time this method is called then the token will not be
      * generated.
-     *
-     * @return null
      */
     public function setCSRFToken()
     {
         if (! isset($_SESSION)) {
             return null;
         }
-        
+
         if (! array_key_exists('ESAPI', $_SESSION)) {
             $_SESSION['ESAPI'] = array(
                 'HTTPUtilities' => array(
                     'CSRFToken' => ''
                 )
             );
-        } else if (! array_key_exists('HTTPUtilities', $_SESSION['ESAPI'])) {
+        } elseif (! array_key_exists('HTTPUtilities', $_SESSION['ESAPI'])) {
             $_SESSION['ESAPI']['HTTPUtilities'] = array(
                 'CSRFToken' => ''
             );
-            
         }
-        
+
         $_SESSION['ESAPI']['HTTPUtilities']['CSRFToken']
             = ESAPI::getRandomizer()->getRandomGUID();
     }
-
 
     /**
      * Get the first cookie with the matching name.
@@ -187,8 +179,8 @@ class DefaultHTTPUtilities implements HTTPUtilities
      * @param SafeRequest $request Request object.
      * @param string      $name    The name of the cookie to retreive.
      *
-     * @return string|null value of the requested cookie or
-     *                     null if the specified cookie is not present.
+     * @return string|NULL value of the requested cookie or
+     *                     NULL if the specified cookie is not present.
      */
     public function getCookie($request, $name)
     {
@@ -197,9 +189,9 @@ class DefaultHTTPUtilities implements HTTPUtilities
                 'getCookie expects an instance of SafeRequest.'
             );
         }
+
         return $request->getCookie($name);
     }
-
 
     /**
      * Ensures that the supplied request was received with Transport Layer
@@ -208,8 +200,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
      * be called from any method that uses sensitive data from a web form.
      *
      * @param SafeRequest $request The request object to test.
-     *
-     * @return null
      *
      * @throws AccessControlException if security constraints are not met.
      */
@@ -238,7 +228,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
         }
     }
 
-
     /**
      * Invalidate the old session after copying all of its contents to a newly
      * created session with a new session id. Note that this is different from
@@ -246,18 +235,18 @@ class DefaultHTTPUtilities implements HTTPUtilities
      * the existing session contents. Care should be taken to use this only when
      * the existing session does not contain hazardous contents.
      *
-     * @return bool true if the change of Session Identifier was successful,
-     *              false otherwise
+     * @return bool TRUE if the change of Session Identifier was successful,
+     *              FALSE otherwise
      */
     public function changeSessionIdentifier()
     {
         $result = session_regenerate_id(true);
+
         return $result;
     }
 
-
     /**
-     * Returns true if the supplied request object was received over a secured
+     * Returns TRUE if the supplied request object was received over a secured
      * channel i.e. Transport Layer Security (e.g. SSL or TLS).
      * This method tests for the $_SERVER global with key 'HTTPS' which should
      * be a non-empty value if TLS was used.  Since this key is not part of the
@@ -267,10 +256,10 @@ class DefaultHTTPUtilities implements HTTPUtilities
      *
      * @param SafeRequest $request The request object to test.
      *
+     * @throws EnterpiseSecurityException
+     *
      * @return bool TRUE if the request was made over Transport Layer Security
      *              FALSE otherwise.
-     *
-     * @throws EnterpiseSecurityException
      */
     public function isSecureChannel($request)
     {
@@ -301,15 +290,12 @@ class DefaultHTTPUtilities implements HTTPUtilities
      */
     public function getParameter($request, $name, $default = null)
     {
-      $value = $request->getParameter($name);
-      if($this->_validator->isValidInput("HTTP parameter value: " . $value, $value, "HTTPParameterValue", 2000, true) )
-	{
-	  return $value;
-	}
-      else 
-	{
-	  return $default;
-	}
+        $value = $request->getParameter($name);
+        if ($this->_validator->isValidInput("HTTP parameter value: " . $value, $value, "HTTPParameterValue", 2000, true)) {
+            return $value;
+        } else {
+            return $default;
+        }
     }
 
     /**
@@ -318,8 +304,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
      * this method.
      *
      * @param SafeRequest $request Request object.
-     *
-     * @return null.
      */
     public function killAllCookies($request)
     {
@@ -334,7 +318,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
         }
     }
 
-
     /**
      * Kills the specified cookie by setting a new cookie that expires
      * immediately. Note that this method does not delete new cookies that are
@@ -342,9 +325,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
      *
      * @param SafeRequest $request Request object.
      * @param string      $name    Name of the cookie to be killed.
-     *
-     * @return null.
-     *
      */
     public function killCookie($request, $name)
     {
@@ -360,7 +340,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
 
         setcookie($name, $value, $expire, $path, $domain);
     }
-
 
     /**
      * Takes an HTTP query string and parses it into name-value pairs which are
@@ -384,7 +363,7 @@ class DefaultHTTPUtilities implements HTTPUtilities
                 if (! array_key_exists($name, $map)) {
                     $map[$name] = $value;
                 }
-            } catch( EncodingException $e ) {
+            } catch (EncodingException $e) {
                 // NoOp - skip this pair - exception was logged already.
             }
         }
@@ -392,14 +371,11 @@ class DefaultHTTPUtilities implements HTTPUtilities
         return $map;
     }
 
-
     /**
      * Stores the supplied SafeRequest object so that it may be readily accessed
      * throughout ESAPI (and elsewhere).
      *
      * @param SafeRequest $request Current Request object.
-     *
-     * @return null.
      */
     public function setCurrentHTTP($request)
     {
@@ -411,7 +387,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
         $this->_currentRequest = $request;
     }
 
-
     /**
      * Retrieves the current SafeRequest.
      *
@@ -422,7 +397,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
         return $this->_currentRequest;
     }
 
-
     /**
      * Format the Source IP address, URL, URL parameters, and all form parameters
      * into a string suitable for the log file. Be careful not to log sensitive
@@ -430,20 +404,17 @@ class DefaultHTTPUtilities implements HTTPUtilities
      *
      * @param SafeRequest $request Current Request object.
      * @param Auditor     $auditor the auditor to write the request to.
-     *
-     * @return null
      */
     public function logHTTPRequest($request, $auditor)
     {
         $this->logHTTPRequestObfuscate($request, $auditor, null);
     }
 
-
     /**
      * Format the Source IP address, URL, URL parameters, and all form parameters
      * into a string suitable for the log file. The list of parameters to obfuscate
      * should be specified in order to prevent sensitive information from being
-     * logged. If a null or empty list of parameters is provided, then all
+     * logged. If a NULL or empty list of parameters is provided, then all
      * parameters will be logged in the clear. If HTTP request logging is done in a
      * central place $paramsToObfuscate could be made a configuration parameter. We
      * include it here in case different parts of the application need to obfuscate
@@ -451,9 +422,7 @@ class DefaultHTTPUtilities implements HTTPUtilities
      *
      * @param SafeRequest $request           Current Request object.
      * @param Auditor     $auditor           The auditor to write the request to.
-     * @param array|null  $paramsToObfuscate The sensitive parameters.
-     *
-     * @return null
+     * @param array|NULL  $paramsToObfuscate The sensitive parameters.
      */
     public function logHTTPRequestObfuscate($request, $auditor, $paramsToObfuscate)
     {
@@ -469,12 +438,12 @@ class DefaultHTTPUtilities implements HTTPUtilities
         }
         if ($paramsToObfuscate === null) {
             $paramsToObfuscate = array();
-        } else if (! is_array($paramsToObfuscate)) {
+        } elseif (! is_array($paramsToObfuscate)) {
             throw new InvalidArgumentException(
                 'logHTTPRequestObfuscate expects an array $paramsToObfuscate or null.'
-            );            
+            );
         }
-        
+
         $msg  = '';
         $msg .= $request->getRemoteAddr();
         if ($msg !== '') {
@@ -489,7 +458,7 @@ class DefaultHTTPUtilities implements HTTPUtilities
         $params = $request->getParameterMap();
         if ($path !== '' && sizeof($params, false) > 0) {
             $msg .= '?';
-        } else if ($msg !== '') {
+        } elseif ($msg !== '') {
             $msg .= ' ';
         }
         $paramBuilder = array();
@@ -510,7 +479,7 @@ class DefaultHTTPUtilities implements HTTPUtilities
             }
         }
         $msg .= implode('&', $paramBuilder);
-        
+
         $cookies = $request->getCookies();
         $sessName = session_name();
         foreach ($cookies as $cName => $cValue) {
@@ -518,11 +487,9 @@ class DefaultHTTPUtilities implements HTTPUtilities
                 $msg .= "+{$cName}={$cValue}";
             }
         }
-        
-        $auditor->info(Auditor::SECURITY, true, $msg);
-        
-    }
 
+        $auditor->info(Auditor::SECURITY, true, $msg);
+    }
 
     /*
      * Retrieves the current HttpServletResponse.
@@ -536,7 +503,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
             'getCurrentResponse method Not implemented'
         );
     }*/
-
 
     /*
      * This method performs a forward to any resource located inside the WEB-INF
@@ -552,7 +518,7 @@ class DefaultHTTPUtilities implements HTTPUtilities
      *                                value passed in.
      * @param string       $location The URL to forward to.
      *
-     * @return null.
+     * @return NULL.
      *
      * @throws AccessControlException
      * @throws ServletException
@@ -565,7 +531,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
             'safeSendForward method Not implemented'
         );
     }*/
-
 
     /*
      * Set the content type character encoding header on every HttpServletResponse
@@ -584,7 +549,7 @@ class DefaultHTTPUtilities implements HTTPUtilities
      * @param SafeResponse $response The response object to set the content type
      *                               for.
      *
-     * @return null.
+     * @return NULL.
      *
     public function setSafeContentType($response)
     {
@@ -594,7 +559,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
         );
     }*/
 
-
     /*
      * Set headers to protect sensitive information against being cached in the
      * browser. Developers should make this call for any HTTP responses that contain
@@ -603,14 +567,14 @@ class DefaultHTTPUtilities implements HTTPUtilities
      * expected browsers. The safest approach is to set all relevant headers to
      * their most restrictive setting. These include:
      *
-     * <PRE>
+     * <pre>
      *
-     * Cache-Control: no-store<BR>
-     * Cache-Control: no-cache<BR>
-     * Cache-Control: must-revalidate<BR>
-     * Expires: -1<BR>
+     * Cache-Control: no-store<br />
+     * Cache-Control: no-cache<br />
+     * Cache-Control: must-revalidate<br />
+     * Expires: -1<br />
      *
-     * </PRE>
+     * </pre>
      *
      * Note that the header "pragma: no-cache" is only useful in HTTP requests,
      * not HTTP responses. So even though there are many articles recommending the
@@ -634,7 +598,7 @@ class DefaultHTTPUtilities implements HTTPUtilities
      *
      * @param SafeResponse $response Response object.
      *
-     * @return null.
+     * @return NULL.
      *
     public function setNoCacheHeaders($response)
     {
@@ -643,7 +607,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
             'setNoCacheHeaders method Not implemented'
         );
     }*/
-
 
     /*
      * Set a cookie containing the current User's remember me token for
@@ -666,8 +629,8 @@ class DefaultHTTPUtilities implements HTTPUtilities
      * @param string       $password the user's password.
      * @param int          $maxAge   the length of time that the token should be
      *                               valid for in relative seconds.
-     * @param string|null  $domain   the domain to restrict the token to.
-     * @param string|null  $path     the path to restrict the token to.
+     * @param string|NULL  $domain   the domain to restrict the token to.
+     * @param string|NULL  $path     the path to restrict the token to.
      *
      * @return string  encrypted "Remember Me" token.
      *
@@ -680,13 +643,12 @@ class DefaultHTTPUtilities implements HTTPUtilities
         );
     }*/
 
-
     /*
      * Decrypts an encrypted hidden field value and returns the plain text. If
      * the field does not decrypt properly, an IntrusionException is thrown to
      * indicate tampering.
      *
-     * @param string $encrypted hidden field value to decrypt.
+     * @param string $encrypted Hidden field value to decrypt.
      *
      * @return string decrypted hidden field value.
      *
@@ -712,7 +674,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
         }
     }*/
 
-
     /*
      * Takes an encrypted query string and returns an asscoiative array
      * containing the original, unencrypted parameters.
@@ -733,11 +694,10 @@ class DefaultHTTPUtilities implements HTTPUtilities
         return $this->_queryToMap($plaintext);
     }*/
 
-
     /*
      * Retrieves a map of data from a cookie encrypted with encryptStateInCookie().
      *
-     * @param SafeRequest $request object.
+     * @param SafeRequest $request Object.
      *
      * @return array a map containing the decrypted cookie state value.
      *
@@ -761,7 +721,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
 
     }*/
 
-
     /*
      * Encrypts a hidden field value for use in HTML.
      *
@@ -779,7 +738,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
         );
         return ESAPI::getEncryptor()->encrypt($value);
     }*/
-
 
     /*
      * Takes an HTTP query string (everything after the question mark in the
@@ -800,7 +758,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
         return ESAPI::getEncryptor()->encrypt($query);
     }*/
 
-
     /*
      * Stores a Map of data in an encrypted cookie. Generally the session is a
      * better place to store state information, as it does not expose it to the
@@ -811,7 +768,7 @@ class DefaultHTTPUtilities implements HTTPUtilities
      * @param SafeResponse $response  response object.
      * @param array        $cleartext state information.
      *
-     * @return null.
+     * @return NULL.
      *
     public function encryptStateInCookie($response, $cleartext)
     {
@@ -837,7 +794,6 @@ class DefaultHTTPUtilities implements HTTPUtilities
         $response->addCookie('state', $encrypted);
     }*/
 
-
     /*
      * Extract uploaded files from a multipart HTTP requests. Implementations
      * must check the content to ensure that it is safe before making a permanent
@@ -860,5 +816,4 @@ class DefaultHTTPUtilities implements HTTPUtilities
             'getSafeFileUploads method Not implemented'
         );
     }*/
-
 }

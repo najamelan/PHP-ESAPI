@@ -1,4 +1,24 @@
-# trunk/test/readme.txt
+How to run the unit tests
+=========================
+
+Requirements
+------------
+
+- phpunit
+- xdebug (if you want to have code coverage analysis)
+
+
+Usage
+-----
+
+From the root of the project, call:
+
+   phpunit --configuration test/AllTests.xml
+
+
+In order to get code coverage, run:
+
+   phpunit --configuration test/AllTests.xml --coverage-text
 
 
 ESAPI Logging File

@@ -1,6 +1,6 @@
 <?php
 /**
- * OWASP Enterprise Security API (ESAPI)
+ * OWASP Enterprise Security API (ESAPI).
  *
  * This file is part of the Open Web Application Security Project (OWASP)
  * Enterprise Security API (ESAPI) project.
@@ -12,11 +12,15 @@
  * software.
  *
  * @category  OWASP
+ *
  * @package   ESAPI_Filters
+ *
  * @author    jah <jah@jahboite.co.uk>
  * @copyright 2009-2010 The OWASP Foundation
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD license
+ *
  * @version   SVN: $Id$
+ *
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 
@@ -24,9 +28,9 @@
 /**
  * SafeRequest requires the DefaultEncoder, HTMLEntityCodec and PercentCodec.
  */
-require_once dirname(__FILE__) . '/../reference/DefaultEncoder.php';
-require_once dirname(__FILE__) . '/../codecs/HTMLEntityCodec.php';
-require_once dirname(__FILE__) . '/../codecs/PercentCodec.php';
+require_once __DIR__ . '/../reference/DefaultEncoder.php';
+require_once __DIR__ . '/../codecs/HTMLEntityCodec.php';
+require_once __DIR__ . '/../codecs/PercentCodec.php';
 
 
 /**
@@ -38,15 +42,20 @@ require_once dirname(__FILE__) . '/../codecs/PercentCodec.php';
  * PHP version 5.2
  *
  * @category  OWASP
+ *
  * @package   ESAPI_Filters
+ *
  * @author    jah <jah@jahboite.co.uk>
  * @copyright 2009-2010 The OWASP Foundation
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD license
+ *
  * @version   Release: @package_version@
+ *
  * @link      http://www.owasp.org/index.php/ESAPI
  */
 class SafeRequest
 {
+
     /*
      * Ascii character sets defining printable, non-alphanumeric characters
      * permitted in various HTTP request contexts.
@@ -75,31 +84,30 @@ class SafeRequest
     const PATTERN_IPV4_ADDRESS
         = '^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$';
 
-    private $_serverGlobals      = null;
+    private $_serverGlobals;
 
-    private $_authType           = null;
-    private $_contentLength      = null;
-    private $_contentType        = null;
-    private $_headers            = null;
-    private $_pathInfo           = null;
-    private $_pathTranslated     = null;
-    private $_queryString        = null;
-    private $_remoteAddr         = null;
-    private $_remoteHost         = null;
-    private $_remoteUser         = null;
-    private $_method             = null;
-    private $_requestURI         = null;
-    private $_serverName         = null;
-    private $_serverPort         = null;
-    private $_protocol           = null;
-    private $_cookies            = null;
-    private $_parameterNames     = null;
-    private $_parameterMap       = null;
+    private $_authType;
+    private $_contentLength;
+    private $_contentType;
+    private $_headers;
+    private $_pathInfo;
+    private $_pathTranslated;
+    private $_queryString;
+    private $_remoteAddr;
+    private $_remoteHost;
+    private $_remoteUser;
+    private $_method;
+    private $_requestURI;
+    private $_serverName;
+    private $_serverPort;
+    private $_protocol;
+    private $_cookies;
+    private $_parameterNames;
+    private $_parameterMap;
 
-    private $_validator = null;
-    private $_encoder   = null;
-    private $_auditor   = null;
-
+    private $_validator;
+    private $_encoder;
+    private $_auditor;
 
     /**
      * SafeRequest can be forced to use the supplied cookies, headers and server
@@ -111,7 +119,7 @@ class SafeRequest
      * TODO accept a string like: 'GET / HTTP/1.1\r\nHost:example.com\r\n\r\n'
      * TODO accept GET and REQUEST parameters.
      *
-     * @param null|array $options array (optional) of HTTP Request elements.
+     * @param NULL|array $options Array (optional) of HTTP Request elements.
      */
     public function __construct($options = null)
     {
@@ -137,14 +145,11 @@ class SafeRequest
         }
     }
 
-
     /**
      * Sets the encoder instance to be used for encoding/decoding, canonicalization
      * and validation.
      *
      * @param Encoder $encoder An instance of the Encoder interface.
-     *
-     * @return null
      */
     public function setEncoder($encoder)
     {
@@ -156,7 +161,6 @@ class SafeRequest
         $this->_encoder = $encoder;
     }
 
-
     /**
      * Returns the value of $_SERVER['AUTH_TYPE'] if it is present or an
      * empty string if it is not.
@@ -166,7 +170,7 @@ class SafeRequest
     public function getAuthType()
     {
         $defaultValue = '';
-        
+
         if ($this->_authType !== null) {
             return $this->_authType;
         } else {
@@ -189,10 +193,9 @@ class SafeRequest
         if ($authType !== null) {
             $this->_authType = $authType;
         }
-        
+
         return $this->_authType;
     }
-
 
     /**
      * Returns the value of $_SERVER['CONTENT_LENGTH'] if it is present or zero
@@ -203,7 +206,7 @@ class SafeRequest
     public function getContentLength()
     {
         $defaultValue = 0;
-        
+
         if ($this->_contentLength !== null) {
             return $this->_contentLength;
         } else {
@@ -223,7 +226,6 @@ class SafeRequest
         return $this->_contentLength;
     }
 
-
     /**
      * Returns the value of $_SERVER['CONTENT_TYPE'] if it is present or an
      * empty string if it is not.
@@ -233,7 +235,7 @@ class SafeRequest
     public function getContentType()
     {
         $defaultValue = '';
-        
+
         if ($this->_contentType !== null) {
             return $this->_contentType;
         } else {
@@ -259,10 +261,9 @@ class SafeRequest
         if ($contentType !== null) {
             $this->_contentType = $contentType;
         }
-        
+
         return $this->_contentType;
     }
-
 
     /**
      * Returns the value of $_SERVER['PATH_INFO'] if it is present or an
@@ -273,7 +274,7 @@ class SafeRequest
     public function getPathInfo()
     {
         $defaultValue = '';
-        
+
         if ($this->_pathInfo !== null) {
             return $this->_pathInfo;
         } else {
@@ -299,10 +300,9 @@ class SafeRequest
         if ($pathInfo !== null) {
             $this->_pathInfo = $pathInfo;
         }
-        
+
         return $this->_pathInfo;
     }
-
 
     /**
      * Returns the value of $_SERVER['PATH_TRANSLATED'] if it is present or an
@@ -313,7 +313,7 @@ class SafeRequest
     public function getPathTranslated()
     {
         $defaultValue = '';
-        
+
         if ($this->_pathTranslated !== null) {
             return $this->_pathTranslated;
         } else {
@@ -343,7 +343,6 @@ class SafeRequest
         return $this->_pathTranslated;
     }
 
-
     /**
      * Returns the value of $_SERVER['QUERY_STRING'] if it is present or an
      * empty string if it is not.
@@ -353,7 +352,7 @@ class SafeRequest
     public function getQueryString()
     {
         $defaultValue = '';
-        
+
         if ($this->_queryString !== null) {
             return $this->_queryString;
         } else {
@@ -383,7 +382,6 @@ class SafeRequest
         return $this->_queryString;
     }
 
-
     /**
      * Returns the value of $_SERVER['REMOTE_ADDR'] if it is present or an
      * empty string if it is not.
@@ -393,7 +391,7 @@ class SafeRequest
     public function getRemoteAddr()
     {
         $defaultValue = '';
-        
+
         if ($this->_remoteAddr !== null) {
             return $this->_remoteAddr;
         } else {
@@ -421,7 +419,6 @@ class SafeRequest
         return $this->_remoteAddr;
     }
 
-
     /**
      * Returns the value of $_SERVER['REMOTE_HOST'] if it is present or an
      * empty string if it is not.
@@ -431,7 +428,7 @@ class SafeRequest
     public function getRemoteHost()
     {
         $defaultValue = '';
-        
+
         if ($this->_remoteHost !== null) {
             return $this->_remoteHost;
         } else {
@@ -459,7 +456,6 @@ class SafeRequest
         return $this->_remoteHost;
     }
 
-
     /**
      * Returns the value of $_SERVER['REMOTE_USER'] if it is present or an
      * empty string if it is not.
@@ -469,7 +465,7 @@ class SafeRequest
     public function getRemoteUser()
     {
         $defaultValue = '';
-        
+
         if ($this->_remoteUser !== null) {
             return $this->_remoteUser;
         } else {
@@ -499,7 +495,6 @@ class SafeRequest
         return $this->_remoteUser;
     }
 
-
     /**
      * Returns the value of $_SERVER['REQUEST_METHOD'] if it is present or an
      * empty string if it is not.
@@ -509,7 +504,7 @@ class SafeRequest
     public function getMethod()
     {
         $defaultValue = '';
-        
+
         if ($this->_method !== null) {
             return $this->_method;
         } else {
@@ -536,7 +531,6 @@ class SafeRequest
         return $this->_method;
     }
 
-
     /**
      * Returns the URI from the HTTP Request line exlcuding any path info and the
      * query string.
@@ -546,7 +540,7 @@ class SafeRequest
     public function getRequestURI()
     {
         $defaultValue = '';
-        
+
         if ($this->_requestURI !== null) {
             return $this->_requestURI;
         } else {
@@ -575,7 +569,6 @@ class SafeRequest
         return $this->_requestURI;
     }
 
-
     /**
      * Returns the value of $_SERVER['SERVER_NAME'] if it is present or an
      * empty string if it is not.
@@ -585,7 +578,7 @@ class SafeRequest
     public function getServerName()
     {
         $defaultValue = '';
-        
+
         if ($this->_serverName !== null) {
             return $this->_serverName;
         } else {
@@ -617,7 +610,6 @@ class SafeRequest
         return $this->_serverName;
     }
 
-
     /**
      * Returns the value of $_SERVER['SERVER_PORT'] if it is present or zero if it
      * is not.
@@ -627,7 +619,7 @@ class SafeRequest
     public function getServerPort()
     {
         $defaultValue = 0;
-        
+
         if ($this->_serverPort !== null) {
             return $this->_serverPort;
         } else {
@@ -647,7 +639,6 @@ class SafeRequest
         return $this->_serverPort;
     }
 
-
     /**
      * Returns an associative array of valid, canonical HTTP Headers.
      *
@@ -664,16 +655,16 @@ class SafeRequest
         }
 
         $this->_headers = $this->_validateHeaders($this->_serverGlobals);
+
         return $this->_headers;
     }
-
 
     /**
      * Retreives a named HTTP header value.
      *
      * @param string $key Name of the http header value to retreive.
      *
-     * @return null|string valid, canonicalised header value or null if it is not
+     * @return NULL|string valid, canonicalised header value or NULL if it is not
      *                     present in the header or was present, but invalid.
      */
     public function getHeader($key)
@@ -692,7 +683,6 @@ class SafeRequest
         return $this->_headers[$key];
     }
 
-
     /**
      * Returns an associative array of HTTP Cookies.
      *
@@ -707,16 +697,14 @@ class SafeRequest
         $this->_cookies = $this->_validateCookies($_COOKIE);
 
         return $this->_cookies;
-
     }
-
 
     /**
      * Retreives a named http cookie value.
      *
      * @param string $name Name of the cookie value to retreive.
      *
-     * @return null|string valid, canonicalised cookie value or null if it is not
+     * @return NULL|string valid, canonicalised cookie value or NULL if it is not
      *                     present in the header or was present, but invalid.
      */
     public function getCookie($name)
@@ -735,14 +723,13 @@ class SafeRequest
         return $this->_cookies[$name];
     }
 
-
     /**
      * Returns the value of the PHP Server Global with the supplied name. If the
-     * variable does not exist then null is returned.
+     * variable does not exist then NULL is returned.
      *
      * @param string $key Index name for a value in the $_SERVER array.
      *
-     * @return string|null Value of a $_SERVER variable or null.
+     * @return string|NULL Value of a $_SERVER variable or NULL.
      */
     public function getServerGlobal($key)
     {
@@ -764,9 +751,8 @@ class SafeRequest
         return null;
     }
 
-
     /**
-     * Returns the value of a request parameter as a String, or null if the
+     * Returns the value of a request parameter as a String, or NULL if the
      * parameter does not exist. Request parameters are contained in the query
      * string or posted form data and are retreived from the $_GET and $_POST PHP
      * globals {@see getParameterMap}.
@@ -778,7 +764,7 @@ class SafeRequest
      *
      * @param string $name The name of a parameter to retreive.
      *
-     * @return string|null The first or only value of a parameter or null if the
+     * @return string|NULL The first or only value of a parameter or NULL if the
      *                     parameter is not present in the request.
      */
     public function getParameter($name)
@@ -795,9 +781,9 @@ class SafeRequest
         if (! is_array($this->_parameterMap[$name])) {
             return $this->_parameterMap[$name];
         }
+
         return $this->_parameterMap[$name][0];
     }
-
 
     /**
      * Returns an array containing the names of all parameters for this request.
@@ -818,10 +804,9 @@ class SafeRequest
             $tmp[] = $name;
         }
         $this->_parameterNames = $tmp;
+
         return $this->_parameterNames;
-
     }
-
 
     /**
      * Retrieves all values for the supplied parameter of this request as an array.
@@ -831,8 +816,8 @@ class SafeRequest
      *
      * @param string $name The name of the parameter to retreive.
      *
-     * @return array|null Array of request parameter values asscoiated with the
-     *                    supplied name or null if the parameter name was not found
+     * @return array|NULL Array of request parameter values asscoiated with the
+     *                    supplied name or NULL if the parameter name was not found
      *                    in this request.
      */
     public function getParameterValues($name)
@@ -846,9 +831,9 @@ class SafeRequest
         if (! array_key_exists($name, $this->_parameterMap)) {
             return null;
         }
+
         return $this->_parameterMap[$name];
     }
-
 
     /**
      * Returns an associative array of the parameters of this request. Request
@@ -885,9 +870,9 @@ class SafeRequest
             }
         }
         $this->_parameterMap = $tmp;
+
         return $this->_parameterMap;
     }
-
 
     /**
      * A convenience method to retrieve an array of PHP Server Globals.  Both the
@@ -906,7 +891,6 @@ class SafeRequest
 
         return $this->_serverGlobals;
     }
-
 
     /**
      * Performs strict canonicalization of the indices and values of the supplied
@@ -932,9 +916,9 @@ class SafeRequest
                 // Validation or Intrusion Exceptions perform auto logging.
             }
         }
+
         return $tmp;
     }
-
 
     /**
      * This helper method accepts either the server globals array $_SERVER or a
@@ -960,8 +944,7 @@ class SafeRequest
 
         $tmp = array();
         foreach ($ary as $unvalidatedKey => $unvalidatedVal) {
-            try
-            {
+            try {
                 $safeKey = $this->_getIfValid(
                     '$_SERVER Index', $unvalidatedKey, $ptnKey,
                     'HTTP Header Validator', PHP_INT_MAX, false
@@ -973,15 +956,13 @@ class SafeRequest
                     );
                     $tmp[$safeKey] = $safeVal;
                 }
-            }
-            catch (Exception $e)
-            {
+            } catch (Exception $e) {
                 // NoOp
             }
         }
+
         return $tmp;
     }
-
 
     /**
      * This helper method accepts either the $_COOKIES array or a similar array
@@ -1025,10 +1006,9 @@ class SafeRequest
                 // Validation or Intrusion Exceptions perform auto logging.
             }
         }
+
         return $tmp;
-
     }
-
 
     /**
      * Helper method to validate input and return the canonicalized, validated value
@@ -1041,11 +1021,11 @@ class SafeRequest
      * @param string $type      A descriptive name for the StringValidationRule.
      * @param int    $maxLength The maximum post-canonicalized length of valid
      *                          inputs.
-     * @param bool   $allowNull Whether an empty string is considered valid input.
-     *
-     * @return string canonicalized, valid inputs only.
+     * @param bool   $allowNULL Whether an empty string is considered valid input.
      *
      * @throws ValidationException
+     *
+     * @return string canonicalized, valid inputs only.
      */
     private function _getIfValid($context, $input, $pattern, $type, $maxLength, $allowNull)
     {
@@ -1060,7 +1040,6 @@ class SafeRequest
 
         return $validationRule->getValid($context, $input);
     }
-
 
     /**
      * Helper method which hex encodes characters in the supplied array of strings
@@ -1089,7 +1068,7 @@ class SafeRequest
             $pad = mb_strlen($h, 'ASCII') == 1 ? '0' : '';
             $hex .= '\\x' . $pad . $h;
         }
+
         return $hex;
     }
-
 }
